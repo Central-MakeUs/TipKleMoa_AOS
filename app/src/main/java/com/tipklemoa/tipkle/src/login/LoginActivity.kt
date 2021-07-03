@@ -1,5 +1,6 @@
 package com.tipklemoa.tipkle.src.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import com.kakao.sdk.auth.model.OAuthToken
@@ -22,6 +23,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             }
             else if (token != null) {
                 Log.i("kakao", "로그인 성공 ${token.accessToken}")
+                startActivity(Intent(this, RegisterWithNickNameActivity::class.java))
             }
         }
 
