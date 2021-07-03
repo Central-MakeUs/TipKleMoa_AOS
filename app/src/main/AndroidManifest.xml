@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".config.ApplicationClass"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -15,18 +16,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TipKle">
-<!--        <activity android:name="com.">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
+        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
-<!--                &lt;!&ndash; Redirect URI: "kakao{NATIVE_APP_KEY}://oauth" &ndash;&gt;-->
-<!--                <data android:host="oauth"-->
-<!--                    android:scheme="kakao{NATIVE_APP_KEY}" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-        <activity android:name=".src.splash.SplashActivity">
+                <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth" -->
+                <data android:host="oauth"
+                    android:scheme="kakaoc1206b7932db38f451e4b4e498e5f8df" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".src.splash.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,10 +37,12 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-        </activity>
-        <activity android:name=".src.login.LoginActivity"
-            android:exported="true"/>
+            android:screenOrientation="portrait"
+            android:exported="true"></activity>
+        <activity
+            android:name=".src.login.LoginActivity"
+            android:screenOrientation="portrait"
+            android:exported="true" />
     </application>
 
 </manifest>

@@ -1,15 +1,20 @@
 package com.tipklemoa.tipkle.src.splash
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Base64
+import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
 import com.tipklemoa.tipkle.src.login.LoginActivity
 import com.tipklemoa.tipkle.config.BaseActivity
 import com.tipklemoa.tipkle.databinding.ActivitySplashBinding
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding::inflate) {
     @RequiresApi(Build.VERSION_CODES.P)
@@ -19,7 +24,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
         // Hide the status bar.
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
 
-//        프로젝트 해시키 알아볼때 쓰는 코드
+////        프로젝트 해시키 알아볼때 쓰는 코드
 //        try {
 //            val info = packageManager.getPackageInfo(
 //                packageName, PackageManager.GET_SIGNATURES
