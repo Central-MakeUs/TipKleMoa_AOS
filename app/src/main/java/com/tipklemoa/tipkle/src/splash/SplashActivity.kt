@@ -9,6 +9,7 @@ import android.os.Looper
 import android.util.Base64
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import com.tipklemoa.tipkle.src.login.LoginActivity
 import com.tipklemoa.tipkle.config.BaseActivity
@@ -22,7 +23,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
         super.onCreate(savedInstanceState)
 
         // Hide the status bar.
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
 ////        프로젝트 해시키 알아볼때 쓰는 코드
 //        try {

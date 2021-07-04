@@ -7,11 +7,14 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import com.tipklemoa.tipkle.config.BaseActivity
 import com.tipklemoa.tipkle.databinding.ActivityLoginBinding
+import com.tipklemoa.tipkle.src.home.MainActivity
+import com.tipklemoa.tipkle.src.login.model.KakaoLoginResponse
+import com.tipklemoa.tipkle.src.login.model.PostKakaoLoginRequest
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate),
     LoginActivityView {
 
-    private var access_token:String?=null
+    private var accessToken:String?=null
     var email:String?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,11 +22,17 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         // 로그인 공통 callback 구성
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
+                accessToken = null
                 Log.e("kakao", "로그인 실패", error)
             }
             else if (token != null) {
+                accessToken = token.accessToken
+
                 Log.i("kakao", "로그인 성공 ${token.accessToken}")
-                startActivity(Intent(this, RegisterWithNickNameActivity::class.java))
+
+                showLoadingDialog(this)
+                val postKakaoLoginRequest = PostKakaoLoginRequest(accessToken!!)
+                LoginService(this).tryPostKakaoLogin(postKakaoLoginRequest = postKakaoLoginRequest)
             }
         }
 
@@ -36,5 +45,22 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             }
         }
 
+    }
+
+    override fun onPostKakaoLoginSuccess(response: KakaoLoginResponse) {
+        //멤버 아님 -> 회원가입
+        val intent = Intent(this, RegisterWithNickNameActivity::class.java)
+        intent.putExtra("accessToken", accessToken)
+        if (response.result.isMember=='N'){ //회원아님
+            startActivity(intent)
+        }
+        else{ //회원임
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+    }
+
+    override fun onPostKakaoLoginFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast(message)
     }
 }

@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit
 // 앱이 실행될때 1번만 실행이 됩니다.
 // 전역변수, 앱이 실행될 동안 한번만 유지되면 되는 객체들을 생성하는 코드 작성
 class ApplicationClass : Application() {
-    val API_URL = "https://dev.tipkle.shop/"
+    val API_URL = "https://tipkle.shop/"
 
     // 테스트 서버 주소
 //    val API_URL = "https://dungiapp.herokuapp.com/"
@@ -26,7 +26,7 @@ class ApplicationClass : Application() {
         lateinit var sSharedPreferences: SharedPreferences
 
         // JWT Token Header 키 값
-        val X_ACCESS_TOKEN = "access-token"
+        val X_ACCESS_TOKEN = "x-access-token"
         val kakaoToken = "access_token"
 
         // Retrofit 인스턴스, 앱 실행시 한번만 생성하여 사용합니다.

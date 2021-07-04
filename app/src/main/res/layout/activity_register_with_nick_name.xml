@@ -25,8 +25,8 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="10dp"
-                android:layout_height="10dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_marginRight="5dp"
                 android:background="@drawable/ic_left_arrow"/>
@@ -35,6 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="회원가입"
+                android:textSize="20dp"
                 android:textColor="@color/black"/>
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
@@ -110,7 +111,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="148dp"
         android:ems="10"
+        android:hint="닉네임을 입력해주세요."
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -118,44 +121,65 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/appCompatButton"
-        android:layout_width="26dp"
-        android:layout_height="26dp"
-        android:layout_marginLeft="32dp"
-        android:background="@drawable/check_box_line"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtNickName"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-    <TextView
-        android:id="@+id/tvPrivacy"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="[필수] 이용양꽌 및 개인정보처리방침"
-        android:textColor="@color/black"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="56dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/appCompatButton"
-        app:layout_constraintTop_toBottomOf="@+id/edtNickName" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtNickName">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnAgreePrivacy"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/check_box_line"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvPrivacy"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/tvPrivacy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="[필수] 이용약관 및 개인정보처리방침"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnAgreePrivacy"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="27dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
+            android:id="@+id/tvLoginNext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="다음"
+            android:textSize="20dp"
             android:textColor="#DBDBDB" />
 
         <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginTop="2dp"
-            android:background="@drawable/right_arrow"
+            android:id="@+id/imgRightArrow"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:background="@drawable/ic_right_arrow"
             android:backgroundTint="#DBDBDB" />
 
     </LinearLayout>

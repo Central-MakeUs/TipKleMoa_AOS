@@ -1,19 +1,15 @@
 package com.tipklemoa.tipkle.src.login
 
-interface LoginRetrofitInterface {
-//    @POST("/login")
-//    fun postLogin(@Body params: PostLoginRequest): Call<LoginResponse>
+import com.tipklemoa.tipkle.src.login.model.KakaoLoginResponse
+import com.tipklemoa.tipkle.src.login.model.PostKakaoLoginRequest
+import retrofit2.Call
+import retrofit2.http.Body
+import retrofit2.http.POST
 
-//   카카오 회원가입
-//    @Multipart
-//    @POST("/kakao/user")
-//    fun postKakaoRegister(@Part("nickname") nickname:RequestBody,
-//                          @Part profileImg: MultipartBody.Part? = null,
-//                          @Part("email") email:RequestBody,
-//                          @Part("access_token") access_token:RequestBody,
-//                          @Part("kakaoImg") kakaoImg:RequestBody?=null): Call<KakaoRegisterResponse>
-//
-////    카카오 로그인
-//    @POST("/kakao/login")
-//    fun postKakaoLogin(@Body params: PostKakaoLoginRequest): Call<KakaoLoginResponse>
+interface LoginRetrofitInterface {
+
+//    카카오 로그인 검증
+    @POST("/login/kakao")
+    fun postKakaoLogin(@Body params: PostKakaoLoginRequest): Call<KakaoLoginResponse>
+
 }
