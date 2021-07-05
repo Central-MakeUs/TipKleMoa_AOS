@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Window
+import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.databinding.DialogLoadingBinding
 
 class LoadingDialog(context: Context) : Dialog(context) {
@@ -16,8 +17,8 @@ class LoadingDialog(context: Context) : Dialog(context) {
         setContentView(binding.root)
         setCanceledOnTouchOutside(false)
         setCancelable(false)
-        window!!.setBackgroundDrawable(ColorDrawable())
-        //window!!.setDimAmount(0.2f)
+        window!!.setBackgroundDrawableResource(android.R.color.transparent)
+        window!!.setDimAmount(0.0f)
     }
 
     override fun show() {

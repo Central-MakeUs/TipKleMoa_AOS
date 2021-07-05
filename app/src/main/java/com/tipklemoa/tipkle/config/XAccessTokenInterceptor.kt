@@ -20,7 +20,7 @@ class XAccessTokenInterceptor : Interceptor {
             builder.addHeader("access_token", kakaoToken)
         }
         if (jwtToken != null) {
-            builder.addHeader("access-token", jwtToken)
+            builder.addHeader("x-access-token", jwtToken)
         }
         return chain.proceed(builder.build())
     }

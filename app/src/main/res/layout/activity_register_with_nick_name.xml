@@ -20,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:layout_marginLeft="24dp"
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -29,9 +30,12 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_marginRight="5dp"
-                android:background="@drawable/ic_left_arrow"/>
+                android:background="@drawable/ic_icon_back"/>
 
             <TextView
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
+                android:layout_marginLeft="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="회원가입"
@@ -60,12 +64,16 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
                 android:text="팁끌"
                 android:textColor="@color/lightmint"
                 android:textSize="26dp" />
 
             <TextView
                 android:id="@+id/textView2"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="과 함께 일상의"
@@ -81,6 +89,8 @@
 
             <TextView
                 android:id="@+id/textView3"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="꿀팁"
@@ -91,6 +101,8 @@
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
                 android:text="이 되는 이야기를"
                 android:textColor="@color/gray"
                 android:textSize="26dp" />
@@ -99,6 +111,8 @@
 
         <TextView
             android:id="@+id/textView5"
+            android:fontFamily="@font/notosanscjkkr_bold"
+            android:includeFontPadding="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="공유해보세요."
@@ -106,20 +120,24 @@
             android:textSize="26dp" />
     </LinearLayout>
 
-    <EditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/edtNickName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="148dp"
+        android:backgroundTint="@color/mint"
         android:ems="10"
         android:hint="닉네임을 입력해주세요."
+        android:textColorHint="@color/DBGray"
         android:inputType="textPersonName"
         android:minHeight="48dp"
+        android:singleLine="true"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="HardcodedText,SpeakableTextPresentCheck" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -157,6 +175,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
+        android:id="@+id/loNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="32dp"
@@ -169,17 +188,19 @@
             android:id="@+id/tvLoginNext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/notosanscjkkr_bold"
+            android:includeFontPadding="false"
             android:text="다음"
-            android:textSize="20dp"
-            android:textColor="#DBDBDB" />
+            android:textColor="#DBDBDB"
+            android:textSize="20dp" />
 
         <ImageView
             android:id="@+id/imgRightArrow"
+            android:background="@drawable/ic_icon_next"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"
-            android:layout_width="7dp"
-            android:layout_height="7dp"
-            android:background="@drawable/ic_right_arrow"
             android:backgroundTint="#DBDBDB" />
 
     </LinearLayout>
