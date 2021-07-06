@@ -9,7 +9,7 @@ import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseActivity
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.ActivityLoginBinding
-import com.tipklemoa.tipkle.src.home.MainActivity
+import com.tipklemoa.tipkle.src.MainActivity
 import com.tipklemoa.tipkle.src.login.model.KakaoLoginResponse
 import com.tipklemoa.tipkle.src.login.model.KakaoRegisterResponse
 import com.tipklemoa.tipkle.src.login.model.PostKakaoLoginRequest
@@ -62,8 +62,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         else{ //회원임
             editor.putString(ApplicationClass.X_ACCESS_TOKEN, response.result.jwt)
             editor.apply()
-            showLoadingDialog(this)
-            LoginService(this).tryGetAutoLogin()
+            this.finish()
+            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 
@@ -81,18 +81,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
     }
 
     override fun onGetAutoLoginSuccess(response: BaseResponse) {
-        dismissLoadingDialog()
-        if (response.code==1000){ //JWT 토큰 검증 성공
-            this.finish()
-            startActivity(Intent(this, MainActivity::class.java))
-        }
-        else{
-            showCustomToast("다시 로그인해주세요")
-        }
+
     }
 
     override fun onGetAutoLoginFailure(message: String) {
-        dismissLoadingDialog()
-        showCustomToast(message)
     }
 }

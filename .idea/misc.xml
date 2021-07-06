@@ -3,12 +3,38 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/bottom_home.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/drawable/bottom_home_icon.xml" value="0.1828125" />
+        <entry key="app/src/main/res/drawable/bottom_mypage.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/drawable/bottom_search.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/drawable/bottom_tipkle.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/drawable/ic_icon_bottom_home.xml" value="0.17083333333333334" />
+        <entry key="app/src/main/res/drawable/ic_icon_bottom_home_inactive.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/drawable/ic_icon_mypage.xml" value="0.17083333333333334" />
+        <entry key="app/src/main/res/drawable/ic_icon_mypage_active.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/drawable/ic_icon_search.xml" value="0.17083333333333334" />
+        <entry key="app/src/main/res/drawable/ic_icon_search_active.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/drawable/ic_icon_search_inactive.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/drawable/ic_icon_setting.xml" value="0.17083333333333334" />
+        <entry key="app/src/main/res/drawable/ic_icon_setting_active.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/drawable/ic_icon_tipkle.xml" value="0.17083333333333334" />
+        <entry key="app/src/main/res/drawable/ic_icon_tipkle_active.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/drawable/ic_icon_tipkle_inactive.xml" value="0.20104166666666667" />
         <entry key="app/src/main/res/layout/activity_choose_category.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_register_with_nick_name.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.125" />
         <entry key="app/src/main/res/layout/dialog_loading.xml" value="0.153125" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1546875" />
+        <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.1546875" />
+        <entry key="app/src/main/res/layout/fragment_picked_tip.xml" value="0.1578125" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.1546875" />
+        <entry key="app/src/main/res/layout/fragment_tipkle.xml" value="0.1546875" />
+        <entry key="app/src/main/res/layout/fragment_today_tip.xml" value="0.1578125" />
+        <entry key="app/src/main/res/layout/viewpager_home_tab.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/viewpager_nest_tab.xml" value="0.1578125" />
+        <entry key="app/src/main/res/menu/bottomtab_menu.xml" value="0.335" />
       </map>
     </option>
   </component>

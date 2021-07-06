@@ -10,7 +10,7 @@ import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseActivity
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.ActivityChooseCategoryBinding
-import com.tipklemoa.tipkle.src.home.MainActivity
+import com.tipklemoa.tipkle.src.MainActivity
 import com.tipklemoa.tipkle.src.login.model.KakaoLoginResponse
 import com.tipklemoa.tipkle.src.login.model.KakaoRegisterResponse
 import com.tipklemoa.tipkle.src.login.model.PostKakaoRegisterRequest
