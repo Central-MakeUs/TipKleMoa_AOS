@@ -15,10 +15,8 @@
     </style>
 
     <style name="home_tabtext_style" parent="TextAppearance.Design.Tab">
-        <item name="fontFamily">@font/notosanscjkkr_bold</item>
+        <item name="fontFamily">@font/notosanscjkkr_medium</item>
         <item name="android:textSize">20dp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:lineSpacingExtra">17dp</item>
         <item name="android:textColor">#979797</item>
         <item name="android:includeFontPadding">false</item>
     </style>

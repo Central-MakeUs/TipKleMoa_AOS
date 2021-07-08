@@ -23,5 +23,4 @@ interface LoginRetrofitInterface {
     //카카오 자동로그인 (jwt 검증)
     @GET("/auto-login")
     fun getAutoLogin(): Call<BaseResponse>
-
 }

@@ -37,7 +37,6 @@ android {
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.5.0'
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'com.google.android.material:material:1.3.0'
@@ -46,8 +45,13 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-
     implementation 'com.google.code.gson:gson:2.8.7'
+
+    //circle indicator
+    implementation 'com.tbuonomo:dotsindicator:4.2'
+
+    //dialog
+    implementation 'com.afollestad.material-dialogs:bottomsheets:3.2.1'
 
     //loading dialog
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
@@ -66,8 +70,6 @@ dependencies {
 
     //glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
-    implementation 'jp.wasabeef:picasso-transformations:2.4.0'
-    implementation 'com.sdsmdg.harjot:materialshadows:1.2.5'
 
     implementation "com.kakao.sdk:v2-user:2.5.2" // 카카오 로그인
 

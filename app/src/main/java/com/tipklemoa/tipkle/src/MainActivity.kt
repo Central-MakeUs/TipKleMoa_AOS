@@ -38,7 +38,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                 }
                 true
             }
-            selectedItemId = R.id.home
+            selectedItemId = R.id.bottom_home
         }
     }
     private fun changeFragment(fragment: Fragment) {

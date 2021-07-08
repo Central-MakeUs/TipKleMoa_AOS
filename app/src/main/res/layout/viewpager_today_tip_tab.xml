@@ -7,60 +7,34 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar2"
+    <!-- tabindicatorFullWidth : 글씨크기에 맞게 indicator -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/today_cat_tab"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/white"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.1125"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/home_tab_top" />
-    <!-- tabindicatorFullWidth : 글씨크기에 맞게 indicator -->
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/home_tab_top"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/white"
-        app:layout_constraintWidth_percent="0.466"
         android:clipToPadding="false"
         app:tabIndicatorFullWidth="false"
-        app:layout_constraintBottom_toTopOf="@id/vpInner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tabIndicator="@drawable/ic_home_tab_underline"
         app:tabIndicatorColor="@color/mint"
+        app:tabPaddingBottom="-1dp"
         app:tabPaddingEnd="-1dp"
         app:tabPaddingStart="-1dp"
         app:tabSelectedTextColor="@color/mint"
         app:tabTextAppearance="@style/home_tabtext_style"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnSettingCategory"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/ic_icon_setting_active"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/vpInner"
+        android:id="@+id/todaytipvpInner"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2">
-
-
-    </androidx.viewpager2.widget.ViewPager2>
+        app:layout_constraintTop_toBottomOf="@+id/today_cat_tab" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

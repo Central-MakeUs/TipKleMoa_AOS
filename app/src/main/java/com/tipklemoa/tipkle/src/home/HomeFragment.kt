@@ -4,7 +4,6 @@ import android.os.Bundle
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.config.BaseFragment
 import com.tipklemoa.tipkle.databinding.FragmentHomeBinding
-import com.tipklemoa.tipkle.src.ViewPagerFragment
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
     FragmentHomeBinding::bind,
@@ -14,6 +13,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         super.onCreate(savedInstanceState)
 
         // ViewPagerFragment를 fragmentFrame에 띄우기
-        childFragmentManager.beginTransaction().add(R.id.innerFrame, ViewPagerFragment()).commit()
+        parentFragmentManager.beginTransaction().add(R.id.homeinnerFrame, HomeTopViewPagerFragment()).commit()
     }
 }
