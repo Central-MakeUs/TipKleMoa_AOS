@@ -3,6 +3,7 @@ package com.tipklemoa.tipkle.src.home
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.src.home.model.BannerResponse
 import com.tipklemoa.tipkle.src.home.model.CategoryListResponse
+import com.tipklemoa.tipkle.src.home.model.HomePreviewFeedResponse
 import com.tipklemoa.tipkle.src.login.model.KakaoLoginResponse
 import com.tipklemoa.tipkle.src.login.model.KakaoRegisterResponse
 
@@ -13,8 +14,8 @@ interface HomeFragmentView {
     fun onGetBannerSuccess(response: BannerResponse)
     fun onGetBannerFailure(message: String)
 
-//    fun onPostKakaoLoginSuccess(response: KakaoLoginResponse)
-//    fun onPostKakaoLoginFailure(message: String)
+    fun onGetHomePreviewFeedSuccess(response: HomePreviewFeedResponse)
+    fun onGetHomePreviewFeedFailure(message: String)
 //
 //    fun onPostKakaoRegisterSuccess(response: KakaoRegisterResponse)
 //    fun onPostKakaoRegisterFailure(message: String)

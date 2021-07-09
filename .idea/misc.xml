@@ -33,8 +33,10 @@
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.1546875" />
         <entry key="app/src/main/res/layout/fragment_tipkle.xml" value="0.1546875" />
         <entry key="app/src/main/res/layout/fragment_today_tip.xml" value="0.1578125" />
+        <entry key="app/src/main/res/layout/home_bottomsheet_edit_category.xml" value="0.13958333333333334" />
         <entry key="app/src/main/res/layout/home_bottomsheet_layout.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/layout_banner.xml" value="0.12864583333333332" />
+        <entry key="app/src/main/res/layout/layout_banner.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/layout_home_preview_feed.xml" value="0.375" />
         <entry key="app/src/main/res/layout/viewpager_home_tab.xml" value="0.25" />
         <entry key="app/src/main/res/layout/viewpager_nest_tab.xml" value="0.1578125" />
         <entry key="app/src/main/res/layout/viewpager_picked_tib_tav.xml" value="0.29791666666666666" />

@@ -3,31 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@color/white">
 
     <ImageView
-        android:id="@+id/banneritem"
+        android:id="@+id/imgHomeFeed"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_marginRight="16dp"
+        android:layout_height="153dp"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.685"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/bannerTitle"
+        android:id="@+id/tvHomeFeedTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/notosanscjkkr_bold"
         android:includeFontPadding="false"
+        android:maxEms="12"
+        android:singleLine="false"
+        android:layout_marginBottom="32dp"
         android:text="title"
-        android:textColor="@color/white"
-        android:layout_marginLeft="24dp"
-        android:layout_marginBottom="20dp"
-        android:textSize="18dp"
+        android:textColor="@color/black"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintEnd_toEndOf="@+id/imgHomeFeed"
+        app:layout_constraintStart_toStartOf="@+id/imgHomeFeed"
+        app:layout_constraintTop_toBottomOf="@+id/imgHomeFeed" />
 </androidx.constraintlayout.widget.ConstraintLayout>

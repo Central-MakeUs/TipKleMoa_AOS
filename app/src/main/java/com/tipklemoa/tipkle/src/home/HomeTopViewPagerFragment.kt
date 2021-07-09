@@ -2,6 +2,7 @@ package com.tipklemoa.tipkle.src.home
 
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.bottomsheets.setPeekHeight
@@ -13,18 +14,18 @@ import com.tipklemoa.tipkle.config.BaseFragment
 import com.tipklemoa.tipkle.databinding.ViewpagerHomeTabBinding
 import com.tipklemoa.tipkle.src.home.PickedTipFragment
 import com.tipklemoa.tipkle.src.home.TodayTipFragment
+import com.tipklemoa.tipkle.src.home.model.BannerResponse
+import com.tipklemoa.tipkle.src.home.model.CategoryListResponse
+import com.tipklemoa.tipkle.src.home.model.HomePreviewFeedResponse
 
 class HomeTopViewPagerFragment : BaseFragment<ViewpagerHomeTabBinding>(ViewpagerHomeTabBinding::bind,
-    R.layout.viewpager_home_tab) {
+    R.layout.viewpager_home_tab), HomeFragmentView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         binding.btnSettingCategory.setOnClickListener {
-            MaterialDialog(requireContext(), BottomSheet()).show {
-                customView(R.layout.home_bottomsheet_layout)
-                setPeekHeight()
-            }
+
         }
 
         val pagerAdapter = PagerFragmentStateAdapter(requireActivity())
@@ -47,5 +48,31 @@ class HomeTopViewPagerFragment : BaseFragment<ViewpagerHomeTabBinding>(Viewpager
         }.attach()
 
         binding.vpInner.isUserInputEnabled = false
+    }
+
+    override fun onGetPickedCategoryListSuccess(response: CategoryListResponse) {
+        dismissLoadingDialog()
+
+    }
+
+    override fun onGetPickedCategoryListFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast(message)
+    }
+
+    override fun onGetBannerSuccess(response: BannerResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetBannerFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetHomePreviewFeedSuccess(response: HomePreviewFeedResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetHomePreviewFeedFailure(message: String) {
+        TODO("Not yet implemented")
     }
 }

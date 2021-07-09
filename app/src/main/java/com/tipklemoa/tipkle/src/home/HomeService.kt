@@ -4,6 +4,7 @@ import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.src.home.model.BannerResponse
 import com.tipklemoa.tipkle.src.home.model.CategoryListResponse
+import com.tipklemoa.tipkle.src.home.model.HomePreviewFeedResponse
 import com.tipklemoa.tipkle.src.login.model.KakaoLoginResponse
 import com.tipklemoa.tipkle.src.login.model.KakaoRegisterResponse
 import com.tipklemoa.tipkle.src.login.model.PostKakaoLoginRequest
@@ -23,6 +24,19 @@ class HomeService(val view: HomeFragmentView) {
 
             override fun onFailure(call: Call<BannerResponse>, t: Throwable) {
                 view.onGetBannerFailure(t.message ?: "통신 오류")
+            }
+        })
+    }
+
+    fun tryHomePreviewFeed(categoryName:String, order:String){
+        val homeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
+        homeRetrofitInterface.getPreviewFeed(categoryName, order).enqueue(object: Callback<HomePreviewFeedResponse> {
+            override fun onResponse(call: Call<HomePreviewFeedResponse>, response: Response<HomePreviewFeedResponse>) {
+                view.onGetHomePreviewFeedSuccess(response.body() as HomePreviewFeedResponse)
+            }
+
+            override fun onFailure(call: Call<HomePreviewFeedResponse>, t: Throwable) {
+                view.onGetHomePreviewFeedFailure(t.message ?: "통신 오류")
             }
         })
     }

@@ -2,6 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.TipKle" parent="Theme.Design.NoActionBar">
         <!-- Primary brand color. -->
+        <item name="background">@color/white</item>
         <item name="colorPrimary">@color/mint</item>
         <!--        <item name="colorPrimaryVariant">@color/purple_700</item>-->
         <!--        <item name="colorOnPrimary">@color/white</item>-->
@@ -15,9 +16,8 @@
     </style>
 
     <style name="home_tabtext_style" parent="TextAppearance.Design.Tab">
-        <item name="fontFamily">@font/notosanscjkkr_bold</item>
+        <item name="fontFamily">@font/notosanscjkkr_medium</item>
         <item name="android:textSize">20dp</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:textColor">#979797</item>
         <item name="android:includeFontPadding">false</item>
     </style>

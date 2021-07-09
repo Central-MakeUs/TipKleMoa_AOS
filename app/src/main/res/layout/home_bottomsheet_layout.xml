@@ -8,10 +8,10 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnAllCategory"
+        android:layout_marginTop="24dp"
         android:layout_width="28dp"
         android:layout_height="28dp"
         android:layout_marginLeft="28dp"
-        android:layout_marginTop="24dp"
         android:background="@drawable/check_box_line"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -176,7 +176,7 @@
         tools:ignore="HardcodedText" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/appCompatButton"
+        android:id="@+id/btnChooseBeauty"
         android:layout_width="28dp"
         android:layout_height="28dp"
         android:layout_marginLeft="28dp"
@@ -194,21 +194,22 @@
         android:layout_marginLeft="16dp"
         android:textColor="@color/black"
         android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/appCompatButton"
-        app:layout_constraintStart_toEndOf="@+id/appCompatButton"
-        app:layout_constraintTop_toTopOf="@+id/appCompatButton"
+        app:layout_constraintBottom_toBottomOf="@+id/btnChooseBeauty"
+        app:layout_constraintStart_toEndOf="@+id/btnChooseBeauty"
+        app:layout_constraintTop_toTopOf="@+id/btnChooseBeauty"
         tools:ignore="HardcodedText" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCompleteEditCategory"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/mint"
+        android:layout_height="wrap_content"
+        android:background="@color/gray"
         android:fontFamily="@font/notosanscjkkr_bold"
         android:text="적용"
         android:textSize="18dp"
+        android:includeFontPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.07"
         app:layout_constraintStart_toStartOf="parent" />
 
 

@@ -20,9 +20,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tabIndicator="@drawable/ic_home_tab_underline"
         app:tabIndicatorColor="@color/mint"
+        app:tabIndicatorHeight="0dp"
         app:tabPaddingBottom="-1dp"
         app:tabPaddingEnd="-1dp"
         app:tabPaddingStart="-1dp"
+        app:tabPaddingTop="-1dp"
         app:tabSelectedTextColor="@color/mint"
         app:tabTextAppearance="@style/home_tabtext_style"
         tools:ignore="SpeakableTextPresentCheck" />
@@ -38,29 +40,20 @@
 
     </androidx.viewpager2.widget.ViewPager2>
 
-    <TextView
-        android:id="@+id/bannerTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="하이"
-        android:includeFontPadding="false"
-        android:fontFamily="@font/notosanscjkkr_bold"
-        android:textSize="18dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginBottom="20dp"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/pickedIndicator"
-        app:layout_constraintStart_toStartOf="@+id/pickedBannerViewPager" />
-
     <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
         android:id="@+id/pickedIndicator"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginTop="12dp"
         app:dotsColor="@color/DBGray"
+        app:dotsCornerRadius="8dp"
+        app:dotsSize="6dp"
+        app:dotsSpacing="4dp"
+        app:dotsWidthFactor="2.5"
+        app:progressMode="false"
         app:selectedDotColor="@color/mint"
-        app:progressMode="true"
         app:layout_constraintWidth_percent="0.125"
-        app:layout_constraintHeight_percent="0.0075"
+        app:layout_constraintHeight_percent="0.023"
         app:layout_constraintTop_toBottomOf="@id/pickedBannerViewPager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -107,7 +100,7 @@
         android:includeFontPadding="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/DBGray"
+        android:textColor="@color/black"
         android:text="최신순"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pickedLookAround" />
@@ -136,9 +129,13 @@
         app:layout_constraintTop_toBottomOf="@+id/pickedLookAround" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvHomePreviewFeed"
         android:layout_width="match_parent"
-        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="28dp"
         android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:nestedScrollingEnabled="false"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -155,6 +152,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:maxImageSize="56dp"
         android:elevation="0dp"
+        app:elevation="0dp"
         app:srcCompat="@drawable/ic_icon_write"
         tools:ignore="SpeakableTextPresentCheck" />
 
