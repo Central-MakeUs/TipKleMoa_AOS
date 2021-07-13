@@ -11,12 +11,14 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.tipklemoa.tipkle.PagerFragmentStateAdapter
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.config.BaseFragment
+import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.ViewpagerHomeTabBinding
 import com.tipklemoa.tipkle.src.home.PickedTipFragment
 import com.tipklemoa.tipkle.src.home.TodayTipFragment
 import com.tipklemoa.tipkle.src.home.model.BannerResponse
 import com.tipklemoa.tipkle.src.home.model.CategoryListResponse
 import com.tipklemoa.tipkle.src.home.model.HomePreviewFeedResponse
+import com.tipklemoa.tipkle.src.home.model.LookAroundResponse
 
 class HomeTopViewPagerFragment : BaseFragment<ViewpagerHomeTabBinding>(ViewpagerHomeTabBinding::bind,
     R.layout.viewpager_home_tab), HomeFragmentView {
@@ -25,7 +27,8 @@ class HomeTopViewPagerFragment : BaseFragment<ViewpagerHomeTabBinding>(Viewpager
         super.onActivityCreated(savedInstanceState)
 
         binding.btnSettingCategory.setOnClickListener {
-
+            val homeEditCategoryBottomSheet = HomeEditCategoryBottomSheet()
+            homeEditCategoryBottomSheet.show(parentFragmentManager, homeEditCategoryBottomSheet.tag)
         }
 
         val pagerAdapter = PagerFragmentStateAdapter(requireActivity())
@@ -73,6 +76,22 @@ class HomeTopViewPagerFragment : BaseFragment<ViewpagerHomeTabBinding>(Viewpager
     }
 
     override fun onGetHomePreviewFeedFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPatchCategorySuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPatchCategoryFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetLookAroundFeedSuccess(response: LookAroundResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetLookAroundFeedFailure(message: String) {
         TODO("Not yet implemented")
     }
 }

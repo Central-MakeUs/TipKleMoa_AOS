@@ -4,6 +4,7 @@ import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.src.home.model.BannerResponse
 import com.tipklemoa.tipkle.src.home.model.CategoryListResponse
 import com.tipklemoa.tipkle.src.home.model.HomePreviewFeedResponse
+import com.tipklemoa.tipkle.src.home.model.LookAroundResponse
 import com.tipklemoa.tipkle.src.login.model.KakaoLoginResponse
 import com.tipklemoa.tipkle.src.login.model.KakaoRegisterResponse
 
@@ -16,10 +17,10 @@ interface HomeFragmentView {
 
     fun onGetHomePreviewFeedSuccess(response: HomePreviewFeedResponse)
     fun onGetHomePreviewFeedFailure(message: String)
-//
-//    fun onPostKakaoRegisterSuccess(response: KakaoRegisterResponse)
-//    fun onPostKakaoRegisterFailure(message: String)
-//
-//    fun onGetAutoLoginSuccess(response: BaseResponse)
-//    fun onGetAutoLoginFailure(message: String)
+
+    fun onPatchCategorySuccess(response: BaseResponse)
+    fun onPatchCategoryFailure(message: String)
+
+    fun onGetLookAroundFeedSuccess(response: LookAroundResponse)
+    fun onGetLookAroundFeedFailure(message: String)
 }

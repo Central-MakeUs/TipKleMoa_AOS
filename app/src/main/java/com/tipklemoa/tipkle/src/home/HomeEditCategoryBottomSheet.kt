@@ -7,13 +7,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.config.ApplicationClass
+import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.HomeBottomsheetLayoutBinding
+import com.tipklemoa.tipkle.src.home.model.*
 import com.tipklemoa.tipkle.util.LoadingDialog
 
-class HomeEditCategoryBottomSheet: BottomSheetDialogFragment(){
+class HomeEditCategoryBottomSheet: BottomSheetDialogFragment(), HomeFragmentView{
     private lateinit var mLoadingDialog: LoadingDialog
     private lateinit var binding: HomeBottomsheetLayoutBinding
     private val categoryBooleanList = Array(6){false}
@@ -35,6 +38,9 @@ class HomeEditCategoryBottomSheet: BottomSheetDialogFragment(){
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        
+        showLoadingDialog(requireContext())
+        HomeService(this).tryGetPickedCategoryList()
 
         binding.btnAllCategory.setOnClickListener{
             if (!selectallflag){ //카테고리 전체가 선택이 되지 않았었던 경우
@@ -67,6 +73,7 @@ class HomeEditCategoryBottomSheet: BottomSheetDialogFragment(){
 
                 pickedCategoryList.clear()
 
+                pickedNum = 0
                 selectallflag = false
             }
             checkFour()
@@ -175,7 +182,9 @@ class HomeEditCategoryBottomSheet: BottomSheetDialogFragment(){
         }
 
         binding.btnCompleteEditCategory.setOnClickListener {
-
+            showLoadingDialog(requireContext())
+            var patchCategoryRequest = PatchCategoryRequest(pickedCategoryList)
+            HomeService(this).tryPatchCategory(patchCategoryRequest)
         }
     }
 
@@ -199,5 +208,48 @@ class HomeEditCategoryBottomSheet: BottomSheetDialogFragment(){
         if (mLoadingDialog.isShowing) {
             mLoadingDialog.dismiss()
         }
+    }
+
+    override fun onGetPickedCategoryListSuccess(response: CategoryListResponse) {
+        dismissLoadingDialog()
+    }
+
+    override fun onGetPickedCategoryListFailure(message: String) {
+        dismissLoadingDialog()
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun onGetBannerSuccess(response: BannerResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetBannerFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetHomePreviewFeedSuccess(response: HomePreviewFeedResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetHomePreviewFeedFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPatchCategorySuccess(response: BaseResponse) {
+        dismissLoadingDialog()
+        this.dismiss()
+    }
+
+    override fun onPatchCategoryFailure(message: String) {
+        dismissLoadingDialog()
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun onGetLookAroundFeedSuccess(response: LookAroundResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetLookAroundFeedFailure(message: String) {
+        TODO("Not yet implemented")
     }
 }

@@ -1,9 +1,7 @@
 package com.tipklemoa.tipkle.src.home
 
 import com.tipklemoa.tipkle.config.BaseResponse
-import com.tipklemoa.tipkle.src.home.model.BannerResponse
-import com.tipklemoa.tipkle.src.home.model.CategoryListResponse
-import com.tipklemoa.tipkle.src.home.model.HomePreviewFeedResponse
+import com.tipklemoa.tipkle.src.home.model.*
 import com.tipklemoa.tipkle.src.login.model.KakaoLoginResponse
 import com.tipklemoa.tipkle.src.login.model.KakaoRegisterResponse
 import com.tipklemoa.tipkle.src.login.model.PostKakaoLoginRequest
@@ -27,5 +25,10 @@ interface HomeRetrofitInterface {
 
     //사용자 카테고리 수정
     @PATCH("/users/categories")
-    fun patchCategory(): Call<BaseResponse>
+    fun patchCategory(@Body params: PatchCategoryRequest): Call<BaseResponse>
+
+    //피드 목록 조회 (팁끌 들러보기)
+    @GET("/posts")
+    fun getLookAroundFeed(@Query("categoryName") categoryName:String, @Query("order") order:String, @Query("search") search:String?=null)
+            : Call<LookAroundResponse>
 }

@@ -2,13 +2,7 @@ package com.tipklemoa.tipkle.src.home
 
 import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseResponse
-import com.tipklemoa.tipkle.src.home.model.BannerResponse
-import com.tipklemoa.tipkle.src.home.model.CategoryListResponse
-import com.tipklemoa.tipkle.src.home.model.HomePreviewFeedResponse
-import com.tipklemoa.tipkle.src.login.model.KakaoLoginResponse
-import com.tipklemoa.tipkle.src.login.model.KakaoRegisterResponse
-import com.tipklemoa.tipkle.src.login.model.PostKakaoLoginRequest
-import com.tipklemoa.tipkle.src.login.model.PostKakaoRegisterRequest
+import com.tipklemoa.tipkle.src.home.model.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -40,20 +34,34 @@ class HomeService(val view: HomeFragmentView) {
             }
         })
     }
-//    fun tryPostKakaoLogin(postKakaoLoginRequest: PostKakaoLoginRequest){
-//       val loginRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
-//       loginRetrofitInterface.postKakaoLogin(postKakaoLoginRequest).enqueue(object: Callback<KakaoLoginResponse> {
-//           override fun onResponse(call: Call<KakaoLoginResponse>, response: Response<KakaoLoginResponse>) {
-//               view.onPostKakaoLoginSuccess(response.body() as KakaoLoginResponse)
-//           }
-//
-//           override fun onFailure(call: Call<KakaoLoginResponse>, t: Throwable) {
-//               view.onPostKakaoLoginFailure(t.message ?: "통신 오류")
-//           }
-//
-//       })
-//    }
-//
+
+    fun tryLookAroundFeed(categoryName:String, order:String, search:String?=null){
+        val homeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
+        homeRetrofitInterface.getLookAroundFeed(categoryName, order, search).enqueue(object: Callback<LookAroundResponse> {
+            override fun onResponse(call: Call<LookAroundResponse>, response: Response<LookAroundResponse>) {
+                view.onGetLookAroundFeedSuccess(response.body() as LookAroundResponse)
+            }
+
+            override fun onFailure(call: Call<LookAroundResponse>, t: Throwable) {
+                view.onGetLookAroundFeedFailure(t.message ?: "통신 오류")
+            }
+        })
+    }
+
+    fun tryPatchCategory(patchCategoryRequest: PatchCategoryRequest){
+       val loginRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
+       loginRetrofitInterface.patchCategory(patchCategoryRequest).enqueue(object: Callback<BaseResponse> {
+           override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
+               view.onPatchCategorySuccess(response.body() as BaseResponse)
+           }
+
+           override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
+               view.onPatchCategoryFailure(t.message ?: "통신 오류")
+           }
+
+       })
+    }
+
     fun tryGetPickedCategoryList(){
         val homeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
     homeRetrofitInterface.getPickedCategoryList().enqueue(object: Callback<CategoryListResponse> {

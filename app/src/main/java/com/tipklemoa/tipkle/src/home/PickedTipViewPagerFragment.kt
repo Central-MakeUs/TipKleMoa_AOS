@@ -4,16 +4,20 @@ import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.tipklemoa.tipkle.R
+import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseFragment
+import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.ViewpagerPickedTipTabBinding
 import com.tipklemoa.tipkle.src.home.model.BannerResponse
 import com.tipklemoa.tipkle.src.home.model.CategoryListResponse
 import com.tipklemoa.tipkle.src.home.model.HomePreviewFeedResponse
+import com.tipklemoa.tipkle.src.home.model.LookAroundResponse
 
 class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(ViewpagerPickedTipTabBinding::bind,
     R.layout.viewpager_picked_tip_tab), HomeFragmentView {
 
     var clickedCatName:String?=null
+    var editor = ApplicationClass.sSharedPreferences.edit()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -31,7 +35,11 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
         showLoadingDialog(requireContext())
 
         //맨 첫번째로 선택한 카테고리의 최신순 띄워주기
+        //그리고 기기내 저장
         clickedCatName = response.result[0].categoryName
+        editor.putString("clickedCatName", clickedCatName)
+        editor.apply()
+
         HomeService(this).tryHomePreviewFeed(response.result[0].categoryName, "recent")
 
         //탭 클릭시 내용 바뀌는 부분
@@ -40,6 +48,8 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
 
                 //선택한 탭의 텍스트를 받아오는 부분
                 clickedCatName = binding.pickedCatTab.getTabAt(binding.pickedCatTab.selectedTabPosition)?.text.toString()
+                editor.putString("clickedCatName", clickedCatName)
+                editor.apply()
                 showLoadingDialog(requireContext())
 
                 binding.pickedtiprecent.setTextColor(resources.getColor(R.color.black))
@@ -68,6 +78,10 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
             binding.pickedtiprecent.setTextColor(resources.getColor(R.color.DBGray))
             showLoadingDialog(requireContext())
             HomeService(this).tryHomePreviewFeed(clickedCatName!!, "popular")
+        }
+
+        binding.pickedLookAround.setOnClickListener {
+            parentFragmentManager.beginTransaction().replace(R.id.homeinnerFrame, LookAroundFragment()).commit()
         }
     }
 
@@ -98,5 +112,21 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
     override fun onGetHomePreviewFeedFailure(message: String) {
         dismissLoadingDialog()
         showCustomToast(message)
+    }
+
+    override fun onPatchCategorySuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPatchCategoryFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetLookAroundFeedSuccess(response: LookAroundResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetLookAroundFeedFailure(message: String) {
+        TODO("Not yet implemented")
     }
 }

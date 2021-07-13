@@ -16,6 +16,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TipKle">
+        <activity
+            android:name=".FeedDetailActivity"
+            android:exported="true" />
+        <activity
+            android:name=".src.home.LookAroundFragment"
+            android:exported="true" />
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -40,12 +46,12 @@
         </activity>
         <activity
             android:name=".src.login.ChooseCategoryActivity"
-            android:screenOrientation="portrait"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".src.login.RegisterWithNickNameActivity"
-            android:screenOrientation="portrait"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".src.MainActivity"
             android:exported="true"

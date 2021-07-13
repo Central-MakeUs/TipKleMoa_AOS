@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.17604166666666668" />
         <entry key="app/src/main/res/drawable/bottom_home.xml" value="0.20104166666666667" />
         <entry key="app/src/main/res/drawable/bottom_home_icon.xml" value="0.1828125" />
         <entry key="app/src/main/res/drawable/bottom_mypage.xml" value="0.20104166666666667" />
@@ -22,12 +23,14 @@
         <entry key="app/src/main/res/drawable/ic_icon_tipkle_active.xml" value="0.20104166666666667" />
         <entry key="app/src/main/res/drawable/ic_icon_tipkle_inactive.xml" value="0.20104166666666667" />
         <entry key="app/src/main/res/layout/activity_choose_category.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_feed_detail.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_register_with_nick_name.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.125" />
         <entry key="app/src/main/res/layout/dialog_loading.xml" value="0.153125" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_look_around.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.1546875" />
         <entry key="app/src/main/res/layout/fragment_picked_tip.xml" value="0.1578125" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.1546875" />
@@ -36,7 +39,10 @@
         <entry key="app/src/main/res/layout/home_bottomsheet_edit_category.xml" value="0.13958333333333334" />
         <entry key="app/src/main/res/layout/home_bottomsheet_layout.xml" value="0.335" />
         <entry key="app/src/main/res/layout/layout_banner.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/layout_detail_feed_viewpager.xml" value="0.19270833333333334" />
+        <entry key="app/src/main/res/layout/layout_home_lookaround.xml" value="0.5" />
         <entry key="app/src/main/res/layout/layout_home_preview_feed.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/layout_lookaround_image.xml" value="0.15052083333333333" />
         <entry key="app/src/main/res/layout/viewpager_home_tab.xml" value="0.25" />
         <entry key="app/src/main/res/layout/viewpager_nest_tab.xml" value="0.1578125" />
         <entry key="app/src/main/res/layout/viewpager_picked_tib_tav.xml" value="0.29791666666666666" />
