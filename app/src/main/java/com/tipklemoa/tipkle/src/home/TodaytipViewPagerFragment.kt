@@ -1,12 +1,8 @@
 package com.tipklemoa.tipkle.src.home
 
 import android.os.Bundle
-import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayoutMediator
-import com.tipklemoa.tipkle.PagerFragmentStateAdapter
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.config.BaseFragment
-import com.tipklemoa.tipkle.databinding.FragmentTodayTipBinding
 import com.tipklemoa.tipkle.databinding.ViewpagerTodayTipTabBinding
 
 class TodaytipViewPagerFragment : BaseFragment<ViewpagerTodayTipTabBinding>(

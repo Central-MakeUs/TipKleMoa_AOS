@@ -6,11 +6,26 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.tipklemoa.tipkle.src.home.model.ResultBanner
 import com.tipklemoa.tipkle.src.model.ResultDetailFeed
 
-class FeedDetailFragmentStateAdapter(fragmentActivity: FragmentActivity, val detailImageList:List<String>): FragmentStateAdapter(fragmentActivity) {
+class FeedDetailFragmentStateAdapter(fragmentActivity: FragmentActivity): FragmentStateAdapter(fragmentActivity) {
 
-    override fun getItemCount(): Int = detailImageList.size
+    var fragments : ArrayList<Fragment> = ArrayList()
+
+    override fun getItemCount(): Int {
+        return fragments.size
+    }
 
     override fun createFragment(position: Int): Fragment {
-        return FeedDetailFragment(detailImageList[position])
+        return fragments[position]
+    }
+
+    //뷰페이저에 동적으로 프래그먼트 추가해서 보여줄때
+    fun addFragment(fragment: Fragment) {
+        fragments.add(fragment)
+        notifyItemInserted(fragments.size-1)
+    }
+
+    fun removeFragment() {
+        fragments.removeAt(fragments.size-1)
+        notifyItemRemoved(fragments.size)
     }
 }

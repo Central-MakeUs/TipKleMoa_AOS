@@ -1,17 +1,20 @@
 package com.tipklemoa.tipkle.src.home
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.src.home.model.ResultLookAround
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tipklemoa.tipkle.src.FeedDetailActivity
 
 
 class LookAroundFeedAdapter(val context: Context, private val feedList: List<ResultLookAround>):
@@ -27,6 +30,7 @@ class LookAroundFeedAdapter(val context: Context, private val feedList: List<Res
         private val tvHow = itemView.findViewById<TextView>(R.id.tvLookAroundHow)
         private val tvLookAroundtext = itemView.findViewById<TextView>(R.id.tvLookAroundText)
         private val imgFeed = itemView.findViewById<RecyclerView>(R.id.rvLookAroundImageSlide)
+        private val layoutWhenToImage = itemView.findViewById<ConstraintLayout>(R.id.layoutwhentoimage)
 
         fun bind(feed: ResultLookAround, context: Context) {
 
@@ -38,7 +42,7 @@ class LookAroundFeedAdapter(val context: Context, private val feedList: List<Res
             tvLookAroundUserName.text = feed.nickName //닉네임
 
             tvLookAroundTime.text = feed.createdAt //시간
-            ratingBar.numStars = feed.star //ratingbar
+            ratingBar.rating = feed.star.toFloat() //ratingbar
             tvRatingBar.text = feed.score //점수 (소수점)
             tvWhen.text = feed.whenText
             tvHow.text = feed.howText
@@ -50,6 +54,12 @@ class LookAroundFeedAdapter(val context: Context, private val feedList: List<Res
             imgFeed.layoutManager = layoutManager
             var adapter = LookAroundImageAdapter(context, feed.imgUrl)
             imgFeed.adapter = adapter
+
+            layoutWhenToImage.setOnClickListener {
+                val intent = Intent(context, FeedDetailActivity::class.java)
+                intent.putExtra("postId", feed.postId)
+                context.startActivity(intent)
+            }
         }
     }
 

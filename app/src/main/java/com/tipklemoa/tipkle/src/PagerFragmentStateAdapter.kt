@@ -1,4 +1,4 @@
-package com.tipklemoa.tipkle
+package com.tipklemoa.tipkle.src
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

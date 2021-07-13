@@ -2,19 +2,12 @@ package com.tipklemoa.tipkle.src.home
 
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
-import com.afollestad.materialdialogs.LayoutMode
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.bottomsheets.BottomSheet
-import com.afollestad.materialdialogs.bottomsheets.setPeekHeight
-import com.afollestad.materialdialogs.customview.customView
 import com.google.android.material.tabs.TabLayoutMediator
-import com.tipklemoa.tipkle.PagerFragmentStateAdapter
+import com.tipklemoa.tipkle.src.PagerFragmentStateAdapter
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.config.BaseFragment
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.ViewpagerHomeTabBinding
-import com.tipklemoa.tipkle.src.home.PickedTipFragment
-import com.tipklemoa.tipkle.src.home.TodayTipFragment
 import com.tipklemoa.tipkle.src.home.model.BannerResponse
 import com.tipklemoa.tipkle.src.home.model.CategoryListResponse
 import com.tipklemoa.tipkle.src.home.model.HomePreviewFeedResponse
