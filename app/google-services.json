@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "87082722862",
+    "project_id": "tipkle-1c752",
+    "storage_bucket": "tipkle-1c752.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:87082722862:android:67b58d1b9dffd44943a1bf",
+        "android_client_info": {
+          "package_name": "com.tipklemoa.tipkle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "87082722862-s29fjd13mh6aa6f9tc7nvao7etvp38i3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALHB8DNLkh5D5eEOtsFVPvgA44izRnHNE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "87082722862-s29fjd13mh6aa6f9tc7nvao7etvp38i3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

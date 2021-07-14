@@ -1,15 +1,15 @@
 package com.tipklemoa.tipkle.src.search
 
 import android.os.Bundle
-import androidx.recyclerview.widget.GridLayoutManager
-import com.google.android.material.tabs.TabLayout
+import android.util.Log
+import androidx.fragment.app.setFragmentResultListener
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseFragment
 import com.tipklemoa.tipkle.config.BaseResponse
-import com.tipklemoa.tipkle.databinding.ViewpagerPickedTipTabBinding
-import com.tipklemoa.tipkle.databinding.ViewpagerPopularKeywordBinding
-import com.tipklemoa.tipkle.databinding.ViewpagerRecentKeywordBinding
+import com.tipklemoa.tipkle.databinding.FragmentHomeBinding
+import com.tipklemoa.tipkle.databinding.FragmentLookAroundBinding
+import com.tipklemoa.tipkle.databinding.FragmentSearchResultBinding
 import com.tipklemoa.tipkle.src.home.model.BannerResponse
 import com.tipklemoa.tipkle.src.home.model.CategoryListResponse
 import com.tipklemoa.tipkle.src.home.model.HomePreviewFeedResponse
@@ -17,33 +17,41 @@ import com.tipklemoa.tipkle.src.home.model.LookAroundResponse
 import com.tipklemoa.tipkle.src.search.model.KeywordResponse
 import com.tipklemoa.tipkle.src.search.model.SearchResponse
 
-class PopularViewPagerFragment : BaseFragment<ViewpagerPopularKeywordBinding>(ViewpagerPopularKeywordBinding::bind,
-    R.layout.viewpager_popular_keyword), SearchFragmentView {
+class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(
+    FragmentSearchResultBinding::bind,
+    R.layout.fragment_search_result
+), SearchFragmentView {
 
+    lateinit var keyword:String
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        setFragmentResultListener("keyword") { key, bundle ->
+            // We use a String here, but any type that can be put in a Bundle is supported
+            keyword = bundle.getString("keyword")!!
+            // Do something with the result...
+        }
+
         showLoadingDialog(requireContext())
-        //SearchService(this).tryLookAroundFeed("popular")
+        SearchService(this).trySearchFeed(null, "recent", keyword)
     }
 
     override fun onGetKeywordSuccess(response: KeywordResponse) {
-        dismissLoadingDialog()
-        var rankNumList = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-        val pageAdapter = KeywordAdapter(requireContext(), rankNumList, response.result)
-        binding.rvPopularKeyword.adapter = pageAdapter
+        TODO("Not yet implemented")
     }
 
     override fun onGetKeywordFailure(message: String) {
-        dismissLoadingDialog()
-        showCustomToast(message)
+        TODO("Not yet implemented")
     }
 
     override fun onGetSearchSuccess(response: SearchResponse) {
-        TODO("Not yet implemented")
+        dismissLoadingDialog()
+        val rvAdapter =
+        binding.rvSearchFeed.adapter =
     }
 
     override fun onGetSearchFailure(message: String) {
-        TODO("Not yet implemented")
+        dismissLoadingDialog()
+        showCustomToast(message)
     }
 }

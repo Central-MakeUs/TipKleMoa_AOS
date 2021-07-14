@@ -6,6 +6,7 @@ import com.tipklemoa.tipkle.config.BaseFragment
 import com.tipklemoa.tipkle.databinding.ViewpagerRecentKeywordBinding
 import com.tipklemoa.tipkle.databinding.ViewpagerTodayTipTabBinding
 import com.tipklemoa.tipkle.src.search.model.KeywordResponse
+import com.tipklemoa.tipkle.src.search.model.SearchResponse
 
 class RecentViewPagerFragment : BaseFragment<ViewpagerRecentKeywordBinding>(
     ViewpagerRecentKeywordBinding::bind,
@@ -15,7 +16,7 @@ class RecentViewPagerFragment : BaseFragment<ViewpagerRecentKeywordBinding>(
         super.onActivityCreated(savedInstanceState)
 
         showLoadingDialog(requireContext())
-        SearchService(this).tryLookAroundFeed("recent")
+        SearchService(this).trySearchFeed("recent")
     }
 
     override fun onGetKeywordSuccess(response: KeywordResponse) {
@@ -28,5 +29,13 @@ class RecentViewPagerFragment : BaseFragment<ViewpagerRecentKeywordBinding>(
     override fun onGetKeywordFailure(message: String) {
         dismissLoadingDialog()
         showCustomToast(message)
+    }
+
+    override fun onGetSearchSuccess(response: SearchResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetSearchFailure(message: String) {
+        TODO("Not yet implemented")
     }
 }
