@@ -16,7 +16,7 @@ class RecentViewPagerFragment : BaseFragment<ViewpagerRecentKeywordBinding>(
         super.onActivityCreated(savedInstanceState)
 
         showLoadingDialog(requireContext())
-        SearchService(this).trySearchFeed("recent")
+        SearchService(this).tryGetKeyword("recent")
     }
 
     override fun onGetKeywordSuccess(response: KeywordResponse) {

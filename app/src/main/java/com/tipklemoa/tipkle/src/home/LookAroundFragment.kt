@@ -44,6 +44,10 @@ class LookAroundFragment : BaseFragment<FragmentLookAroundBinding>(
                 HomeService(this).tryLookAroundFeed(clickedCatName, "popular")
             }
         }
+
+        binding.btnLookAroundBack.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
     }
 
     override fun onGetPickedCategoryListSuccess(response: CategoryListResponse) {

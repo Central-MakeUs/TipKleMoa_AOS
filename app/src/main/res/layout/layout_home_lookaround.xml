@@ -61,12 +61,11 @@
         android:id="@+id/tvLookAroundTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
         android:layout_marginRight="24dp"
-        android:layout_marginTop="4dp"
+        android:text="TextView"
         android:textColor="@color/gray97"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/imgLookAroundProfile" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutwhentoimage"

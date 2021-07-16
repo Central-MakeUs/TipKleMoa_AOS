@@ -11,6 +11,19 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SearchService(val view: SearchFragmentView) {
+    fun tryGetKeyword(order:String){
+        val searchRetrofitInterface = ApplicationClass.sRetrofit.create(SearchRetrofitInterface::class.java)
+        searchRetrofitInterface.getKeyword(order).enqueue(object: Callback<KeywordResponse> {
+            override fun onResponse(call: Call<KeywordResponse>, response: Response<KeywordResponse>) {
+                view.onGetKeywordSuccess(response.body() as KeywordResponse)
+            }
+
+            override fun onFailure(call: Call<KeywordResponse>, t: Throwable) {
+                view.onGetKeywordFailure(t.message ?: "통신 오류")
+            }
+        })
+    }
+
     fun trySearchFeed(categoryName:String?=null, order:String, search:String){
         val searchRetrofitInterface = ApplicationClass.sRetrofit.create(SearchRetrofitInterface::class.java)
         searchRetrofitInterface.getSearchFeed(categoryName, order, search).enqueue(object: Callback<SearchResponse> {

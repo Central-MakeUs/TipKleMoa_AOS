@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/drawable/bottom_mypage.xml" value="0.20104166666666667" />
         <entry key="app/src/main/res/drawable/bottom_search.xml" value="0.20104166666666667" />
         <entry key="app/src/main/res/drawable/bottom_tipkle.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/drawable/dialog_white_roundcorner.xml" value="0.11822916666666666" />
         <entry key="app/src/main/res/drawable/ic_home_tab_underline.xml" value="0.3140625" />
         <entry key="app/src/main/res/drawable/ic_icon_bottom_home.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/drawable/ic_icon_bottom_home_inactive.xml" value="0.20104166666666667" />
@@ -22,12 +23,14 @@
         <entry key="app/src/main/res/drawable/ic_icon_tipkle.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/drawable/ic_icon_tipkle_active.xml" value="0.20104166666666667" />
         <entry key="app/src/main/res/drawable/ic_icon_tipkle_inactive.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/drawable/ic_tab_indicator.xml" value="0.18541666666666667" />
         <entry key="app/src/main/res/layout/activity_choose_category.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_feed_detail.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_register_new_tip.xml" value="0.3700836761661541" />
         <entry key="app/src/main/res/layout/activity_register_with_nick_name.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_select_pic.xml" value="0.16510416666666666" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.125" />
         <entry key="app/src/main/res/layout/dialog_loading.xml" value="0.153125" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
@@ -36,15 +39,15 @@
         <entry key="app/src/main/res/layout/fragment_picked_tip.xml" value="0.1578125" />
         <entry key="app/src/main/res/layout/fragment_popular_keyword.xml" value="0.1609375" />
         <entry key="app/src/main/res/layout/fragment_recent_keyword.xml" value="0.1609375" />
-        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/fragment_search_result.xml" value="0.24583333333333332" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.3092269326683292" />
+        <entry key="app/src/main/res/layout/fragment_search_result.xml" value="0.37866666666666665" />
         <entry key="app/src/main/res/layout/fragment_tipkle.xml" value="0.1546875" />
         <entry key="app/src/main/res/layout/fragment_today_tip.xml" value="0.1578125" />
         <entry key="app/src/main/res/layout/home_bottomsheet_edit_category.xml" value="0.13958333333333334" />
         <entry key="app/src/main/res/layout/home_bottomsheet_layout.xml" value="0.335" />
         <entry key="app/src/main/res/layout/layout_banner.xml" value="0.25" />
         <entry key="app/src/main/res/layout/layout_detail_feed_viewpager.xml" value="0.19270833333333334" />
-        <entry key="app/src/main/res/layout/layout_gallery_item.xml" value="0.3418674799068309" />
+        <entry key="app/src/main/res/layout/layout_gallery_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/layout_home_lookaround.xml" value="0.335" />
         <entry key="app/src/main/res/layout/layout_home_preview_feed.xml" value="0.375" />
         <entry key="app/src/main/res/layout/layout_keyword_item.xml" value="0.5035211267605634" />
@@ -52,8 +55,8 @@
         <entry key="app/src/main/res/layout/viewpager_home_tab.xml" value="0.25" />
         <entry key="app/src/main/res/layout/viewpager_nest_tab.xml" value="0.1578125" />
         <entry key="app/src/main/res/layout/viewpager_picked_tib_tav.xml" value="0.29791666666666666" />
-        <entry key="app/src/main/res/layout/viewpager_picked_tip_tab.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/viewpager_popular_keyword.xml" value="0.12952898550724637" />
+        <entry key="app/src/main/res/layout/viewpager_picked_tip_tab.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/viewpager_popular_keyword.xml" value="0.165" />
         <entry key="app/src/main/res/layout/viewpager_popular_keywrod.xml" value="0.1609375" />
         <entry key="app/src/main/res/layout/viewpager_recent_keyword.xml" value="0.1609375" />
         <entry key="app/src/main/res/layout/viewpager_today_tib_tab.xml" value="0.29791666666666666" />

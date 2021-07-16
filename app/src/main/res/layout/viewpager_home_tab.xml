@@ -17,12 +17,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.1125"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/home_tab_top" />
+        app:layout_constraintTop_toTopOf="parent" />
     <!-- tabindicatorFullWidth : 글씨크기에 맞게 indicator -->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/home_tab_top"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         app:layout_constraintWidth_percent="0.466"
         android:clipToPadding="false"
@@ -30,9 +30,9 @@
         app:layout_constraintBottom_toTopOf="@id/vpInner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tabIndicator="@drawable/ic_home_tab_underline"
+        app:layout_constraintTop_toTopOf="@id/toolbar2"
         app:tabIndicatorColor="@color/mint"
+        app:tabPaddingBottom="-10dp"
         app:tabPaddingEnd="-1dp"
         app:tabPaddingStart="-1dp"
         app:tabSelectedTextColor="@color/mint"

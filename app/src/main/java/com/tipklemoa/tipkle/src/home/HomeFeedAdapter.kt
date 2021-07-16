@@ -15,9 +15,6 @@ import com.tipklemoa.tipkle.src.home.model.ResultHomePreviewFeed
 import com.bumptech.glide.request.RequestOptions
 
 
-
-
-
 class HomeFeedAdapter(val context: Context, private val feedList: List<ResultHomePreviewFeed>):
     RecyclerView.Adapter<HomeFeedAdapter.ItemViewHolder>(){
 

@@ -1,9 +1,15 @@
 package com.tipklemoa.tipkle.src.search
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
+import androidx.fragment.app.add
 import androidx.fragment.app.setFragmentResult
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
@@ -44,21 +50,43 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(
 
         binding.searchViewPager.isUserInputEnabled = false
 
-        //검색 불러오기
-        binding.edtSearch.setOnKeyListener { v, keyCode, event ->
-            if (event.action==KeyEvent.ACTION_DOWN && keyCode==KeyEvent.KEYCODE_ENTER){
-                val text = binding.edtSearch.text.toString()
-                if (text.isNullOrEmpty()){
+        val searchAutoCompleteTextView = binding.edtSearch.findViewById<SearchView.SearchAutoComplete>(R.id.search_src_text)
+        searchAutoCompleteTextView.setHintTextColor(resources.getColor(R.color.DBGray))
+        searchAutoCompleteTextView.setTextColor(resources.getColor(R.color.black))
+
+        binding.edtSearch.setOnQueryTextFocusChangeListener { v, hasFocus ->
+            if (hasFocus){
+                val imm:InputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.showSoftInput(v, 0)
+            }
+        }
+
+        binding.edtSearch.setOnQueryTextListener(object:SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                val text = binding.edtSearch.query.toString()
+                if (text.isEmpty()){
                     Toast.makeText(requireContext(), "검색어를 입력해주세요", Toast.LENGTH_SHORT).show()
                 }
                 else{
-                    val bundle = bundleOf("keyword" to text)
-                    // 요청키로 수신측의 리스너에 값을 전달
-                    setFragmentResult("keyword", bundle)
-                    parentFragmentManager.beginTransaction().replace(R.id.searchFrame, SearchResultFragment()).commit()
+                    val bundle = Bundle()
+                    bundle.putString("keyword", text)
+
+                    val searchResultFragment = SearchResultFragment()
+                    searchResultFragment.arguments = bundle
+
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.searchFrame, searchResultFragment)
+                        .addToBackStack(null)
+                        .commit()
                 }
+                return false
             }
-            true
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
         }
+
+        )
     }
 }

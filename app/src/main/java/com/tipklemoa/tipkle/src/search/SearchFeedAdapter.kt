@@ -15,13 +15,14 @@ import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.src.home.model.ResultLookAround
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tipklemoa.tipkle.src.FeedDetailActivity
+import com.tipklemoa.tipkle.src.home.LookAroundImageAdapter
 import com.tipklemoa.tipkle.src.search.model.ResultSearch
 
 class SearchFeedAdapter(val context: Context, private val searchList: List<ResultSearch>):
     RecyclerView.Adapter<SearchFeedAdapter.ItemViewHolder>(){
 
     inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val imgProfile = itemView.findViewById<ImageView>(R.id.img)
+        private val imgProfile = itemView.findViewById<ImageView>(R.id.imgLookAroundProfile)
         private val tvSearchUserName = itemView.findViewById<TextView>(R.id.tvLookAroundUserName)
         private val tvLookAroundTime = itemView.findViewById<TextView>(R.id.tvLookAroundTime)
         private val ratingBar = itemView.findViewById<RatingBar>(R.id.ratingBar)
@@ -32,14 +33,14 @@ class SearchFeedAdapter(val context: Context, private val searchList: List<Resul
         private val imgFeed = itemView.findViewById<RecyclerView>(R.id.rvLookAroundImageSlide)
         private val layoutWhenToImage = itemView.findViewById<ConstraintLayout>(R.id.layoutwhentoimage)
 
-        fun bind(feed: ResultLookAround, context: Context) {
+        fun bind(feed: ResultSearch, context: Context) {
 
             Glide
                 .with(context)
                 .load(feed.profileImgUrl)
                 .into(imgProfile) // 프로필
 
-            tvLookAroundUserName.text = feed.nickName //닉네임
+            tvSearchUserName.text = feed.nickName //닉네임
 
             tvLookAroundTime.text = feed.createdAt //시간
             ratingBar.rating = feed.star.toFloat() //ratingbar
@@ -72,10 +73,10 @@ class SearchFeedAdapter(val context: Context, private val searchList: List<Resul
     }
 
     override fun onBindViewHolder(holder: SearchFeedAdapter.ItemViewHolder, position: Int) {
-        holder.bind(feedList[position], context)
+        holder.bind(searchList[position], context)
     }
 
     override fun getItemCount(): Int {
-        return feedList.size
+        return searchList.size
     }
 }

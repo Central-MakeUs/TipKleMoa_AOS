@@ -7,7 +7,7 @@
     android:layout_height="118dp">
 
     <ImageView
-        android:id="@+id/imgLookAround"
+        android:id="@+id/imgGalleryItem"
         android:layout_width="0dp"
         app:layout_constraintHeight_percent="0.3"
         android:layout_marginRight="3dp"
@@ -18,5 +18,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/imgFrame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imgGalleryItem"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_gallery_item_frame"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/imgSelectBackGround"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_margin="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/imgGalleryItem"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_select_pic_circle_background"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tvSelectImageCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:textColor="@color/white"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imgSelectBackGround"
+        app:layout_constraintEnd_toEndOf="@+id/imgSelectBackGround"
+        app:layout_constraintStart_toStartOf="@+id/imgSelectBackGround"
+        app:layout_constraintTop_toTopOf="@+id/imgSelectBackGround"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

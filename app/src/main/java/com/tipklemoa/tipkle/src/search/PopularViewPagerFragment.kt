@@ -24,7 +24,7 @@ class PopularViewPagerFragment : BaseFragment<ViewpagerPopularKeywordBinding>(Vi
         super.onActivityCreated(savedInstanceState)
 
         showLoadingDialog(requireContext())
-        //SearchService(this).tryLookAroundFeed("popular")
+        SearchService(this).tryGetKeyword("popular")
     }
 
     override fun onGetKeywordSuccess(response: KeywordResponse) {

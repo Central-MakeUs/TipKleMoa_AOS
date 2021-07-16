@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.config.ApplicationClass
@@ -185,6 +187,10 @@ class HomeEditCategoryBottomSheet: BottomSheetDialogFragment(), HomeFragmentView
             showLoadingDialog(requireContext())
             var patchCategoryRequest = PatchCategoryRequest(pickedCategoryList)
             HomeService(this).tryPatchCategory(patchCategoryRequest)
+            val bundle = bundleOf("editCat_ok" to "ok")
+            // 요청키로 수신측의 리스너에 값을 전달
+            setFragmentResult("editCat", bundle)
+            this.dismiss()
         }
     }
 

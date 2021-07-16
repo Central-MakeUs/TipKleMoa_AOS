@@ -1,6 +1,11 @@
 package com.tipklemoa.tipkle.src.home
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.tipklemoa.tipkle.R
@@ -8,6 +13,7 @@ import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseFragment
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.ViewpagerPickedTipTabBinding
+import com.tipklemoa.tipkle.src.SelectPicActivity
 import com.tipklemoa.tipkle.src.home.model.BannerResponse
 import com.tipklemoa.tipkle.src.home.model.CategoryListResponse
 import com.tipklemoa.tipkle.src.home.model.HomePreviewFeedResponse
@@ -19,20 +25,35 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
     var clickedCatName:String?=null
     var editor = ApplicationClass.sSharedPreferences.edit()
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         showLoadingDialog(requireContext())
         HomeService(this).tryGetPickedCategoryList()
         HomeService(this).tryGetBanner()
+
+        binding.pickedfloatting.setOnClickListener {
+            startActivity(Intent(requireContext(), SelectPicActivity::class.java))
+        }
+
+        //  둥지 추가 후 바로 반영
+//        setFragmentResultListener("editCat") { _, bundle ->
+//            bundle.getString("editCat_ok")?.let {
+//                if (it == "ok") {
+//                    //showLoadingDialog(requireContext())
+//                    HomeService(this).tryGetPickedCategoryList()
+//                }
+//            }
+//        }
     }
 
     override fun onGetPickedCategoryListSuccess(response: CategoryListResponse) {
         dismissLoadingDialog()
+        binding.pickedCatTab.removeAllTabs()
         for (e in response.result) {
             binding.pickedCatTab.addTab(binding.pickedCatTab.newTab().setText(e.categoryName))
         }
-        showLoadingDialog(requireContext())
 
         //맨 첫번째로 선택한 카테고리의 최신순 띄워주기
         //그리고 기기내 저장
@@ -40,6 +61,7 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
         editor.putString("clickedCatName", clickedCatName)
         editor.apply()
 
+        showLoadingDialog(requireContext())
         HomeService(this).tryHomePreviewFeed(response.result[0].categoryName, "recent")
 
         //탭 클릭시 내용 바뀌는 부분
@@ -50,10 +72,10 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
                 clickedCatName = binding.pickedCatTab.getTabAt(binding.pickedCatTab.selectedTabPosition)?.text.toString()
                 editor.putString("clickedCatName", clickedCatName)
                 editor.apply()
-                showLoadingDialog(requireContext())
 
                 binding.pickedtiprecent.setTextColor(resources.getColor(R.color.black))
                 binding.pickedtippopular.setTextColor(resources.getColor(R.color.DBGray))
+                showLoadingDialog(requireContext())
                 HomeService(this@PickedTipViewPagerFragment).tryHomePreviewFeed(clickedCatName!!, "recent")
             }
 
@@ -81,7 +103,10 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
         }
 
         binding.pickedLookAround.setOnClickListener {
-            parentFragmentManager.beginTransaction().replace(R.id.homeinnerFrame, LookAroundFragment()).commit()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.homeinnerFrame, LookAroundFragment())
+                .addToBackStack(null)
+                .commit()
         }
     }
 
@@ -91,6 +116,7 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
     }
 
     override fun onGetBannerSuccess(response: BannerResponse) {
+        dismissLoadingDialog()
         val pagerAdapter = activity?.let { HomeBannerFragmentStateAdapter(it, response.result) }
         binding.pickedBannerViewPager.adapter = pagerAdapter
         binding.pickedIndicator.setViewPager2(binding.pickedBannerViewPager)
