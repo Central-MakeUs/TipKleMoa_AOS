@@ -5,6 +5,7 @@
         <item name="background">@color/white</item>
         <item name="backgroundColor">@color/white</item>
         <item name="colorPrimary">@color/mint</item>
+        <item name="android:screenOrientation">portrait</item>
 <!--        <item name="colorPrimaryVariant">@color/purple_700</item>-->
 <!--        <item name="colorOnPrimary">@color/white</item>-->
         <!-- Secondary brand color. -->

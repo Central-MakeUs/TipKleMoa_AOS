@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <external-path
+        name="external"
+        path="/Pictures/팁끌" />
+    <external-files-path
+        name="external_files"
+        path="/Pictures/팁끌" />
+    <cache-path
+        name="cache"
+        path="/Pictures/팁끌" />
+    <external-cache-path
+        name="external_cache"
+        path="/Pictures/팁끌" />
+    <files-path
+        name="files"
+        path="/Pictures/팁끌" />
+</paths>
