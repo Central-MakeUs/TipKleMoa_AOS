@@ -35,9 +35,9 @@ class HomeService(val view: HomeFragmentView) {
         })
     }
 
-    fun tryLookAroundFeed(categoryName:String, order:String, search:String?=null){
+    fun tryLookAroundFeed(categoryName:String, order:String, search:String?=null, page:Int){
         val homeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
-        homeRetrofitInterface.getLookAroundFeed(categoryName, order, search).enqueue(object: Callback<LookAroundResponse> {
+        homeRetrofitInterface.getLookAroundFeed(categoryName, order, search, page, 5).enqueue(object: Callback<LookAroundResponse> {
             override fun onResponse(call: Call<LookAroundResponse>, response: Response<LookAroundResponse>) {
                 view.onGetLookAroundFeedSuccess(response.body() as LookAroundResponse)
             }

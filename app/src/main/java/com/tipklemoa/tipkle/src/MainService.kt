@@ -4,6 +4,8 @@ import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.src.home.model.*
 import com.tipklemoa.tipkle.src.model.DetailFeedResponse
+import com.tipklemoa.tipkle.src.model.NewTipResponse
+import com.tipklemoa.tipkle.src.model.PostNewTipRequest
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,6 +21,33 @@ class MainService(val view: MainView) {
 
             override fun onFailure(call: Call<DetailFeedResponse>, t: Throwable) {
                 view.onGetFeedDetailFailure(t.message ?: "통신 오류")
+            }
+        })
+    }
+
+    //피드삭제
+    fun tryDeleteFeed(postId:Int){
+        val mainRetrofitInterface = ApplicationClass.sRetrofit.create(MainRetrofitInterface::class.java)
+        mainRetrofitInterface.deleteFeed(postId).enqueue(object: Callback<BaseResponse> {
+            override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
+                view.onDeleteFeedSuccess(response.body() as BaseResponse)
+            }
+
+            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
+                view.onDeleteFeedFailure(t.message ?: "통신 오류")
+            }
+        })
+    }
+
+    fun tryPostNewTip(postNewTipRequest: PostNewTipRequest){
+        val mainRetrofitInterface = ApplicationClass.sRetrofit.create(MainRetrofitInterface::class.java)
+        mainRetrofitInterface.postNewTip(postNewTipRequest).enqueue(object: Callback<NewTipResponse> {
+            override fun onResponse(call: Call<NewTipResponse>, response: Response<NewTipResponse>) {
+                view.onPostSuccess(response.body() as NewTipResponse)
+            }
+
+            override fun onFailure(call: Call<NewTipResponse>, t: Throwable) {
+                view.onPostFailure(t.message ?: "통신 오류")
             }
         })
     }

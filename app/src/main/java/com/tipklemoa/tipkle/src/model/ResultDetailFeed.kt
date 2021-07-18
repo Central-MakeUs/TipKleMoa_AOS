@@ -14,5 +14,6 @@ data class ResultDetailFeed(@SerializedName("postId") val postId: Int,
                             @SerializedName("isStarred") val isStarred: Char,
                             @SerializedName("isBookMarked") val isBookMarked:Char,
                             @SerializedName("commentCount") val commentCount:Int,
+                            @SerializedName("isAuthor") val isAuthor: Char,
                             @SerializedName("imgUrl") val imgUrl:List<String>
 )

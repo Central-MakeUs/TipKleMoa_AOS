@@ -29,6 +29,7 @@ interface HomeRetrofitInterface {
 
     //피드 목록 조회 (팁끌 들러보기)
     @GET("/posts")
-    fun getLookAroundFeed(@Query("categoryName") categoryName:String, @Query("order") order:String, @Query("search") search:String?=null)
+    fun getLookAroundFeed(@Query("categoryName") categoryName:String, @Query("order") order:String, @Query("search") search:String?=null,
+                          @Query("page") page:Int, @Query("limit") limit:Int)
             : Call<LookAroundResponse>
 }

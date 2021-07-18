@@ -25,13 +25,8 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
     var clickedCatName:String?=null
     var editor = ApplicationClass.sSharedPreferences.edit()
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        showLoadingDialog(requireContext())
-        HomeService(this).tryGetPickedCategoryList()
-        HomeService(this).tryGetBanner()
 
         binding.pickedfloatting.setOnClickListener {
             startActivity(Intent(requireContext(), SelectPicActivity::class.java))
@@ -46,6 +41,14 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
 //                }
 //            }
 //        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        showLoadingDialog(requireContext())
+        HomeService(this).tryGetPickedCategoryList()
+        HomeService(this).tryGetBanner()
     }
 
     override fun onGetPickedCategoryListSuccess(response: CategoryListResponse) {

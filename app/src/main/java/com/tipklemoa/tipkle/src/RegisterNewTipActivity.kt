@@ -13,8 +13,10 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.storage.FirebaseStorage
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
+import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.config.BaseActivity
 import com.tipklemoa.tipkle.databinding.ActivityRegisterNewTipBinding
 import java.io.File
@@ -31,6 +33,9 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
     private lateinit var timeStamp:String
     private lateinit var imageFileName:String //현재 파일 이름
     var selectedimageUrlList = arrayListOf<String>()
+    //var uploadImageList =
+    var storage: FirebaseStorage? = null //파이어베이스
+
 
     private var takePicListener: PermissionListener = object : PermissionListener {
         override fun onPermissionGranted() {
@@ -44,6 +49,7 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        storage = FirebaseStorage.getInstance()
 
         selectedimageUrlList = if (intent.getStringArrayListExtra("selectedimageUrlList").isNullOrEmpty()){
             arrayListOf()
@@ -84,6 +90,34 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
         binding.tvCompleteNewTip.setOnClickListener {
             checkIsEmpty()
         }
+
+        binding.layoutCategory.setOnClickListener {
+            val cetegoryDialog = NewTipCategoryDialogFragment()
+            cetegoryDialog.show(supportFragmentManager, cetegoryDialog.tag)
+            activateButton()
+        }
+
+        binding.edtHow.setOnFocusChangeListener { v, hasFocus ->
+            activateButton()
+        }
+
+        binding.edtWhen.setOnFocusChangeListener { v, hasFocus ->
+            activateButton()
+        }
+
+        binding.edtTipLine.setOnFocusChangeListener { v, hasFocus ->
+            activateButton()
+        }
+
+        //액티비티에서 프래그먼트가 보내는 데이터를 받아올때!
+        supportFragmentManager
+            .setFragmentResultListener("category", this) { requestKey, bundle ->
+                // We use a String here, but any type that can be put in a Bundle is supported
+                val result = bundle.getString("category")
+                Log.d("result", result.toString())
+                // Do something with the result
+                binding.tvNewTipCategory.text = result
+            }
     }
 
     private val onClicked = object: NewTipPicAdapter.OnItemClickListener{
@@ -138,6 +172,7 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
         //사진 폴더에 저장하기 위한 경로 선언
         val file = File(currentPhotoPath)
         val uri = Uri.fromFile(file)
+        Log.d("test", uri.toString())
         MediaScannerConnection.scanFile(this, arrayOf(file.toString()),
             null, null)
         selectedimageUrlList.add(file.toUri().toString())
@@ -164,41 +199,68 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
         val bundle = Bundle()
         var dialogText:String?=null
 
-        //아무것도 등록 안했을때
-        if (selectedimageUrlList.size==0 && binding.edtWhen.text.isNullOrEmpty() &&
-            binding.edtHow.text.isNullOrEmpty() && binding.tvNewTipCategory.text.toString()=="*카테고리"){
-            dialogText = "사진 등록, 카테고리, When, How는 필수 입력 항목이에요."
-        } //사진만 등록
-        else if (selectedimageUrlList.size!=0 && binding.edtWhen.text.isNullOrEmpty() &&
-            binding.edtHow.text.isNullOrEmpty() && binding.tvNewTipCategory.text.toString()=="*카테고리"){
-            dialogText = "카테고리, When, How는 필수 입력 항목이에요."
-        } //When, How 입력 안함
-        else if (selectedimageUrlList.size!=0 && binding.edtWhen.text.isNullOrEmpty() &&
-            binding.edtHow.text.isNullOrEmpty() && binding.tvNewTipCategory.text.toString()!="*카테고리"){
-            dialogText = "When, How는 필수 입력 항목이에요."
-        } //사진, 카테고리 등록 안함
-        else if (selectedimageUrlList.size==0 && binding.edtWhen.text.isNotEmpty() &&
-            binding.edtHow.text.isNotEmpty() && binding.tvNewTipCategory.text.toString()=="*카테고리"){
-            dialogText = "사진 등록, 카테고리는 필수 입력 항목이에요."
-        } //사진 등록안함
-        else if (selectedimageUrlList.isNullOrEmpty() && binding.edtWhen.text.isNotEmpty() &&
+        if (selectedimageUrlList.isNullOrEmpty() && binding.edtWhen.text.isNotEmpty() &&
             binding.edtHow.text.isNotEmpty() && binding.tvNewTipCategory.text.toString()!="*카테고리"){
-            dialogText = "게시글 사진을 등록해주세요."
+            dialogText = "사진을 1장 이상 등록해주세요"
+            bundle.putString("dialogText", dialogText)
+            dialogIsEmpty.arguments = bundle
+            dialogIsEmpty.show(supportFragmentManager, dialogIsEmpty.tag)
         } //모두 입력
-        else if (!selectedimageUrlList.isNullOrEmpty() && !binding.edtWhen.text.isNullOrEmpty() &&
-            !binding.edtHow.text.isNullOrEmpty() && binding.tvNewTipCategory.text.toString()!="*카테고리"){
-            if (binding.edtHow.text.length<4) dialogText = "How를 4자 이상 40자 미만 작성해주세요."
-            else if (binding.edtWhen.text.length<4) dialogText = "When을 4자 이상 40자 미만 작성해주세요."
-            else if (binding.edtHow.text.length<4 && binding.edtWhen.text.length<4) dialogText = "When, How를 4자 이상 40자 미만 작성해주세요."
+        else if (selectedimageUrlList.isNotEmpty() && binding.edtWhen.text.isNotEmpty() &&
+            binding.edtHow.text.isNotEmpty() && binding.tvNewTipCategory.text.toString()!="*카테고리"){
+                dialogText = ""
+            if (binding.edtHow.text.length<4) dialogText += "How를 4자 이상 40자 미만 작성해주세요.\n"
+            if (binding.edtWhen.text.length<4) dialogText += "When을 4자 이상 40자 미만 작성해주세요."
+            bundle.putString("dialogText", dialogText)
+            dialogIsEmpty.arguments = bundle
+            dialogIsEmpty.show(supportFragmentManager, dialogIsEmpty.tag)
         }
-//        else{
-//
-//        }
-        if (dialogText != null) {
-            Log.d("dialogText", dialogText)
+        else { //게시글 등록 API
+            imageUploadFirebase()
         }
-        bundle.putString("dialogText", dialogText)
-        dialogIsEmpty.arguments = bundle
-        dialogIsEmpty.show(supportFragmentManager, dialogIsEmpty.tag)
+    }
+
+    private fun activateButton() {
+        //사진을 안올렸을때
+        if (selectedimageUrlList.isNullOrEmpty() && binding.edtWhen.text.isNotEmpty() &&
+            binding.edtHow.text.isNotEmpty() && binding.tvNewTipCategory.text.toString()!="*카테고리") {
+            binding.tvCompleteNewTip.isEnabled = true
+            binding.tvCompleteNewTip.setTextColor(resources.getColor(R.color.mint))
+        }
+        else {
+            binding.tvCompleteNewTip.isEnabled = false
+            binding.tvCompleteNewTip.setTextColor(resources.getColor(R.color.DBGray))
+        }
+    }
+
+    fun imageUploadFirebase(){
+        if(selectedimageUrlList.size>1) { //사진 여러장일때
+            for (i in selectedimageUrlList) {
+                val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+                var fileN = i.split("/").last()
+                val split = fileN.split(".")
+                fileN = split.first() + timestamp.split('.').first() + "." + split.last()
+                val storageRef = storage?.reference?.child("media")?.child(fileN)
+
+                storageRef?.putFile(Uri.parse(i)!!)?.addOnSuccessListener {
+                    Log.d("test", "파이어베이스 업로드완료")
+                    storageRef.downloadUrl.addOnSuccessListener { uri ->
+                        Log.d("test", uri.toString())
+                    }
+                }
+            }
+        }else{ //사진 한장일때
+            val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+            val imageFile = "Image_"+timestamp+"_.jpg"
+            val storageRef = storage?.reference?.child("media")?.child(imageFile)
+
+            storageRef?.putFile(Uri.parse(selectedimageUrlList[0]))?.addOnSuccessListener {
+                Log.d("photo", "파이어베이스 업로드완료")
+                storageRef.downloadUrl.addOnSuccessListener { uri ->
+                    Log.d("test", "파이어베이스 업로드완료")
+                    Log.d("test", uri.toString())
+                }
+            }
+        }
     }
 }
