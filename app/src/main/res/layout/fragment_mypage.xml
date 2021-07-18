@@ -1,7 +1,288 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent"
-    tools:context=".src.home.HomeFragment"/>
+    tools:context=".src.home.HomeFragment">
+
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/mint"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanscjkkr_bold"
+        android:includeFontPadding="false"
+        android:layout_marginLeft="24dp"
+        android:layout_marginVertical="54dp"
+        android:textColor="@color/white"
+        android:text="마이페이지"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="9dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView19">
+
+        <ImageView
+            android:id="@+id/imageView21"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_box_level_up"
+            android:scaleType="fitXY"
+            android:outlineProvider="background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgMyPageProfile"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/ic_img_profile"
+            android:translationZ="90dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView21" />
+
+        <TextView
+            android:id="@+id/tvMyPageNickName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosanscjkkr_bold"
+            android:includeFontPadding="false"
+            android:text="닉네"
+            android:gravity="start"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:translationZ="90dp"
+            app:layout_constraintEnd_toEndOf="@+id/imgMyPageProfile"
+            app:layout_constraintStart_toStartOf="@+id/imgMyPageProfile"
+            app:layout_constraintTop_toBottomOf="@+id/imgMyPageProfile" />
+
+        <ImageView
+            android:id="@+id/imageView22"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:src="@drawable/ic_right_arrow"
+            android:translationZ="90dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvMyPageNickName"
+            app:layout_constraintEnd_toEndOf="@+id/imgMyPageProfile"
+            app:layout_constraintStart_toEndOf="@+id/tvMyPageNickName"
+            app:layout_constraintTop_toBottomOf="@+id/imgMyPageProfile" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/imageView23"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintHeight_percent="0.25"
+        android:layout_marginHorizontal="9dp"
+        android:background="@drawable/ic_box_level_up"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:fontFamily="@font/notosanscjkkr_medium"
+        android:includeFontPadding="false"
+        android:text="팁끌모아 레벨업"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="@+id/imageView23"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
+
+    <ImageView
+        android:id="@+id/imgMyPageGauge"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_lv1_0_"
+        app:layout_constraintEnd_toEndOf="@+id/imageView23"
+        app:layout_constraintStart_toStartOf="@+id/imageView23"
+        app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+    <TextView
+        android:id="@+id/tvLevelName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanscjkkr_medium"
+        android:includeFontPadding="false"
+        android:text="Lv. 팁끌"
+        android:textColor="@color/mint"
+        android:textSize="12dp"
+        app:layout_constraintStart_toStartOf="@+id/imgMyPageGauge"
+        app:layout_constraintTop_toBottomOf="@+id/imgMyPageGauge" />
+
+    <TextView
+        android:id="@+id/tvMyPageAchieve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanscjkkr_regular"
+        android:includeFontPadding="false"
+        android:text="0/100"
+        android:textColor="@color/gray97"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/imgMyPageGauge"
+        app:layout_constraintTop_toBottomOf="@+id/imgMyPageGauge" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_keyword"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView23">
+
+        <TextView
+            android:id="@+id/tvNewTipCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:layout_marginLeft="30dp"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:includeFontPadding="false"
+            android:text="키워드 알림"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/ic_right_arrow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/imageView15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_keyword"
+        app:srcCompat="@drawable/ic_gray_line" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_logout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView15">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:layout_marginLeft="30dp"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:includeFontPadding="false"
+            android:text="로그아웃"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/ic_right_arrow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_withdraw"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView25">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:layout_marginLeft="30dp"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:includeFontPadding="false"
+            android:text="회원탈퇴"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/ic_right_arrow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/imageView25"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_logout"
+        app:srcCompat="@drawable/ic_gray_line" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_withdraw"
+        app:srcCompat="@drawable/ic_gray_line" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

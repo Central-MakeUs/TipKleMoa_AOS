@@ -1,7 +1,8 @@
-package com.tipklemoa.tipkle. src
+package com.tipklemoa.tipkle.src
 
 import android.Manifest
 import android.content.Intent
+import android.content.SharedPreferences
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
@@ -17,15 +18,21 @@ import com.google.firebase.storage.FirebaseStorage
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
 import com.tipklemoa.tipkle.R
+import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseActivity
+import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.ActivityRegisterNewTipBinding
+import com.tipklemoa.tipkle.src.model.DetailFeedResponse
+import com.tipklemoa.tipkle.src.model.NewTipResponse
+import com.tipklemoa.tipkle.src.model.PostNewTipRequest
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(ActivityRegisterNewTipBinding::inflate) {
+class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(ActivityRegisterNewTipBinding::inflate),
+    MainView {
 
     private val REQUEST_TAKE_PHOTO = 1
     private lateinit var currentPhotoPath: String
@@ -33,9 +40,9 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
     private lateinit var timeStamp:String
     private lateinit var imageFileName:String //현재 파일 이름
     var selectedimageUrlList = arrayListOf<String>()
-    //var uploadImageList =
+    private var uploadImageList = arrayListOf<String>()
+    lateinit var editor:SharedPreferences.Editor
     var storage: FirebaseStorage? = null //파이어베이스
-
 
     private var takePicListener: PermissionListener = object : PermissionListener {
         override fun onPermissionGranted() {
@@ -50,6 +57,7 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         storage = FirebaseStorage.getInstance()
+        editor = ApplicationClass.sSharedPreferences.edit()
 
         selectedimageUrlList = if (intent.getStringArrayListExtra("selectedimageUrlList").isNullOrEmpty()){
             arrayListOf()
@@ -120,17 +128,26 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
             }
     }
 
+//    override fun onResume() {
+//        super.onResume()
+//
+//
+//    }
+
     private val onClicked = object: NewTipPicAdapter.OnItemClickListener{
         override fun onClicked(position: Int) {
             selectedimageUrlList.remove(selectedimageUrlList[position])
             newTipPicAdapter.notifyItemRemoved(position)
             binding.tvPickedPicCount.text = selectedimageUrlList.size.toString()
+            activateButton()
         }
     }
 
     // 사진 찍는 인텐트
     private fun takePictureIntent() {
         Log.d("test", "takePictureIntent")
+        //editor.putString("")
+
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         if (takePictureIntent.resolveActivity(packageManager) != null) {
 
@@ -198,36 +215,35 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
         val dialogIsEmpty = NewTipAlertDialogFragment()
         val bundle = Bundle()
         var dialogText:String?=null
-
-        if (selectedimageUrlList.isNullOrEmpty() && binding.edtWhen.text.isNotEmpty() &&
-            binding.edtHow.text.isNotEmpty() && binding.tvNewTipCategory.text.toString()!="*카테고리"){
-            dialogText = "사진을 1장 이상 등록해주세요"
-            bundle.putString("dialogText", dialogText)
-            dialogIsEmpty.arguments = bundle
-            dialogIsEmpty.show(supportFragmentManager, dialogIsEmpty.tag)
-        } //모두 입력
-        else if (selectedimageUrlList.isNotEmpty() && binding.edtWhen.text.isNotEmpty() &&
-            binding.edtHow.text.isNotEmpty() && binding.tvNewTipCategory.text.toString()!="*카테고리"){
+            //모두 입력
+        if (selectedimageUrlList.isNotEmpty() && binding.edtWhen.text.length<4 ||
+            binding.edtHow.text.length<4 && binding.tvNewTipCategory.text.toString()!="*카테고리"){
                 dialogText = ""
             if (binding.edtHow.text.length<4) dialogText += "How를 4자 이상 40자 미만 작성해주세요.\n"
             if (binding.edtWhen.text.length<4) dialogText += "When을 4자 이상 40자 미만 작성해주세요."
+
             bundle.putString("dialogText", dialogText)
             dialogIsEmpty.arguments = bundle
             dialogIsEmpty.show(supportFragmentManager, dialogIsEmpty.tag)
         }
         else { //게시글 등록 API
             imageUploadFirebase()
+//            val postNewTipRequest = PostNewTipRequest(binding.tvNewTipCategory.text.toString(),
+//                binding.edtWhen.text.toString(), binding.edtHow.text.toString(), binding.edtTipLine.text.toString(),
+//                uploadImageList)
+//            showLoadingDialog(this)
+//            MainService(this).tryPostNewTip(postNewTipRequest)
         }
     }
 
     private fun activateButton() {
         //사진을 안올렸을때
-        if (selectedimageUrlList.isNullOrEmpty() && binding.edtWhen.text.isNotEmpty() &&
+        if (selectedimageUrlList.isNotEmpty() && binding.edtWhen.text.isNotEmpty() &&
             binding.edtHow.text.isNotEmpty() && binding.tvNewTipCategory.text.toString()!="*카테고리") {
             binding.tvCompleteNewTip.isEnabled = true
             binding.tvCompleteNewTip.setTextColor(resources.getColor(R.color.mint))
         }
-        else {
+        else{
             binding.tvCompleteNewTip.isEnabled = false
             binding.tvCompleteNewTip.setTextColor(resources.getColor(R.color.DBGray))
         }
@@ -246,6 +262,7 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
                     Log.d("test", "파이어베이스 업로드완료")
                     storageRef.downloadUrl.addOnSuccessListener { uri ->
                         Log.d("test", uri.toString())
+                        uploadImageList.add(uri.toString())
                     }
                 }
             }
@@ -256,11 +273,45 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
 
             storageRef?.putFile(Uri.parse(selectedimageUrlList[0]))?.addOnSuccessListener {
                 Log.d("photo", "파이어베이스 업로드완료")
-                storageRef.downloadUrl.addOnSuccessListener { uri ->
-                    Log.d("test", "파이어베이스 업로드완료")
-                    Log.d("test", uri.toString())
+                storageRef.downloadUrl.addOnSuccessListener { uri->
+                    uploadImageList.add(uri.toString())
                 }
             }
+            Log.d("size", uploadImageList.size.toString())
         }
+//
+//        Log.d("size", uploadImageList.size.toString())
+//        val postNewTipRequest = PostNewTipRequest(binding.tvNewTipCategory.text.toString(),
+//            binding.edtWhen.text.toString(), binding.edtHow.text.toString(), binding.edtTipLine.text.toString(),
+//            uploadImageList)
+//        showLoadingDialog(this)
+//        MainService(this).tryPostNewTip(postNewTipRequest)
+    }
+
+    override fun onGetFeedDetailSuccess(response: DetailFeedResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetFeedDetailFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteFeedSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteFeedFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostSuccess(response: NewTipResponse) {
+        dismissLoadingDialog()
+        showCustomToast("팁 등록이 완료되었습니다!")
+        this.finish()
+    }
+
+    override fun onPostFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast(message)
     }
 }

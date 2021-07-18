@@ -17,6 +17,7 @@ import androidx.fragment.app.setFragmentResult
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.LayoutDetailReallyDeleteDialogBinding
 import com.tipklemoa.tipkle.src.model.DetailFeedResponse
+import com.tipklemoa.tipkle.src.model.NewTipResponse
 import com.tipklemoa.tipkle.util.LoadingDialog
 
 class ReallyDeleteDialog : DialogFragment(), MainView {
@@ -107,5 +108,13 @@ class ReallyDeleteDialog : DialogFragment(), MainView {
     override fun onDeleteFeedFailure(message: String) {
         dismissLoadingDialog()
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onPostSuccess(response: NewTipResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostFailure(message: String) {
+        TODO("Not yet implemented")
     }
 }
