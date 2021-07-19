@@ -11,10 +11,10 @@ class HomeBannerFragmentStateAdapter(fragmentActivity: FragmentActivity, val ban
 
     override fun createFragment(position: Int): Fragment {
         return when(position) {
-            0 -> HomeBannerFragment(bannerList[0].thumbnailUrl, bannerList[0].title)
-            1 -> HomeBannerFragment(bannerList[1].thumbnailUrl, bannerList[1].title)
-            2 -> HomeBannerFragment(bannerList[2].thumbnailUrl, bannerList[2].title)
-            else -> HomeBannerFragment(bannerList[3].thumbnailUrl, bannerList[3].title)
+            0 -> HomeBannerFragment(bannerList[0].thumbnailUrl, bannerList[0].title, bannerList[0].postId)
+            1 -> HomeBannerFragment(bannerList[1].thumbnailUrl, bannerList[1].title, bannerList[1].postId)
+            2 -> HomeBannerFragment(bannerList[2].thumbnailUrl, bannerList[2].title, bannerList[2].postId)
+            else -> HomeBannerFragment(bannerList[3].thumbnailUrl, bannerList[3].title, bannerList[3].postId)
         }
     }
 }

@@ -12,7 +12,7 @@ import retrofit2.Response
 
 class MainService(val view: MainView) {
 
-    fun tryHomePreviewFeed(postId:Int){
+    fun tryGetFeedDetail(postId:Int){
         val mainRetrofitInterface = ApplicationClass.sRetrofit.create(MainRetrofitInterface::class.java)
         mainRetrofitInterface.getFeedDetail(postId).enqueue(object: Callback<DetailFeedResponse> {
             override fun onResponse(call: Call<DetailFeedResponse>, response: Response<DetailFeedResponse>) {

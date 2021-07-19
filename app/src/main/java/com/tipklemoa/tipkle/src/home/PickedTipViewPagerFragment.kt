@@ -32,21 +32,8 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
             startActivity(Intent(requireContext(), SelectPicActivity::class.java))
         }
 
-        //  둥지 추가 후 바로 반영
-//        setFragmentResultListener("editCat") { _, bundle ->
-//            bundle.getString("editCat_ok")?.let {
-//                if (it == "ok") {
-//                    //showLoadingDialog(requireContext())
-//                    HomeService(this).tryGetPickedCategoryList()
-//                }
-//            }
-//        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-
         showLoadingDialog(requireContext())
+
         HomeService(this).tryGetPickedCategoryList()
         HomeService(this).tryGetBanner()
     }
@@ -64,7 +51,6 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
         editor.putString("clickedCatName", clickedCatName)
         editor.apply()
 
-        showLoadingDialog(requireContext())
         HomeService(this).tryHomePreviewFeed(response.result[0].categoryName, "recent")
 
         //탭 클릭시 내용 바뀌는 부분

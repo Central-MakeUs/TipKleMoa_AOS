@@ -1,11 +1,19 @@
 package com.tipklemoa.tipkle.src
 
+import com.google.gson.annotations.SerializedName
 import com.tipklemoa.tipkle.config.BaseResponse
+import com.tipklemoa.tipkle.src.home.model.PatchCategoryRequest
 import com.tipklemoa.tipkle.src.model.DetailFeedResponse
 import com.tipklemoa.tipkle.src.model.NewTipResponse
 import com.tipklemoa.tipkle.src.model.PostNewTipRequest
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.http.*
+import java.util.ArrayList
+
+import retrofit2.http.POST
+
+import retrofit2.http.FormUrlEncoded
 
 interface MainRetrofitInterface {
 
@@ -18,7 +26,7 @@ interface MainRetrofitInterface {
     fun deleteFeed(@Path("postId") postId:Int): Call<BaseResponse>
 
     //게시글 등록
-    @POST("/post")
+    @POST("/posts")
     fun postNewTip(@Body params: PostNewTipRequest): Call<NewTipResponse>
 //
 //    //피드 목록 조회 (팁끌 들러보기)

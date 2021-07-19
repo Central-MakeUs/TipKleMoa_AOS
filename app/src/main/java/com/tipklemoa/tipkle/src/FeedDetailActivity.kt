@@ -21,7 +21,7 @@ class FeedDetailActivity : BaseActivity<ActivityFeedDetailBinding>(ActivityFeedD
         Log.d("postId", postId.toString())
 
         showLoadingDialog(this)
-        MainService(this).tryHomePreviewFeed(postId)
+        MainService(this).tryGetFeedDetail(postId)
     }
 
     override fun onGetFeedDetailSuccess(response: DetailFeedResponse) {
@@ -47,6 +47,7 @@ class FeedDetailActivity : BaseActivity<ActivityFeedDetailBinding>(ActivityFeedD
         binding.tvDetailText.text = response.result.description
         binding.ratingBarDetail.rating = response.result.star.toFloat()
         binding.tvDetailFloat.text = response.result.score
+        binding.tvDetailStar.text = response.result.star.toString()
 
         if (response.result.isStarred=='Y'){
             binding.btnDetailStar.setBackgroundResource(R.drawable.ic_mint_start)

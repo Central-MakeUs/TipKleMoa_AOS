@@ -1,11 +1,14 @@
 package com.tipklemoa.tipkle.src.home
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -13,7 +16,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.src.home.model.ResultHomePreviewFeed
 import com.bumptech.glide.request.RequestOptions
-
+import com.tipklemoa.tipkle.src.FeedDetailActivity
 
 class HomeFeedAdapter(val context: Context, private val feedList: List<ResultHomePreviewFeed>):
     RecyclerView.Adapter<HomeFeedAdapter.ItemViewHolder>(){
@@ -34,7 +37,6 @@ class HomeFeedAdapter(val context: Context, private val feedList: List<ResultHom
             var requestOptions = RequestOptions()
             requestOptions = requestOptions.transform(CenterCrop(), RoundedCorners(8))
 
-
             tvFeedTitle.text = feed.title //멤버 이름
             Glide
                 .with(context)
@@ -54,6 +56,11 @@ class HomeFeedAdapter(val context: Context, private val feedList: List<ResultHom
 
     override fun onBindViewHolder(holder: HomeFeedAdapter.ItemViewHolder, position: Int) {
         holder.bind(feedList[position], context)
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, FeedDetailActivity::class.java)
+            intent.putExtra("postId", feedList[position].postId)
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {

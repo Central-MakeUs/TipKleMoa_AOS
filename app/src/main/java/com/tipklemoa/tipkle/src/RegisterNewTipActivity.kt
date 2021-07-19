@@ -39,8 +39,8 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
     private lateinit var newTipPicAdapter: NewTipPicAdapter
     private lateinit var timeStamp:String
     private lateinit var imageFileName:String //현재 파일 이름
-    var selectedimageUrlList = arrayListOf<String>()
-    private var uploadImageList = arrayListOf<String>()
+    var selectedimageUrlList = java.util.ArrayList<String>()
+    private var uploadImageList = java.util.ArrayList<String>()
     lateinit var editor:SharedPreferences.Editor
     var storage: FirebaseStorage? = null //파이어베이스
 
@@ -228,11 +228,6 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
         }
         else { //게시글 등록 API
             imageUploadFirebase()
-//            val postNewTipRequest = PostNewTipRequest(binding.tvNewTipCategory.text.toString(),
-//                binding.edtWhen.text.toString(), binding.edtHow.text.toString(), binding.edtTipLine.text.toString(),
-//                uploadImageList)
-//            showLoadingDialog(this)
-//            MainService(this).tryPostNewTip(postNewTipRequest)
         }
     }
 
@@ -249,7 +244,7 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
         }
     }
 
-    fun imageUploadFirebase(){
+    private fun imageUploadFirebase(){
         if(selectedimageUrlList.size>1) { //사진 여러장일때
             for (i in selectedimageUrlList) {
                 val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
@@ -263,6 +258,15 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
                     storageRef.downloadUrl.addOnSuccessListener { uri ->
                         Log.d("test", uri.toString())
                         uploadImageList.add(uri.toString())
+
+                        if (uploadImageList.size==selectedimageUrlList.size){
+                            showLoadingDialog(this)
+                            val postNewTipRequest = PostNewTipRequest(binding.tvNewTipCategory.text.toString(),
+                                binding.edtWhen.text.toString(), binding.edtHow.text.toString(), binding.edtTipLine.text.toString(),
+                                uploadImageList)
+
+                            MainService(this).tryPostNewTip(postNewTipRequest)
+                        }
                     }
                 }
             }
@@ -275,17 +279,18 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
                 Log.d("photo", "파이어베이스 업로드완료")
                 storageRef.downloadUrl.addOnSuccessListener { uri->
                     uploadImageList.add(uri.toString())
+                    Log.d("size", uploadImageList.size.toString())
+                    Log.d("size", uploadImageList[0])
+
+                    showLoadingDialog(this)
+                    val postNewTipRequest = PostNewTipRequest(binding.tvNewTipCategory.text.toString(),
+                        binding.edtWhen.text.toString(), binding.edtHow.text.toString(), binding.edtTipLine.text.toString(),
+                        uploadImageList)
+
+                    MainService(this).tryPostNewTip(postNewTipRequest)
                 }
             }
-            Log.d("size", uploadImageList.size.toString())
         }
-//
-//        Log.d("size", uploadImageList.size.toString())
-//        val postNewTipRequest = PostNewTipRequest(binding.tvNewTipCategory.text.toString(),
-//            binding.edtWhen.text.toString(), binding.edtHow.text.toString(), binding.edtTipLine.text.toString(),
-//            uploadImageList)
-//        showLoadingDialog(this)
-//        MainService(this).tryPostNewTip(postNewTipRequest)
     }
 
     override fun onGetFeedDetailSuccess(response: DetailFeedResponse) {
