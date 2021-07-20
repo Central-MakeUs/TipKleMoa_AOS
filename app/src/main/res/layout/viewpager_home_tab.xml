@@ -31,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/toolbar2"
-        app:tabIndicatorColor="@color/mint"
+        app:tabIndicatorColor="@color/transparent"
         app:tabPaddingBottom="-10dp"
         app:tabPaddingEnd="-1dp"
         app:tabPaddingStart="-1dp"
@@ -45,9 +45,9 @@
         android:layout_height="28dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/ic_icon_setting_active"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
+        app:layout_constraintBottom_toBottomOf="@+id/home_tab_top"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/home_tab_top"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <androidx.viewpager2.widget.ViewPager2

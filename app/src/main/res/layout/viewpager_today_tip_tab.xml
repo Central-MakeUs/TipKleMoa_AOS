@@ -24,7 +24,7 @@
         app:tabPaddingEnd="-1dp"
         app:tabPaddingStart="-1dp"
         app:tabSelectedTextColor="@color/mint"
-        app:tabTextAppearance="@style/home_tabtext_style"
+        app:tabTextAppearance="@style/home_categorytabtext_style"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.viewpager2.widget.ViewPager2

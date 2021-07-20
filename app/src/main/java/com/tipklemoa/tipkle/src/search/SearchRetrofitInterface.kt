@@ -14,6 +14,7 @@ interface SearchRetrofitInterface {
 
     //검색 피드 목록 조회 (팁끌 들러보기)
     @GET("/posts")
-    fun getSearchFeed(@Query("categoryName") categoryName:String?=null, @Query("order") order:String, @Query("search") search:String)
+    fun getSearchFeed(@Query("categoryName") categoryName:String?=null, @Query("order") order:String, @Query("search") search:String,
+    @Query("page") page:Int, @Query("limit") limit:Int)
             : Call<SearchResponse>
 }

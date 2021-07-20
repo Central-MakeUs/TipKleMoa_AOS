@@ -176,7 +176,7 @@
         app:srcCompat="@drawable/ic_gray_line" />
 
     <TextView
-        android:id="@+id/tvWhenStart"
+        android:id="@+id/tvWhenStar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -194,7 +194,7 @@
         android:id="@+id/edtWhen"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="16dp"
+        android:layout_marginVertical="12dp"
         android:layout_marginRight="24dp"
         android:maxLength="40"
         android:background="@color/transparent"
@@ -204,7 +204,7 @@
         android:textColor="@color/black"
         android:textColorHint="@color/DBGray"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvWhenStart"
+        app:layout_constraintStart_toEndOf="@+id/tvWhenStar"
         app:layout_constraintTop_toBottomOf="@+id/imageView13" />
 
     <ImageView
@@ -212,7 +212,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -238,7 +238,7 @@
         android:id="@+id/edtHow"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:layout_marginRight="24dp"
         android:maxLength="40"
         android:hint="How? (내용을 4~40자 입력해주세요.)"
@@ -256,7 +256,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -273,6 +273,7 @@
         android:gravity="start"
         android:layout_marginTop="20dp"
         android:textColor="@color/black"
+        android:lineSpacingExtra="2dp"
         android:hint="나만의 꿀팁을 입력해주세요. (관계없는 내용의 꿀팁은 게시가 제한될 수 있어요.)"
         android:inputType="textMultiLine"
         android:textColorHint="@color/DBGray"

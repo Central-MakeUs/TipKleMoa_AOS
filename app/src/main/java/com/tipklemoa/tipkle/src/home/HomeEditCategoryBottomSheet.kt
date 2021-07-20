@@ -1,18 +1,14 @@
 package com.tipklemoa.tipkle.src.home
 
 import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.Color
+import android.graphics.Point
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tipklemoa.tipkle.R
-import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.HomeBottomsheetLayoutBinding
 import com.tipklemoa.tipkle.src.home.model.*
@@ -25,6 +21,9 @@ class HomeEditCategoryBottomSheet: BottomSheetDialogFragment(), HomeFragmentView
     var pickedNum = 0
     var selectallflag = false
     private var pickedCategoryList = mutableListOf<Int>()
+    var windowManager: WindowManager? = null
+    var display: Display? = null
+    var size: Point? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,6 +33,11 @@ class HomeEditCategoryBottomSheet: BottomSheetDialogFragment(), HomeFragmentView
         super.onCreateView(inflater, container, savedInstanceState)
 
         binding = HomeBottomsheetLayoutBinding.inflate(inflater, container, false)
+
+        windowManager = activity?.getSystemService(Context.WINDOW_SERVICE) as? WindowManager
+        display = windowManager!!.defaultDisplay
+        size = Point()
+        display!!.getSize(size)
 
         return binding.root
     }
@@ -216,8 +220,64 @@ class HomeEditCategoryBottomSheet: BottomSheetDialogFragment(), HomeFragmentView
         }
     }
 
+//    override fun onResume() {
+//        super.onResume()
+//
+//        val params: ViewGroup.LayoutParams? = dialog?.window?.attributes
+//        val deviceHeight = size!!.y
+//
+//        params?.height = (deviceHeight*0.7).toInt()
+//
+//        dialog?.window?.attributes = params as WindowManager.LayoutParams
+//    }
+
     override fun onGetPickedCategoryListSuccess(response: CategoryListResponse) {
         dismissLoadingDialog()
+        for (i in response.result){
+            when (i.categoryName) {
+                "청소" -> {
+                    binding.btnChooseClean.setBackgroundResource(R.drawable.check_box_color)
+                    categoryBooleanList[0] = true
+                    pickedCategoryList.add(1)
+                    pickedNum++
+                }
+                "요리" -> {
+                    binding.btnChooseCook.setBackgroundResource(R.drawable.check_box_color)
+                    categoryBooleanList[1] = true
+                    pickedCategoryList.add(2)
+                    pickedNum++
+                }
+                "자취" -> {
+                    binding.btnChooseJachi.setBackgroundResource(R.drawable.check_box_color)
+                    categoryBooleanList[2] = true
+                    pickedCategoryList.add(3)
+
+                    pickedNum++
+                }
+                "여행" -> {
+                    binding.btnChooseTrip.setBackgroundResource(R.drawable.check_box_color)
+                    categoryBooleanList[3] = true
+                    pickedCategoryList.add(4)
+
+                    pickedNum++
+                }
+                "대학" -> {
+                    binding.btnChooseUniv.setBackgroundResource(R.drawable.check_box_color)
+                    categoryBooleanList[4] = true
+                    pickedCategoryList.add(5)
+
+                    pickedNum++
+                }
+                "뷰티" -> {
+                    binding.btnChooseBeauty.setBackgroundResource(R.drawable.check_box_color)
+                    categoryBooleanList[5] = true
+                    pickedCategoryList.add(6)
+
+                    pickedNum++
+                }
+            }
+        }
+        checkFour()
     }
 
     override fun onGetPickedCategoryListFailure(message: String) {

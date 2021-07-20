@@ -24,9 +24,9 @@ class SearchService(val view: SearchFragmentView) {
         })
     }
 
-    fun trySearchFeed(categoryName:String?=null, order:String, search:String){
+    fun trySearchFeed(categoryName:String?=null, order:String, search:String, page:Int, limit:Int){
         val searchRetrofitInterface = ApplicationClass.sRetrofit.create(SearchRetrofitInterface::class.java)
-        searchRetrofitInterface.getSearchFeed(categoryName, order, search).enqueue(object: Callback<SearchResponse> {
+        searchRetrofitInterface.getSearchFeed(categoryName, order, search, page, limit).enqueue(object: Callback<SearchResponse> {
             override fun onResponse(call: Call<SearchResponse>, response: Response<SearchResponse>) {
                 view.onGetSearchSuccess(response.body() as SearchResponse)
             }

@@ -16,8 +16,9 @@ class LookAroundFragment : BaseFragment<FragmentLookAroundBinding>(
     FragmentLookAroundBinding::bind,
     R.layout.fragment_look_around
 ), HomeFragmentView{
-    private var lookaroundList = mutableListOf<ResultLookAround>()
     var clickedCatName = ApplicationClass.sSharedPreferences.getString("clickedCatName", null)
+
+    private var lookaroundList = mutableListOf<ResultLookAround>()
     private var page = 1      // 현재 페이지
     var isFeedEnd = false
 

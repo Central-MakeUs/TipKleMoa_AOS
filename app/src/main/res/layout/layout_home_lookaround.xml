@@ -11,7 +11,7 @@
         android:stepSize="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:progressBackgroundTint="@color/lightmint2"
+        android:progressBackgroundTint="@color/DBGray"
         android:progressTint="@color/mint"
         app:layout_constraintBottom_toBottomOf="@+id/imgLookAroundProfile"
         app:layout_constraintStart_toStartOf="@+id/tvLookAroundUserName"

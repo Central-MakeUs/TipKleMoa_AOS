@@ -24,7 +24,7 @@
         app:tabPaddingStart="-1dp"
         app:tabPaddingTop="-1dp"
         app:tabSelectedTextColor="@color/mint"
-        app:tabTextAppearance="@style/home_tabtext_style"
+        app:tabTextAppearance="@style/home_categorytabtext_style"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.viewpager2.widget.ViewPager2
@@ -95,6 +95,7 @@
         android:layout_marginLeft="24dp"
         android:fontFamily="@font/notosanscjkkr_bold"
         android:textSize="16dp"
+        android:layout_marginTop="8dp"
         android:includeFontPadding="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -106,7 +107,8 @@
     <ImageView
         android:id="@+id/imageView3"
         android:layout_marginLeft="6dp"
-        android:layout_width="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_width="5dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/pickedtiprecent"
         app:layout_constraintStart_toEndOf="@id/pickedtiprecent"
@@ -118,6 +120,8 @@
         android:layout_marginLeft="6dp"
         android:fontFamily="@font/notosanscjkkr_bold"
         android:textSize="16dp"
+        android:layout_marginTop="8dp"
+
         android:includeFontPadding="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -149,6 +153,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:maxImageSize="56dp"
+        android:backgroundTint="@color/transparent"
+        app:borderWidth="0dp"
+        android:scaleType="center"
         android:elevation="0dp"
         app:elevation="0dp"
         app:srcCompat="@drawable/ic_icon_write"

@@ -18,8 +18,15 @@
     </style>
 
     <style name="home_tabtext_style" parent="TextAppearance.Design.Tab">
-        <item name="fontFamily">@font/notosanscjkkr_medium</item>
+        <item name="fontFamily">@font/notosanscjkkr_bold</item>
         <item name="android:textSize">20dp</item>
+        <item name="android:textColor">#979797</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="home_categorytabtext_style" parent="TextAppearance.Design.Tab">
+        <item name="fontFamily">@font/notosanscjkkr_regular</item>
+        <item name="android:textSize">18dp</item>
         <item name="android:textColor">#979797</item>
         <item name="android:includeFontPadding">false</item>
     </style>

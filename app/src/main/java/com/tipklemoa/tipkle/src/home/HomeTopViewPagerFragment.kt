@@ -26,7 +26,7 @@ class HomeTopViewPagerFragment : BaseFragment<ViewpagerHomeTabBinding>(Viewpager
 
         val pagerAdapter = PagerFragmentStateAdapter(requireActivity())
         // 2개의 Fragment Add
-        pagerAdapter.addFragment(TodayTipFragment())
+        //pagerAdapter.addFragment(TodayTipFragment())
         pagerAdapter.addFragment(PickedTipFragment())
         // Adapter
         binding.vpInner.adapter = pagerAdapter
@@ -37,7 +37,7 @@ class HomeTopViewPagerFragment : BaseFragment<ViewpagerHomeTabBinding>(Viewpager
             }
         })
 
-        val tabTextArray = arrayOf("오늘의 팁", "관심 팁")
+        val tabTextArray = arrayOf("관심 팁")
         // TabLayout attach
         TabLayoutMediator(binding.homeTabTop, binding.vpInner) { tab, position ->
             tab.text = tabTextArray[position]

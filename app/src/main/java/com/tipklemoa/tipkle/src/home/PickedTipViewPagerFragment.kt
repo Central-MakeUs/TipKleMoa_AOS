@@ -31,11 +31,16 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
         binding.pickedfloatting.setOnClickListener {
             startActivity(Intent(requireContext(), SelectPicActivity::class.java))
         }
-
         showLoadingDialog(requireContext())
-
         HomeService(this).tryGetPickedCategoryList()
         HomeService(this).tryGetBanner()
+
+        setFragmentResultListener("editCat"){ key, bundle ->
+            if (bundle.getString("editCat_ok")=="ok"){
+                showLoadingDialog(requireContext())
+                HomeService(this).tryGetPickedCategoryList()
+            }
+        }
     }
 
     override fun onGetPickedCategoryListSuccess(response: CategoryListResponse) {

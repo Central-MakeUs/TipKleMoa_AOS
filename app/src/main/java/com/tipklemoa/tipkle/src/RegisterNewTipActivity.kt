@@ -1,6 +1,7 @@
 package com.tipklemoa.tipkle.src
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import android.media.MediaScannerConnection
@@ -10,6 +11,8 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
+import android.view.MotionEvent
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
@@ -54,6 +57,7 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         storage = FirebaseStorage.getInstance()
@@ -109,7 +113,7 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
             activateButton()
         }
 
-        binding.edtWhen.setOnFocusChangeListener { v, hasFocus ->
+        binding.edtWhen.setOnFocusChangeListener { v, event ->
             activateButton()
         }
 
@@ -203,11 +207,9 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
 //         사진저장
             savePhoto()
 
-//           팁 등록 페이지로 이미지 리스트를 넘김
-            val intent = Intent(this, RegisterNewTipActivity::class.java)
-            intent.putStringArrayListExtra("selectedimageUrlList", selectedimageUrlList)
-            startActivity(intent)
-            finish()
+//         사진추가
+            newTipPicAdapter.notifyItemInserted(selectedimageUrlList.size-1)
+            binding.tvPickedPicCount.text  = selectedimageUrlList.size.toString()
         }
     }
 
@@ -313,6 +315,9 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
         dismissLoadingDialog()
         showCustomToast("팁 등록이 완료되었습니다!")
         this.finish()
+        val intent = Intent(this, FeedDetailActivity::class.java)
+        intent.putExtra("postId", response.result.postId)
+        startActivity(intent)
     }
 
     override fun onPostFailure(message: String) {

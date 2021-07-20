@@ -19,6 +19,7 @@ import com.tipklemoa.tipkle.databinding.FragmentSearchBinding
 import com.tipklemoa.tipkle.src.PagerFragmentStateAdapter
 import com.tipklemoa.tipkle.src.home.HomeTopViewPagerFragment
 import com.tipklemoa.tipkle.src.home.LookAroundFragment
+import com.tipklemoa.tipkle.src.home.model.ResultLookAround
 import com.tipklemoa.tipkle.src.search.model.KeywordResponse
 import com.tipklemoa.tipkle.src.search.model.SearchResponse
 
@@ -26,6 +27,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(
     FragmentSearchBinding::bind,
     R.layout.fragment_search
 ){
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 

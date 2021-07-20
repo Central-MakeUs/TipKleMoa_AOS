@@ -49,6 +49,10 @@ class SearchFeedAdapter(val context: Context, private val searchList: List<Resul
             tvHow.text = feed.howText
             tvLookAroundtext.text = feed.description
 
+            if (feed.description==""){
+                tvLookAroundtext.visibility = View.GONE
+            }
+
             //이미지 피드
             val layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
