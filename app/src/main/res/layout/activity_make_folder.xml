@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".src.tipkle.MakeFolderActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar4"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_marginLeft="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanscjkkr_bold"
+        android:includeFontPadding="false"
+        android:text="나만의 꿀 TIP"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar4" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnNewFolderX"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@drawable/ic_x"
+        android:layout_marginRight="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar4" />
+
+    <EditText
+        android:id="@+id/edtNewFolder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="12dp"
+        android:backgroundTint="@color/DBGray"
+        android:fontFamily="@font/notosanscjkkr_regular"
+        android:hint="나만의 꿀 TIP 폴더명 입력"
+        android:includeFontPadding="false"
+        android:inputType="textPersonName"
+        android:maxLength="20"
+        android:textColor="@color/black"
+        android:textColorHint="@color/DBGray"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toStartOf="@+id/textView26"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar4" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/notosanscjkkr_regular"
+        android:includeFontPadding="false"
+        android:textSize="14dp"
+        android:text="/20글자)"
+        android:textColor="@color/gray97"
+        app:layout_constraintBottom_toBottomOf="@+id/edtNewFolder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edtNewFolder" />
+
+    <TextView
+        android:id="@+id/tvNewFolderTextNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:fontFamily="@font/notosanscjkkr_regular"
+        android:includeFontPadding="false"
+        android:textSize="14dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView23"
+        app:layout_constraintEnd_toStartOf="@+id/textView23"
+        app:layout_constraintTop_toTopOf="@+id/textView23" />
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanscjkkr_regular"
+        android:includeFontPadding="false"
+        android:text="("
+        android:textColor="@color/gray97"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNewFolderTextNum"
+        app:layout_constraintEnd_toStartOf="@+id/tvNewFolderTextNum"
+        app:layout_constraintTop_toTopOf="@+id/tvNewFolderTextNum" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCompleteNewFolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mint"
+        android:fontFamily="@font/notosanscjkkr_bold"
+        android:includeFontPadding="false"
+        android:text="확인"
+        android:layout_marginTop="56dp"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvNewTipAlert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:fontFamily="@font/notosanscjkkr_regular"
+        android:includeFontPadding="false"
+        android:text="폴더명을 입력해주세요."
+        android:textColor="@color/textRed"
+        android:textSize="12dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/edtNewFolder"
+        app:layout_constraintTop_toBottomOf="@+id/edtNewFolder"
+        tools:visibility="visible" />
+</androidx.constraintlayout.widget.ConstraintLayout>

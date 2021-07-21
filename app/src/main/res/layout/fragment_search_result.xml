@@ -105,11 +105,15 @@
                 app:layout_constraintStart_toStartOf="@id/imageView3"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
+                android:layout_width="2dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="1dp"
+                android:text=" | "
+                android:textColor="@color/DBGray"
+                android:textSize="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/tvLookAroundRecent"
                 app:layout_constraintStart_toEndOf="@id/tvLookAroundRecent"
                 app:layout_constraintTop_toTopOf="@+id/tvLookAroundRecent"

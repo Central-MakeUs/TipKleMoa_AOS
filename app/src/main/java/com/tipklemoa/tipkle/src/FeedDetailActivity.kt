@@ -33,6 +33,7 @@ class FeedDetailActivity : BaseActivity<ActivityFeedDetailBinding>(ActivityFeedD
         for (element in response.result.imgUrl){
             pagerAdapter.addFragment(FeedDetailFragment(element))
         }
+
         binding.viewPagerDetail.adapter = pagerAdapter
         binding.detailCircleIndicator.setViewPager2(binding.viewPagerDetail)
 

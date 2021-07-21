@@ -23,7 +23,7 @@
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/tabBottom"
-            app:itemIconSize="100dp"
+            app:itemIconSize="24dp"
             android:layout_width="0dp"
             app:labelVisibilityMode="unlabeled"
             android:background="@color/white"
