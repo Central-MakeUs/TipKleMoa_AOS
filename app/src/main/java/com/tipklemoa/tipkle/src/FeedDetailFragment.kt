@@ -1,5 +1,6 @@
 package com.tipklemoa.tipkle.src
 
+import android.content.Intent
 import android.os.Bundle
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
@@ -20,5 +21,11 @@ class FeedDetailFragment(private var image:String) : BaseFragment<LayoutDetailFe
         Glide.with(this)
             .load(image)
             .into(binding.feedimageitem)
+
+        binding.feedimageitem.setOnClickListener {
+            val intent = Intent(requireContext(), ViewOriginalImageActivity::class.java)
+            intent.putExtra("image", image)
+            startActivity(intent)
+        }
     }
 }

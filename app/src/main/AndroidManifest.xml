@@ -20,6 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TipKle">
         <activity
+            android:name=".src.ViewOriginalImageActivity"
+            android:exported="true" />
+        <activity
             android:name=".src.tipkle.FolderDetailActivity"
             android:exported="true" />
         <activity

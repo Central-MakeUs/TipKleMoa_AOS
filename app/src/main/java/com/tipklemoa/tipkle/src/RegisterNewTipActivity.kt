@@ -10,6 +10,8 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -109,13 +111,45 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
             activateButton()
         }
 
-        binding.edtHow.setOnFocusChangeListener { v, hasFocus ->
-            activateButton()
-        }
+        binding.edtHow.addTextChangedListener(object:TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
-        binding.edtWhen.setOnFocusChangeListener { v, event ->
-            activateButton()
-        }
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (binding.edtHow.text.isNotEmpty()){
+                    binding.tvHowStar.visibility = View.INVISIBLE
+                }
+                else{
+                    binding.tvHowStar.visibility = View.VISIBLE
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                activateButton()
+            }
+
+        })
+
+        binding.edtWhen.addTextChangedListener(object:TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (binding.edtWhen.text.isNotEmpty()){
+                    binding.tvWhenStar.visibility = View.INVISIBLE
+                }
+                else{
+                    binding.tvWhenStar.visibility = View.VISIBLE
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                activateButton()
+            }
+
+        })
 
         binding.edtTipLine.setOnFocusChangeListener { v, hasFocus ->
             activateButton()
