@@ -117,4 +117,20 @@ class ReallyDeleteDialog : DialogFragment(), MainView {
     override fun onPostFailure(message: String) {
         TODO("Not yet implemented")
     }
+
+    override fun onPostBookMarkSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostBookMarkFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteBookmarkSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteBookmarkFailure(message: String) {
+        TODO("Not yet implemented")
+    }
 }

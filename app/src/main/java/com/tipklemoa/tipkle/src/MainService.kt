@@ -5,6 +5,7 @@ import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.src.home.model.*
 import com.tipklemoa.tipkle.src.model.DetailFeedResponse
 import com.tipklemoa.tipkle.src.model.NewTipResponse
+import com.tipklemoa.tipkle.src.model.PostAddBookMarkRequest
 import com.tipklemoa.tipkle.src.model.PostNewTipRequest
 import retrofit2.Call
 import retrofit2.Callback
@@ -52,32 +53,31 @@ class MainService(val view: MainView) {
         })
     }
 
-//    fun tryLookAroundFeed(categoryName:String, order:String, search:String?=null){
-//        val homeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
-//        homeRetrofitInterface.getLookAroundFeed(categoryName, order, search).enqueue(object: Callback<LookAroundResponse> {
-//            override fun onResponse(call: Call<LookAroundResponse>, response: Response<LookAroundResponse>) {
-//                view.onGetLookAroundFeedSuccess(response.body() as LookAroundResponse)
-//            }
-//
-//            override fun onFailure(call: Call<LookAroundResponse>, t: Throwable) {
-//                view.onGetLookAroundFeedFailure(t.message ?: "통신 오류")
-//            }
-//        })
-//    }
-//
-//    fun tryPatchCategory(patchCategoryRequest: PatchCategoryRequest){
-//       val loginRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
-//       loginRetrofitInterface.patchCategory(patchCategoryRequest).enqueue(object: Callback<BaseResponse> {
-//           override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
-//               view.onPatchCategorySuccess(response.body() as BaseResponse)
-//           }
-//
-//           override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
-//               view.onPatchCategoryFailure(t.message ?: "통신 오류")
-//           }
-//
-//       })
-//    }
+    fun tryPostBookMark(folderId:Int, postAddBookMarkRequest: PostAddBookMarkRequest){
+        val mainRetrofitInterface = ApplicationClass.sRetrofit.create(MainRetrofitInterface::class.java)
+        mainRetrofitInterface.postBookMark(folderId, postAddBookMarkRequest).enqueue(object: Callback<BaseResponse> {
+            override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
+                view.onPostBookMarkSuccess(response.body() as BaseResponse)
+            }
+
+            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
+                view.onPostBookMarkFailure(t.message ?: "통신 오류")
+            }
+        })
+    }
+    //피드삭제
+    fun tryDeleteBookMark(postId:Int){
+        val mainRetrofitInterface = ApplicationClass.sRetrofit.create(MainRetrofitInterface::class.java)
+        mainRetrofitInterface.deleteBookMark(postId).enqueue(object: Callback<BaseResponse> {
+            override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
+                view.onDeleteBookmarkSuccess(response.body() as BaseResponse)
+            }
+
+            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
+                view.onDeleteBookmarkFailure(t.message ?: "통신 오류")
+            }
+        })
+    }
 //
 //    fun tryGetPickedCategoryList(){
 //        val homeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)

@@ -17,8 +17,11 @@
         <entry key="app/src/main/res/drawable/ic_box_level_up.xml" value="0.5" />
         <entry key="app/src/main/res/drawable/ic_box_profile.xml" value="0.375" />
         <entry key="app/src/main/res/drawable/ic_center_vertical_line.xml" value="0.1921875" />
+        <entry key="app/src/main/res/drawable/ic_check_box.xml" value="0.16875" />
+        <entry key="app/src/main/res/drawable/ic_detail_bookmark_empty.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/drawable/ic_folder.xml" value="0.1734375" />
         <entry key="app/src/main/res/drawable/ic_home_tab_underline.xml" value="0.3140625" />
+        <entry key="app/src/main/res/drawable/ic_icon_bookmark_full.xml" value="0.1796875" />
         <entry key="app/src/main/res/drawable/ic_icon_bottom_home.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/drawable/ic_icon_bottom_home_active.xml" value="0.26197916666666665" />
         <entry key="app/src/main/res/drawable/ic_icon_bottom_home_inactive.xml" value="0.20104166666666667" />
@@ -62,6 +65,7 @@
         <entry key="app/src/main/res/layout/home_bottomsheet_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/layout_addbookmark_bottomsheet.xml" value="0.335" />
         <entry key="app/src/main/res/layout/layout_banner.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/layout_bookmark_folder_list.xml" value="0.625" />
         <entry key="app/src/main/res/layout/layout_detail_bottomsheet.xml" value="0.375" />
         <entry key="app/src/main/res/layout/layout_detail_feed_viewpager.xml" value="0.19270833333333334" />
         <entry key="app/src/main/res/layout/layout_detail_really_delete_dialog.xml" value="0.209375" />

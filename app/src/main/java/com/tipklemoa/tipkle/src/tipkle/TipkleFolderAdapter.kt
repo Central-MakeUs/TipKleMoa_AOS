@@ -25,7 +25,7 @@ class TipkleFolderAdapter(val context: Context, private val folderList: List<Res
         fun bind(folder: ResultTipFolder, context: Context) {
 
             tvFolderName.text = folder.folderName
-            if (folder.postInfo.isNullOrEmpty()){
+            if (folder.postsInfo.isNullOrEmpty()){
                 imgFolderEmptyPreview.visibility = View.VISIBLE
             }
             else{
@@ -33,7 +33,7 @@ class TipkleFolderAdapter(val context: Context, private val folderList: List<Res
                 val layoutManager =
                     LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 rvFolderPreview.layoutManager = layoutManager
-                val adapter = TipkleFolderPreviewAdapter(context, folder.postInfo)
+                val adapter = TipkleFolderPreviewAdapter(context, folder.postsInfo)
                 rvFolderPreview.adapter = adapter
             }
             layoutfolderName.setOnClickListener {

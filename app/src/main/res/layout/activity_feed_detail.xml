@@ -30,10 +30,10 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnDetailAddBookMark"
-        android:layout_width="14dp"
-        android:layout_height="18dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_margin="30dp"
-        android:background="@drawable/ic_detail_bookmark_empty"
+        android:background="@drawable/ic_bookmark_line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

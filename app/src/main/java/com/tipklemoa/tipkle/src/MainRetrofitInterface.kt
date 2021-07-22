@@ -5,6 +5,7 @@ import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.src.home.model.PatchCategoryRequest
 import com.tipklemoa.tipkle.src.model.DetailFeedResponse
 import com.tipklemoa.tipkle.src.model.NewTipResponse
+import com.tipklemoa.tipkle.src.model.PostAddBookMarkRequest
 import com.tipklemoa.tipkle.src.model.PostNewTipRequest
 import retrofit2.Call
 import retrofit2.Callback
@@ -28,9 +29,14 @@ interface MainRetrofitInterface {
     //게시글 등록
     @POST("/posts")
     fun postNewTip(@Body params: PostNewTipRequest): Call<NewTipResponse>
-//
-//    //피드 목록 조회 (팁끌 들러보기)
-//    @GET("/posts")
-//    fun getLookAroundFeed(@Query("categoryName") categoryName:String, @Query("order") order:String, @Query("search") search:String?=null)
-//            : Call<LookAroundResponse>
+
+    //북마크 추가
+    @POST("/folders/{folderId}/posts")
+    fun postBookMark(@Path("folderId") folderId:Int, @Body params: PostAddBookMarkRequest)
+            : Call<BaseResponse>
+
+    //북마크 삭제
+    @DELETE("/folders/posts/{postId}")
+    fun deleteBookMark(@Path("postId") postId:Int): Call<BaseResponse>
+
 }

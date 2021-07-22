@@ -358,4 +358,20 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
         dismissLoadingDialog()
         showCustomToast(message)
     }
+
+    override fun onPostBookMarkSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostBookMarkFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteBookmarkSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteBookmarkFailure(message: String) {
+        TODO("Not yet implemented")
+    }
 }

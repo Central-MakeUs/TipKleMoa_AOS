@@ -19,13 +19,10 @@ interface MainView {
 
     fun onPostSuccess(response: NewTipResponse)
     fun onPostFailure(message: String)
-//
-//    fun onGetHomePreviewFeedSuccess(response: HomePreviewFeedResponse)
-//    fun onGetHomePreviewFeedFailure(message: String)
-//
-//    fun onPatchCategorySuccess(response: BaseResponse)
-//    fun onPatchCategoryFailure(message: String)
-//
-//    fun onGetLookAroundFeedSuccess(response: LookAroundResponse)
-//    fun onGetLookAroundFeedFailure(message: String)
+
+    fun onPostBookMarkSuccess(response: BaseResponse)
+    fun onPostBookMarkFailure(message: String)
+
+    fun onDeleteBookmarkSuccess(response: BaseResponse)
+    fun onDeleteBookmarkFailure(message: String)
 }
