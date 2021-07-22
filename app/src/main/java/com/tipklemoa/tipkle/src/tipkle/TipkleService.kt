@@ -3,6 +3,7 @@ package com.tipklemoa.tipkle.src.tipkle
 import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.src.home.model.*
+import com.tipklemoa.tipkle.src.tipkle.model.FolderFeedResponse
 import com.tipklemoa.tipkle.src.tipkle.model.MakeFolderResponse
 import com.tipklemoa.tipkle.src.tipkle.model.PostNewFolderRequest
 import com.tipklemoa.tipkle.src.tipkle.model.TipFolderResponse
@@ -37,33 +38,33 @@ class TipkleService(val view: TipkleFragmentView) {
             }
         })
     }
-//
-//    fun tryLookAroundFeed(categoryName:String, order:String, search:String?=null, page:Int){
-//        val homeRetrofitInterface = ApplicationClass.sRetrofit.create(TipkleRetrofitInterface::class.java)
-//        homeRetrofitInterface.getLookAroundFeed(categoryName, order, search, page, 5).enqueue(object: Callback<LookAroundResponse> {
-//            override fun onResponse(call: Call<LookAroundResponse>, response: Response<LookAroundResponse>) {
-//                view.onGetLookAroundFeedSuccess(response.body() as LookAroundResponse)
-//            }
-//
-//            override fun onFailure(call: Call<LookAroundResponse>, t: Throwable) {
-//                view.onGetLookAroundFeedFailure(t.message ?: "통신 오류")
-//            }
-//        })
-//    }
-//
-//    fun tryPatchCategory(patchCategoryRequest: PatchCategoryRequest){
-//       val loginRetrofitInterface = ApplicationClass.sRetrofit.create(TipkleRetrofitInterface::class.java)
-//       loginRetrofitInterface.patchCategory(patchCategoryRequest).enqueue(object: Callback<BaseResponse> {
-//           override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
-//               view.onPatchCategorySuccess(response.body() as BaseResponse)
-//           }
-//
-//           override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
-//               view.onPatchCategoryFailure(t.message ?: "통신 오류")
-//           }
-//
-//       })
-//    }
+
+    fun tryGetFolderFeed(folderId:Int){
+        val tipkleRetrofitInterface = ApplicationClass.sRetrofit.create(TipkleRetrofitInterface::class.java)
+        tipkleRetrofitInterface.getFolderFeed(folderId).enqueue(object: Callback<FolderFeedResponse> {
+            override fun onResponse(call: Call<FolderFeedResponse>, response: Response<FolderFeedResponse>) {
+                view.onGetFolderFeedSuccess(response.body() as FolderFeedResponse)
+            }
+
+            override fun onFailure(call: Call<FolderFeedResponse>, t: Throwable) {
+                view.onGetFolderFeedFailure(t.message ?: "통신 오류")
+            }
+        })
+    }
+
+    fun tryDeleteFolder(folderId:Int){
+       val tipkleRetrofitInterface = ApplicationClass.sRetrofit.create(TipkleRetrofitInterface::class.java)
+        tipkleRetrofitInterface.deleteFolder(folderId).enqueue(object: Callback<BaseResponse> {
+           override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
+               view.onDeleteFolderSuccess(response.body() as BaseResponse)
+           }
+
+           override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
+               view.onDeleteFolderFailure(t.message ?: "통신 오류")
+           }
+
+       })
+    }
 //
 //    fun tryGetPickedCategoryList(){
 //        val homeRetrofitInterface = ApplicationClass.sRetrofit.create(TipkleRetrofitInterface::class.java)

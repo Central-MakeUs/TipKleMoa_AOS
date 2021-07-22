@@ -60,6 +60,7 @@
         <entry key="app/src/main/res/layout/layout_detail_feed_viewpager.xml" value="0.19270833333333334" />
         <entry key="app/src/main/res/layout/layout_detail_really_delete_dialog.xml" value="0.209375" />
         <entry key="app/src/main/res/layout/layout_dialog_pickcategory.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/layout_folder_feed.xml" value="0.335" />
         <entry key="app/src/main/res/layout/layout_folder_preview.xml" value="0.5" />
         <entry key="app/src/main/res/layout/layout_gallery_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/layout_home_lookaround.xml" value="0.335" />

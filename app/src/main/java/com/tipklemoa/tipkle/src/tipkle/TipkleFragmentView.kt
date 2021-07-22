@@ -1,9 +1,7 @@
 package com.tipklemoa.tipkle.src.tipkle
 
 import com.tipklemoa.tipkle.config.BaseResponse
-import com.tipklemoa.tipkle.src.home.model.BannerResponse
-import com.tipklemoa.tipkle.src.home.model.HomePreviewFeedResponse
-import com.tipklemoa.tipkle.src.home.model.LookAroundResponse
+import com.tipklemoa.tipkle.src.tipkle.model.FolderFeedResponse
 import com.tipklemoa.tipkle.src.tipkle.model.MakeFolderResponse
 import com.tipklemoa.tipkle.src.tipkle.model.TipFolderResponse
 
@@ -13,12 +11,12 @@ interface TipkleFragmentView {
 
     fun onPostFolderSuccess(response: MakeFolderResponse)
     fun onPostFolderFailure(message: String)
-//
-//    fun onGetHomePreviewFeedSuccess(response: HomePreviewFeedResponse)
-//    fun onGetHomePreviewFeedFailure(message: String)
-//
-//    fun onPatchCategorySuccess(response: BaseResponse)
-//    fun onPatchCategoryFailure(message: String)
+
+    fun onGetFolderFeedSuccess(response: FolderFeedResponse)
+    fun onGetFolderFeedFailure(message: String)
+
+    fun onDeleteFolderSuccess(response: BaseResponse)
+    fun onDeleteFolderFailure(message: String)
 //
 //    fun onGetLookAroundFeedSuccess(response: LookAroundResponse)
 //    fun onGetLookAroundFeedFailure(message: String)

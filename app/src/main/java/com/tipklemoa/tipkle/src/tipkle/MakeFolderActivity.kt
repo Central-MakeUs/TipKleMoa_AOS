@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.View
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.config.BaseActivity
+import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.ActivityFeedDetailBinding
 import com.tipklemoa.tipkle.databinding.ActivityMakeFolderBinding
+import com.tipklemoa.tipkle.src.tipkle.model.FolderFeedResponse
 import com.tipklemoa.tipkle.src.tipkle.model.MakeFolderResponse
 import com.tipklemoa.tipkle.src.tipkle.model.PostNewFolderRequest
 import com.tipklemoa.tipkle.src.tipkle.model.TipFolderResponse
@@ -30,6 +32,7 @@ class MakeFolderActivity : BaseActivity<ActivityMakeFolderBinding>(ActivityMakeF
                 binding.edtNewFolder.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.mint))
                 binding.tvNewTipAlert.visibility = View.INVISIBLE
                 var postNewFolderRequest = PostNewFolderRequest(binding.edtNewFolder.text.toString())
+
                 showLoadingDialog(this)
                 TipkleService(this).tryMakeFolder(postNewFolderRequest)
             }
@@ -72,4 +75,19 @@ class MakeFolderActivity : BaseActivity<ActivityMakeFolderBinding>(ActivityMakeF
         showCustomToast(message)
     }
 
+    override fun onGetFolderFeedSuccess(response: FolderFeedResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetFolderFeedFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteFolderSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteFolderFailure(message: String) {
+        TODO("Not yet implemented")
+    }
 }
