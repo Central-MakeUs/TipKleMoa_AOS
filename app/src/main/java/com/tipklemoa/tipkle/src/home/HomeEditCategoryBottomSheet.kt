@@ -119,15 +119,15 @@ class HomeEditCategoryBottomSheet: BottomSheetDialogFragment(), HomeFragmentView
             checkFour()
         }
 
-        binding.btnChooseJachi.setOnClickListener {
+        binding.btnChooseBeauty.setOnClickListener {
             if (!categoryBooleanList[2]){
-                binding.btnChooseJachi.setBackgroundResource(R.drawable.check_box_color)
+                binding.btnChooseBeauty.setBackgroundResource(R.drawable.check_box_color)
                 pickedNum++
                 pickedCategoryList.add(3)
 
                 categoryBooleanList[2] = true
             } else {
-                binding.btnChooseJachi.setBackgroundResource(R.drawable.check_box_line)
+                binding.btnChooseBeauty.setBackgroundResource(R.drawable.check_box_line)
                 pickedNum--
                 pickedCategoryList.remove(3)
 
@@ -136,15 +136,15 @@ class HomeEditCategoryBottomSheet: BottomSheetDialogFragment(), HomeFragmentView
             checkFour()
         }
 
-        binding.btnChooseTrip.setOnClickListener {
+        binding.btnChooseJachi.setOnClickListener {
             if (!categoryBooleanList[3]){
-                binding.btnChooseTrip.setBackgroundResource(R.drawable.check_box_color)
+                binding.btnChooseJachi.setBackgroundResource(R.drawable.check_box_color)
                 pickedNum++
                 pickedCategoryList.add(4)
 
                 categoryBooleanList[3] = true
             } else {
-                binding.btnChooseTrip.setBackgroundResource(R.drawable.check_box_line)
+                binding.btnChooseJachi.setBackgroundResource(R.drawable.check_box_line)
                 pickedNum--
                 pickedCategoryList.remove(4)
 
@@ -153,15 +153,15 @@ class HomeEditCategoryBottomSheet: BottomSheetDialogFragment(), HomeFragmentView
             checkFour()
         }
 
-        binding.btnChooseUniv.setOnClickListener {
+        binding.btnChooseTrip.setOnClickListener {
             if (!categoryBooleanList[4]){
-                binding.btnChooseUniv.setBackgroundResource(R.drawable.check_box_color)
+                binding.btnChooseTrip.setBackgroundResource(R.drawable.check_box_color)
                 pickedNum++
                 pickedCategoryList.add(5)
 
                 categoryBooleanList[4] = true
             } else {
-                binding.btnChooseUniv.setBackgroundResource(R.drawable.check_box_line)
+                binding.btnChooseTrip.setBackgroundResource(R.drawable.check_box_line)
                 pickedNum--
                 pickedCategoryList.remove(5)
 
@@ -170,15 +170,15 @@ class HomeEditCategoryBottomSheet: BottomSheetDialogFragment(), HomeFragmentView
             checkFour()
         }
 
-        binding.btnChooseBeauty.setOnClickListener {
+        binding.btnChooseUniv.setOnClickListener {
             if (!categoryBooleanList[5]){
-                binding.btnChooseBeauty.setBackgroundResource(R.drawable.check_box_color)
+                binding.btnChooseUniv.setBackgroundResource(R.drawable.check_box_color)
                 pickedNum++
                 pickedCategoryList.add(6)
 
                 categoryBooleanList[5] = true
             } else {
-                binding.btnChooseBeauty.setBackgroundResource(R.drawable.check_box_line)
+                binding.btnChooseUniv.setBackgroundResource(R.drawable.check_box_line)
                 pickedNum--
                 pickedCategoryList.remove(6)
 
@@ -247,29 +247,29 @@ class HomeEditCategoryBottomSheet: BottomSheetDialogFragment(), HomeFragmentView
                     pickedCategoryList.add(2)
                     pickedNum++
                 }
-                "자취" -> {
-                    binding.btnChooseJachi.setBackgroundResource(R.drawable.check_box_color)
+                "뷰티" -> {
+                    binding.btnChooseBeauty.setBackgroundResource(R.drawable.check_box_color)
                     categoryBooleanList[2] = true
                     pickedCategoryList.add(3)
 
                     pickedNum++
                 }
-                "여행" -> {
-                    binding.btnChooseTrip.setBackgroundResource(R.drawable.check_box_color)
+                "자취" -> {
+                    binding.btnChooseJachi.setBackgroundResource(R.drawable.check_box_color)
                     categoryBooleanList[3] = true
                     pickedCategoryList.add(4)
 
                     pickedNum++
                 }
-                "대학" -> {
-                    binding.btnChooseUniv.setBackgroundResource(R.drawable.check_box_color)
+                "여행" -> {
+                    binding.btnChooseTrip.setBackgroundResource(R.drawable.check_box_color)
                     categoryBooleanList[4] = true
                     pickedCategoryList.add(5)
 
                     pickedNum++
                 }
-                "뷰티" -> {
-                    binding.btnChooseBeauty.setBackgroundResource(R.drawable.check_box_color)
+                "대학" -> {
+                    binding.btnChooseUniv.setBackgroundResource(R.drawable.check_box_color)
                     categoryBooleanList[5] = true
                     pickedCategoryList.add(6)
 

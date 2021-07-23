@@ -20,6 +20,8 @@ import com.tipklemoa.tipkle.src.FeedDetailActivity
 class LookAroundFeedAdapter(val context: Context, private val feedList: List<ResultLookAround>):
     RecyclerView.Adapter<LookAroundFeedAdapter.ItemViewHolder>(){
 
+    var postId = 0
+
     inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imgProfile = itemView.findViewById<ImageView>(R.id.imgLookAroundProfile)
         private val tvLookAroundUserName = itemView.findViewById<TextView>(R.id.tvLookAroundUserName)
@@ -34,6 +36,8 @@ class LookAroundFeedAdapter(val context: Context, private val feedList: List<Res
 
         fun bind(feed: ResultLookAround, context: Context) {
 
+            postId = feed.postId
+
             Glide
                 .with(context)
                 .load(feed.profileImgUrl)
@@ -47,6 +51,9 @@ class LookAroundFeedAdapter(val context: Context, private val feedList: List<Res
             tvWhen.text = feed.whenText
             tvHow.text = feed.howText
             tvLookAroundtext.text = feed.description
+            if (feed.description==""){
+                tvLookAroundtext.visibility = View.GONE
+            }
 
             //이미지 피드
             val layoutManager =
@@ -56,6 +63,12 @@ class LookAroundFeedAdapter(val context: Context, private val feedList: List<Res
             imgFeed.adapter = adapter
 
             layoutWhenToImage.setOnClickListener {
+                val intent = Intent(context, FeedDetailActivity::class.java)
+                intent.putExtra("postId", feed.postId)
+                context.startActivity(intent)
+            }
+
+            imgFeed.setOnClickListener {
                 val intent = Intent(context, FeedDetailActivity::class.java)
                 intent.putExtra("postId", feed.postId)
                 context.startActivity(intent)

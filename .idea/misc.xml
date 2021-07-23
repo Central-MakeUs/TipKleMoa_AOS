@@ -53,7 +53,7 @@
         <entry key="app/src/main/res/layout/activity_view_original_image.xml" value="0.25740337233838717" />
         <entry key="app/src/main/res/layout/dialog_loading.xml" value="0.153125" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_look_around.xml" value="0.35670356703567035" />
+        <entry key="app/src/main/res/layout/fragment_look_around.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_picked_tip.xml" value="0.1578125" />
         <entry key="app/src/main/res/layout/fragment_popular_keyword.xml" value="0.1609375" />
@@ -75,7 +75,7 @@
         <entry key="app/src/main/res/layout/layout_folder_preview.xml" value="0.5" />
         <entry key="app/src/main/res/layout/layout_gallery_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/layout_home_lookaround.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/layout_home_preview_feed.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/layout_home_preview_feed.xml" value="0.45" />
         <entry key="app/src/main/res/layout/layout_keyword_item.xml" value="0.5035211267605634" />
         <entry key="app/src/main/res/layout/layout_lookaround_image.xml" value="0.15052083333333333" />
         <entry key="app/src/main/res/layout/layout_newtip_dialog.xml" value="0.335" />

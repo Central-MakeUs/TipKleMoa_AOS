@@ -92,7 +92,7 @@
                 android:fontFamily="@font/notosanscjkkr_bold"
                 android:gravity="start"
                 android:includeFontPadding="false"
-                android:text="닉네"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:translationZ="90dp"

@@ -48,6 +48,7 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
     private var uploadImageList = java.util.ArrayList<String>()
     lateinit var editor:SharedPreferences.Editor
     var storage: FirebaseStorage? = null //파이어베이스
+    var tvCatNotEmpty = false
 
     private var takePicListener: PermissionListener = object : PermissionListener {
         override fun onPermissionGranted() {
@@ -108,7 +109,6 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
         binding.layoutCategory.setOnClickListener {
             val cetegoryDialog = NewTipCategoryDialogFragment()
             cetegoryDialog.show(supportFragmentManager, cetegoryDialog.tag)
-            activateButton()
         }
 
         binding.edtHow.addTextChangedListener(object:TextWatcher{
@@ -163,6 +163,7 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
                 Log.d("result", result.toString())
                 // Do something with the result
                 binding.tvNewTipCategory.text = result
+                activateButton()
             }
     }
 
@@ -269,7 +270,7 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
 
     private fun activateButton() {
         //사진을 안올렸을때
-        if (binding.edtWhen.text.isNotEmpty() &&
+        if (selectedimageUrlList.size!=0 && binding.edtWhen.text.isNotEmpty() &&
             binding.edtHow.text.isNotEmpty() && binding.tvNewTipCategory.text.toString()!="*카테고리") {
             binding.tvCompleteNewTip.isEnabled = true
             binding.tvCompleteNewTip.setTextColor(resources.getColor(R.color.mint))

@@ -24,6 +24,7 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
 
     var clickedCatName:String?=null
     var editor = ApplicationClass.sSharedPreferences.edit()
+    var tabsize = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,6 +42,7 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
 
         setFragmentResultListener("editCat"){ key, bundle ->
             if (bundle.getString("editCat_ok")=="ok"){
+                binding.pickedCatTab.removeAllTabs()
                 showLoadingDialog(requireContext())
                 HomeService(this).tryGetPickedCategoryList()
             }
@@ -49,7 +51,6 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
 
     override fun onGetPickedCategoryListSuccess(response: CategoryListResponse) {
         dismissLoadingDialog()
-        binding.pickedCatTab.removeAllTabs()
         for (e in response.result) {
             binding.pickedCatTab.addTab(binding.pickedCatTab.newTab().setText(e.categoryName))
         }
@@ -73,7 +74,7 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
 
                 binding.pickedtiprecent.setTextColor(resources.getColor(R.color.black))
                 binding.pickedtippopular.setTextColor(resources.getColor(R.color.DBGray))
-                showLoadingDialog(requireContext())
+                //showLoadingDialog(requireContext())
                 HomeService(this@PickedTipViewPagerFragment).tryHomePreviewFeed(clickedCatName!!, "recent")
             }
 
