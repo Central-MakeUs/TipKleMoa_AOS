@@ -37,12 +37,12 @@
         android:id="@+id/imgPickMark"
         android:layout_width="88dp"
         android:layout_height="88dp"
-        android:scaleType="fitXY"
+        android:scaleType="fitCenter"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/tvBookMarkTitle"
         app:layout_constraintEnd_toEndOf="@+id/imgBookMarkFeed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imgBookMarkFeed"
-        android:background="@drawable/ic_check_box"
+        android:background="@drawable/ic_box"
         tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

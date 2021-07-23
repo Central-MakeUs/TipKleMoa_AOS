@@ -13,7 +13,7 @@
         android:layout_height="30dp"
         android:layout_margin="24dp"
         android:background="@drawable/ic_white_x"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
     </androidx.appcompat.widget.AppCompatButton>
@@ -26,5 +26,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1/1"
+        android:fontFamily="@font/notosanscjkkr_bold"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:includeFontPadding="false"
+        app:layout_constraintBottom_toBottomOf="@+id/btnViewImageX"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnViewImageX" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -88,6 +88,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvLookAroundFeed"
+        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:overScrollMode="never"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

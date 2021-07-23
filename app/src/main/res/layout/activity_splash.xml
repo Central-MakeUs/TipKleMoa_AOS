@@ -15,5 +15,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.288"
-        app:srcCompat="@drawable/tipkle_white_logo" />
+        app:srcCompat="@drawable/ic_logo_splash" />
 </androidx.constraintlayout.widget.ConstraintLayout>

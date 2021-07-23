@@ -35,6 +35,9 @@ class LookAroundFragment : BaseFragment<FragmentLookAroundBinding>(
             binding.tvLookAroundPopular.setTextColor(resources.getColor(R.color.DBGray))
             showLoadingDialog(requireContext())
             if (clickedCatName != null) {
+                page = 1
+                lookaroundList.clear()
+
                 HomeService(this).tryLookAroundFeed(clickedCatName!!, "recent", null, page)
             }
         }
@@ -44,6 +47,8 @@ class LookAroundFragment : BaseFragment<FragmentLookAroundBinding>(
             binding.tvLookAroundRecent.setTextColor(resources.getColor(R.color.DBGray))
             showLoadingDialog(requireContext())
             if (clickedCatName != null) {
+                page = 1
+                lookaroundList.clear()
                 HomeService(this).tryLookAroundFeed(clickedCatName!!, "popular", null, page)
             }
         }
@@ -119,6 +124,7 @@ class LookAroundFragment : BaseFragment<FragmentLookAroundBinding>(
 
     override fun onGetLookAroundFeedSuccess(response: LookAroundResponse) {
         dismissLoadingDialog()
+
         var feedAdapter = LookAroundFeedAdapter(requireContext(), response.result)
 //      맨 처음(page=0) -> 데이터가 하나라도 있으면
         if (page == 1 && response.result.isNotEmpty()) {

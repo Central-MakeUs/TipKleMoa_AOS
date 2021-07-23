@@ -51,7 +51,7 @@ class FeedDetailActivity : BaseActivity<ActivityFeedDetailBinding>(ActivityFeedD
         binding.tvDetailText.text = response.result.description
         binding.ratingBarDetail.rating = response.result.star.toFloat()
         binding.tvDetailFloat.text = response.result.score
-        binding.tvDetailStar.text = response.result.star.toString()
+        binding.tvDetailStar.text = response.result.score
 
         if (response.result.isStarred=='Y'){
             binding.btnDetailStar.setBackgroundResource(R.drawable.ic_mint_start)

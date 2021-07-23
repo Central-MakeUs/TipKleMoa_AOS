@@ -269,7 +269,7 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
 
     private fun activateButton() {
         //사진을 안올렸을때
-        if (selectedimageUrlList.isNotEmpty() && binding.edtWhen.text.isNotEmpty() &&
+        if (binding.edtWhen.text.isNotEmpty() &&
             binding.edtHow.text.isNotEmpty() && binding.tvNewTipCategory.text.toString()!="*카테고리") {
             binding.tvCompleteNewTip.isEnabled = true
             binding.tvCompleteNewTip.setTextColor(resources.getColor(R.color.mint))

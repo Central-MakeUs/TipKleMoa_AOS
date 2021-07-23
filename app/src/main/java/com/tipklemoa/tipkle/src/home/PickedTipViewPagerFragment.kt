@@ -29,6 +29,10 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
         super.onViewCreated(view, savedInstanceState)
 
         binding.pickedfloatting.setOnClickListener {
+            binding.pickedfloatting.compatElevation = 0F
+            binding.pickedfloatting.rippleColor = resources.getColor(R.color.transparent)
+            binding.pickedfloatting.animation = null
+
             startActivity(Intent(requireContext(), SelectPicActivity::class.java))
         }
         showLoadingDialog(requireContext())

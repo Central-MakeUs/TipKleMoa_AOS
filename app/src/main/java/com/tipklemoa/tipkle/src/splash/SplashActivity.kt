@@ -10,6 +10,7 @@ import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.src.login.LoginActivity

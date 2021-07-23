@@ -37,12 +37,6 @@ class HomeTopViewPagerFragment : BaseFragment<ViewpagerHomeTabBinding>(Viewpager
             }
         })
 
-        val tabTextArray = arrayOf("관심 팁")
-        // TabLayout attach
-        TabLayoutMediator(binding.homeTabTop, binding.vpInner) { tab, position ->
-            tab.text = tabTextArray[position]
-        }.attach()
-
         binding.vpInner.isUserInputEnabled = false
     }
 

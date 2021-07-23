@@ -1,7 +1,11 @@
 package com.tipklemoa.tipkle.src.search
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.view.KeyEvent
+import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +25,7 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(
 ), SearchFragmentView {
     lateinit var keyword:String
     private var searchResultList = mutableListOf<ResultSearch>()
+    var order="recent"
     private var page = 1      // 현재 페이지
     var isFeedEnd = false
 
@@ -33,33 +38,66 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(
 
         binding.edtSearchResult.setText(keyword)
 
-        binding.edtSearchResult.setOnFocusChangeListener { v, hasFocus ->
-            if (hasFocus){
-                if (binding.edtSearchResult.text.isNullOrEmpty()){
-                    binding.btnSearchDelete.visibility = View.GONE
+        binding.edtSearchResult.addTextChangedListener(object :TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s.isNullOrEmpty()){
+                    binding.btnSearchDelete.visibility = View.INVISIBLE
                 }
                 else{
                     binding.btnSearchDelete.visibility = View.VISIBLE
                 }
             }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+        })
+
+        binding.edtSearchResult.setOnKeyListener { v, keyCode, event ->
+            if (event.action==KeyEvent.ACTION_DOWN && keyCode==KEYCODE_ENTER){
+                binding.tvLookAroundRecent.setTextColor(resources.getColor(R.color.black))
+                binding.tvLookAroundPopular.setTextColor(resources.getColor(R.color.DBGray))
+
+                showLoadingDialog(requireContext())
+
+                order = "recent"
+                keyword = binding.edtSearchResult.text.toString()
+                page = 1
+                searchResultList.clear()
+                SearchService(this@SearchResultFragment).trySearchFeed(
+                    null,
+                    order,
+                    keyword, page, 5)
+            }
+            true
         }
 
         binding.btnSearchDelete.setOnClickListener {
             binding.edtSearchResult.setText("")
+            binding.btnSearchDelete.visibility = View.INVISIBLE
         }
 
         binding.tvLookAroundRecent.setOnClickListener {
             binding.tvLookAroundRecent.setTextColor(resources.getColor(R.color.black))
             binding.tvLookAroundPopular.setTextColor(resources.getColor(R.color.DBGray))
             showLoadingDialog(requireContext())
-            SearchService(this).trySearchFeed(search=keyword, order="recent", page=1, limit=5)
+            order = "recent"
+            page = 1
+            searchResultList.clear()
+            SearchService(this).trySearchFeed(search=keyword, order=order, page=page, limit=5)
         }
 
         binding.tvLookAroundPopular.setOnClickListener {
             binding.tvLookAroundPopular.setTextColor(resources.getColor(R.color.black))
             binding.tvLookAroundRecent.setTextColor(resources.getColor(R.color.DBGray))
             showLoadingDialog(requireContext())
-            SearchService(this).trySearchFeed(search=keyword, order="popular", page=1, limit=5)
+            order = "popular"
+            page = 1
+            searchResultList.clear()
+            SearchService(this).trySearchFeed(search=keyword, order=order, page=page, limit=5)
         }
 
         binding.nestedScrollView.isNestedScrollingEnabled = false
@@ -78,9 +116,10 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(
                     if (!isFeedEnd) {
                         dismissLoadingDialog()
                         showLoadingDialog(requireContext())
+                        order = "recent"
                         SearchService(this@SearchResultFragment).trySearchFeed(
                             null,
-                            "popular",
+                            order,
                             keyword, ++page, 5)
                     }
                 }
@@ -108,23 +147,30 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(
 
     override fun onGetSearchSuccess(response: SearchResponse) {
         dismissLoadingDialog()
-        var searchAdapter = SearchFeedAdapter(requireContext(), response.result)
-//      맨 처음(page=0) -> 데이터가 하나라도 있으면
-        if (page == 1 && response.result.isNotEmpty()) {
-            Log.d("test", "결과 있음")
 
+        var searchAdapter = SearchFeedAdapter(requireContext(), response.result)
+        if (response.result.isNullOrEmpty()){
+            binding.layoutEmptysearch.visibility = View.VISIBLE
+        }
+//      맨 처음(page=0) -> 데이터가 하나라도 있으면
+        else if (page == 1 && response.result.isNotEmpty()) {
+            binding.layoutEmptysearch.visibility = View.INVISIBLE
             searchResultList.addAll(response.result)
             searchAdapter = SearchFeedAdapter(requireContext(), searchResultList)
             binding.rvSearchFeed.adapter = searchAdapter
         }
 //      page=1부터 불러오고, 둥지가 있으면 추가해줘야함 ->
         else if (page != 1 && response.result.isNotEmpty()) {
+            binding.layoutEmptysearch.visibility = View.INVISIBLE
+
             searchResultList.addAll(response.result)
             searchAdapter.notifyItemInserted(searchResultList.size - 1)
         }
 
 //        페이지추가 끝
         if (page != 1 && response.result.isNullOrEmpty()) {
+            binding.layoutEmptysearch.visibility = View.INVISIBLE
+
             Log.d("둥지", "둥지끝")
             isFeedEnd = true
         }
