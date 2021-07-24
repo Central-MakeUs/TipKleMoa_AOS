@@ -12,17 +12,33 @@ class RecentViewPagerFragment : BaseFragment<ViewpagerRecentKeywordBinding>(
     ViewpagerRecentKeywordBinding::bind,
     R.layout.viewpager_recent_keyword
 ), SearchFragmentView{
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+
+    override fun onResume() {
+        super.onResume()
 
         showLoadingDialog(requireContext())
         SearchService(this).tryGetKeyword("recent")
     }
 
+    private val onClicked = object: KeywordAdapter.OnItemClickListener{
+        override fun onClicked(keyword: String) {
+            val bundle = Bundle()
+            bundle.putString("keyword", keyword)
+
+            val searchResultFragment = SearchResultFragment()
+            searchResultFragment.arguments = bundle
+
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.searchFrame, searchResultFragment)
+                .addToBackStack(null)
+                .commit()
+        }
+    }
+
     override fun onGetKeywordSuccess(response: KeywordResponse) {
         dismissLoadingDialog()
-        var rankNumList = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-        val pageAdapter = KeywordAdapter(requireContext(), rankNumList, response.result)
+        val pageAdapter = KeywordAdapter(requireContext(), null, response.result)
+        pageAdapter.setOnItemClickListener(onClicked)
         binding.rvRecentKeyword.adapter = pageAdapter
     }
 

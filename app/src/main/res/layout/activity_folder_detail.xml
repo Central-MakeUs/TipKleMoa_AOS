@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/notosanscjkkr_regular"
             android:includeFontPadding="false"
-            android:text="나만의 꿀 TIP 폴더가 없습니다."
+            android:text="등록된 콘텐츠가 없습니다."
             android:textColor="#B0EDE8"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

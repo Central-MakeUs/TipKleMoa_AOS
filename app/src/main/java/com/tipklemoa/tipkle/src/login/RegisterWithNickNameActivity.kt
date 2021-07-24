@@ -3,8 +3,12 @@ package com.tipklemoa.tipkle.src.login
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import androidx.core.widget.addTextChangedListener
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseActivity
@@ -22,41 +26,42 @@ class RegisterWithNickNameActivity : BaseActivity<ActivityRegisterWithNickNameBi
 
         Log.d("accessToken", intent.getStringExtra("accessToken").toString())
 
+        binding.btnRegisterNickNameBack.setOnClickListener {
+            finish()
+        }
+
+        binding.tvPrivacy.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://tipkle.shop/%ED%8C%81%EB%81%8C_%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EB%B0%A9%EC%B9%A8.html"))
+            startActivity(intent)
+        }
+
         binding.btnAgreePrivacy.setOnClickListener {
             if (!is_agree_flag){
                 //동의 안된경우에 눌렀을때 -> 버튼 색 바뀜
                 binding.btnAgreePrivacy.setBackgroundResource(R.drawable.check_box_color)
                 is_agree_flag = true
-
-                if (!binding.edtNickName.text.isNullOrEmpty()){
-                    binding.imgRightArrow.backgroundTintList = ColorStateList.valueOf(Color.BLACK)
-                    binding.tvLoginNext.setTextColor(resources.getColor(R.color.black))
-                    binding.loNext.isClickable = true
-                }
-                else {
-                    binding.imgRightArrow.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.DBGray))
-                    binding.tvLoginNext.setTextColor(resources.getColor(R.color.DBGray))
-                    binding.loNext.isClickable = false
-                }
             }
             else{ //동의 된 상태에서 눌렀을 때
                 is_agree_flag = false
                 binding.btnAgreePrivacy.setBackgroundResource(R.drawable.check_box_line)
             }
+            activateButton()
         }
 
-        binding.edtNickName.setOnFocusChangeListener { v, hasFocus ->
-            if (!binding.edtNickName.text.isNullOrEmpty() && is_agree_flag){
-                binding.imgRightArrow.backgroundTintList = ColorStateList.valueOf(Color.BLACK)
-                binding.tvLoginNext.setTextColor(resources.getColor(R.color.black))
-                binding.loNext.isClickable = true
+        binding.edtNickName.addTextChangedListener(object :TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
             }
-            else if (binding.edtNickName.text.isNullOrEmpty()){
-                binding.imgRightArrow.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.DBGray))
-                binding.tvLoginNext.setTextColor(resources.getColor(R.color.DBGray))
-                binding.loNext.isClickable = false
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                activateButton()
             }
-        }
+
+            override fun afterTextChanged(s: Editable?) {
+                activateButton()
+            }
+
+        })
 
         binding.loNext.setOnClickListener {
             val toCatIntent = Intent(this, ChooseCategoryActivity::class.java)
@@ -64,6 +69,21 @@ class RegisterWithNickNameActivity : BaseActivity<ActivityRegisterWithNickNameBi
             toCatIntent.putExtra("accessToken", intent.getStringExtra("accessToken"))
             startActivity(toCatIntent)
         }
+    }
+
+    private fun activateButton() {
+        //버튼 활성화
+        if (is_agree_flag && binding.edtNickName.text!!.isNotEmpty()){
+            binding.imgRightArrow.backgroundTintList = ColorStateList.valueOf(Color.BLACK)
+            binding.tvLoginNext.setTextColor(resources.getColor(R.color.black))
+            binding.loNext.isClickable = true
+        }
+        else{
+            binding.imgRightArrow.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.DBGray))
+            binding.tvLoginNext.setTextColor(resources.getColor(R.color.DBGray))
+            binding.loNext.isClickable = false
+        }
+
     }
 
     override fun onPostKakaoLoginSuccess(response: KakaoLoginResponse) {

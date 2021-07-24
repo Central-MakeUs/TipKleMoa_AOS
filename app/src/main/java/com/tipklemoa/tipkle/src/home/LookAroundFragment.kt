@@ -1,6 +1,9 @@
 package com.tipklemoa.tipkle.src.home
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +13,7 @@ import com.tipklemoa.tipkle.config.BaseFragment
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.FragmentHomeBinding
 import com.tipklemoa.tipkle.databinding.FragmentLookAroundBinding
+import com.tipklemoa.tipkle.src.MainActivity
 import com.tipklemoa.tipkle.src.home.model.*
 
 class LookAroundFragment : BaseFragment<FragmentLookAroundBinding>(
@@ -123,26 +127,27 @@ class LookAroundFragment : BaseFragment<FragmentLookAroundBinding>(
     }
 
     override fun onGetLookAroundFeedSuccess(response: LookAroundResponse) {
-        dismissLoadingDialog()
+        Handler(Looper.getMainLooper()).postDelayed({
+            dismissLoadingDialog()
+        }, 1500)
 
         var feedAdapter = LookAroundFeedAdapter(requireContext(), response.result)
-//      맨 처음(page=0) -> 데이터가 하나라도 있으면
+//      맨 처음(page=1) -> 데이터가 하나라도 있으면
         if (page == 1 && response.result.isNotEmpty()) {
-            Log.d("test", "결과 있음")
-
+            Log.d("case", "1")
             lookaroundList.addAll(response.result)
             feedAdapter = LookAroundFeedAdapter(requireContext(), lookaroundList)
             binding.rvLookAroundFeed.adapter = feedAdapter
         }
 //      page=1부터 불러오고, 둥지가 있으면 추가해줘야함 ->
         else if (page != 1 && response.result.isNotEmpty()) {
+            Log.d("case", "2")
             lookaroundList.addAll(response.result)
             feedAdapter.notifyItemInserted(lookaroundList.size - 1)
         }
-
 //        페이지추가 끝
-        if (page != 1 && response.result.isNullOrEmpty()) {
-            Log.d("둥지", "둥지끝")
+        else if (page != 1 && response.result.isNullOrEmpty()) {
+            Log.d("case", "3")
             isFeedEnd = true
         }
     }

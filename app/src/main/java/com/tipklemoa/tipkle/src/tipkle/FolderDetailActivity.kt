@@ -1,6 +1,5 @@
 package com.tipklemoa.tipkle.src.tipkle
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View

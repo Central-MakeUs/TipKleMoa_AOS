@@ -136,6 +136,9 @@ class AddBookmarkBottomSheet: BottomSheetDialogFragment(), MainView, TipkleFragm
         editor.putBoolean("isBookMarked", true)
         editor.apply()
 
+        val bundle = bundleOf("addBookMark_ok" to "ok")
+        setFragmentResult("addBookMark", bundle)
+
         Toast.makeText(requireContext(), "폴더 저장 완료", Toast.LENGTH_SHORT).show()
         this.dismiss()
     }

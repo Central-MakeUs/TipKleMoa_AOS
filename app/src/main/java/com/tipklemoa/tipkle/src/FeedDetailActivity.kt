@@ -20,6 +20,7 @@ class FeedDetailActivity : BaseActivity<ActivityFeedDetailBinding>(ActivityFeedD
         super.onCreate(savedInstanceState)
 
         postId = intent.getIntExtra("postId", 0)
+        isBookMarked = intent.getBooleanExtra("isBookMarked", false)
 
         Log.d("postId", postId.toString())
 
@@ -84,13 +85,12 @@ class FeedDetailActivity : BaseActivity<ActivityFeedDetailBinding>(ActivityFeedD
 
         binding.btnDetailAddBookMark.setOnClickListener {
             if (isBookMarked){ //취소
-                binding.btnDetailAddBookMark.setBackgroundResource(R.drawable.ic_bookmark_line)
                 showLoadingDialog(this)
                 MainService(this).tryDeleteBookMark(postId)
                 isBookMarked = false
+                binding.btnDetailAddBookMark.setBackgroundResource(R.drawable.ic_bookmark_line)
             }
             else{ //저장
-                binding.btnDetailAddBookMark.setBackgroundResource(R.drawable.ic_icon_bookmark_full)
                 val bundle = Bundle()
                 bundle.putInt("postId", postId)
                 val addBookmarkBottomSheet = AddBookmarkBottomSheet()
@@ -105,9 +105,22 @@ class FeedDetailActivity : BaseActivity<ActivityFeedDetailBinding>(ActivityFeedD
                 // We use a String here, but any type that can be put in a Bundle is supported
                 val result = bundle.getString("delete_ok")
                 Log.d("result", result.toString())
+                binding.btnDetailAddBookMark.setBackgroundResource(R.drawable.ic_detail_bookmark_empty)
                 // Do something with the result
                 if (result=="ok"){
                     this.finish()
+                }
+            }
+
+        supportFragmentManager
+            .setFragmentResultListener("addBookMark", this) { requestKey, bundle ->
+                // We use a String here, but any type that can be put in a Bundle is supported
+                val result = bundle.getString("addBookMark_ok")
+                Log.d("result", result.toString())
+                // Do something with the result
+                if (result=="ok"){
+                    binding.btnDetailAddBookMark.setBackgroundResource(R.drawable.ic_icon_bookmark_full)
+                    isBookMarked = true
                 }
             }
     }

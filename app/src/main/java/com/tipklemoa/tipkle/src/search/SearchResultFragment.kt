@@ -1,12 +1,15 @@
 package com.tipklemoa.tipkle.src.search
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.RecyclerView
 import com.tipklemoa.tipkle.R
@@ -36,7 +39,8 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(
 
         Log.d("keyword", keyword)
 
-        binding.edtSearchResult.setText(keyword)
+        binding.edtSearchResult.setText(keyword, TextView.BufferType.EDITABLE)
+        binding.edtSearchResult.isEnabled = true
 
         binding.edtSearchResult.addTextChangedListener(object :TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -146,33 +150,35 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(
     }
 
     override fun onGetSearchSuccess(response: SearchResponse) {
-        dismissLoadingDialog()
+        Handler(Looper.getMainLooper()).postDelayed({
+            dismissLoadingDialog()
+        }, 1500)
 
         var searchAdapter = SearchFeedAdapter(requireContext(), response.result)
-        if (response.result.isNullOrEmpty()){
-            binding.layoutEmptysearch.visibility = View.VISIBLE
-        }
-//      맨 처음(page=0) -> 데이터가 하나라도 있으면
-        else if (page == 1 && response.result.isNotEmpty()) {
+//      맨 처음(page=1) -> 데이터가 하나라도 있으면
+        if (page == 1 && response.result.isNotEmpty()) {
             binding.layoutEmptysearch.visibility = View.INVISIBLE
             searchResultList.addAll(response.result)
             searchAdapter = SearchFeedAdapter(requireContext(), searchResultList)
             binding.rvSearchFeed.adapter = searchAdapter
         }
-//      page=1부터 불러오고, 둥지가 있으면 추가해줘야함 ->
+//      page=1부터 불러오고, 데이터가 있으면 추가해줘야함 ->
         else if (page != 1 && response.result.isNotEmpty()) {
             binding.layoutEmptysearch.visibility = View.INVISIBLE
 
             searchResultList.addAll(response.result)
             searchAdapter.notifyItemInserted(searchResultList.size - 1)
         }
-
 //        페이지추가 끝
-        if (page != 1 && response.result.isNullOrEmpty()) {
+        else if (page != 1 && response.result.isNullOrEmpty()) {
             binding.layoutEmptysearch.visibility = View.INVISIBLE
 
-            Log.d("둥지", "둥지끝")
             isFeedEnd = true
+        }
+        else{
+            searchAdapter = SearchFeedAdapter(requireContext(), response.result)
+            binding.rvSearchFeed.adapter = searchAdapter
+            binding.layoutEmptysearch.visibility = View.VISIBLE
         }
     }
 

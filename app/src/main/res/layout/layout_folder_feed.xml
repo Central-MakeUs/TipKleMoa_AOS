@@ -18,7 +18,7 @@
 
     <TextView
         android:id="@+id/tvFolderFeedName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:fontFamily="@font/notosanscjkkr_medium"
@@ -28,6 +28,7 @@
         android:textColor="@color/black"
         android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="@+id/imgFolderFeed"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imgFolderFeed"
         app:layout_constraintTop_toTopOf="@+id/imgFolderFeed" />
 </androidx.constraintlayout.widget.ConstraintLayout>

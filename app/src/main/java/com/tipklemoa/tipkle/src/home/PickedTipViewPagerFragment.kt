@@ -24,7 +24,6 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
 
     var clickedCatName:String?=null
     var editor = ApplicationClass.sSharedPreferences.edit()
-    var tabsize = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,17 +35,22 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
 
             startActivity(Intent(requireContext(), SelectPicActivity::class.java))
         }
-        showLoadingDialog(requireContext())
-        HomeService(this).tryGetPickedCategoryList()
-        HomeService(this).tryGetBanner()
 
         setFragmentResultListener("editCat"){ key, bundle ->
             if (bundle.getString("editCat_ok")=="ok"){
-                binding.pickedCatTab.removeAllTabs()
                 showLoadingDialog(requireContext())
                 HomeService(this).tryGetPickedCategoryList()
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        binding.pickedCatTab.removeAllTabs()
+        showLoadingDialog(requireContext())
+        HomeService(this).tryGetPickedCategoryList()
+        HomeService(this).tryGetBanner()
     }
 
     override fun onGetPickedCategoryListSuccess(response: CategoryListResponse) {

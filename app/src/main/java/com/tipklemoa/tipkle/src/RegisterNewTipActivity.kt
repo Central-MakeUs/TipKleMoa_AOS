@@ -282,6 +282,8 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
     }
 
     private fun imageUploadFirebase(){
+        showLoadingDialog(this)
+
         if(selectedimageUrlList.size>1) { //사진 여러장일때
             for (i in selectedimageUrlList) {
                 val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
@@ -297,7 +299,6 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
                         uploadImageList.add(uri.toString())
 
                         if (uploadImageList.size==selectedimageUrlList.size){
-                            showLoadingDialog(this)
                             val postNewTipRequest = PostNewTipRequest(binding.tvNewTipCategory.text.toString(),
                                 binding.edtWhen.text.toString(), binding.edtHow.text.toString(), binding.edtTipLine.text.toString(),
                                 uploadImageList)
@@ -319,7 +320,6 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
                     Log.d("size", uploadImageList.size.toString())
                     Log.d("size", uploadImageList[0])
 
-                    showLoadingDialog(this)
                     val postNewTipRequest = PostNewTipRequest(binding.tvNewTipCategory.text.toString(),
                         binding.edtWhen.text.toString(), binding.edtHow.text.toString(), binding.edtTipLine.text.toString(),
                         uploadImageList)

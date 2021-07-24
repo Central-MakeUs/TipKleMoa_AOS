@@ -3,6 +3,7 @@ package com.tipklemoa.tipkle.src.home
 import android.content.Context
 import android.graphics.Point
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.core.os.bundleOf
@@ -17,7 +18,7 @@ import com.tipklemoa.tipkle.util.LoadingDialog
 class HomeEditCategoryBottomSheet: BottomSheetDialogFragment(), HomeFragmentView{
     private lateinit var mLoadingDialog: LoadingDialog
     private lateinit var binding: HomeBottomsheetLayoutBinding
-    private val categoryBooleanList = Array(6){false}
+    private var categoryBooleanList = Array(6){false}
     var pickedNum = 0
     var selectallflag = false
     private var pickedCategoryList = mutableListOf<Int>()
@@ -58,12 +59,16 @@ class HomeEditCategoryBottomSheet: BottomSheetDialogFragment(), HomeFragmentView
                 binding.btnChooseUniv.setBackgroundResource(R.drawable.check_box_color)
                 binding.btnChooseBeauty.setBackgroundResource(R.drawable.check_box_color)
 
+                pickedCategoryList.clear()
+
                 pickedCategoryList.add(1)
                 pickedCategoryList.add(2)
                 pickedCategoryList.add(3)
                 pickedCategoryList.add(4)
                 pickedCategoryList.add(5)
                 pickedCategoryList.add(6)
+
+                categoryBooleanList = Array(6){true}
 
                 pickedNum = 6
                 selectallflag = true
@@ -78,6 +83,7 @@ class HomeEditCategoryBottomSheet: BottomSheetDialogFragment(), HomeFragmentView
                 binding.btnChooseBeauty.setBackgroundResource(R.drawable.check_box_line)
 
                 pickedCategoryList.clear()
+                categoryBooleanList = Array(6){false}
 
                 pickedNum = 0
                 selectallflag = false
@@ -189,6 +195,7 @@ class HomeEditCategoryBottomSheet: BottomSheetDialogFragment(), HomeFragmentView
 
         binding.btnCompleteEditCategory.setOnClickListener {
             showLoadingDialog(requireContext())
+            pickedCategoryList.sort()
             var patchCategoryRequest = PatchCategoryRequest(pickedCategoryList)
             HomeService(this).tryPatchCategory(patchCategoryRequest)
             val bundle = bundleOf("editCat_ok" to "ok")
@@ -207,6 +214,7 @@ class HomeEditCategoryBottomSheet: BottomSheetDialogFragment(), HomeFragmentView
             binding.btnCompleteEditCategory.isEnabled = false
             binding.btnCompleteEditCategory.setBackgroundColor(resources.getColor(R.color.gray))
         }
+        Log.d("pickedNum", pickedNum.toString())
     }
 
     private fun showLoadingDialog(context: Context) {
@@ -277,6 +285,7 @@ class HomeEditCategoryBottomSheet: BottomSheetDialogFragment(), HomeFragmentView
                 }
             }
         }
+        Log.d("pickedNum", pickedNum.toString())
         checkFour()
     }
 

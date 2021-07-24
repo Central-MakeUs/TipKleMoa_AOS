@@ -16,6 +16,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.config.BaseFragment
 import com.tipklemoa.tipkle.databinding.FragmentSearchBinding
+import com.tipklemoa.tipkle.src.NewTipPicAdapter
 import com.tipklemoa.tipkle.src.PagerFragmentStateAdapter
 import com.tipklemoa.tipkle.src.home.HomeTopViewPagerFragment
 import com.tipklemoa.tipkle.src.home.LookAroundFragment

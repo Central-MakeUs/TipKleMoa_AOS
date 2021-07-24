@@ -54,6 +54,9 @@ class LookAroundFeedAdapter(val context: Context, private val feedList: List<Res
             if (feed.description==""){
                 tvLookAroundtext.visibility = View.GONE
             }
+            else{
+                tvLookAroundtext.visibility = View.VISIBLE
+            }
 
             //이미지 피드
             val layoutManager =
