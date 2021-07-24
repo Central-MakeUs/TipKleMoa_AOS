@@ -16,11 +16,11 @@ import com.tipklemoa.tipkle.src.home.model.ResultLookAround
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tipklemoa.tipkle.src.FeedDetailActivity
 
-
 class LookAroundFeedAdapter(val context: Context, private val feedList: List<ResultLookAround>):
     RecyclerView.Adapter<LookAroundFeedAdapter.ItemViewHolder>(){
 
     var postId = 0
+    private var listener: OnItemClickListener? = null
 
     inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imgProfile = itemView.findViewById<ImageView>(R.id.imgLookAroundProfile)
@@ -76,6 +76,10 @@ class LookAroundFeedAdapter(val context: Context, private val feedList: List<Res
                 intent.putExtra("postId", feed.postId)
                 context.startActivity(intent)
             }
+
+            itemView.setOnClickListener {
+                listener!!.onClicked(feed.postId)
+            }
         }
     }
 
@@ -89,9 +93,22 @@ class LookAroundFeedAdapter(val context: Context, private val feedList: List<Res
 
     override fun onBindViewHolder(holder: LookAroundFeedAdapter.ItemViewHolder, position: Int) {
         holder.bind(feedList[position], context)
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, FeedDetailActivity::class.java)
+            intent.putExtra("postId", feedList[position].postId)
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
         return feedList.size
+    }
+
+    fun setOnItemClickListener(listener:OnItemClickListener){
+        this.listener = listener
+    }
+
+    interface OnItemClickListener{
+        fun onClicked(position: Int)
     }
 }

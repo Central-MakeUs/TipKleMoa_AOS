@@ -16,6 +16,7 @@ import com.tipklemoa.tipkle.config.BaseFragment
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.FragmentHomeBinding
 import com.tipklemoa.tipkle.databinding.FragmentMypageBinding
+import com.tipklemoa.tipkle.src.ReallyDeleteDialog
 import com.tipklemoa.tipkle.src.login.LoginActivity
 import com.tipklemoa.tipkle.src.mypage.model.MyPageResponse
 
@@ -28,13 +29,13 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
         super.onViewCreated(view, savedInstanceState)
 
         binding.layoutLogout.setOnClickListener {
-            showLoadingDialog(requireContext())
-            MyPageService(this).tryLogout()
+            val dialog = ReallyLogoutDialog()
+            dialog.show(parentFragmentManager, dialog.tag)
         }
 
         binding.layoutWithdraw.setOnClickListener {
-            showLoadingDialog(requireContext())
-            MyPageService(this).tryDeleteUsers()
+            val dialog = ReallyWithdrawDialog()
+            dialog.show(parentFragmentManager, dialog.tag)
         }
     }
 
@@ -125,22 +126,11 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
     }
 
     override fun onGetMyPageFailure(message: String) {
-        dismissLoadingDialog()
-        showCustomToast(message)
+
     }
 
     override fun onLogoutSuccess(response: BaseResponse) {
-        dismissLoadingDialog()
-        val editor = ApplicationClass.sSharedPreferences.edit()
-        editor.remove(ApplicationClass.X_ACCESS_TOKEN)
-        editor.apply()
 
-        val intent = Intent(activity, LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        startActivity(intent)
-        activity?.finish()
-
-        showCustomToast("로그아웃 되었습니다")
     }
 
     override fun onLogoutFailure(message: String) {

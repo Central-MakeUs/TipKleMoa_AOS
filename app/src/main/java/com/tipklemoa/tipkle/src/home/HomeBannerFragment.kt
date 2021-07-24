@@ -1,6 +1,8 @@
 package com.tipklemoa.tipkle.src.home
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.os.Bundle
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
@@ -26,6 +28,8 @@ class HomeBannerFragment(private var image:String, var title:String, var postId:
         Glide.with(this)
             .load(image)
             .into(binding.banneritem)
+
+        //binding.banneritem.alpha = 0.7F
 
         binding.bannerTitle.text = title
 

@@ -78,6 +78,11 @@ class SearchFeedAdapter(val context: Context, private val searchList: List<Resul
 
     override fun onBindViewHolder(holder: SearchFeedAdapter.ItemViewHolder, position: Int) {
         holder.bind(searchList[position], context)
+//        holder.itemView.setOnClickListener {
+//            val intent = Intent(context, FeedDetailActivity::class.java)
+//            intent.putExtra("postId", searchList[position].postId)
+//            context.startActivity(intent)
+//        }
     }
 
     override fun getItemCount(): Int {

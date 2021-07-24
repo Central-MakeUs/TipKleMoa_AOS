@@ -13,6 +13,7 @@ import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseFragment
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.ViewpagerPickedTipTabBinding
+import com.tipklemoa.tipkle.src.RegisterNewTipActivity
 import com.tipklemoa.tipkle.src.SelectPicActivity
 import com.tipklemoa.tipkle.src.home.model.BannerResponse
 import com.tipklemoa.tipkle.src.home.model.CategoryListResponse
@@ -39,6 +40,7 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
         setFragmentResultListener("editCat"){ key, bundle ->
             if (bundle.getString("editCat_ok")=="ok"){
                 showLoadingDialog(requireContext())
+                binding.pickedCatTab.removeAllTabs()
                 HomeService(this).tryGetPickedCategoryList()
             }
         }

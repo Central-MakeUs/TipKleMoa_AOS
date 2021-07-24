@@ -78,6 +78,10 @@ class SelectPicActivity : BaseActivity<ActivitySelectPicBinding>(ActivitySelectP
             )
             .check()
 
+        binding.imgPicBack.setOnClickListener {
+            finish()
+        }
+
 //        selectedimageUrlList = if (intent.getStringArrayListExtra("selectedimageUrlList")!=null){
 //            intent.getStringArrayListExtra("selectedimageUrlList")!!
 //        } else{

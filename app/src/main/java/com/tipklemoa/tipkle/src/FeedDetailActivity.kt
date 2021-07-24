@@ -31,8 +31,9 @@ class FeedDetailActivity : BaseActivity<ActivityFeedDetailBinding>(ActivityFeedD
     override fun onGetFeedDetailSuccess(response: DetailFeedResponse) {
         dismissLoadingDialog()
         binding.btnDetailBack.setOnClickListener {
-            this.finish()
+            finish()
         }
+
         val pagerAdapter = FeedDetailFragmentStateAdapter(this)
         for (element in response.result.imgUrl){
             pagerAdapter.addFragment(FeedDetailFragment(element))

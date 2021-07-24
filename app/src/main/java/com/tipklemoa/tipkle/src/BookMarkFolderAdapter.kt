@@ -60,7 +60,6 @@ class BookMarkFolderAdapter(val context: Context, private val folderList: List<R
     override fun onBindViewHolder(holder: BookMarkFolderAdapter.ItemViewHolder, position: Int) {
         holder.bind(folderList[position], context)
         holder.itemView.setOnClickListener {
-            holder.itemView.findViewById<ImageView>(R.id.imgPickMark).visibility = View.VISIBLE
             listener!!.onClicked(folderList[position].folderId)
         }
     }

@@ -48,7 +48,6 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
     private var uploadImageList = java.util.ArrayList<String>()
     lateinit var editor:SharedPreferences.Editor
     var storage: FirebaseStorage? = null //파이어베이스
-    var tvCatNotEmpty = false
 
     private var takePicListener: PermissionListener = object : PermissionListener {
         override fun onPermissionGranted() {
@@ -246,16 +245,17 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
             newTipPicAdapter.notifyItemInserted(selectedimageUrlList.size-1)
             binding.tvPickedPicCount.text  = selectedimageUrlList.size.toString()
         }
+        activateButton()
     }
 
     private fun checkIsEmpty(){
         val dialogIsEmpty = NewTipAlertDialogFragment()
         val bundle = Bundle()
-        var dialogText:String?=null
             //모두 입력
-        if (selectedimageUrlList.isNotEmpty() && binding.edtWhen.text.length<4 ||
+        var dialogText = ""
+
+        if (binding.edtWhen.text.length<4 ||
             binding.edtHow.text.length<4 && binding.tvNewTipCategory.text.toString()!="*카테고리"){
-                dialogText = ""
             if (binding.edtHow.text.length<4) dialogText += "How를 4자 이상 40자 미만 작성해주세요.\n"
             if (binding.edtWhen.text.length<4) dialogText += "When을 4자 이상 40자 미만 작성해주세요."
 
@@ -270,7 +270,7 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
 
     private fun activateButton() {
         //사진을 안올렸을때
-        if (selectedimageUrlList.size!=0 && binding.edtWhen.text.isNotEmpty() &&
+        if (selectedimageUrlList.isNotEmpty() && binding.edtWhen.text.isNotEmpty() &&
             binding.edtHow.text.isNotEmpty() && binding.tvNewTipCategory.text.toString()!="*카테고리") {
             binding.tvCompleteNewTip.isEnabled = true
             binding.tvCompleteNewTip.setTextColor(resources.getColor(R.color.mint))

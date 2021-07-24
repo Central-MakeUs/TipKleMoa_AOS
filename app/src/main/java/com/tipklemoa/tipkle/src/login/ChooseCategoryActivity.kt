@@ -26,6 +26,10 @@ LoginActivityView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding.btnChooseCategoryBack.setOnClickListener {
+            finish()
+        }
+
         binding.loComplete.setOnClickListener {
             val nickName = intent.getStringExtra("nickName")
             val accessToken = intent.getStringExtra("accessToken")

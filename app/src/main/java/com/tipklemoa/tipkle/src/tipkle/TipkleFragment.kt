@@ -16,6 +16,8 @@ class TipkleFragment : BaseFragment<FragmentTipkleBinding>(
     FragmentTipkleBinding::bind,
     R.layout.fragment_tipkle
 ), TipkleFragmentView {
+
+    var folderAdapter:TipkleFolderAdapter?=null
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -35,11 +37,13 @@ class TipkleFragment : BaseFragment<FragmentTipkleBinding>(
     override fun onGetTipFolderListSuccess(response: TipFolderResponse) {
         dismissLoadingDialog()
         if (response.result.isNullOrEmpty()){
+            binding.rvTipFolder.visibility = View.INVISIBLE
             binding.layoutEmptyfolder.visibility = View.VISIBLE
         }
         else{
+            binding.rvTipFolder.visibility = View.VISIBLE
             binding.layoutEmptyfolder.visibility = View.INVISIBLE
-            val folderAdapter = TipkleFolderAdapter(requireContext(), response.result)
+            folderAdapter = TipkleFolderAdapter(requireContext(), response.result)
             binding.rvTipFolder.adapter = folderAdapter
         }
     }

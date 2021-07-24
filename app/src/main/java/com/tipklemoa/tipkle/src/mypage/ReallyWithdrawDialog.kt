@@ -1,6 +1,7 @@
-package com.tipklemoa.tipkle.src
+package com.tipklemoa.tipkle.src.mypage
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
@@ -14,13 +15,16 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
+import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.LayoutDetailReallyDeleteDialogBinding
+import com.tipklemoa.tipkle.src.login.LoginActivity
 import com.tipklemoa.tipkle.src.model.DetailFeedResponse
 import com.tipklemoa.tipkle.src.model.NewTipResponse
+import com.tipklemoa.tipkle.src.mypage.model.MyPageResponse
 import com.tipklemoa.tipkle.util.LoadingDialog
 
-class ReallyDeleteDialog : DialogFragment(), MainView {
+class ReallyWithdrawDialog : DialogFragment(), MyPageView {
     var windowManager: WindowManager? = null
     var display: Display? = null
     var size: Point? = null
@@ -42,12 +46,13 @@ class ReallyDeleteDialog : DialogFragment(), MainView {
         savedInstanceState: Bundle?
     ): View {
         binding = LayoutDetailReallyDeleteDialogBinding.inflate(inflater, container, false)
+        binding.tvDialogMent.text = "정말 회원탈퇴 하시겠습니까? "+String(Character.toChars(0x1F622))
+
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        postId = arguments?.getInt("postId")!!
 
         binding.btnDeleteConfirm.setOnClickListener {
             showLoadingDialog(requireContext())
-            MainService(this).tryDeleteFeed(postId)
+            MyPageService(this).tryDeleteUsers()
         }
 
         binding.btnDeleteCancel.setOnClickListener {
@@ -71,10 +76,10 @@ class ReallyDeleteDialog : DialogFragment(), MainView {
 
         var params: ViewGroup.LayoutParams? = dialog?.window?.attributes
         val deviceWidth = size!!.x
-        val deviceHeight = size!!.y
+        //val deviceHeight = size!!.y
 
         params?.width = (deviceWidth*0.82).toInt()
-        params?.height = (deviceHeight*0.17).toInt()
+        //params?.height = (deviceHeight*0.17).toInt()
 
         dialog?.window?.attributes = params as WindowManager.LayoutParams
     }
@@ -90,47 +95,38 @@ class ReallyDeleteDialog : DialogFragment(), MainView {
         }
     }
 
-    override fun onGetFeedDetailSuccess(response: DetailFeedResponse) {
+    override fun onGetMyPageSuccess(response: MyPageResponse) {
         TODO("Not yet implemented")
     }
 
-    override fun onGetFeedDetailFailure(message: String) {
+    override fun onGetMyPageFailure(message: String) {
         TODO("Not yet implemented")
     }
 
-    override fun onDeleteFeedSuccess(response: BaseResponse) {
+    override fun onLogoutSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onLogoutFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteUserSuccess(response: BaseResponse) {
         dismissLoadingDialog()
-        val bundle = bundleOf("delete_ok" to "ok")
-        setFragmentResult("delete", bundle)
-        this.dismiss()
+        val editor = ApplicationClass.sSharedPreferences.edit()
+        editor.remove(ApplicationClass.X_ACCESS_TOKEN)
+        editor.apply()
+
+        val intent = Intent(activity, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+        activity?.finish()
+
+        Toast.makeText(requireContext(), "회원탈퇴 되었습니다", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onDeleteFeedFailure(message: String) {
+    override fun onDeleteUserFailure(message: String) {
         dismissLoadingDialog()
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onPostSuccess(response: NewTipResponse) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onPostFailure(message: String) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onPostBookMarkSuccess(response: BaseResponse) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onPostBookMarkFailure(message: String) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onDeleteBookmarkSuccess(response: BaseResponse) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onDeleteBookmarkFailure(message: String) {
-        TODO("Not yet implemented")
     }
 }

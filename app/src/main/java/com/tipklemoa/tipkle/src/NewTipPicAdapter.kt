@@ -28,7 +28,6 @@ class NewTipPicAdapter(val context: Context, private val searchList: List<String
             btnNewTipX.setOnClickListener {
                 listener!!.onClicked(adapterPosition)
             }
-
         }
     }
 

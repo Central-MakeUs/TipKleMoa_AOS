@@ -5,15 +5,14 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseFragment
 import com.tipklemoa.tipkle.config.BaseResponse
-import com.tipklemoa.tipkle.databinding.FragmentHomeBinding
 import com.tipklemoa.tipkle.databinding.FragmentLookAroundBinding
-import com.tipklemoa.tipkle.src.MainActivity
+import com.tipklemoa.tipkle.src.FeedDetailActivity
+import com.tipklemoa.tipkle.src.NewTipPicAdapter
 import com.tipklemoa.tipkle.src.home.model.*
 
 class LookAroundFragment : BaseFragment<FragmentLookAroundBinding>(
@@ -25,6 +24,7 @@ class LookAroundFragment : BaseFragment<FragmentLookAroundBinding>(
     private var lookaroundList = mutableListOf<ResultLookAround>()
     private var page = 1      // 현재 페이지
     var isFeedEnd = false
+    var postId = 0
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -94,6 +94,14 @@ class LookAroundFragment : BaseFragment<FragmentLookAroundBinding>(
         clickedCatName?.let { HomeService(this).tryLookAroundFeed(it, "recent", null, page) }
     }
 
+//    private val onClicked = object: LookAroundFeedAdapter.OnItemClickListener{
+//        override fun onClicked(position: Int) {
+//            val intent = Intent(context, FeedDetailActivity::class.java)
+//            intent.putExtra("postId", postId)
+//            startActivity(intent)
+//        }
+//    }
+
     override fun onGetPickedCategoryListSuccess(response: CategoryListResponse) {
         TODO("Not yet implemented")
     }
@@ -137,6 +145,7 @@ class LookAroundFragment : BaseFragment<FragmentLookAroundBinding>(
             Log.d("case", "1")
             lookaroundList.addAll(response.result)
             feedAdapter = LookAroundFeedAdapter(requireContext(), lookaroundList)
+            //feedAdapter.setOnItemClickListener(onClicked)
             binding.rvLookAroundFeed.adapter = feedAdapter
         }
 //      page=1부터 불러오고, 둥지가 있으면 추가해줘야함 ->
@@ -144,6 +153,7 @@ class LookAroundFragment : BaseFragment<FragmentLookAroundBinding>(
             Log.d("case", "2")
             lookaroundList.addAll(response.result)
             feedAdapter.notifyItemInserted(lookaroundList.size - 1)
+           //feedAdapter.setOnItemClickListener(onClicked)
         }
 //        페이지추가 끝
         else if (page != 1 && response.result.isNullOrEmpty()) {

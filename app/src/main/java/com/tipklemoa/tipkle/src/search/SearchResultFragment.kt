@@ -21,6 +21,7 @@ import com.tipklemoa.tipkle.src.home.model.ResultLookAround
 import com.tipklemoa.tipkle.src.search.model.KeywordResponse
 import com.tipklemoa.tipkle.src.search.model.ResultSearch
 import com.tipklemoa.tipkle.src.search.model.SearchResponse
+import android.text.SpannableStringBuilder
 
 class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(
     FragmentSearchResultBinding::bind,
@@ -38,9 +39,9 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(
         keyword = arguments?.getString("keyword").toString()
 
         Log.d("keyword", keyword)
+        val editable: Editable = SpannableStringBuilder(keyword)
 
-        binding.edtSearchResult.setText(keyword, TextView.BufferType.EDITABLE)
-        binding.edtSearchResult.isEnabled = true
+        binding.edtSearchResult.text = editable
 
         binding.edtSearchResult.addTextChangedListener(object :TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -56,6 +57,7 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(
             }
 
             override fun afterTextChanged(s: Editable?) {
+
             }
 
         })
@@ -104,8 +106,6 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(
             SearchService(this).trySearchFeed(search=keyword, order=order, page=page, limit=5)
         }
 
-        binding.nestedScrollView.isNestedScrollingEnabled = false
-
         binding.btnSearchBack.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
@@ -120,7 +120,6 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(
                     if (!isFeedEnd) {
                         dismissLoadingDialog()
                         showLoadingDialog(requireContext())
-                        order = "recent"
                         SearchService(this@SearchResultFragment).trySearchFeed(
                             null,
                             order,
@@ -157,27 +156,33 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(
         var searchAdapter = SearchFeedAdapter(requireContext(), response.result)
 //      맨 처음(page=1) -> 데이터가 하나라도 있으면
         if (page == 1 && response.result.isNotEmpty()) {
+            Log.d("case", "1")
+
             binding.layoutEmptysearch.visibility = View.INVISIBLE
             searchResultList.addAll(response.result)
+            Log.d("case", searchResultList.size.toString())
             searchAdapter = SearchFeedAdapter(requireContext(), searchResultList)
             binding.rvSearchFeed.adapter = searchAdapter
         }
 //      page=1부터 불러오고, 데이터가 있으면 추가해줘야함 ->
         else if (page != 1 && response.result.isNotEmpty()) {
             binding.layoutEmptysearch.visibility = View.INVISIBLE
+            Log.d("case", "2")
 
             searchResultList.addAll(response.result)
+            Log.d("case", searchResultList.size.toString())
             searchAdapter.notifyItemInserted(searchResultList.size - 1)
         }
 //        페이지추가 끝
         else if (page != 1 && response.result.isNullOrEmpty()) {
             binding.layoutEmptysearch.visibility = View.INVISIBLE
+            Log.d("case", "3")
+            Log.d("case", searchResultList.size.toString())
 
             isFeedEnd = true
         }
-        else{
-            searchAdapter = SearchFeedAdapter(requireContext(), response.result)
-            binding.rvSearchFeed.adapter = searchAdapter
+        else if (response.result.isNullOrEmpty()){
+            binding.rvSearchFeed.visibility = View.INVISIBLE
             binding.layoutEmptysearch.visibility = View.VISIBLE
         }
     }
