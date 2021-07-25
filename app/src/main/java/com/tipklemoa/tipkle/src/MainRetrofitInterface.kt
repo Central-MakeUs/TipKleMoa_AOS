@@ -1,20 +1,13 @@
 package com.tipklemoa.tipkle.src
 
-import com.google.gson.annotations.SerializedName
 import com.tipklemoa.tipkle.config.BaseResponse
-import com.tipklemoa.tipkle.src.home.model.PatchCategoryRequest
 import com.tipklemoa.tipkle.src.model.DetailFeedResponse
 import com.tipklemoa.tipkle.src.model.NewTipResponse
 import com.tipklemoa.tipkle.src.model.PostAddBookMarkRequest
 import com.tipklemoa.tipkle.src.model.PostNewTipRequest
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.http.*
-import java.util.ArrayList
-
 import retrofit2.http.POST
-
-import retrofit2.http.FormUrlEncoded
 
 interface MainRetrofitInterface {
 
@@ -38,5 +31,4 @@ interface MainRetrofitInterface {
     //북마크 삭제
     @DELETE("/folders/posts/{postId}")
     fun deleteBookMark(@Path("postId") postId:Int): Call<BaseResponse>
-
 }

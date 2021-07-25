@@ -39,9 +39,8 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(
         keyword = arguments?.getString("keyword").toString()
 
         Log.d("keyword", keyword)
-        val editable: Editable = SpannableStringBuilder(keyword)
 
-        binding.edtSearchResult.text = editable
+        binding.edtSearchResult.text = Editable.Factory.getInstance().newEditable(keyword)
 
         binding.edtSearchResult.addTextChangedListener(object :TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

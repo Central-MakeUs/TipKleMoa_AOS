@@ -1,6 +1,5 @@
 package com.tipklemoa.tipkle.src.search
 
-import com.tipklemoa.tipkle.src.home.model.*
 import com.tipklemoa.tipkle.src.search.model.KeywordResponse
 import com.tipklemoa.tipkle.src.search.model.SearchResponse
 import retrofit2.Call

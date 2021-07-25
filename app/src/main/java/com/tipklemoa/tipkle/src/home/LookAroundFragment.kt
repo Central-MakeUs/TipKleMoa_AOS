@@ -94,13 +94,13 @@ class LookAroundFragment : BaseFragment<FragmentLookAroundBinding>(
         clickedCatName?.let { HomeService(this).tryLookAroundFeed(it, "recent", null, page) }
     }
 
-//    private val onClicked = object: LookAroundFeedAdapter.OnItemClickListener{
-//        override fun onClicked(position: Int) {
-//            val intent = Intent(context, FeedDetailActivity::class.java)
-//            intent.putExtra("postId", postId)
-//            startActivity(intent)
-//        }
-//    }
+    private val onClicked = object: LookAroundFeedAdapter.OnItemClickListener{
+        override fun onClicked(position: Int) {
+            val intent = Intent(context, FeedDetailActivity::class.java)
+            intent.putExtra("postId", postId)
+            startActivity(intent)
+        }
+    }
 
     override fun onGetPickedCategoryListSuccess(response: CategoryListResponse) {
         TODO("Not yet implemented")
@@ -145,7 +145,7 @@ class LookAroundFragment : BaseFragment<FragmentLookAroundBinding>(
             Log.d("case", "1")
             lookaroundList.addAll(response.result)
             feedAdapter = LookAroundFeedAdapter(requireContext(), lookaroundList)
-            //feedAdapter.setOnItemClickListener(onClicked)
+            feedAdapter.setOnItemClickListener(onClicked)
             binding.rvLookAroundFeed.adapter = feedAdapter
         }
 //      page=1부터 불러오고, 둥지가 있으면 추가해줘야함 ->
@@ -153,7 +153,7 @@ class LookAroundFragment : BaseFragment<FragmentLookAroundBinding>(
             Log.d("case", "2")
             lookaroundList.addAll(response.result)
             feedAdapter.notifyItemInserted(lookaroundList.size - 1)
-           //feedAdapter.setOnItemClickListener(onClicked)
+           feedAdapter.setOnItemClickListener(onClicked)
         }
 //        페이지추가 끝
         else if (page != 1 && response.result.isNullOrEmpty()) {

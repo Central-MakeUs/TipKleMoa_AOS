@@ -73,7 +73,7 @@ class RegisterWithNickNameActivity : BaseActivity<ActivityRegisterWithNickNameBi
 
     private fun activateButton() {
         //버튼 활성화
-        if (is_agree_flag && binding.edtNickName.text!!.isNotEmpty()){
+        if (is_agree_flag && binding.edtNickName.text.toString().replace(" ", "").isNotEmpty()){
             binding.imgRightArrow.backgroundTintList = ColorStateList.valueOf(Color.BLACK)
             binding.tvLoginNext.setTextColor(resources.getColor(R.color.black))
             binding.loNext.isClickable = true
