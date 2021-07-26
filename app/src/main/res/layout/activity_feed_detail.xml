@@ -91,7 +91,7 @@
 
         <RatingBar
             android:id="@+id/ratingBarDetail"
-            style="@style/RatingBar"
+            style="@style/DetailRatingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"

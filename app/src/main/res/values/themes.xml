@@ -38,8 +38,13 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
-    <style name="RatingBar" parent="Widget.AppCompat.RatingBar.Small">
+    <style name="DetailRatingBar" parent="Widget.AppCompat.RatingBar.Small">
         <item name="colorControlNormal">#DFF8F6</item>
+        <item name="colorControlActivated">@color/mint</item>
+    </style>
+
+    <style name="DialogRatingBar" parent="Widget.AppCompat.RatingBar">
+        <item name="colorControlNormal">@color/DBGray</item>
         <item name="colorControlActivated">@color/mint</item>
     </style>
 

@@ -68,6 +68,7 @@
         <entry key="app/src/main/res/layout/layout_addbookmark_bottomsheet.xml" value="0.335" />
         <entry key="app/src/main/res/layout/layout_banner.xml" value="0.25" />
         <entry key="app/src/main/res/layout/layout_bookmark_folder_list.xml" value="0.75" />
+        <entry key="app/src/main/res/layout/layout_comment_bottomsheet.xml" value="0.25" />
         <entry key="app/src/main/res/layout/layout_detail_bottomsheet.xml" value="0.375" />
         <entry key="app/src/main/res/layout/layout_detail_feed_viewpager.xml" value="0.19270833333333334" />
         <entry key="app/src/main/res/layout/layout_detail_really_delete_dialog.xml" value="0.335" />
@@ -81,6 +82,7 @@
         <entry key="app/src/main/res/layout/layout_lookaround_image.xml" value="0.15052083333333333" />
         <entry key="app/src/main/res/layout/layout_newtip_dialog.xml" value="0.335" />
         <entry key="app/src/main/res/layout/layout_newtip_picitem.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/layout_star_dialog.xml" value="0.375" />
         <entry key="app/src/main/res/layout/layout_tip_folder.xml" value="0.25" />
         <entry key="app/src/main/res/layout/viewpager_home_tab.xml" value="0.25" />
         <entry key="app/src/main/res/layout/viewpager_nest_tab.xml" value="0.1578125" />

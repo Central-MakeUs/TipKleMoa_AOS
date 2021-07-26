@@ -9,6 +9,7 @@ import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseActivity
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.ActivityFeedDetailBinding
+import com.tipklemoa.tipkle.src.model.CommentResponse
 import com.tipklemoa.tipkle.src.model.DetailFeedResponse
 import com.tipklemoa.tipkle.src.model.NewTipResponse
 
@@ -62,13 +63,20 @@ class FeedDetailActivity : BaseActivity<ActivityFeedDetailBinding>(ActivityFeedD
             binding.btnDetailStar.setBackgroundResource(R.drawable.ic_empty_star)
         }
 
-        if (response.result.isBookMarked=='Y'){
-            binding.btnDetailAddBookMark.setBackgroundResource(R.drawable.ic_icon_bookmark_full)
-            isBookMarked = true
+        binding.btnDetailStar.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putInt("postId", postId)
+            val starDialog = StarDialog()
+            starDialog.arguments = bundle
+            starDialog.show(supportFragmentManager, starDialog.tag)
         }
-        else{
+
+        isBookMarked = if (response.result.isBookMarked=='Y'){
+            binding.btnDetailAddBookMark.setBackgroundResource(R.drawable.ic_icon_bookmark_full)
+            true
+        } else{
             binding.btnDetailAddBookMark.setBackgroundResource(R.drawable.ic_bookmark_line)
-            isBookMarked = false
+            false
         }
 
         if (response.result.isAuthor=='Y'){
@@ -124,6 +132,18 @@ class FeedDetailActivity : BaseActivity<ActivityFeedDetailBinding>(ActivityFeedD
                     isBookMarked = true
                 }
             }
+
+        supportFragmentManager
+            .setFragmentResultListener("star", this) { requestKey, bundle ->
+                // We use a String here, but any type that can be put in a Bundle is supported
+                val result = bundle.getString("star_ok")
+                Log.d("result", result.toString())
+                // Do something with the result
+                if (result=="ok"){
+                    showLoadingDialog(this)
+                    MainService(this).tryGetFeedDetail(postId)
+                }
+            }
     }
 
     override fun onGetFeedDetailFailure(message: String) {
@@ -163,5 +183,37 @@ class FeedDetailActivity : BaseActivity<ActivityFeedDetailBinding>(ActivityFeedD
     override fun onDeleteBookmarkFailure(message: String) {
         dismissLoadingDialog()
         showCustomToast(message)
+    }
+
+    override fun onPostStarSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostStarFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetCommentSuccess(response: CommentResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetCommentFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostCommentSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostCommentFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteCommentSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteCommentFailure(message: String) {
+        TODO("Not yet implemented")
     }
 }

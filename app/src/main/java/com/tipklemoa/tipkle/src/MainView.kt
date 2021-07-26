@@ -7,6 +7,7 @@ import com.tipklemoa.tipkle.src.home.model.HomePreviewFeedResponse
 import com.tipklemoa.tipkle.src.home.model.LookAroundResponse
 import com.tipklemoa.tipkle.src.login.model.KakaoLoginResponse
 import com.tipklemoa.tipkle.src.login.model.KakaoRegisterResponse
+import com.tipklemoa.tipkle.src.model.CommentResponse
 import com.tipklemoa.tipkle.src.model.DetailFeedResponse
 import com.tipklemoa.tipkle.src.model.NewTipResponse
 
@@ -25,4 +26,17 @@ interface MainView {
 
     fun onDeleteBookmarkSuccess(response: BaseResponse)
     fun onDeleteBookmarkFailure(message: String)
+
+    fun onPostStarSuccess(response: BaseResponse)
+    fun onPostStarFailure(message: String)
+
+    fun onGetCommentSuccess(response: CommentResponse)
+    fun onGetCommentFailure(message: String)
+
+    fun onPostCommentSuccess(response: BaseResponse)
+    fun onPostCommentFailure(message: String)
+
+    fun onDeleteCommentSuccess(response: BaseResponse)
+    fun onDeleteCommentFailure(message: String)
+
 }

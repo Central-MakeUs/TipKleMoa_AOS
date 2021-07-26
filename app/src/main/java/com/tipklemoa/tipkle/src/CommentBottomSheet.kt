@@ -27,7 +27,7 @@ import com.tipklemoa.tipkle.src.tipkle.model.MakeFolderResponse
 import com.tipklemoa.tipkle.src.tipkle.model.TipFolderResponse
 import com.tipklemoa.tipkle.util.LoadingDialog
 
-class AddBookmarkBottomSheet: BottomSheetDialogFragment(), MainView, TipkleFragmentView{
+class CommentBottomSheet: BottomSheetDialogFragment(), MainView{
     private lateinit var binding: LayoutAddbookmarkBottomsheetBinding
     var postId = 0
     var folderId = 0
@@ -45,7 +45,6 @@ class AddBookmarkBottomSheet: BottomSheetDialogFragment(), MainView, TipkleFragm
 
         binding = LayoutAddbookmarkBottomsheetBinding.inflate(inflater, container, false)
         showLoadingDialog(requireContext())
-        TipkleService(this).tryGetFolderList()
 
         return binding.root
     }
@@ -54,7 +53,7 @@ class AddBookmarkBottomSheet: BottomSheetDialogFragment(), MainView, TipkleFragm
         override fun onClicked(folderId: Int) {
             showLoadingDialog(requireContext())
             val postAddBookMarkRequest = PostAddBookMarkRequest(postId)
-            MainService(this@AddBookmarkBottomSheet).tryPostBookMark(folderId, postAddBookMarkRequest)
+            MainService(this@CommentBottomSheet).tryPostBookMark(folderId, postAddBookMarkRequest)
         }
     }
 

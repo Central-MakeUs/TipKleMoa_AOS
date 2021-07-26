@@ -1,10 +1,7 @@
 package com.tipklemoa.tipkle.src
 
 import com.tipklemoa.tipkle.config.BaseResponse
-import com.tipklemoa.tipkle.src.model.DetailFeedResponse
-import com.tipklemoa.tipkle.src.model.NewTipResponse
-import com.tipklemoa.tipkle.src.model.PostAddBookMarkRequest
-import com.tipklemoa.tipkle.src.model.PostNewTipRequest
+import com.tipklemoa.tipkle.src.model.*
 import retrofit2.Call
 import retrofit2.http.*
 import retrofit2.http.POST
@@ -31,4 +28,20 @@ interface MainRetrofitInterface {
     //북마크 삭제
     @DELETE("/folders/posts/{postId}")
     fun deleteBookMark(@Path("postId") postId:Int): Call<BaseResponse>
+
+    //별점 등록
+    @POST("/posts/{postId}/stars")
+    fun postStar(@Path("postId") postId:Int, @Body params:PostStarRequest): Call<BaseResponse>
+
+    //댓글 조회
+    @GET("/posts/{postId}/comments")
+    fun getComments(@Path("postId") postId:Int): Call<CommentResponse>
+
+    //댓글 등록
+    @POST("/posts/{postId}/comments")
+    fun postComment(@Path("postId") postId:Int): Call<BaseResponse>
+
+    //댓글 삭제
+    @DELETE("/posts/comments/{commentId}")
+    fun deleteComment(@Path("commentId") commentId:Int): Call<BaseResponse>
 }

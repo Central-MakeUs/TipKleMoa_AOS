@@ -16,12 +16,14 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.LayoutDetailReallyDeleteDialogBinding
+import com.tipklemoa.tipkle.databinding.LayoutStarDialogBinding
 import com.tipklemoa.tipkle.src.model.CommentResponse
 import com.tipklemoa.tipkle.src.model.DetailFeedResponse
 import com.tipklemoa.tipkle.src.model.NewTipResponse
+import com.tipklemoa.tipkle.src.model.PostStarRequest
 import com.tipklemoa.tipkle.util.LoadingDialog
 
-class ReallyDeleteDialog : DialogFragment(), MainView {
+class StarDialog : DialogFragment(), MainView {
     var windowManager: WindowManager? = null
     var display: Display? = null
     var size: Point? = null
@@ -29,7 +31,7 @@ class ReallyDeleteDialog : DialogFragment(), MainView {
     var postId = 0
 
     lateinit var mLoadingDialog: LoadingDialog
-    private lateinit var binding: LayoutDetailReallyDeleteDialogBinding
+    private lateinit var binding: LayoutStarDialogBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,13 +44,14 @@ class ReallyDeleteDialog : DialogFragment(), MainView {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = LayoutDetailReallyDeleteDialogBinding.inflate(inflater, container, false)
+        binding = LayoutStarDialogBinding.inflate(inflater, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         postId = arguments?.getInt("postId")!!
 
         binding.btnDeleteConfirm.setOnClickListener {
             showLoadingDialog(requireContext())
-            MainService(this).tryDeleteFeed(postId)
+            val postStarRequest = PostStarRequest(binding.postRatingBar.numStars)
+            MainService(this).tryPostStar(postId, postStarRequest)
         }
 
         binding.btnDeleteCancel.setOnClickListener {
@@ -136,11 +139,15 @@ class ReallyDeleteDialog : DialogFragment(), MainView {
     }
 
     override fun onPostStarSuccess(response: BaseResponse) {
-        TODO("Not yet implemented")
+        dismissLoadingDialog()
+        val bundle = bundleOf("star_ok" to "ok")
+        setFragmentResult("star", bundle)
+        this.dismiss()
     }
 
     override fun onPostStarFailure(message: String) {
-        TODO("Not yet implemented")
+        dismissLoadingDialog()
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onGetCommentSuccess(response: CommentResponse) {

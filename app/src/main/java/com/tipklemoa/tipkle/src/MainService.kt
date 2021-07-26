@@ -2,11 +2,8 @@ package com.tipklemoa.tipkle.src
 
 import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseResponse
-import com.tipklemoa.tipkle.src.home.model.*
-import com.tipklemoa.tipkle.src.model.DetailFeedResponse
-import com.tipklemoa.tipkle.src.model.NewTipResponse
-import com.tipklemoa.tipkle.src.model.PostAddBookMarkRequest
-import com.tipklemoa.tipkle.src.model.PostNewTipRequest
+import com.tipklemoa.tipkle.src.model.*
+import org.w3c.dom.Comment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -78,17 +75,56 @@ class MainService(val view: MainView) {
             }
         })
     }
-//
-//    fun tryGetPickedCategoryList(){
-//        val homeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
-//    homeRetrofitInterface.getPickedCategoryList().enqueue(object: Callback<CategoryListResponse> {
-//            override fun onResponse(call: Call<CategoryListResponse>, response: Response<CategoryListResponse>) {
-//                view.onGetPickedCategoryListSuccess(response.body() as CategoryListResponse)
-//            }
-//
-//            override fun onFailure(call: Call<CategoryListResponse>, t: Throwable) {
-//                view.onGetPickedCategoryListFailure(t.message ?: "통신 오류")
-//            }
-//        })
-//    }
+
+    fun tryPostStar(postId:Int, postStarRequest: PostStarRequest){
+        val mainRetrofitInterface = ApplicationClass.sRetrofit.create(MainRetrofitInterface::class.java)
+        mainRetrofitInterface.postStar(postId, postStarRequest).enqueue(object: Callback<BaseResponse> {
+            override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
+                view.onPostStarSuccess(response.body() as BaseResponse)
+            }
+
+            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
+                view.onPostStarFailure(t.message ?: "통신 오류")
+            }
+        })
+    }
+
+    fun tryGetComments(postId:Int){
+        val mainRetrofitInterface = ApplicationClass.sRetrofit.create(MainRetrofitInterface::class.java)
+        mainRetrofitInterface.getComments(postId).enqueue(object: Callback<CommentResponse> {
+            override fun onResponse(call: Call<CommentResponse>, response: Response<CommentResponse>) {
+                view.onGetCommentSuccess(response.body() as CommentResponse)
+            }
+
+            override fun onFailure(call: Call<CommentResponse>, t: Throwable) {
+                view.onGetCommentFailure(t.message ?: "통신 오류")
+            }
+        })
+    }
+
+    fun tryPostComment(postId:Int, postCommentRequest: PostCommentRequest){
+        val mainRetrofitInterface = ApplicationClass.sRetrofit.create(MainRetrofitInterface::class.java)
+        mainRetrofitInterface.postComment(postId).enqueue(object: Callback<BaseResponse> {
+            override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
+                view.onPostCommentSuccess(response.body() as BaseResponse)
+            }
+
+            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
+                view.onPostCommentFailure(t.message ?: "통신 오류")
+            }
+        })
+    }
+
+    fun tryDeleteComment(commentId:Int){
+        val mainRetrofitInterface = ApplicationClass.sRetrofit.create(MainRetrofitInterface::class.java)
+        mainRetrofitInterface.deleteComment(commentId).enqueue(object: Callback<BaseResponse> {
+            override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
+                view.onDeleteCommentSuccess(response.body() as BaseResponse)
+            }
+
+            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
+                view.onDeleteCommentFailure(t.message ?: "통신 오류")
+            }
+        })
+    }
 }

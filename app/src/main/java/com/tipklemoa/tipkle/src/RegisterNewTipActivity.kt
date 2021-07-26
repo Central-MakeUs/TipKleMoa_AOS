@@ -27,6 +27,7 @@ import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseActivity
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.ActivityRegisterNewTipBinding
+import com.tipklemoa.tipkle.src.model.CommentResponse
 import com.tipklemoa.tipkle.src.model.DetailFeedResponse
 import com.tipklemoa.tipkle.src.model.NewTipResponse
 import com.tipklemoa.tipkle.src.model.PostNewTipRequest
@@ -47,7 +48,7 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
     var selectedimageUrlList = java.util.ArrayList<String>()
     private var uploadImageList = java.util.ArrayList<String>()
     lateinit var editor:SharedPreferences.Editor
-    var storage: FirebaseStorage? = null //파이어베이스
+    var storage: FirebaseStorage? = null //파이어베이스하
 
     private var takePicListener: PermissionListener = object : PermissionListener {
         override fun onPermissionGranted() {
@@ -256,8 +257,8 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
 
         if (binding.edtWhen.text.length<4 ||
             binding.edtHow.text.length<4 && binding.tvNewTipCategory.text.toString()!="*카테고리"){
-            if (binding.edtHow.text.length<4) dialogText += "How를 4자 이상 40자 미만 작성해주세요.\n"
-            if (binding.edtWhen.text.length<4) dialogText += "When을 4자 이상 40자 미만 작성해주세요."
+            if (binding.edtHow.text.length<4) dialogText += "How를 4자 이상 25자 이하 작성해주세요.\n"
+            if (binding.edtWhen.text.length<4) dialogText += "When을 4자 이상 25자 이 작성해주세요."
 
             bundle.putString("dialogText", dialogText)
             dialogIsEmpty.arguments = bundle
@@ -373,6 +374,38 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
     }
 
     override fun onDeleteBookmarkFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostStarSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostStarFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetCommentSuccess(response: CommentResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetCommentFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostCommentSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostCommentFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteCommentSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteCommentFailure(message: String) {
         TODO("Not yet implemented")
     }
 }
