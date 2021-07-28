@@ -12,6 +12,10 @@ import com.tipklemoa.tipkle.databinding.ActivityFeedDetailBinding
 import com.tipklemoa.tipkle.src.model.CommentResponse
 import com.tipklemoa.tipkle.src.model.DetailFeedResponse
 import com.tipklemoa.tipkle.src.model.NewTipResponse
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import android.widget.FrameLayout
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import android.util.DisplayMetrics
 
 class FeedDetailActivity : BaseActivity<ActivityFeedDetailBinding>(ActivityFeedDetailBinding::inflate), MainView {
     var postId = 0
@@ -69,6 +73,15 @@ class FeedDetailActivity : BaseActivity<ActivityFeedDetailBinding>(ActivityFeedD
             val starDialog = StarDialog()
             starDialog.arguments = bundle
             starDialog.show(supportFragmentManager, starDialog.tag)
+        }
+// Use this to programmatically apply behavior attributes
+        binding.btnDetailComent.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putInt("postId", postId)
+
+            val commentBottomSheet = CommentBottomSheet()
+            commentBottomSheet.arguments = bundle
+            commentBottomSheet.show(supportFragmentManager, commentBottomSheet.tag)
         }
 
         isBookMarked = if (response.result.isBookMarked=='Y'){

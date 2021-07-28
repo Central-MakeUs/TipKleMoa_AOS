@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--<androidx.coordinatorlayout.widget.CoordinatorLayout-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent">-->
+
+<!--    <include layout="@layout/layout_comment_bottomsheet"/>-->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -69,7 +76,7 @@
             android:id="@+id/imgDetailFeedProfile"
             android:layout_width="44dp"
             android:layout_height="44dp"
-            android:layout_marginVertical="24dp"
+            android:layout_marginVertical="16dp"
             android:layout_marginLeft="24dp"
             android:background="@drawable/ic_profile_background"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -80,12 +87,12 @@
             android:id="@+id/tvDetailNickName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
+            android:layout_marginLeft="14dp"
             android:fontFamily="@font/notosanscjkkr_bold"
             android:includeFontPadding="false"
             android:text="TextView"
             android:textColor="@color/black"
-            android:textSize="12dp"
+            android:textSize="16dp"
             app:layout_constraintStart_toEndOf="@+id/imgDetailFeedProfile"
             app:layout_constraintTop_toTopOf="@+id/imgDetailFeedProfile" />
 
@@ -94,11 +101,10 @@
             style="@style/DetailRatingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
             android:progressBackgroundTint="@color/DBGray"
             android:progressTint="@color/mint"
             android:stepSize="1"
-            app:layout_constraintStart_toEndOf="@+id/imgDetailFeedProfile"
+            app:layout_constraintStart_toStartOf="@+id/tvDetailNickName"
             app:layout_constraintTop_toBottomOf="@+id/tvDetailNickName" />
 
         <TextView
@@ -219,6 +225,7 @@
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
                 android:text="How?"
+                android:layout_marginLeft="4dp"
                 android:textColor="@color/mint"
                 android:textSize="16dp"
                 app:layout_constraintStart_toEndOf="@+id/imageView7"
@@ -260,7 +267,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/notosanscjkkr_regular"
                 android:includeFontPadding="false"
                 android:lineSpacingExtra="2dp"
@@ -329,6 +336,5 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+<!--</androidx.coordinatorlayout.widget.CoordinatorLayout>-->

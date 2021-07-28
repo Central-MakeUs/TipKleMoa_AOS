@@ -14,7 +14,7 @@ import com.tipklemoa.tipkle.src.login.model.KakaoLoginResponse
 import com.tipklemoa.tipkle.src.login.model.KakaoRegisterResponse
 import com.tipklemoa.tipkle.src.login.model.PostKakaoLoginRequest
 
-class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate),
+class  LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate),
     LoginActivityView {
 
     private var accessToken:String?=null

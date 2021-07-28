@@ -118,7 +118,7 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (binding.edtHow.text.isNotEmpty()){
-                    binding.tvHowStar.visibility = View.INVISIBLE
+                    binding.tvHowStar.visibility = View.GONE
                 }
                 else{
                     binding.tvHowStar.visibility = View.VISIBLE
@@ -128,7 +128,6 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
             override fun afterTextChanged(s: Editable?) {
                 activateButton()
             }
-
         })
 
         binding.edtWhen.addTextChangedListener(object:TextWatcher{
@@ -138,7 +137,7 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (binding.edtWhen.text.isNotEmpty()){
-                    binding.tvWhenStar.visibility = View.INVISIBLE
+                    binding.tvWhenStar.visibility = View.GONE
                 }
                 else{
                     binding.tvWhenStar.visibility = View.VISIBLE

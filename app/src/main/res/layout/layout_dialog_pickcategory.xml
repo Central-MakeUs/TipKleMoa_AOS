@@ -12,7 +12,7 @@
         android:fontFamily="@font/notosanscjkkr_bold"
         android:text="카테고리"
         android:includeFontPadding="false"
-        android:layout_marginVertical="28dp"
+        android:layout_marginVertical="24dp"
         android:layout_marginLeft="24dp"
         android:textColor="@color/black"
         android:textSize="18dp"

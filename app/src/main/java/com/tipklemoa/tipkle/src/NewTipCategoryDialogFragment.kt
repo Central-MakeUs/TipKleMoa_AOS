@@ -96,7 +96,7 @@ class NewTipCategoryDialogFragment: DialogFragment(){
         val deviceHeight = size!!.y
 
         params?.width = (deviceWidth*0.82).toInt()
-        params?.height = (deviceHeight*0.71).toInt()
+        params?.height = (deviceHeight*0.72).toInt()
 
         dialog?.window?.attributes = params as WindowManager.LayoutParams
     }

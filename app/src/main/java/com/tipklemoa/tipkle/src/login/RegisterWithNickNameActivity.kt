@@ -20,7 +20,7 @@ import com.tipklemoa.tipkle.src.login.model.KakaoRegisterResponse
 class RegisterWithNickNameActivity : BaseActivity<ActivityRegisterWithNickNameBinding>(ActivityRegisterWithNickNameBinding::inflate),
     LoginActivityView {
 
-    var is_agree_flag = false
+    private var is_agree_flag = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

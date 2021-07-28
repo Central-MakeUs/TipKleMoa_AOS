@@ -38,21 +38,21 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
             WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
 ////        프로젝트 해시키 알아볼때 쓰는 코드
-//        try {
-//            val info = packageManager.getPackageInfo(
-//                packageName, PackageManager.GET_SIGNATURES
-//            )
-//            for (signature in info.signatures) {
-//                val md: MessageDigest = MessageDigest.getInstance("SHA")
-//                md.update(signature.toByteArray())
-//                Log.e(
-//                    "MY KEY HASH:",
-//                    Base64.encodeToString(md.digest(), Base64.DEFAULT)
-//                )
-//            }
-//        } catch (e: PackageManager.NameNotFoundException) {
-//        } catch (e: NoSuchAlgorithmException) {
-//        }
+        try {
+            val info = packageManager.getPackageInfo(
+                packageName, PackageManager.GET_SIGNATURES
+            )
+            for (signature in info.signatures) {
+                val md: MessageDigest = MessageDigest.getInstance("SHA")
+                md.update(signature.toByteArray())
+                Log.e(
+                    "MY KEY HASH:",
+                    Base64.encodeToString(md.digest(), Base64.DEFAULT)
+                )
+            }
+        } catch (e: PackageManager.NameNotFoundException) {
+        } catch (e: NoSuchAlgorithmException) {
+        }
 
         //로그인 X -> 로그인 화면으로 리다이렉트
         val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
