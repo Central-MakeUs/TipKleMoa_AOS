@@ -104,7 +104,7 @@ class MainService(val view: MainView) {
 
     fun tryPostComment(postId:Int, postCommentRequest: PostCommentRequest){
         val mainRetrofitInterface = ApplicationClass.sRetrofit.create(MainRetrofitInterface::class.java)
-        mainRetrofitInterface.postComment(postId).enqueue(object: Callback<BaseResponse> {
+        mainRetrofitInterface.postComment(postId, postCommentRequest).enqueue(object: Callback<BaseResponse> {
             override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
                 view.onPostCommentSuccess(response.body() as BaseResponse)
             }

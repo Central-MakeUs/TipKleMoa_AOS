@@ -28,7 +28,7 @@
         android:fontFamily="@font/notosanscjkkr_bold"
         android:includeFontPadding="false"
         android:singleLine="false"
-        android:gravity="left|bottom"
+        android:gravity="left|top"
         android:layout_marginBottom="32dp"
         android:text="title"
         android:textColor="@color/black"

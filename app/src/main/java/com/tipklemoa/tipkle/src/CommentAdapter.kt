@@ -1,26 +1,20 @@
 package com.tipklemoa.tipkle.src
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.src.model.ResultComment
-import com.tipklemoa.tipkle.src.tipkle.model.ResultTipFolder
 
 class CommentAdapter(val context: Context, private val commentList: List<ResultComment>):
     RecyclerView.Adapter<CommentAdapter.ItemViewHolder>(){
-//    private var listener: OnItemClickListener? = null
+    private var listener: OnItemClickListener? = null
 
     inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tvCommentName = itemView.findViewById<TextView>(R.id.tvCommentName)
@@ -57,20 +51,20 @@ class CommentAdapter(val context: Context, private val commentList: List<ResultC
 
     override fun onBindViewHolder(holder: CommentAdapter.ItemViewHolder, position: Int) {
         holder.bind(commentList[position], context)
-//        holder.itemView.setOnClickListener {
-//            listener!!.onClicked(commentList[position].folderId)
-//        }
+        holder.itemView.findViewById<Button>(R.id.btnCommentEdit).setOnClickListener {
+            listener!!.onClicked(commentList[position].commentId, commentList[position].isAuthor)
+        }
     }
 
     override fun getItemCount(): Int {
         return commentList.size
     }
 
-//    fun setOnItemClickListener(listener:OnItemClickListener){
-//        this.listener = listener
-//    }
-//
-//    interface OnItemClickListener{
-//        fun onClicked(folderId:Int)
-//    }
+    fun setOnItemClickListener(listener:OnItemClickListener){
+        this.listener = listener
+    }
+
+    interface OnItemClickListener{
+        fun onClicked(commentId:Int, isAuthor:Char)
+    }
 }

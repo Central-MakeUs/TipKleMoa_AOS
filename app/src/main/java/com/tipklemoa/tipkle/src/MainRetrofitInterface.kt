@@ -39,7 +39,7 @@ interface MainRetrofitInterface {
 
     //댓글 등록
     @POST("/posts/{postId}/comments")
-    fun postComment(@Path("postId") postId:Int): Call<BaseResponse>
+    fun postComment(@Path("postId") postId:Int, @Body params:PostCommentRequest): Call<BaseResponse>
 
     //댓글 삭제
     @DELETE("/posts/comments/{commentId}")

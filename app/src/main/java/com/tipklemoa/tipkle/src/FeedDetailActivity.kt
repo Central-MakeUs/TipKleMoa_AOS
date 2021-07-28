@@ -2,19 +2,14 @@ package com.tipklemoa.tipkle.src
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import com.bumptech.glide.Glide
 import com.tipklemoa.tipkle.R
-import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseActivity
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.ActivityFeedDetailBinding
 import com.tipklemoa.tipkle.src.model.CommentResponse
 import com.tipklemoa.tipkle.src.model.DetailFeedResponse
 import com.tipklemoa.tipkle.src.model.NewTipResponse
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import android.widget.FrameLayout
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import android.util.DisplayMetrics
 
 class FeedDetailActivity : BaseActivity<ActivityFeedDetailBinding>(ActivityFeedDetailBinding::inflate), MainView {
@@ -74,7 +69,7 @@ class FeedDetailActivity : BaseActivity<ActivityFeedDetailBinding>(ActivityFeedD
             starDialog.arguments = bundle
             starDialog.show(supportFragmentManager, starDialog.tag)
         }
-// Use this to programmatically apply behavior attributes
+    // Use this to programmatically apply behavior attributes
         binding.btnDetailComent.setOnClickListener {
             val bundle = Bundle()
             bundle.putInt("postId", postId)
@@ -92,15 +87,16 @@ class FeedDetailActivity : BaseActivity<ActivityFeedDetailBinding>(ActivityFeedD
             false
         }
 
-        if (response.result.isAuthor=='Y'){
-            binding.btnDetailEdit.visibility = View.VISIBLE
-            binding.btnDetailEdit.setOnClickListener {
-                val bundle = Bundle()
-                bundle.putInt("postId", postId)
-                val editOrDeleteBottomSheet = EditOrDeleteBottomSheet()
-                editOrDeleteBottomSheet.arguments = bundle
-                editOrDeleteBottomSheet.show(supportFragmentManager, editOrDeleteBottomSheet.tag)
-            }
+        binding.btnDetailEdit.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putInt("postId", postId)
+
+            if (response.result.isAuthor=='Y') bundle.putString("what", "delete")
+            else bundle.putString("what", "report")
+
+            val editOrDeleteBottomSheet = DeleteOrReportBottomSheet()
+            editOrDeleteBottomSheet.arguments = bundle
+            editOrDeleteBottomSheet.show(supportFragmentManager, editOrDeleteBottomSheet.tag)
         }
 
         binding.tvCommentCount.text = response.result.commentCount.toString()

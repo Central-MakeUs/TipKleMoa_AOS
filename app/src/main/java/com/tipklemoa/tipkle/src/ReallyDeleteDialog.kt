@@ -27,6 +27,8 @@ class ReallyDeleteDialog : DialogFragment(), MainView {
     var size: Point? = null
     var color = 0
     var postId = 0
+    var commentId = 0
+    var what = ""
 
     lateinit var mLoadingDialog: LoadingDialog
     private lateinit var binding: LayoutDetailReallyDeleteDialogBinding
@@ -45,10 +47,26 @@ class ReallyDeleteDialog : DialogFragment(), MainView {
         binding = LayoutDetailReallyDeleteDialogBinding.inflate(inflater, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         postId = arguments?.getInt("postId")!!
+        commentId = arguments?.getInt("commentId")!!
+        what = arguments?.getString("what")!!
+
+        if (what=="delete"){
+            binding.tvDialogMent.text = "댓글을 정말 삭제하시겠습니까?"
+        }
 
         binding.btnDeleteConfirm.setOnClickListener {
-            showLoadingDialog(requireContext())
-            MainService(this).tryDeleteFeed(postId)
+            if (postId!=0){
+                this.dismiss()
+                showLoadingDialog(requireContext())
+                MainService(this).tryDeleteFeed(postId)
+            }
+            else if (commentId!=0) {
+                if (what=="delete"){
+                    this.dismiss()
+                    showLoadingDialog(requireContext())
+                    MainService(this).tryDeleteComment(commentId)
+                }
+            }
         }
 
         binding.btnDeleteCancel.setOnClickListener {
@@ -160,10 +178,13 @@ class ReallyDeleteDialog : DialogFragment(), MainView {
     }
 
     override fun onDeleteCommentSuccess(response: BaseResponse) {
-        TODO("Not yet implemented")
+        dismissLoadingDialog()
+        val bundle = bundleOf("deleteComment_ok" to "ok")
+        setFragmentResult("deleteComment", bundle)
     }
 
     override fun onDeleteCommentFailure(message: String) {
-        TODO("Not yet implemented")
+        dismissLoadingDialog()
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 }

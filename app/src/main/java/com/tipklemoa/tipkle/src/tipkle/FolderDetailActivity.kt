@@ -6,7 +6,7 @@ import android.view.View
 import com.tipklemoa.tipkle.config.BaseActivity
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.ActivityFolderDetailBinding
-import com.tipklemoa.tipkle.src.EditOrDeleteBottomSheet
+import com.tipklemoa.tipkle.src.DeleteOrReportBottomSheet
 import com.tipklemoa.tipkle.src.tipkle.model.FolderFeedResponse
 import com.tipklemoa.tipkle.src.tipkle.model.MakeFolderResponse
 import com.tipklemoa.tipkle.src.tipkle.model.TipFolderResponse
@@ -29,7 +29,7 @@ class FolderDetailActivity : BaseActivity<ActivityFolderDetailBinding>(ActivityF
         binding.btnFolderDelete.setOnClickListener {
             val bundle = Bundle()
             bundle.putInt("folderId", folderId)
-            val editOrDeleteBottomSheet = EditOrDeleteBottomSheet()
+            val editOrDeleteBottomSheet = DeleteOrReportBottomSheet()
             editOrDeleteBottomSheet.arguments = bundle
             editOrDeleteBottomSheet.show(supportFragmentManager, editOrDeleteBottomSheet.tag)
         }
