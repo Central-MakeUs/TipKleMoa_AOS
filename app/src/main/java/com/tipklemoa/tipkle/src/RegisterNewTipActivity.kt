@@ -407,4 +407,20 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
     override fun onDeleteCommentFailure(message: String) {
         TODO("Not yet implemented")
     }
+
+    override fun onPostFeedReportSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostFeedReportFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostCommentReportSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostCommentReportFailure(message: String) {
+        TODO("Not yet implemented")
+    }
 }

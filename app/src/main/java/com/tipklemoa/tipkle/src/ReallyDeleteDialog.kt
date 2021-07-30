@@ -62,7 +62,7 @@ class ReallyDeleteDialog : DialogFragment(), MainView {
             }
             else if (commentId!=0) {
                 if (what=="delete"){
-                    this.dismiss()
+                    //this.dismiss()
                     showLoadingDialog(requireContext())
                     MainService(this).tryDeleteComment(commentId)
                 }
@@ -181,10 +181,27 @@ class ReallyDeleteDialog : DialogFragment(), MainView {
         dismissLoadingDialog()
         val bundle = bundleOf("deleteComment_ok" to "ok")
         setFragmentResult("deleteComment", bundle)
+        dismiss()
     }
 
     override fun onDeleteCommentFailure(message: String) {
         dismissLoadingDialog()
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onPostFeedReportSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostFeedReportFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostCommentReportSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostCommentReportFailure(message: String) {
+        TODO("Not yet implemented")
     }
 }

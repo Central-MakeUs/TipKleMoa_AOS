@@ -1,54 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
     android:background="@color/white"
-    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/tvKeywordRankNum"
+        android:id="@+id/tvKeyword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="1"
-        android:textColor="@color/DBGray"
-        android:textSize="20dp"
-        android:textStyle="bold"
+        android:background="@drawable/ic_rectangle_mint"
+        android:fontFamily="@font/notosanscjkkr_medium"
+        android:paddingLeft="12dp"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imgSearchIcon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvRankKeyword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvRankKeyword"
-        app:srcCompat="@drawable/ic_icon_search_color" />
-
-    <TextView
-        android:id="@+id/tvRankKeyword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:fontFamily="@font/notosanscjkkr_regular"
-        android:textSize="16dp"
-        android:includeFontPadding="false"
-        android:layout_marginLeft="20dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/tvKeywordRankNum"
-        app:layout_constraintStart_toEndOf="@+id/tvKeywordRankNum"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/DBGray"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/btnKeywordX"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/ic_x"
+        android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvRankKeyword" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

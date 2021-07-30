@@ -9,6 +9,7 @@ import com.tipklemoa.tipkle.src.login.model.KakaoLoginResponse
 import com.tipklemoa.tipkle.src.login.model.KakaoRegisterResponse
 import com.tipklemoa.tipkle.src.model.DetailFeedResponse
 import com.tipklemoa.tipkle.src.model.NewTipResponse
+import com.tipklemoa.tipkle.src.mypage.model.KeywordResponse
 import com.tipklemoa.tipkle.src.mypage.model.MyPageResponse
 
 interface MyPageView {
@@ -20,13 +21,19 @@ interface MyPageView {
 
     fun onDeleteUserSuccess(response: BaseResponse)
     fun onDeleteUserFailure(message: String)
-//
-//    fun onGetHomePreviewFeedSuccess(response: HomePreviewFeedResponse)
-//    fun onGetHomePreviewFeedFailure(message: String)
-//
-//    fun onPatchCategorySuccess(response: BaseResponse)
-//    fun onPatchCategoryFailure(message: String)
-//
-//    fun onGetLookAroundFeedSuccess(response: LookAroundResponse)
-//    fun onGetLookAroundFeedFailure(message: String)
+
+    fun onPatchProfileImgSuccess(response: BaseResponse)
+    fun onPatchProfileImgFailure(message: String)
+
+    fun onPatchNickNameSuccess(response: BaseResponse)
+    fun onPatchNickNameFailure(message: String)
+
+    fun onGetKeywordSuccess(response: KeywordResponse)
+    fun onGetKeywordFailure(message: String)
+
+    fun onPostKeywordSuccess(response: BaseResponse)
+    fun onPostKeywordFailure(message: String)
+
+    fun onDeleteKeywordSuccess(response: BaseResponse)
+    fun onDeleteKeywordFailure(message: String)
 }

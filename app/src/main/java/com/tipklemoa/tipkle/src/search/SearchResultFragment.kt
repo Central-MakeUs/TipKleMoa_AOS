@@ -40,26 +40,26 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(
 
         Log.d("keyword", keyword)
 
-        binding.edtSearchResult.text = Editable.Factory.getInstance().newEditable(keyword)
+        binding.edtSearchResult.setText(keyword)
 
-        binding.edtSearchResult.addTextChangedListener(object :TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s.isNullOrEmpty()){
-                    binding.btnSearchDelete.visibility = View.INVISIBLE
-                }
-                else{
-                    binding.btnSearchDelete.visibility = View.VISIBLE
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-
-            }
-
-        })
+//        binding.edtSearchResult.addTextChangedListener(object :TextWatcher{
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//            }
+//
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                if (s.isNullOrEmpty()){
+//                    binding.btnSearchDelete.visibility = View.INVISIBLE
+//                }
+//                else{
+//                    binding.btnSearchDelete.visibility = View.VISIBLE
+//                }
+//            }
+//
+//            override fun afterTextChanged(s: Editable?) {
+//
+//            }
+//
+//        })
 
         binding.edtSearchResult.setOnKeyListener { v, keyCode, event ->
             if (event.action==KeyEvent.ACTION_DOWN && keyCode==KEYCODE_ENTER){
@@ -77,7 +77,7 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(
                     order,
                     keyword, page, 5)
             }
-            true
+            false
         }
 
         binding.btnSearchDelete.setOnClickListener {

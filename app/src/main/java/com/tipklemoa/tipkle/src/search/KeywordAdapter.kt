@@ -7,15 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.tipklemoa.tipkle.R
-import com.tipklemoa.tipkle.src.home.model.ResultHomePreviewFeed
-import com.bumptech.glide.request.RequestOptions
-import com.tipklemoa.tipkle.src.NewTipPicAdapter
 import com.tipklemoa.tipkle.src.search.model.ResultKeyword
-import org.w3c.dom.Text
 
 class KeywordAdapter(val context: Context, val rankNumList:List<Int>?=null, private val keywordList: List<ResultKeyword>):
     RecyclerView.Adapter<KeywordAdapter.ItemViewHolder>(){
@@ -51,7 +44,7 @@ class KeywordAdapter(val context: Context, val rankNumList:List<Int>?=null, priv
 
         viewType: Int
     ): KeywordAdapter.ItemViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.layout_keyword_item, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.layout_search_item, parent, false)
         return ItemViewHolder(view)
     }
 

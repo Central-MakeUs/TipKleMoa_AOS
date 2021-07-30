@@ -44,4 +44,11 @@ interface MainRetrofitInterface {
     //댓글 삭제
     @DELETE("/posts/comments/{commentId}")
     fun deleteComment(@Path("commentId") commentId:Int): Call<BaseResponse>
+
+    //피드 삭제
+    @POST("/posts/{postId}/reports")
+    fun postReportFeed(@Path("postId") postId:Int, @Body params:PostReportFeedRequest): Call<BaseResponse>
+
+    @POST("/posts/comments/{commentId}/reports")
+    fun postReportComment(@Path("commentId") commentId:Int, @Body params:PostReportFeedRequest): Call<BaseResponse>
 }

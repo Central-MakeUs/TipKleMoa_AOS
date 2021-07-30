@@ -2,7 +2,7 @@ package com.tipklemoa.tipkle.src.mypage
 
 import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseResponse
-import com.tipklemoa.tipkle.src.mypage.model.MyPageResponse
+import com.tipklemoa.tipkle.src.mypage.model.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -49,43 +49,69 @@ class MyPageService(val view: MyPageView) {
         })
     }
 
-//    fun tryLookAroundFeed(categoryName:String, order:String, search:String?=null){
-//        val homeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
-//        homeRetrofitInterface.getLookAroundFeed(categoryName, order, search).enqueue(object: Callback<LookAroundResponse> {
-//            override fun onResponse(call: Call<LookAroundResponse>, response: Response<LookAroundResponse>) {
-//                view.onGetLookAroundFeedSuccess(response.body() as LookAroundResponse)
-//            }
-//
-//            override fun onFailure(call: Call<LookAroundResponse>, t: Throwable) {
-//                view.onGetLookAroundFeedFailure(t.message ?: "통신 오류")
-//            }
-//        })
-//    }
-//
-//    fun tryPatchCategory(patchCategoryRequest: PatchCategoryRequest){
-//       val loginRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
-//       loginRetrofitInterface.patchCategory(patchCategoryRequest).enqueue(object: Callback<BaseResponse> {
-//           override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
-//               view.onPatchCategorySuccess(response.body() as BaseResponse)
-//           }
-//
-//           override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
-//               view.onPatchCategoryFailure(t.message ?: "통신 오류")
-//           }
-//
-//       })
-//    }
-//
-//    fun tryGetPickedCategoryList(){
-//        val homeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
-//    homeRetrofitInterface.getPickedCategoryList().enqueue(object: Callback<CategoryListResponse> {
-//            override fun onResponse(call: Call<CategoryListResponse>, response: Response<CategoryListResponse>) {
-//                view.onGetPickedCategoryListSuccess(response.body() as CategoryListResponse)
-//            }
-//
-//            override fun onFailure(call: Call<CategoryListResponse>, t: Throwable) {
-//                view.onGetPickedCategoryListFailure(t.message ?: "통신 오류")
-//            }
-//        })
-//    }
+    fun tryPatchProfile(patchProfileRequest: PostEditProfileRequest){
+        val myPageRetrofitInterface = ApplicationClass.sRetrofit.create(MyPageRetrofitInterface::class.java)
+        myPageRetrofitInterface.patchProfileImage(patchProfileRequest).enqueue(object: Callback<BaseResponse> {
+            override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
+                view.onPatchProfileImgSuccess(response.body() as BaseResponse)
+            }
+
+            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
+                view.onPatchProfileImgFailure(t.message ?: "통신 오류")
+            }
+
+        })
+    }
+    fun tryPatchNickName(patchNickNameRequest: PostEditNickNameRequest){
+       val myPageRetrofitInterface = ApplicationClass.sRetrofit.create(MyPageRetrofitInterface::class.java)
+    myPageRetrofitInterface.patchUserNickName(patchNickNameRequest).enqueue(object: Callback<BaseResponse> {
+           override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
+               view.onPatchNickNameSuccess(response.body() as BaseResponse)
+           }
+
+           override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
+               view.onPatchNickNameFailure(t.message ?: "통신 오류")
+           }
+
+       })
+    }
+
+    fun tryGetKeywords(){
+        val myPageRetrofitInterface = ApplicationClass.sRetrofit.create(MyPageRetrofitInterface::class.java)
+        myPageRetrofitInterface.getKeywords().enqueue(object: Callback<KeywordResponse> {
+            override fun onResponse(call: Call<KeywordResponse>, response: Response<KeywordResponse>) {
+                view.onGetKeywordSuccess(response.body() as KeywordResponse)
+            }
+
+            override fun onFailure(call: Call<KeywordResponse>, t: Throwable) {
+                view.onGetKeywordFailure(t.message ?: "통신 오류")
+            }
+        })
+    }
+
+    fun tryPostKeyword(postKeywordRequest : PostKeywordRequest){
+        val myPageRetrofitInterface = ApplicationClass.sRetrofit.create(MyPageRetrofitInterface::class.java)
+        myPageRetrofitInterface.postKeyword(postKeywordRequest).enqueue(object: Callback<BaseResponse> {
+            override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
+                view.onPostKeywordSuccess(response.body() as BaseResponse)
+            }
+
+            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
+                view.onPostKeywordFailure(t.message ?: "통신 오류")
+            }
+        })
+    }
+
+    fun tryDeleteKeyword(keywordId:Int){
+        val myPageRetrofitInterface = ApplicationClass.sRetrofit.create(MyPageRetrofitInterface::class.java)
+        myPageRetrofitInterface.deleteKeyword(keywordId).enqueue(object: Callback<BaseResponse> {
+            override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
+                view.onDeleteKeywordSuccess(response.body() as BaseResponse)
+            }
+
+            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
+                view.onDeleteKeywordFailure(t.message ?: "통신 오류")
+            }
+        })
+    }
 }

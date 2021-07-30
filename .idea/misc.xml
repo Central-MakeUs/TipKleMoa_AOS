@@ -39,6 +39,7 @@
         <entry key="app/src/main/res/drawable/ic_icon_tipkle_inactive.xml" value="0.20104166666666667" />
         <entry key="app/src/main/res/drawable/ic_icon_write.xml" value="0.1921875" />
         <entry key="app/src/main/res/drawable/ic_icon_x.xml" value="0.1734375" />
+        <entry key="app/src/main/res/drawable/ic_img_profile.xml" value="0.15625" />
         <entry key="app/src/main/res/drawable/ic_kakao_login.xml" value="0.1984375" />
         <entry key="app/src/main/res/drawable/ic_search_box.xml" value="0.24635416666666668" />
         <entry key="app/src/main/res/drawable/ic_search_icon.xml" value="0.24635416666666668" />
@@ -46,26 +47,29 @@
         <entry key="app/src/main/res/drawable/ic_tab_indicator.xml" value="0.18541666666666667" />
         <entry key="app/src/main/res/drawable/ic_x.xml" value="0.1734375" />
         <entry key="app/src/main/res/layout/activity_choose_category.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_feed_detail.xml" value="0.45" />
         <entry key="app/src/main/res/layout/activity_folder_detail.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_keyword.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/layout/activity_make_folder.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_register_new_tip.xml" value="0.45" />
         <entry key="app/src/main/res/layout/activity_register_with_nick_name.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_report_user.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_select_pic.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.125" />
         <entry key="app/src/main/res/layout/activity_view_original_image.xml" value="0.25740337233838717" />
         <entry key="app/src/main/res/layout/dialog_loading.xml" value="0.153125" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_look_around.xml" value="0.625" />
-        <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.4028436018957346" />
+        <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.3676300578034682" />
         <entry key="app/src/main/res/layout/fragment_picked_tip.xml" value="0.1578125" />
         <entry key="app/src/main/res/layout/fragment_popular_keyword.xml" value="0.1609375" />
         <entry key="app/src/main/res/layout/fragment_recent_keyword.xml" value="0.1609375" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/fragment_search_result.xml" value="0.36268656716417913" />
+        <entry key="app/src/main/res/layout/fragment_search_result.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_tipkle.xml" value="0.375" />
         <entry key="app/src/main/res/layout/fragment_today_tip.xml" value="0.1578125" />
         <entry key="app/src/main/res/layout/home_bottomsheet_edit_category.xml" value="0.13958333333333334" />
@@ -78,14 +82,17 @@
         <entry key="app/src/main/res/layout/layout_detail_bottomsheet.xml" value="0.375" />
         <entry key="app/src/main/res/layout/layout_detail_feed_viewpager.xml" value="0.19270833333333334" />
         <entry key="app/src/main/res/layout/layout_detail_really_delete_dialog.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/layout_detail_really_report_dialog.xml" value="0.335" />
         <entry key="app/src/main/res/layout/layout_dialog_pickcategory.xml" value="0.25" />
         <entry key="app/src/main/res/layout/layout_folder_feed.xml" value="0.335" />
         <entry key="app/src/main/res/layout/layout_folder_preview.xml" value="0.5" />
         <entry key="app/src/main/res/layout/layout_gallery_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/layout_home_lookaround.xml" value="0.45" />
         <entry key="app/src/main/res/layout/layout_home_preview_feed.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/layout_keyword_item.xml" value="0.75" />
+        <entry key="app/src/main/res/layout/layout_keyword_dialog.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/layout_keyword_item.xml" value="0.45145631067961167" />
         <entry key="app/src/main/res/layout/layout_lookaround_image.xml" value="0.15052083333333333" />
+        <entry key="app/src/main/res/layout/layout_mypage_bottomsheet.xml" value="0.335" />
         <entry key="app/src/main/res/layout/layout_newtip_dialog.xml" value="0.335" />
         <entry key="app/src/main/res/layout/layout_newtip_picitem.xml" value="0.375" />
         <entry key="app/src/main/res/layout/layout_star_dialog.xml" value="0.375" />

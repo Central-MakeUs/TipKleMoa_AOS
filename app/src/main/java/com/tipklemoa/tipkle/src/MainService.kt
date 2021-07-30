@@ -127,4 +127,31 @@ class MainService(val view: MainView) {
             }
         })
     }
+
+
+    fun tryPostReportFeed(postId:Int, postReportFeedRequest: PostReportFeedRequest){
+        val mainRetrofitInterface = ApplicationClass.sRetrofit.create(MainRetrofitInterface::class.java)
+        mainRetrofitInterface.postReportFeed(postId, postReportFeedRequest).enqueue(object: Callback<BaseResponse> {
+            override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
+                view.onPostFeedReportSuccess(response.body() as BaseResponse)
+            }
+
+            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
+                view.onPostFeedReportFailure(t.message ?: "통신 오류")
+            }
+        })
+    }
+
+    fun tryPostReportComment(commentId:Int, postReportFeedRequest: PostReportFeedRequest){
+        val mainRetrofitInterface = ApplicationClass.sRetrofit.create(MainRetrofitInterface::class.java)
+        mainRetrofitInterface.postReportComment(commentId, postReportFeedRequest).enqueue(object: Callback<BaseResponse> {
+            override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
+                view.onPostCommentReportSuccess(response.body() as BaseResponse)
+            }
+
+            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
+                view.onPostCommentReportFailure(t.message ?: "통신 오류")
+            }
+        })
+    }
 }

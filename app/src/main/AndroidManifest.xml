@@ -8,7 +8,9 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <uses-feature android:name="android.hardware.camera2" android:required="false"/>
+    <uses-feature
+        android:name="android.hardware.camera2"
+        android:required="false" />
 
     <application
         android:name=".config.ApplicationClass"
@@ -20,6 +22,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TipKle">
+        <activity
+            android:name=".src.mypage.KeywordActivity"
+            android:exported="true" />
+        <activity
+            android:name=".src.ReportUserActivity"
+            android:exported="true" />
+        <activity
+            android:name=".src.mypage.EditProfileActivity"
+            android:exported="true" />
         <activity
             android:name=".src.ViewOriginalImageActivity"
             android:exported="true" />

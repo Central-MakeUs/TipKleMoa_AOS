@@ -21,6 +21,7 @@ import com.tipklemoa.tipkle.databinding.LayoutDetailReallyDeleteDialogBinding
 import com.tipklemoa.tipkle.src.login.LoginActivity
 import com.tipklemoa.tipkle.src.model.DetailFeedResponse
 import com.tipklemoa.tipkle.src.model.NewTipResponse
+import com.tipklemoa.tipkle.src.mypage.model.KeywordResponse
 import com.tipklemoa.tipkle.src.mypage.model.MyPageResponse
 import com.tipklemoa.tipkle.util.LoadingDialog
 
@@ -128,5 +129,45 @@ class ReallyWithdrawDialog : DialogFragment(), MyPageView {
     override fun onDeleteUserFailure(message: String) {
         dismissLoadingDialog()
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onPatchProfileImgSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPatchProfileImgFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPatchNickNameSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPatchNickNameFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetKeywordSuccess(response: KeywordResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetKeywordFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostKeywordSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostKeywordFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteKeywordSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteKeywordFailure(message: String) {
+        TODO("Not yet implemented")
     }
 }

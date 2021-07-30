@@ -39,4 +39,9 @@ interface MainView {
     fun onDeleteCommentSuccess(response: BaseResponse)
     fun onDeleteCommentFailure(message: String)
 
+    fun onPostFeedReportSuccess(response: BaseResponse)
+    fun onPostFeedReportFailure(message: String)
+
+    fun onPostCommentReportSuccess(response: BaseResponse)
+    fun onPostCommentReportFailure(message: String)
 }

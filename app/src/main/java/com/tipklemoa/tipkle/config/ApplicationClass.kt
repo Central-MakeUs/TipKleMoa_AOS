@@ -12,10 +12,10 @@ import java.util.concurrent.TimeUnit
 // 앱이 실행될때 1번만 실행이 됩니다.
 // 전역변수, 앱이 실행될 동안 한번만 유지되면 되는 객체들을 생성하는 코드 작성
 class ApplicationClass : Application() {
-    val API_URL = "https://dev.tipkle.shop/"
+    //val API_URL = "https://dev.tipkle.shop/"
 
     // 테스트 서버 주소
-//    val API_URL = "https://tipkle.shop/"
+    val API_URL = "https://tipkle.shop/"
 
     // 실 서버 주소
     // val API_URL = "http://api.test.com/"
