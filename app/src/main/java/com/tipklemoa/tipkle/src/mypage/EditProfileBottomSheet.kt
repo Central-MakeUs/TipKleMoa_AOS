@@ -48,14 +48,13 @@ class EditProfileBottomSheet: BottomSheetDialogFragment() {
     private lateinit var binding: LayoutMypageBottomsheetBinding
     lateinit var mLoadingDialog: LoadingDialog
 
-    private val REQUEST_TAKE_PHOTO = 1
-    private val Gallery = 1
-    var uri:Uri?=null
-
-    private var currentPhotoPath: String?=null
-    private var timeStamp:String?=null
-    private var imageFileName:String?=null //현재 파일 이름
-    var storage: FirebaseStorage? = null //파이어베이스
+    private val REQUEST_TAKE_PHOTO = 1 //안겹치게 잘 확인하자.. 바보조이^^
+    private val Gallery = 2
+    var uri: Uri? = null
+    var file: File? = null
+    private var currentPhotoPath: String? = null
+    private var timeStamp: String? = null
+    private var imageFileName: String? = null //현재 파일 이름
 
     private var takePicListener: PermissionListener = object : PermissionListener {
         override fun onPermissionGranted() {
@@ -122,7 +121,7 @@ class EditProfileBottomSheet: BottomSheetDialogFragment() {
     //   갤러리 띄우기
     private fun loadImage() {
         Log.d("확인", "이미지 불러오는 중입니다.")
-        var intent = Intent()
+        val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
 
@@ -132,35 +131,35 @@ class EditProfileBottomSheet: BottomSheetDialogFragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == REQUEST_TAKE_PHOTO && resultCode == AppCompatActivity.RESULT_OK){
+        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
 //         사진추가
-             val file = File(currentPhotoPath)
-            uri = Uri.fromFile(file)
-        }
-        else if (requestCode == Gallery){
-            if (resultCode == RESULT_OK){
-                uri=data?.data
+            if (currentPhotoPath != null) {
+                file = File(currentPhotoPath)
+                uri = Uri.fromFile(file)
                 Log.d("확인", uri.toString())
 
-                try{
-                    Log.d("확인", uri.toString())
-                    val bitmap: Bitmap =MediaStore.Images.Media.getBitmap(context?.contentResolver, uri)
-                    Log.d("확인", "선택한 사진은$bitmap")
-                }catch (e:Exception){
-                    Log.d("확인","이미지 업로드 오류"+e.toString())
-                }
-            }
-            else{
-                Log.d("확인", "이미지 가져오기 오류")
             }
         }
+        else if (requestCode == Gallery && resultCode==RESULT_OK) {
+            uri = data?.data
 
-//        val bundle = bundleOf("takePic" to "ok")
-//        Log.d("uri", uri.toString())
-//        bundle.putString("uri", uri.toString())
-//        setFragmentResult("takePic", bundle)
-//        this.dismiss()
+            try {
+                Log.d("확인", uri.toString())
+                //val bitmap: Bitmap =MediaStore.Images.Media.getBitmap(context?.contentResolver, uri)
+                //Log.d("확인", "선택한 사진은$bitmap")
+            } catch (e: Exception) {
+                Log.d("확인", "이미지 업로드 오류" + e.toString())
+            }
+        } else {
+            Log.d("확인", "이미지 가져오기 오류")
+        }
+
+        val bundle = bundleOf("takePic" to "ok")
+        bundle.putString("uri", uri.toString())
+        setFragmentResult("takePic", bundle)
+        this.dismiss()
     }
+
 
     // 사진 찍는 인텐트
     private fun takePictureIntent() {

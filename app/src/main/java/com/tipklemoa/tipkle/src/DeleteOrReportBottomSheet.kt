@@ -1,6 +1,7 @@
 package com.tipklemoa.tipkle.src
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.config.BaseResponse
@@ -60,12 +62,18 @@ class DeleteOrReportBottomSheet: BottomSheetDialogFragment(), TipkleFragmentView
 
         binding.constraintLayout2.setOnClickListener {
             if (postId!=0){
-                val dialog = ReallyDeleteDialog()
-                val bundle = Bundle()
-                bundle.putInt("postId", postId)
-                dialog.arguments = bundle
-                dialog.show(parentFragmentManager, dialog.tag)
-                this.dismiss()
+                if (what=="delete"){
+                    val dialog = ReallyDeleteDialog()
+                    val bundle = Bundle()
+                    bundle.putInt("postId", postId)
+                    dialog.arguments = bundle
+                    dialog.show(parentFragmentManager, dialog.tag)
+                    this.dismiss()
+                }
+                else if (what=="report"){ //신
+                    val intent = Intent(requireContext(), ReportUserActivity::class.java)
+                    startActivity(intent)
+                }
             }
             else if (folderId!=0){
                 showLoadingDialog(requireContext())
@@ -82,6 +90,19 @@ class DeleteOrReportBottomSheet: BottomSheetDialogFragment(), TipkleFragmentView
                     dialog.show(parentFragmentManager, dialog.tag)
                     this.dismiss()
                 }
+                else if (what=="report"){ //신
+                    val intent = Intent(requireContext(), ReportUserActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+        }
+
+        setFragmentResultListener("report") { requestKey, bundle ->
+            // We use a String here, but any type that can be put in a Bundle is supported
+            val result = bundle.getString("report_ok")
+            if (result=="ok"){
+                val bundle = bundleOf("report_ok" to "ok")
+                setFragmentResult("report", bundle)
             }
         }
 

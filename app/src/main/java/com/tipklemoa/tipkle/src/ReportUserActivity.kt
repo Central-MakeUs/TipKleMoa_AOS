@@ -1,10 +1,123 @@
 package com.tipklemoa.tipkle.src
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.tipklemoa.tipkle.config.BaseActivity
+import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.ActivityReportUserBinding
+import com.tipklemoa.tipkle.src.model.CommentResponse
+import com.tipklemoa.tipkle.src.model.DetailFeedResponse
+import com.tipklemoa.tipkle.src.model.NewTipResponse
 
-class ReportUserActivity : BaseActivity<ActivityReportUserBinding>(ActivityReportUserBinding::inflate){
+class ReportUserActivity : BaseActivity<ActivityReportUserBinding>(ActivityReportUserBinding::inflate), MainView {
+
+    var postId = 0
+    var commentId = 0
+    var what = ""
+    var reason = ""
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        postId = intent.getIntExtra("postId", 0)
+        commentId = intent.getIntExtra("commentId", 0)
+        what = intent.getStringExtra("what").toString()
+
+        if (postId!=0){
+            binding.tvReportWhat.text = "게시글 신고"
+            binding.tvReportWhatReason.text = "게시글을 신고하는 이유를 선택해주세요."
+        }
+        else if (commentId!=0){
+            binding.tvReportWhat.text = "댓글 신고"
+            binding.tvReportWhatReason.text = "댓을 신고하는 이유를 선택해주세요."
+        }
+
+    }
+    override fun onGetFeedDetailSuccess(response: DetailFeedResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetFeedDetailFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteFeedSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteFeedFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostSuccess(response: NewTipResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostBookMarkSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostBookMarkFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteBookmarkSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteBookmarkFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostStarSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostStarFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetCommentSuccess(response: CommentResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetCommentFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostCommentSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostCommentFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteCommentSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteCommentFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostFeedReportSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostFeedReportFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostCommentReportSuccess(response: BaseResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostCommentReportFailure(message: String) {
+        TODO("Not yet implemented")
+    }
 
 }

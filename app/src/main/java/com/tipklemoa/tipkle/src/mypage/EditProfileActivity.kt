@@ -1,27 +1,55 @@
 package com.tipklemoa.tipkle.src.mypage
 
 import android.content.res.ColorStateList
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import com.bumptech.glide.Glide
+import com.google.firebase.storage.FirebaseStorage
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.config.BaseActivity
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.ActivityEditProfileBinding
 import com.tipklemoa.tipkle.src.DeleteOrReportBottomSheet
 import com.tipklemoa.tipkle.src.MainService
+import com.tipklemoa.tipkle.src.model.PostNewTipRequest
 import com.tipklemoa.tipkle.src.mypage.model.KeywordResponse
 import com.tipklemoa.tipkle.src.mypage.model.MyPageResponse
 import com.tipklemoa.tipkle.src.mypage.model.PostEditNickNameRequest
+import com.tipklemoa.tipkle.src.mypage.model.PostEditProfileRequest
+import java.text.SimpleDateFormat
+import java.util.*
 
 class EditProfileActivity : BaseActivity<ActivityEditProfileBinding>(ActivityEditProfileBinding::inflate), MyPageView{
+    var storage: FirebaseStorage? = null //파이어베이스하
+    var imageUri:String?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.edtNickNameEdit.setText(intent.getStringExtra("nickName"))
+        imageUri = intent.getStringExtra("profileImg")
+        storage = FirebaseStorage.getInstance()
+
+        Glide
+            .with(this)
+            .load(intent.getStringExtra("profileImg"))
+            .circleCrop()
+            .into(binding.imgEditProfile) //멤버 프로필
+
+        if (binding.edtNickNameEdit.text.isNotEmpty()){
+            binding.tvCompleteEditProfile.isEnabled = true
+            binding.tvCompleteEditProfile.setTextColor(resources.getColor(
+                R.color.black))
+        }
+        else{
+            binding.tvCompleteEditProfile.isEnabled = false
+            binding.tvCompleteEditProfile.setTextColor(resources.getColor(
+                R.color.DBGray))
+        }
 
         binding.edtNickNameEdit.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -29,33 +57,30 @@ class EditProfileActivity : BaseActivity<ActivityEditProfileBinding>(ActivityEdi
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                binding.edtNickNameEdit.backgroundTintList = ColorStateList.valueOf(resources.getColor(
-                    R.color.mint))
-                binding.tvProfileAlert.text = "프로필 사진과 닉네임을 입력해주세요."
-                binding.tvProfileAlert.setTextColor(resources.getColor(
-                    R.color.DBGray))
-            }
-
-            override fun afterTextChanged(s: Editable?) {
                 if (binding.edtNickNameEdit.text.isNullOrEmpty()) {
                     binding.tvProfileAlert.text = "닉네임을 입력해주세요!"
                     binding.tvProfileAlert.setTextColor(resources.getColor(
                         R.color.textRed))
                     binding.edtNickNameEdit.backgroundTintList = ColorStateList.valueOf(resources.getColor(
                         R.color.textRed))
-                    binding.tvProfileAlert.text = "닉네임을 입력해주세요!"
                     binding.tvCompleteEditProfile.isEnabled = false
                     binding.tvCompleteEditProfile.setTextColor(resources.getColor(
                         R.color.DBGray))
                 }
                 else{
                     binding.edtNickNameEdit.backgroundTintList = ColorStateList.valueOf(resources.getColor(
-                        R.color.DBGray))
+                        R.color.mint))
                     binding.tvProfileAlert.text = "프로필 사진과 닉네임을 입력해주세요."
+                    binding.tvProfileAlert.setTextColor(resources.getColor(
+                        R.color.DBGray))
                     binding.tvCompleteEditProfile.isEnabled = true
                     binding.tvCompleteEditProfile.setTextColor(resources.getColor(
                         R.color.black))
                 }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
             }
 
         })
@@ -69,30 +94,69 @@ class EditProfileActivity : BaseActivity<ActivityEditProfileBinding>(ActivityEdi
             editProfileBottomSheet.show(supportFragmentManager, editProfileBottomSheet.tag)
         }
 
-        binding.tvCompleteEditProfile.setOnClickListener {
-            if (binding.edtNickNameEdit.text.isNotEmpty()){
-                showLoadingDialog(this)
-                var patchNickNameRequest = PostEditNickNameRequest(binding.edtNickNameEdit.text.toString().trim())
-                MyPageService(this).tryPatchNickName(patchNickNameRequest)
-            }
-        }
-
         supportFragmentManager
             .setFragmentResultListener("takePic", this) { requestKey, bundle ->
                 // We use a String here, but any type that can be put in a Bundle is supported
                 val result = bundle.getString("takePic")
+                imageUri = bundle.getString("uri")
                 // Do something with the result
                 if (result=="ok"){
                     Glide
                         .with(this)
-                        .load(bundle.getString("uri"))
+                        .load(imageUri)
                         .circleCrop()
                         .error(R.drawable.ic_img_profile)
                         .into(binding.imgEditProfile)
                 }
             }
+
+        binding.tvCompleteEditProfile.setOnClickListener {
+            if (binding.edtNickNameEdit.text.isNotEmpty() && intent.getStringExtra("profileImg")!=imageUri){ //프사 바꿨을 때
+                Log.d("확인", "프사바꿈")
+                val patchNickNameRequest = PostEditNickNameRequest(binding.edtNickNameEdit.text.toString().trim())
+                if (imageUri!=null){
+                    Log.d("확인", "프사바꿈")
+                    imageUploadFirebase()
+                } else{ //프사없음
+                    showLoadingDialog(this)
+                    val profileRequest = PostEditProfileRequest()
+                    MyPageService(this).tryPatchProfile(profileRequest)
+                }
+                MyPageService(this).tryPatchNickName(patchNickNameRequest)
+            }
+            else if (binding.edtNickNameEdit.text.isNotEmpty() && intent.getStringExtra("profileImg")==imageUri) { //프사 안바꿨을때
+
+                val patchNickNameRequest = PostEditNickNameRequest(binding.edtNickNameEdit.text.toString().trim())
+                MyPageService(this).tryPatchNickName(patchNickNameRequest)
+            }
+        }
+
+//        binding.tvCompleteEditProfile.setOnClickListener {
+//            if (uri!=null) imageUploadFirebase()
+//            else {
+//                showLoadingDialog(this)
+//                val postProfileRequest = PostEditProfileRequest(null)
+//                MyPageService(this).tryPatchProfile(postProfileRequest)
+//            }
+//        }
     }
 
+    private fun imageUploadFirebase(){
+        showLoadingDialog(this)
+
+        val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val imageFile = "Image_"+timestamp+"_.jpg"
+        val storageRef = storage?.reference?.child("media")?.child(imageFile)
+
+        storageRef?.putFile(Uri.parse(imageUri))?.addOnSuccessListener {
+                Log.d("photo", "파이어베이스 업로드완료")
+                storageRef.downloadUrl.addOnSuccessListener { uri->
+                    imageUri = uri.toString()
+                    val postProfileRequest = PostEditProfileRequest(imageUri)
+                    MyPageService(this).tryPatchProfile(postProfileRequest)
+                }
+            }
+        }
 
     override fun onGetMyPageSuccess(response: MyPageResponse) {
         TODO("Not yet implemented")
@@ -119,21 +183,20 @@ class EditProfileActivity : BaseActivity<ActivityEditProfileBinding>(ActivityEdi
     }
 
     override fun onPatchProfileImgSuccess(response: BaseResponse) {
-        TODO("Not yet implemented")
+        dismissLoadingDialog()
+        showCustomToast("프로필 사진 수정 완료")
     }
 
     override fun onPatchProfileImgFailure(message: String) {
-        TODO("Not yet implemented")
+        dismissLoadingDialog()
+        showCustomToast(message)
     }
 
     override fun onPatchNickNameSuccess(response: BaseResponse) {
-        dismissLoadingDialog()
-        showCustomToast("닉네임 수정 완료!")
-        finish()
+        showCustomToast("닉네임 수정 완료")
     }
 
     override fun onPatchNickNameFailure(message: String) {
-        dismissLoadingDialog()
         showCustomToast(message)
     }
 

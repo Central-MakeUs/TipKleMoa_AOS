@@ -21,6 +21,8 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
     R.layout.fragment_mypage
 ), MyPageView{
 
+    var profileImg:String?=null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -37,6 +39,8 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
         binding.layoutNickname.setOnClickListener {
             val intent = Intent(requireContext(), EditProfileActivity::class.java)
             intent.putExtra("nickName", binding.tvMyPageNickName.text.toString())
+            intent.putExtra("profileImg", profileImg)
+
             startActivity(intent)
         }
 
@@ -58,13 +62,13 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
         dismissLoadingDialog()
         binding.tvLevelName.text = "Lv. "+response.result.levelName
 
-        var requestOptions = RequestOptions()
-        requestOptions = requestOptions.transform(CenterCrop(), RoundedCorners(8))
+        profileImg = response.result.profileImgUrl
 
         Glide
             .with(this)
             .load(response.result.profileImgUrl)
-            .apply(requestOptions)
+            .circleCrop()
+            .error(R.drawable.ic_img_profile)
             .into(binding.imgMyPageProfile) //멤버 프로필
 
         binding.tvMyPageNickName.text = response.result.nickName //닉네임
@@ -74,57 +78,63 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
         var levelImage = 0
 
         if (response.result.level==1){
-            if (response.result.levelbar==0){
-                levelImage = R.drawable.ic_lv1_0_
-            }
-            else if (response.result.levelbar==1){
-                levelImage = R.drawable.ic_lv1_20_
-            }
-            else if (response.result.levelbar==2){
-                levelImage = R.drawable.ic_lv1_40_
-            }
-            else if (response.result.levelbar==3){
-                levelImage = R.drawable.ic_lv1_60_
-            }
-            else if (response.result.levelbar==4){
-                levelImage = R.drawable.ic_lv1_80_
+            when (response.result.levelbar) {
+                0 -> {
+                    levelImage = R.drawable.ic_lv1_0_
+                }
+                1 -> {
+                    levelImage = R.drawable.ic_lv1_20_
+                }
+                2 -> {
+                    levelImage = R.drawable.ic_lv1_40_
+                }
+                3 -> {
+                    levelImage = R.drawable.ic_lv1_60_
+                }
+                4 -> {
+                    levelImage = R.drawable.ic_lv1_80_
+                }
             }
         }
         else if (response.result.level==2){
-            if (response.result.levelbar==0){
-                levelImage = R.drawable.ic_lv2_0_
-            }
-            else if (response.result.levelbar==1){
-                levelImage = R.drawable.ic_lv2_20_
-            }
-            else if (response.result.levelbar==2){
-                levelImage = R.drawable.ic_lv2_40_
-            }
-            else if (response.result.levelbar==3){
-                levelImage = R.drawable.ic_lv2_60_
-            }
-            else if (response.result.levelbar==4){
-                levelImage = R.drawable.ic_lv2_80_
+            when (response.result.levelbar) {
+                0 -> {
+                    levelImage = R.drawable.ic_lv2_0_
+                }
+                1 -> {
+                    levelImage = R.drawable.ic_lv2_20_
+                }
+                2 -> {
+                    levelImage = R.drawable.ic_lv2_40_
+                }
+                3 -> {
+                    levelImage = R.drawable.ic_lv2_60_
+                }
+                4 -> {
+                    levelImage = R.drawable.ic_lv2_80_
+                }
             }
         }
         else if (response.result.level==3){
-            if (response.result.levelbar==0){
-                levelImage = R.drawable.ic_lv3_0_
-            }
-            else if (response.result.levelbar==1){
-                levelImage = R.drawable.ic_lv3_20_
-            }
-            else if (response.result.levelbar==2){
-                levelImage = R.drawable.ic_lv3_40_
-            }
-            else if (response.result.levelbar==3){
-                levelImage = R.drawable.ic_lv3_60_
-            }
-            else if (response.result.levelbar==4){
-                levelImage = R.drawable.ic_lv3_80_
-            }
-            else if (response.result.levelbar==5){
-                levelImage = R.drawable.ic_lv3_100_
+            when (response.result.levelbar) {
+                0 -> {
+                    levelImage = R.drawable.ic_lv3_0_
+                }
+                1 -> {
+                    levelImage = R.drawable.ic_lv3_20_
+                }
+                2 -> {
+                    levelImage = R.drawable.ic_lv3_40_
+                }
+                3 -> {
+                    levelImage = R.drawable.ic_lv3_60_
+                }
+                4 -> {
+                    levelImage = R.drawable.ic_lv3_80_
+                }
+                5 -> {
+                    levelImage = R.drawable.ic_lv3_100_
+                }
             }
         }
         Glide
