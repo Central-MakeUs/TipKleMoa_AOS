@@ -63,8 +63,7 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding>(ActivityKeywordBind
 
     override fun onGetKeywordSuccess(response: KeywordResponse) {
         dismissLoadingDialog()
-        val adapter = KeywordAdapter(this, response.result)
-        binding.rvKeyword.adapter = adapter
+        binding.tvKeywordNum.text = response.result.size.toString()
     }
 
     override fun onGetKeywordFailure(message: String) {

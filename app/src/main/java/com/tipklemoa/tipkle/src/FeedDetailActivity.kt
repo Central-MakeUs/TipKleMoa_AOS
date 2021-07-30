@@ -153,15 +153,6 @@ class FeedDetailActivity : BaseActivity<ActivityFeedDetailBinding>(ActivityFeedD
                     MainService(this).tryGetFeedDetail(postId)
                 }
             }
-
-        supportFragmentManager
-            .setFragmentResultListener("report", this) { requestKey, bundle ->
-                // We use a String here, but any type that can be put in a Bundle is supported
-                val result = bundle.getString("report_ok")
-                if (result=="ok"){
-                    this.finish()
-                }
-            }
     }
 
     override fun onGetFeedDetailFailure(message: String) {

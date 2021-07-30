@@ -13,7 +13,7 @@ class ReportUserActivity : BaseActivity<ActivityReportUserBinding>(ActivityRepor
     var postId = 0
     var commentId = 0
     var what = ""
-    var reason = ""
+    var reason = "신"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +28,94 @@ class ReportUserActivity : BaseActivity<ActivityReportUserBinding>(ActivityRepor
         }
         else if (commentId!=0){
             binding.tvReportWhat.text = "댓글 신고"
-            binding.tvReportWhatReason.text = "댓을 신고하는 이유를 선택해주세요."
+            binding.tvReportWhatReason.text = "댓글을 신고하는 이유를 선택해주세요."
         }
+
+        binding.layoutLie.setOnClickListener {
+            val bundle = Bundle()
+            if (postId!=0){
+                bundle.putInt("postId", postId)
+            }
+            else if (commentId!=0){
+                bundle.putInt("commentId", commentId)
+            }
+            bundle.putString("what", "report")
+
+            val reallyReportDialog = ReallyReportDialog()
+            reallyReportDialog.arguments = bundle
+            reallyReportDialog.show(supportFragmentManager, reallyReportDialog.tag)
+        }
+
+        binding.layoutAd.setOnClickListener {
+            val bundle = Bundle()
+            if (postId!=0){
+                bundle.putInt("postId", postId)
+            }
+            else if (commentId!=0){
+                bundle.putInt("commentId", commentId)
+            }
+            bundle.putString("what", "report")
+
+            val reallyReportDialog = ReallyReportDialog()
+            reallyReportDialog.arguments = bundle
+            reallyReportDialog.show(supportFragmentManager, reallyReportDialog.tag)
+        }
+
+        binding.layoutAbuse.setOnClickListener {
+            val bundle = Bundle()
+            if (postId!=0){
+                bundle.putInt("postId", postId)
+            }
+            else if (commentId!=0){
+                bundle.putInt("commentId", commentId)
+            }
+            bundle.putString("what", "report")
+
+            val reallyReportDialog = ReallyReportDialog()
+            reallyReportDialog.arguments = bundle
+            reallyReportDialog.show(supportFragmentManager, reallyReportDialog.tag)
+        }
+
+        binding.layoutCopyright.setOnClickListener {
+            val bundle = Bundle()
+            if (postId!=0){
+                bundle.putInt("postId", postId)
+            }
+            else if (commentId!=0){
+                bundle.putInt("commentId", commentId)
+            }
+            bundle.putString("what", "report")
+
+            val reallyReportDialog = ReallyReportDialog()
+            reallyReportDialog.arguments = bundle
+            reallyReportDialog.show(supportFragmentManager, reallyReportDialog.tag)
+        }
+
+        binding.layoutEtc.setOnClickListener {
+            val bundle = Bundle()
+            if (postId!=0){
+                bundle.putInt("postId", postId)
+            }
+            else if (commentId!=0){
+                bundle.putInt("commentId", commentId)
+            }
+            bundle.putString("what", "report")
+
+            val reallyReportDialog = ReallyReportDialog()
+            reallyReportDialog.arguments = bundle
+            reallyReportDialog.show(supportFragmentManager, reallyReportDialog.tag)
+        }
+
+        supportFragmentManager
+            .setFragmentResultListener("report", this) { requestKey, bundle ->
+                // We use a String here, but any type that can be put in a Bundle is supported
+                val result = bundle.getString("report_ok")
+                // Do something with the result
+                if (result=="ok"){
+                    showCustomToast("신고가 완료되었습니다")
+                    finish()
+                }
+            }
 
     }
     override fun onGetFeedDetailSuccess(response: DetailFeedResponse) {

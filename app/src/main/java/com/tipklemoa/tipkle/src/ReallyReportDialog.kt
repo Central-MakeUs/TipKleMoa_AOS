@@ -16,9 +16,11 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.LayoutDetailReallyDeleteDialogBinding
+import com.tipklemoa.tipkle.databinding.LayoutDetailReallyReportDialogBinding
 import com.tipklemoa.tipkle.src.model.CommentResponse
 import com.tipklemoa.tipkle.src.model.DetailFeedResponse
 import com.tipklemoa.tipkle.src.model.NewTipResponse
+import com.tipklemoa.tipkle.src.model.PostReportFeedRequest
 import com.tipklemoa.tipkle.util.LoadingDialog
 
 class ReallyReportDialog : DialogFragment(), MainView {
@@ -31,7 +33,7 @@ class ReallyReportDialog : DialogFragment(), MainView {
     var what = ""
 
     lateinit var mLoadingDialog: LoadingDialog
-    private lateinit var binding: LayoutDetailReallyDeleteDialogBinding
+    private lateinit var binding: LayoutDetailReallyReportDialogBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,32 +46,33 @@ class ReallyReportDialog : DialogFragment(), MainView {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = LayoutDetailReallyDeleteDialogBinding.inflate(inflater, container, false)
+        binding = LayoutDetailReallyReportDialogBinding.inflate(inflater, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         postId = arguments?.getInt("postId")!!
         commentId = arguments?.getInt("commentId")!!
         what = arguments?.getString("what")!!
 
-        if (what=="delete"){
-            binding.tvDialogMent.text = "댓글을 정말 삭제하시겠습니까?"
+        Log.d("확인", postId.toString())
+
+        if (what=="report"){
+            if (postId!=0) binding.tvDialogMent.text = "이 게시글은 더이상 보이지 않습니다.\n게시글을 신고하시겠습니까?"
+            else if (commentId!=0) binding.tvDialogMent.text = "이 댓글은 더이상 보이지 않습니다.\n댓글을 신고하시겠습니까?"
         }
 
-        binding.btnDeleteConfirm.setOnClickListener {
+
+        binding.btnReportConfirm.setOnClickListener {
+            showLoadingDialog(requireContext())
             if (postId!=0){
-                this.dismiss()
-                showLoadingDialog(requireContext())
-                MainService(this).tryDeleteFeed(postId)
+                val postReportFeedRequest = PostReportFeedRequest("신고")
+                MainService(this).tryPostReportFeed(postId, postReportFeedRequest)
             }
-            else if (commentId!=0) {
-                if (what=="delete"){
-                    //this.dismiss()
-                    showLoadingDialog(requireContext())
-                    MainService(this).tryDeleteComment(commentId)
-                }
+            else if (commentId!=0){
+                val postReportComment = PostReportFeedRequest("신고")
+                MainService(this).tryPostReportComment(commentId, postReportComment)
             }
         }
 
-        binding.btnDeleteCancel.setOnClickListener {
+        binding.btnReportCancel.setOnClickListener {
             this.dismiss()
         }
 
@@ -190,18 +193,26 @@ class ReallyReportDialog : DialogFragment(), MainView {
     }
 
     override fun onPostFeedReportSuccess(response: BaseResponse) {
-        TODO("Not yet implemented")
+        dismissLoadingDialog()
+        val bundle = bundleOf("report_ok" to "ok")
+        setFragmentResult("report", bundle)
+        dismiss()
     }
 
     override fun onPostFeedReportFailure(message: String) {
-        TODO("Not yet implemented")
+        dismissLoadingDialog()
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onPostCommentReportSuccess(response: BaseResponse) {
-        TODO("Not yet implemented")
+        dismissLoadingDialog()
+        val bundle = bundleOf("report_ok" to "ok")
+        setFragmentResult("report", bundle)
+        dismiss()
     }
 
     override fun onPostCommentReportFailure(message: String) {
-        TODO("Not yet implemented")
+        dismissLoadingDialog()
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 }

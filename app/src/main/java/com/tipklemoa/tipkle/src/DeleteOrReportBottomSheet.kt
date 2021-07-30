@@ -70,9 +70,11 @@ class DeleteOrReportBottomSheet: BottomSheetDialogFragment(), TipkleFragmentView
                     dialog.show(parentFragmentManager, dialog.tag)
                     this.dismiss()
                 }
-                else if (what=="report"){ //신
+                else if (what=="report"){ //신고
                     val intent = Intent(requireContext(), ReportUserActivity::class.java)
+                    intent.putExtra("postId", postId)
                     startActivity(intent)
+                    this.dismiss()
                 }
             }
             else if (folderId!=0){
@@ -90,9 +92,11 @@ class DeleteOrReportBottomSheet: BottomSheetDialogFragment(), TipkleFragmentView
                     dialog.show(parentFragmentManager, dialog.tag)
                     this.dismiss()
                 }
-                else if (what=="report"){ //신
+                else if (what=="report"){ //신고
                     val intent = Intent(requireContext(), ReportUserActivity::class.java)
+                    intent.putExtra("commentId", commentId)
                     startActivity(intent)
+                    this.dismiss()
                 }
             }
         }
@@ -103,6 +107,7 @@ class DeleteOrReportBottomSheet: BottomSheetDialogFragment(), TipkleFragmentView
             if (result=="ok"){
                 val bundle = bundleOf("report_ok" to "ok")
                 setFragmentResult("report", bundle)
+                dismiss()
             }
         }
 

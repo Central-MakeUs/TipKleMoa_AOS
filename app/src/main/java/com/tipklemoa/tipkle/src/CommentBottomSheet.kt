@@ -43,10 +43,15 @@ class CommentBottomSheet: BottomSheetDialogFragment(), MainView{
         postId = arguments?.getInt("postId")!!
 
         binding = LayoutCommentBottomsheetBinding.inflate(inflater, container, false)
-        showLoadingDialog(requireContext())
-        MainService(this).tryGetComments(postId)
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        showLoadingDialog(requireContext())
+        MainService(this).tryGetComments(postId)
     }
 
     private val onClicked = object: CommentAdapter.OnItemClickListener{
