@@ -73,7 +73,9 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
 
         binding.tvMyPageNickName.text = response.result.nickName //닉네임
 
-        binding.tvMyPageAchieve.text = response.result.achievement
+        val word = response.result.achievement.split("/")
+        binding.tvMyPageAchieveFront.text = word[0]
+        binding.tvMyPageAchieveAfter.text = "/"+word[1]
 
         var levelImage = 0
 

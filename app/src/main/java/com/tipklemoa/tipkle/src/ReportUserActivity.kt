@@ -13,7 +13,6 @@ class ReportUserActivity : BaseActivity<ActivityReportUserBinding>(ActivityRepor
     var postId = 0
     var commentId = 0
     var what = ""
-    var reason = "신"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +28,10 @@ class ReportUserActivity : BaseActivity<ActivityReportUserBinding>(ActivityRepor
         else if (commentId!=0){
             binding.tvReportWhat.text = "댓글 신고"
             binding.tvReportWhatReason.text = "댓글을 신고하는 이유를 선택해주세요."
+        }
+
+        binding.btnReportUserBack.setOnClickListener {
+            finish()
         }
 
         binding.layoutLie.setOnClickListener {

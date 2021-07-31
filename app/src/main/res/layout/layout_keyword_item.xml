@@ -5,20 +5,29 @@
     android:background="@color/white"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tvKeyword"
+    <ImageView
+        android:id="@+id/imageViewKeyword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:scaleType="fitXY"
         android:background="@drawable/ic_rectangle_mint"
-        android:fontFamily="@font/notosanscjkkr_medium"
-        android:paddingLeft="12dp"
-        android:text="TextView"
-        android:textColor="@color/black"
-        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvKeyword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanscjkkr_medium"
+        android:paddingLeft="12dp"
+        android:text="키워드"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/imageViewKeyword"
+        app:layout_constraintStart_toStartOf="@id/imageViewKeyword"
+        app:layout_constraintTop_toTopOf="@id/imageViewKeyword"/>
 
     <ImageView
         android:id="@+id/btnKeywordX"

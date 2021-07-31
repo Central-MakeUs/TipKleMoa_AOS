@@ -59,6 +59,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/notosanscjkkr_regular"
             android:includeFontPadding="false"
+            android:stateListAnimator="@null"
             android:text="취소"
             android:layout_weight="1"
             android:textSize="18dp"
@@ -68,6 +69,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnDeleteConfirm"
             android:layout_width="wrap_content"
+            android:stateListAnimator="@null"
             android:layout_height="wrap_content"
             android:fontFamily="@font/notosanscjkkr_regular"
             android:includeFontPadding="false"

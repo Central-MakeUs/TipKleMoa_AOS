@@ -44,32 +44,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
-3
-    <ImageView
-        android:id="@+id/imageView25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_plus"
-        app:layout_constraintBottom_toBottomOf="@+id/textView15"
-        app:layout_constraintEnd_toEndOf="@+id/btnNewTipFolder"
-        app:layout_constraintStart_toEndOf="@+id/textView15"
-        app:layout_constraintTop_toTopOf="@+id/textView15" />
 
-    <TextView
-        android:id="@+id/textView15"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/notosanscjkkr_medium"
-        android:includeFontPadding="false"
-        android:text="나만의 꿀 TIP 폴더를 만들어 보세요."
-        android:textColor="@color/mint"
-        android:textSize="14dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/btnNewTipFolder"
         app:layout_constraintEnd_toEndOf="@+id/btnNewTipFolder"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="@+id/btnNewTipFolder"
-        app:layout_constraintTop_toTopOf="@+id/btnNewTipFolder"
-        app:layout_constraintVertical_bias="0.481" />
+        app:layout_constraintTop_toTopOf="@+id/btnNewTipFolder">
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:includeFontPadding="false"
+            android:text="나만의 꿀 TIP 폴더를 만들어 보세요."
+            android:layout_marginRight="4dp"
+            android:textColor="@color/mint"
+            android:textSize="14dp" />
+
+        <ImageView
+            android:id="@+id/imageView25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_plus" />
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_emptyfolder"

@@ -5,9 +5,12 @@ import android.graphics.Point
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.config.BaseResponse
@@ -41,6 +44,16 @@ class HomeEditCategoryBottomSheet: BottomSheetDialogFragment(), HomeFragmentView
         display!!.getSize(size)
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val bottomSheet = view.findViewById<View>(R.id.home_editCat_layout) as ConstraintLayout
+        //bottomSheet.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+        val bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        bottomSheetBehavior.peekHeight = 500
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

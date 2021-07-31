@@ -60,6 +60,7 @@
         android:fontFamily="@font/notosanscjkkr_bold"
         android:includeFontPadding="false"
         android:text="취소"
+        android:stateListAnimator="@null"
         android:textColor="@color/black"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
