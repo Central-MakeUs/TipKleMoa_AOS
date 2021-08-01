@@ -124,14 +124,25 @@
         app:layout_constraintEnd_toEndOf="@+id/edtKeyword"
         app:layout_constraintTop_toTopOf="@+id/edtKeyword" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvKeyword"
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/rvKeyword"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_marginHorizontal="24dp"-->
+<!--        android:layout_marginTop="12dp"-->
+<!--        android:overScrollMode="never"-->
+<!--        app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"-->
+<!--        tools:listitem="@layout/layout_keyword_item"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/edtKeyword" />-->
+    <com.nex3z.flowlayout.FlowLayout
+        android:id="@+id/flowLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:flChildSpacing="auto"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="12dp"
-        android:overScrollMode="never"
-        tools:listitem="@layout/layout_keyword_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
