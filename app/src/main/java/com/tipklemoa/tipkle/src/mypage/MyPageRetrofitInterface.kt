@@ -39,6 +39,6 @@ interface MyPageRetrofitInterface {
     fun postKeyword(@Body params: PostKeywordRequest): Call<BaseResponse>
 
     //마이페이지 API
-    @POST("/keywords/{keywordId}")
+    @DELETE("/keywords/{keywordId}")
     fun deleteKeyword(@Path("keywordId") keywordId:Int): Call<BaseResponse>
 }

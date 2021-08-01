@@ -17,6 +17,7 @@ class KeywordAlertDialogFragment: DialogFragment(){
     var windowManager: WindowManager? = null
     var display: Display? = null
     var size: Point? = null
+    var what = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,13 +27,19 @@ class KeywordAlertDialogFragment: DialogFragment(){
         super.onCreateView(inflater, container, savedInstanceState)
 
         binding = LayoutNewtipDialogBinding.inflate(inflater, container, false)
+        what = arguments?.getString("what").toString()
 
         windowManager = activity?.getSystemService(Context.WINDOW_SERVICE) as? WindowManager
         display = windowManager!!.defaultDisplay
         size = Point()
         display!!.getSize(size)
 
-        binding.tvNewTipDialogInfo.text = "키워드를 2자 이상 10자 미만 작성해주세요."
+        if (what=="length"){
+            binding.tvNewTipDialogInfo.text = "키워드를 2자 이상 10자 미만 작성해주세요."
+        }
+        else{
+            binding.tvNewTipDialogInfo.text = "키워드를 5개 이상 등록할 수 없습니다."
+        }
 
         binding.btnNewTipAlertOK.setOnClickListener {
             this.dismiss()

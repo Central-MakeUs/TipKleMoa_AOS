@@ -51,7 +51,7 @@
         <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_feed_detail.xml" value="0.45" />
         <entry key="app/src/main/res/layout/activity_folder_detail.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/activity_keyword.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_keyword.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.20416666666666666" />
@@ -65,7 +65,7 @@
         <entry key="app/src/main/res/layout/dialog_loading.xml" value="0.153125" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_look_around.xml" value="0.625" />
-        <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.55" />
+        <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.40816326530612246" />
         <entry key="app/src/main/res/layout/fragment_picked_tip.xml" value="0.1578125" />
         <entry key="app/src/main/res/layout/fragment_popular_keyword.xml" value="0.1609375" />
         <entry key="app/src/main/res/layout/fragment_recent_keyword.xml" value="0.1609375" />
@@ -91,7 +91,7 @@
         <entry key="app/src/main/res/layout/layout_home_lookaround.xml" value="0.45" />
         <entry key="app/src/main/res/layout/layout_home_preview_feed.xml" value="0.375" />
         <entry key="app/src/main/res/layout/layout_keyword_dialog.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/layout_keyword_item.xml" value="0.45145631067961167" />
+        <entry key="app/src/main/res/layout/layout_keyword_item.xml" value="0.44150110375275936" />
         <entry key="app/src/main/res/layout/layout_lookaround_image.xml" value="0.15052083333333333" />
         <entry key="app/src/main/res/layout/layout_mypage_bottomsheet.xml" value="0.335" />
         <entry key="app/src/main/res/layout/layout_newtip_dialog.xml" value="0.335" />

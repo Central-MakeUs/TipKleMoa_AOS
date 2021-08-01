@@ -3,19 +3,19 @@ package com.tipklemoa.tipkle.src.mypage
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.config.BaseActivity
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.ActivityKeywordBinding
+import com.tipklemoa.tipkle.databinding.LayoutKeywordItemBinding
 import com.tipklemoa.tipkle.src.KeywordAlertDialogFragment
+import com.tipklemoa.tipkle.src.MainService
 import com.tipklemoa.tipkle.src.mypage.model.KeywordResponse
 import com.tipklemoa.tipkle.src.mypage.model.MyPageResponse
-import com.google.android.flexbox.JustifyContent
-
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexWrap
-
-import com.google.android.flexbox.FlexboxLayoutManager
+import com.tipklemoa.tipkle.src.mypage.model.PostKeywordRequest
 
 class KeywordActivity : BaseActivity<ActivityKeywordBinding>(ActivityKeywordBinding::inflate), MyPageView{
 
@@ -42,8 +42,7 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding>(ActivityKeywordBind
                 } else {
                     binding.tvCompleteKeyword.isEnabled = true
                     binding.tvCompleteKeyword.setTextColor(
-                        resources.getColor(
-                            R.color.mint
+                        resources.getColor(R.color.mint
                         )
                     )
                 }
@@ -57,10 +56,22 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding>(ActivityKeywordBind
         binding.tvCompleteKeyword.setOnClickListener {
             if (binding.edtKeyword.text.length<2){
                 val keywordAlert = KeywordAlertDialogFragment()
+                val bundle = Bundle()
+                bundle.putString("what", "length")
                 keywordAlert.show(supportFragmentManager, keywordAlert.tag)
             }
             else{ //키워드 등록
-
+                if (binding.tvKeywordNum.text=="5"){
+                    val keywordAlert = KeywordAlertDialogFragment()
+                    val bundle = Bundle()
+                    bundle.putString("what", "num")
+                    keywordAlert.show(supportFragmentManager, keywordAlert.tag)
+                }
+                else{
+                    showLoadingDialog(this)
+                    val postKeywordRequest = PostKeywordRequest(binding.edtKeyword.text.toString().trim())
+                    MyPageService(this).tryPostKeyword(postKeywordRequest)
+                }
             }
         }
     }
@@ -114,15 +125,23 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding>(ActivityKeywordBind
 
     override fun onGetKeywordSuccess(response: KeywordResponse) {
         dismissLoadingDialog()
-        binding.tvKeywordNum.text = response.result.size.toString()
-        val adapTer = KeywordAdapter(this, response.result)
-        val layoutManager = FlexboxLayoutManager(this)
-        layoutManager.flexDirection = FlexDirection.ROW
-        layoutManager.flexWrap = FlexWrap.WRAP
-        layoutManager.justifyContent = JustifyContent.FLEX_START
-        binding.rvKeyword.layoutManager = layoutManager
-        binding.rvKeyword.adapter = adapTer
+        binding.flowLayout.removeAllViews()
 
+        binding.tvKeywordNum.text = response.result.size.toString()
+
+        for (i in response.result){
+            val keywordLayout = layoutInflater.inflate(
+                R.layout.layout_keyword_item,
+                binding.flowLayout,false)
+            val keywordText = keywordLayout.findViewById<TextView>(R.id.tvKeyword)
+            val button = keywordLayout.findViewById<ImageView>(R.id.btnKeywordX)
+            keywordText.text = i.keyword
+            button.setOnClickListener {
+                showLoadingDialog(this)
+                MyPageService(this).tryDeleteKeyword(i.keywordId)
+            }
+            binding.flowLayout.addView(keywordLayout)
+        }
     }
 
     override fun onGetKeywordFailure(message: String) {
@@ -131,18 +150,26 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding>(ActivityKeywordBind
     }
 
     override fun onPostKeywordSuccess(response: BaseResponse) {
-        TODO("Not yet implemented")
+        dismissLoadingDialog()
+        showCustomToast("키워드 등록 완료!")
+        showLoadingDialog(this)
+        MyPageService(this).tryGetKeywords()
     }
 
     override fun onPostKeywordFailure(message: String) {
-        TODO("Not yet implemented")
+        dismissLoadingDialog()
+        showCustomToast(message)
     }
 
     override fun onDeleteKeywordSuccess(response: BaseResponse) {
-        TODO("Not yet implemented")
+        dismissLoadingDialog()
+        showCustomToast("키워드 삭제 완료!")
+        showLoadingDialog(this)
+        MyPageService(this).tryGetKeywords()
     }
 
     override fun onDeleteKeywordFailure(message: String) {
-        TODO("Not yet implemented")
+        dismissLoadingDialog()
+        showCustomToast(message)
     }
 }

@@ -158,9 +158,7 @@
         app:fabCustomSize="64dp"
         android:clickable="true"
         android:src="@drawable/ic_icon_write"
-        app:elevation="0dp"
         android:stateListAnimator="@null"
-        android:backgroundTint="@color/transparent"
         android:scaleType="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

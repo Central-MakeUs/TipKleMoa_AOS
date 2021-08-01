@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:background="@color/white"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/white">
 
     <ImageView
         android:id="@+id/imageViewKeyword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        android:background="@drawable/ic_rectangle_mint"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="8dp"
+        android:src="@drawable/keyword_mint"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,21 +23,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/notosanscjkkr_medium"
+        android:includeFontPadding="false"
         android:paddingLeft="12dp"
-        android:text="키워드"
+        android:text=""
         android:textColor="@color/black"
         android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="@id/imageViewKeyword"
-        app:layout_constraintStart_toStartOf="@id/imageViewKeyword"
-        app:layout_constraintTop_toTopOf="@id/imageViewKeyword"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnKeywordX"
+        app:layout_constraintStart_toStartOf="@+id/imageViewKeyword"
+        app:layout_constraintTop_toTopOf="@+id/imageViewKeyword" />
 
     <ImageView
         android:id="@+id/btnKeywordX"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:background="@drawable/ic_x"
         android:layout_margin="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@drawable/ic_x"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewKeyword"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewKeyword"
+        app:layout_constraintTop_toTopOf="@+id/imageViewKeyword" />
 </androidx.constraintlayout.widget.ConstraintLayout>
