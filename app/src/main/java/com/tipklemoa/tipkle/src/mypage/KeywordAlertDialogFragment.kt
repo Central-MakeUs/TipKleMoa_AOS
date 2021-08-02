@@ -1,4 +1,4 @@
-package com.tipklemoa.tipkle.src
+package com.tipklemoa.tipkle.src.mypage
 
 import android.content.Context
 import android.graphics.Point
@@ -6,11 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.DialogFragment
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.tipklemoa.tipkle.config.ApplicationClass
-import com.tipklemoa.tipkle.databinding.LayoutDetailBottomsheetBinding
 import com.tipklemoa.tipkle.databinding.LayoutNewtipDialogBinding
-import com.tipklemoa.tipkle.util.LoadingDialog
 
 class KeywordAlertDialogFragment: DialogFragment(){
     private lateinit var binding: LayoutNewtipDialogBinding
@@ -28,6 +24,7 @@ class KeywordAlertDialogFragment: DialogFragment(){
 
         binding = LayoutNewtipDialogBinding.inflate(inflater, container, false)
         what = arguments?.getString("what").toString()
+        Log.d("확인", what)
 
         windowManager = activity?.getSystemService(Context.WINDOW_SERVICE) as? WindowManager
         display = windowManager!!.defaultDisplay

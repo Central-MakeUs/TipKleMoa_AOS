@@ -53,12 +53,14 @@ LoginActivityView {
         binding.btnClean.setOnClickListener {
              if (categoryList[0]==0) { //선택 x -> 선택
                  categoryList[0] = 1
-                 binding.btnClean.setBackgroundResource(R.drawable.ic_button_cleaning_mint)
+                 binding.btnClean.setBackgroundResource(R.drawable.register_button_check)
+                 binding.tvClean.setTextColor(resources.getColor(R.color.white))
                  pickedNum++
              }
              else{  //선택 o -> 선택  xloComplete
                  categoryList[0] = 0
-                 binding.btnClean.setBackgroundResource(R.drawable.ic_button_cleaning_gray)
+                 binding.btnClean.setBackgroundResource(R.drawable.register_button_noncheck)
+                 binding.tvClean.setTextColor(resources.getColor(R.color.gray97))
                  pickedNum--
              }
             binding.tvPickedCategoryNum.text = pickedNum.toString()
@@ -68,12 +70,14 @@ LoginActivityView {
         binding.btnCook.setOnClickListener {
             if (categoryList[1]==0){ //선택 x -> 선택
                 categoryList[1] = 2
-                binding.btnCook.setBackgroundResource(R.drawable.ic_button_cooking_mint)
+                binding.btnCook.setBackgroundResource(R.drawable.register_button_check)
+                binding.tvCook.setTextColor(resources.getColor(R.color.white))
                 pickedNum++
             }
             else {
                 categoryList[1] = 0
-                binding.btnCook.setBackgroundResource(R.drawable.ic_button_cooking_gray)
+                binding.btnCook.setBackgroundResource(R.drawable.register_button_noncheck)
+                binding.tvCook.setTextColor(resources.getColor(R.color.gray97))
                 pickedNum--
             }
             binding.tvPickedCategoryNum.text = pickedNum.toString()
@@ -85,11 +89,13 @@ LoginActivityView {
             if (categoryList[2]==0) {
                 categoryList[2] = 3
                 pickedNum++
-                binding.btnBeauty.setBackgroundResource(R.drawable.ic_button_beauty_mint)
+                binding.btnBeauty.setBackgroundResource(R.drawable.register_button_check)
+                binding.tvBeauty.setTextColor(resources.getColor(R.color.white))
             }
             else {
                 categoryList[2] = 0
-                binding.btnBeauty.setBackgroundResource(R.drawable.ic_button_beauty_gray)
+                binding.btnBeauty.setBackgroundResource(R.drawable.register_button_noncheck)
+                binding.tvBeauty.setTextColor(resources.getColor(R.color.gray97))
                 pickedNum--
             }
             binding.tvPickedCategoryNum.text = pickedNum.toString()
@@ -100,12 +106,14 @@ LoginActivityView {
         binding.btnJachi.setOnClickListener {
             if (categoryList[3]==0) {
                 categoryList[3] = 4
-                binding.btnJachi.setBackgroundResource(R.drawable.ic_button_jachi_mint)
+                binding.btnJachi.setBackgroundResource(R.drawable.register_button_check)
+                binding.tvJachi.setTextColor(resources.getColor(R.color.white))
                 pickedNum++
             }
             else {
                 categoryList[3] = 0
-                binding.btnJachi.setBackgroundResource(R.drawable.ic_button_jachi_gray)
+                binding.btnJachi.setBackgroundResource(R.drawable.register_button_noncheck)
+                binding.tvJachi.setTextColor(resources.getColor(R.color.gray97))
                 pickedNum--
             }
             binding.tvPickedCategoryNum.text = pickedNum.toString()
@@ -116,12 +124,14 @@ LoginActivityView {
         binding.btnTrip.setOnClickListener {
             if (categoryList[4]==0) {
                 categoryList[4] = 5
-                binding.btnTrip.setBackgroundResource(R.drawable.ic_button_trip_mint)
+                binding.btnTrip.setBackgroundResource(R.drawable.register_button_check)
+                binding.tvTrip.setTextColor(resources.getColor(R.color.white))
                 pickedNum++
             }
             else {
                 categoryList[4] = 0
-                binding.btnTrip.setBackgroundResource(R.drawable.ic_button_trip_gray)
+                binding.btnTrip.setBackgroundResource(R.drawable.register_button_noncheck)
+                binding.tvTrip.setTextColor(resources.getColor(R.color.gray97))
                 pickedNum--
             }
             binding.tvPickedCategoryNum.text = pickedNum.toString()
@@ -132,12 +142,14 @@ LoginActivityView {
         binding.btnUniv.setOnClickListener {
             if (categoryList[5]==0) {
                 categoryList[5] = 6
-                binding.btnUniv.setBackgroundResource(R.drawable.ic_button_uni_mint)
+                binding.btnUniv.setBackgroundResource(R.drawable.register_button_check)
+                binding.tvUniv.setTextColor(resources.getColor(R.color.white))
                 pickedNum++
             }
             else {
                 categoryList[5] = 0
-                binding.btnUniv.setBackgroundResource(R.drawable.ic_button_uni_gray)
+                binding.btnUniv.setBackgroundResource(R.drawable.register_button_noncheck)
+                binding.tvUniv.setTextColor(resources.getColor(R.color.gray97))
                 pickedNum--
             }
             binding.tvPickedCategoryNum.text = pickedNum.toString()

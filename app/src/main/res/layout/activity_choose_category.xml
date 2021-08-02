@@ -149,65 +149,219 @@
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="4dp"
         android:orientation="vertical"
+        app:layout_constraintHeight_percent="0.415"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.45"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/textView6">
 
-        <androidx.appcompat.widget.AppCompatButton
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btnClean"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
             android:layout_weight="1"
-            android:background="@drawable/ic_button_cleaning_gray"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/appCompatButton2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/register_button_noncheck"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/tvClean"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:includeFontPadding="false"
+                android:text="청소"
+                android:textColor="@color/gray97"
+                android:textSize="18dp"
+                android:translationZ="90dp"
+                app:layout_constraintBottom_toBottomOf="@+id/appCompatButton2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/appCompatButton2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btnCook"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:layout_weight="1"
-            android:background="@drawable/ic_button_cooking_gray"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/appCompatButton3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/register_button_noncheck"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/tvCook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:includeFontPadding="false"
+                android:text="요리"
+                android:textColor="@color/gray97"
+                android:textSize="18dp"
+                android:translationZ="90dp"
+                app:layout_constraintBottom_toBottomOf="@+id/appCompatButton3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btnBeauty"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:layout_weight="1"
-            android:background="@drawable/ic_button_beauty_gray"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/appCompatButton4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/register_button_noncheck"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/tvBeauty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:includeFontPadding="false"
+                android:text="뷰티"
+                android:textColor="@color/gray97"
+                android:textSize="18dp"
+                android:translationZ="90dp"
+                app:layout_constraintBottom_toBottomOf="@+id/appCompatButton4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btnJachi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:layout_weight="1"
-            android:background="@drawable/ic_button_jachi_gray"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/appCompatButton5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/register_button_noncheck"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/tvJachi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:includeFontPadding="false"
+                android:text="자취"
+                android:textColor="@color/gray97"
+                android:textSize="18dp"
+                android:translationZ="90dp"
+                app:layout_constraintBottom_toBottomOf="@+id/appCompatButton5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btnTrip"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:layout_weight="1"
-            android:background="@drawable/ic_button_trip_gray"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/appCompatButton6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/register_button_noncheck"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/tvTrip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:includeFontPadding="false"
+                android:text="여행"
+                android:textColor="@color/gray97"
+                android:textSize="18dp"
+                android:translationZ="90dp"
+                app:layout_constraintBottom_toBottomOf="@+id/appCompatButton6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btnUniv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:layout_weight="1"
-            android:background="@drawable/ic_button_uni_gray"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/appCompatButton7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/register_button_noncheck"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/tvUniv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:includeFontPadding="false"
+                android:text="대학"
+                android:textColor="@color/gray97"
+                android:textSize="18dp"
+                android:translationZ="90dp"
+                app:layout_constraintBottom_toBottomOf="@+id/appCompatButton7"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
     <LinearLayout

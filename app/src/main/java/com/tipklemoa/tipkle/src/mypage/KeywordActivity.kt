@@ -3,16 +3,12 @@ package com.tipklemoa.tipkle.src.mypage
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.config.BaseActivity
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.ActivityKeywordBinding
-import com.tipklemoa.tipkle.databinding.LayoutKeywordItemBinding
-import com.tipklemoa.tipkle.src.KeywordAlertDialogFragment
-import com.tipklemoa.tipkle.src.MainService
 import com.tipklemoa.tipkle.src.mypage.model.KeywordResponse
 import com.tipklemoa.tipkle.src.mypage.model.MyPageResponse
 import com.tipklemoa.tipkle.src.mypage.model.PostKeywordRequest
@@ -58,6 +54,7 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding>(ActivityKeywordBind
                 val keywordAlert = KeywordAlertDialogFragment()
                 val bundle = Bundle()
                 bundle.putString("what", "length")
+                keywordAlert.arguments = bundle
                 keywordAlert.show(supportFragmentManager, keywordAlert.tag)
             }
             else{ //키워드 등록
@@ -65,6 +62,7 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding>(ActivityKeywordBind
                     val keywordAlert = KeywordAlertDialogFragment()
                     val bundle = Bundle()
                     bundle.putString("what", "num")
+                    keywordAlert.arguments = bundle
                     keywordAlert.show(supportFragmentManager, keywordAlert.tag)
                 }
                 else{
