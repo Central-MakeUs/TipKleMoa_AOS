@@ -45,7 +45,7 @@
                 android:layout_marginVertical="24dp"
                 app:defaultQueryHint="검색어를 입력해주세요."
                 android:gravity="left"
-                android:paddingLeft="-12dp"
+                android:paddingLeft="-13dp"
                 app:iconifiedByDefault="false"
                 app:layout_constraintBottom_toBottomOf="@+id/toolbar"
                 app:layout_constraintEnd_toEndOf="@+id/toolbar"
@@ -57,10 +57,11 @@
 
             <ImageView
                 android:id="@+id/imageView9"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
                 android:layout_margin="11dp"
-                android:src="@drawable/ic_search_icon"
+                android:src="@drawable/ic_search_small"
                 app:layout_constraintBottom_toBottomOf="@+id/edtSearch"
                 app:layout_constraintStart_toStartOf="@+id/edtSearch"
                 app:layout_constraintTop_toTopOf="@+id/edtSearch" />

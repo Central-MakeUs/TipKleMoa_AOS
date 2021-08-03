@@ -79,63 +79,65 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(
 
         var levelImage = 0
 
-        if (response.result.level==1){
-            when (response.result.levelbar) {
-                0 -> {
-                    levelImage = R.drawable.ic_lv1_0_
-                }
-                1 -> {
-                    levelImage = R.drawable.ic_lv1_20_
-                }
-                2 -> {
-                    levelImage = R.drawable.ic_lv1_40_
-                }
-                3 -> {
-                    levelImage = R.drawable.ic_lv1_60_
-                }
-                4 -> {
-                    levelImage = R.drawable.ic_lv1_80_
-                }
-            }
-        }
-        else if (response.result.level==2){
-            when (response.result.levelbar) {
-                0 -> {
-                    levelImage = R.drawable.ic_lv2_0_
-                }
-                1 -> {
-                    levelImage = R.drawable.ic_lv2_20_
-                }
-                2 -> {
-                    levelImage = R.drawable.ic_lv2_40_
-                }
-                3 -> {
-                    levelImage = R.drawable.ic_lv2_60_
-                }
-                4 -> {
-                    levelImage = R.drawable.ic_lv2_80_
+        when (response.result.level) {
+            1 -> {
+                when (response.result.levelbar) {
+                    0 -> {
+                        levelImage = R.drawable.ic_lv1_0_
+                    }
+                    1 -> {
+                        levelImage = R.drawable.ic_lv1_20_
+                    }
+                    2 -> {
+                        levelImage = R.drawable.ic_lv1_40_
+                    }
+                    3 -> {
+                        levelImage = R.drawable.ic_lv1_60_
+                    }
+                    4 -> {
+                        levelImage = R.drawable.ic_lv1_80_
+                    }
                 }
             }
-        }
-        else if (response.result.level==3){
-            when (response.result.levelbar) {
-                0 -> {
-                    levelImage = R.drawable.ic_lv3_0_
+            2 -> {
+                when (response.result.levelbar) {
+                    0 -> {
+                        levelImage = R.drawable.ic_lv2_0_
+                    }
+                    1 -> {
+                        levelImage = R.drawable.ic_lv2_20_
+                    }
+                    2 -> {
+                        levelImage = R.drawable.ic_lv2_40_
+                    }
+                    3 -> {
+                        levelImage = R.drawable.ic_lv2_60_
+                    }
+                    4 -> {
+                        levelImage = R.drawable.ic_lv2_80_
+                    }
                 }
-                1 -> {
-                    levelImage = R.drawable.ic_lv3_20_
-                }
-                2 -> {
-                    levelImage = R.drawable.ic_lv3_40_
-                }
-                3 -> {
-                    levelImage = R.drawable.ic_lv3_60_
-                }
-                4 -> {
-                    levelImage = R.drawable.ic_lv3_80_
-                }
-                5 -> {
-                    levelImage = R.drawable.ic_lv3_100_
+            }
+            3 -> {
+                when (response.result.levelbar) {
+                    0 -> {
+                        levelImage = R.drawable.ic_lv3_0_
+                    }
+                    1 -> {
+                        levelImage = R.drawable.ic_lv3_20_
+                    }
+                    2 -> {
+                        levelImage = R.drawable.ic_lv3_40_
+                    }
+                    3 -> {
+                        levelImage = R.drawable.ic_lv3_60_
+                    }
+                    4 -> {
+                        levelImage = R.drawable.ic_lv3_80_
+                    }
+                    5 -> {
+                        levelImage = R.drawable.ic_lv3_100_
+                    }
                 }
             }
         }

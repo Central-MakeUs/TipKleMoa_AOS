@@ -147,21 +147,24 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
+        android:clickable="true"
         app:layout_constraintHeight_percent="0.415"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/btnClean"
+            android:id="@+id/layoutClean"
+            android:clickable="true"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/appCompatButton2"
+                android:id="@+id/btnClean"
+                android:clickable="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/register_button_noncheck"
@@ -173,6 +176,7 @@
 
             <TextView
                 android:id="@+id/tvClean"
+                android:clickable="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/notosanscjkkr_regular"
@@ -181,22 +185,24 @@
                 android:textColor="@color/gray97"
                 android:textSize="18dp"
                 android:translationZ="90dp"
-                app:layout_constraintBottom_toBottomOf="@+id/appCompatButton2"
+                app:layout_constraintBottom_toBottomOf="@+id/btnClean"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/appCompatButton2" />
+                app:layout_constraintTop_toTopOf="@+id/btnClean" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/btnCook"
+            android:id="@+id/layoutCook"
             android:layout_marginTop="12dp"
+            android:clickable="true"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/appCompatButton3"
+                android:id="@+id/btnCook"
+                android:clickable="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/register_button_noncheck"
@@ -208,6 +214,7 @@
 
             <TextView
                 android:id="@+id/tvCook"
+                android:clickable="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/notosanscjkkr_regular"
@@ -216,7 +223,7 @@
                 android:textColor="@color/gray97"
                 android:textSize="18dp"
                 android:translationZ="90dp"
-                app:layout_constraintBottom_toBottomOf="@+id/appCompatButton3"
+                app:layout_constraintBottom_toBottomOf="@+id/btnCook"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -224,14 +231,16 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/btnBeauty"
+            android:id="@+id/layoutBeauty"
             android:layout_marginTop="12dp"
+            android:clickable="true"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/appCompatButton4"
+                android:id="@+id/btnBeauty"
+                android:clickable="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/register_button_noncheck"
@@ -249,9 +258,10 @@
                 android:includeFontPadding="false"
                 android:text="뷰티"
                 android:textColor="@color/gray97"
+                android:clickable="false"
                 android:textSize="18dp"
                 android:translationZ="90dp"
-                app:layout_constraintBottom_toBottomOf="@+id/appCompatButton4"
+                app:layout_constraintBottom_toBottomOf="@+id/btnBeauty"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -259,14 +269,16 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/btnJachi"
+            android:id="@+id/layoutJachi"
             android:layout_marginTop="12dp"
+            android:clickable="true"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/appCompatButton5"
+                android:id="@+id/btnJachi"
+                android:clickable="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/register_button_noncheck"
@@ -283,10 +295,11 @@
                 android:fontFamily="@font/notosanscjkkr_regular"
                 android:includeFontPadding="false"
                 android:text="자취"
+                android:clickable="false"
                 android:textColor="@color/gray97"
                 android:textSize="18dp"
                 android:translationZ="90dp"
-                app:layout_constraintBottom_toBottomOf="@+id/appCompatButton5"
+                app:layout_constraintBottom_toBottomOf="@+id/btnJachi"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -294,14 +307,16 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/btnTrip"
+            android:id="@+id/layoutTrip"
             android:layout_marginTop="12dp"
             android:layout_weight="1"
+            android:clickable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/appCompatButton6"
+                android:id="@+id/btnTrip"
+                android:clickable="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/register_button_noncheck"
@@ -313,6 +328,7 @@
 
             <TextView
                 android:id="@+id/tvTrip"
+                android:clickable="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/notosanscjkkr_regular"
@@ -321,7 +337,7 @@
                 android:textColor="@color/gray97"
                 android:textSize="18dp"
                 android:translationZ="90dp"
-                app:layout_constraintBottom_toBottomOf="@+id/appCompatButton6"
+                app:layout_constraintBottom_toBottomOf="@+id/btnTrip"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -329,14 +345,16 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/btnUniv"
+            android:id="@+id/layoutUniv"
             android:layout_marginTop="12dp"
             android:layout_weight="1"
             android:layout_width="match_parent"
+            android:clickable="true"
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/appCompatButton7"
+                android:id="@+id/btnUniv"
+                android:clickable="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/register_button_noncheck"
@@ -348,6 +366,7 @@
 
             <TextView
                 android:id="@+id/tvUniv"
+                android:clickable="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/notosanscjkkr_regular"
@@ -356,7 +375,7 @@
                 android:textColor="@color/gray97"
                 android:textSize="18dp"
                 android:translationZ="90dp"
-                app:layout_constraintBottom_toBottomOf="@+id/appCompatButton7"
+                app:layout_constraintBottom_toBottomOf="@+id/btnUniv"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

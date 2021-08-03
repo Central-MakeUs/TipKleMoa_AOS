@@ -5,12 +5,8 @@ import android.graphics.Color
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
@@ -50,15 +46,17 @@ class ReallyDeleteDialog : DialogFragment(), MainView {
         commentId = arguments?.getInt("commentId")!!
         what = arguments?.getString("what")!!
 
-        if (what=="delete"){
+        if (commentId!=0){
             binding.tvDialogMent.text = "댓글을 정말 삭제하시겠습니까?"
+        } else if (postId!=0){
+            binding.tvDialogMent.text = "게시글을 정말 삭제하시겠습니까?"
         }
 
         binding.btnDeleteConfirm.setOnClickListener {
             if (postId!=0){
-                this.dismiss()
-                showLoadingDialog(requireContext())
-                MainService(this).tryDeleteFeed(postId)
+                    //this.dismiss()
+                        showLoadingDialog(requireContext())
+                    MainService(this).tryDeleteFeed(postId)
             }
             else if (commentId!=0) {
                 if (what=="delete"){

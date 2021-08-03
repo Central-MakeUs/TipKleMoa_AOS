@@ -56,7 +56,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="@font/notosanscjkkr_bold"
         android:includeFontPadding="false"
-        android:text="알림 받을 키워드"
+        android:text="조회 부분 레이아웃 미정입니다"
         android:textColor="@color/black"
         android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"

@@ -30,6 +30,9 @@ LoginActivityView {
             finish()
         }
 
+        binding.linearLayout5.isEnabled = true
+        binding.linearLayout5.isClickable = true
+
         binding.loComplete.setOnClickListener {
             val nickName = intent.getStringExtra("nickName")
             val accessToken = intent.getStringExtra("accessToken")
@@ -50,7 +53,7 @@ LoginActivityView {
             Log.d("hello", "왜안돼")
         }
 
-        binding.btnClean.setOnClickListener {
+        binding.layoutClean.setOnClickListener {
              if (categoryList[0]==0) { //선택 x -> 선택
                  categoryList[0] = 1
                  binding.btnClean.setBackgroundResource(R.drawable.register_button_check)
@@ -67,7 +70,7 @@ LoginActivityView {
             checkFour()
         }
 
-        binding.btnCook.setOnClickListener {
+        binding.layoutCook.setOnClickListener {
             if (categoryList[1]==0){ //선택 x -> 선택
                 categoryList[1] = 2
                 binding.btnCook.setBackgroundResource(R.drawable.register_button_check)
@@ -85,7 +88,7 @@ LoginActivityView {
 
         }
 
-        binding.btnBeauty.setOnClickListener {
+        binding.layoutBeauty.setOnClickListener {
             if (categoryList[2]==0) {
                 categoryList[2] = 3
                 pickedNum++
@@ -103,7 +106,7 @@ LoginActivityView {
 
         }
 
-        binding.btnJachi.setOnClickListener {
+        binding.layoutJachi.setOnClickListener {
             if (categoryList[3]==0) {
                 categoryList[3] = 4
                 binding.btnJachi.setBackgroundResource(R.drawable.register_button_check)
@@ -121,7 +124,7 @@ LoginActivityView {
 
         }
 
-        binding.btnTrip.setOnClickListener {
+        binding.layoutTrip.setOnClickListener {
             if (categoryList[4]==0) {
                 categoryList[4] = 5
                 binding.btnTrip.setBackgroundResource(R.drawable.register_button_check)
@@ -139,7 +142,7 @@ LoginActivityView {
 
         }
 
-        binding.btnUniv.setOnClickListener {
+        binding.layoutUniv.setOnClickListener {
             if (categoryList[5]==0) {
                 categoryList[5] = 6
                 binding.btnUniv.setBackgroundResource(R.drawable.register_button_check)

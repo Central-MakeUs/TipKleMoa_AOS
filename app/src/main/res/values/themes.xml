@@ -51,6 +51,5 @@
     <style name="searchView" parent="Widget.AppCompat.SearchView">
         <item name="android:queryHint">"검색어를 입력하세요."</item>
         <item name="android:background">@drawable/ic_search_box</item>
-        <item name="android:searchIcon">@drawable/ic_search_icon</item>
     </style>
 </resources>

@@ -24,7 +24,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/tvRankKeyword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvRankKeyword"
-        app:srcCompat="@drawable/ic_icon_search_color" />
+        app:srcCompat="@drawable/ic_search_small" />
 
     <TextView
         android:id="@+id/tvRankKeyword"
