@@ -1,10 +1,13 @@
 package com.tipklemoa.tipkle.src.mypage
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import androidx.core.view.setPadding
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipDrawable
+import com.tbuonomo.viewpagerdotsindicator.setPaddingVertical
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.config.BaseActivity
 import com.tipklemoa.tipkle.config.BaseResponse
@@ -12,6 +15,10 @@ import com.tipklemoa.tipkle.databinding.ActivityKeywordBinding
 import com.tipklemoa.tipkle.src.mypage.model.KeywordResponse
 import com.tipklemoa.tipkle.src.mypage.model.MyPageResponse
 import com.tipklemoa.tipkle.src.mypage.model.PostKeywordRequest
+import android.util.TypedValue
+
+
+
 
 
 class KeywordActivity : BaseActivity<ActivityKeywordBinding>(ActivityKeywordBinding::inflate), MyPageView{
@@ -33,14 +40,14 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding>(ActivityKeywordBind
                     binding.tvCompleteKeyword.isEnabled = false
                     binding.tvCompleteKeyword.setTextColor(
                         resources.getColor(
-                            com.tipklemoa.tipkle.R.color.DBGray
+                            R.color.DBGray
                         )
                     )
                 } else {
                     binding.tvCompleteKeyword.isEnabled = true
                     binding.tvCompleteKeyword.setTextColor(
                         resources.getColor(
-                            com.tipklemoa.tipkle.R.color.mint
+                           R.color.mint
                         )
                     )
                 }
@@ -134,9 +141,18 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding>(ActivityKeywordBind
             chip.setTextColor(resources.getColor(R.color.black))
             chip.closeIcon = resources.getDrawable(R.drawable.ic_x)
             chip.isCloseIconVisible = true
-            //chip.
             chip.setTextAppearance(R.style.ChipTextAppearance)
-            //val chipDrawable = ChipDrawable.createFromResource(this, R.drawable.keyword_mint)
+            chip.isClickable = false
+            chip.setOnCloseIconClickListener {
+                showLoadingDialog(this)
+                MyPageService(this).tryDeleteKeyword(i.keywordId)
+            }
+            val chipDrawable = chip.chipDrawable as ChipDrawable
+            chipDrawable.chipBackgroundColor = ColorStateList.valueOf(resources.getColor(R.color.white))
+            chipDrawable.chipCornerRadius = 4F
+            chipDrawable.setChipStrokeColorResource(R.color.mint)
+            chipDrawable.chipStrokeWidth = 2F
+            chip.chipMinHeight = 80F
             //chip.setChipDrawable(chipDrawable)
 
             binding.chipGroup.addView(chip)

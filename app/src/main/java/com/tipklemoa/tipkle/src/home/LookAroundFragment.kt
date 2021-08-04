@@ -25,6 +25,7 @@ class LookAroundFragment : BaseFragment<FragmentLookAroundBinding>(
     lateinit var networkCallback : ConnectivityManager.NetworkCallback
 
     private var lookaroundList = mutableListOf<ResultLookAround>()
+    var feedAdapter:LookAroundFeedAdapter?=null
     private var page = 1      // 현재 페이지
     var isFeedEnd = false
     var postId = 0
@@ -110,6 +111,7 @@ class LookAroundFragment : BaseFragment<FragmentLookAroundBinding>(
                             showCustomToast("네트워크 연결을 확인해주세요!")
                         }
                         else {
+                            dismissLoadingDialog()
                             showLoadingDialog(requireContext())
                             if (clickedCatName != null) {
                                 HomeService(this@LookAroundFragment).tryLookAroundFeed(
@@ -181,22 +183,20 @@ class LookAroundFragment : BaseFragment<FragmentLookAroundBinding>(
         Handler(Looper.getMainLooper()).postDelayed({
             dismissLoadingDialog()
         }, 1500)
-
-        var feedAdapter = LookAroundFeedAdapter(requireContext(), response.result)
 //      맨 처음(page=1) -> 데이터가 하나라도 있으면
         if (page == 1 && response.result.isNotEmpty()) {
             Log.d("case", "1")
             lookaroundList.addAll(response.result)
             feedAdapter = LookAroundFeedAdapter(requireContext(), lookaroundList)
-            feedAdapter.setOnItemClickListener(onClicked)
+            feedAdapter!!.setOnItemClickListener(onClicked)
             binding.rvLookAroundFeed.adapter = feedAdapter
         }
 //      page=1부터 불러오고, 둥지가 있으면 추가해줘야함 ->
         else if (page != 1 && response.result.isNotEmpty()) {
             Log.d("case", "2")
             lookaroundList.addAll(response.result)
-            feedAdapter.notifyItemInserted(lookaroundList.size - 1)
-           feedAdapter.setOnItemClickListener(onClicked)
+            feedAdapter!!.notifyItemInserted(lookaroundList.size - 1)
+           feedAdapter!!.setOnItemClickListener(onClicked)
         }
 //        페이지추가 끝
         else if (page != 1 && response.result.isNullOrEmpty()) {

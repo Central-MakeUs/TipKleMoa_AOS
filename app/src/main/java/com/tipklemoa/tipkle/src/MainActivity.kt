@@ -1,5 +1,6 @@
 package com.tipklemoa.tipkle.src
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.tipklemoa.tipkle.R
@@ -14,6 +15,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initNavigationBar()
+        if (intent.getIntExtra("postId", 0)!=0){
+            val toFeedDetail = Intent(this, FeedDetailActivity::class.java)
+            toFeedDetail.putExtra("postId", intent.getIntExtra("postId", 0))
+            startActivity(toFeedDetail)
+        }
     }
 
     private fun initNavigationBar() {

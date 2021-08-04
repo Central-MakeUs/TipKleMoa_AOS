@@ -23,10 +23,17 @@ import com.tipklemoa.tipkle.src.login.model.KakaoRegisterResponse
 
 class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding::inflate), LoginActivityView {
     lateinit var networkCallback : ConnectivityManager.NetworkCallback
+    //var postId = 0
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+//        if (intent.extras!=null){
+//            postId = intent.extras!!.getInt("postId")
+//            Log.d("postId", postId.toString())
+//        }
+        //postId = intent.extras.getInt("")
 
         // Hide the status bar.
         window.setFlags(
@@ -41,8 +48,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
 
         networkCallback = object : ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: Network) {
-                // 네트워크가 연결될 때 호출됩니다.
-                Log.d("네트워크", "연결")
                 if (ApplicationClass.sSharedPreferences.getString(
                         ApplicationClass.X_ACCESS_TOKEN,
                         null
@@ -114,7 +119,10 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
         dismissLoadingDialog()
         if (response.code==1000){ //JWT 토큰 검증 성공 -> 메인 액티비티로
             Handler(Looper.getMainLooper()).postDelayed({
-                startActivity(Intent(this, MainActivity::class.java))
+                Log.d("postId", intent.getIntExtra("postId", 0).toString())
+                val toMain = Intent(this, MainActivity::class.java)
+                toMain.putExtra("postId", intent.getIntExtra("postId", 0))
+                startActivity(toMain)
                 finish()
             }, 2000)
         }

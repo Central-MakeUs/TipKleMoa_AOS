@@ -116,9 +116,11 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
             cetegoryDialog.show(supportFragmentManager, cetegoryDialog.tag)
         }
 
-        binding.edtHow.setOnTouchListener{ v, event ->
-            binding.scrollNewTip.smoothScrollTo(0, binding.edtHow.top)
-            false
+        binding.edtTipLine.setOnFocusChangeListener { v, hasFocus ->
+
+            if (hasFocus){
+                binding.scrollNewTip.smoothScrollTo(0, binding.edtWhen.top)
+            }
         }
 
         binding.edtHow.addTextChangedListener(object:TextWatcher{

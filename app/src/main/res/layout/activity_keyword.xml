@@ -98,6 +98,7 @@
         android:fontFamily="@font/notosanscjkkr_regular"
         android:includeFontPadding="false"
         android:inputType="textPersonName"
+        android:maxLength="10"
         android:hint="키워드를 입력해주세요."
         android:textColorHint="@color/DBGray"
         android:padding="12dp"

@@ -3,25 +3,17 @@ package com.tipklemoa.tipkle.src.search
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.View
-import android.widget.TextView
-import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.RecyclerView
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.config.BaseFragment
 import com.tipklemoa.tipkle.databinding.FragmentSearchResultBinding
-import com.tipklemoa.tipkle.src.home.HomeService
-import com.tipklemoa.tipkle.src.home.LookAroundFeedAdapter
-import com.tipklemoa.tipkle.src.home.model.ResultLookAround
 import com.tipklemoa.tipkle.src.search.model.KeywordResponse
 import com.tipklemoa.tipkle.src.search.model.ResultSearch
 import com.tipklemoa.tipkle.src.search.model.SearchResponse
-import android.text.SpannableStringBuilder
 
 class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(
     FragmentSearchResultBinding::bind,
@@ -32,6 +24,7 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(
     var order="recent"
     private var page = 1      // 현재 페이지
     var isFeedEnd = false
+    var searchAdapter:SearchFeedAdapter?=null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -152,7 +145,6 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(
             dismissLoadingDialog()
         }, 1500)
 
-        var searchAdapter = SearchFeedAdapter(requireContext(), response.result)
 //      맨 처음(page=1) -> 데이터가 하나라도 있으면
         if (page == 1 && response.result.isNotEmpty()) {
             Log.d("case", "1")
@@ -171,7 +163,7 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(
 
             searchResultList.addAll(response.result)
             Log.d("case", searchResultList.size.toString())
-            searchAdapter.notifyItemInserted(searchResultList.size - 1)
+            searchAdapter!!.notifyItemInserted(searchResultList.size - 1)
         }
 //        페이지추가 끝
         else if (page != 1 && response.result.isNullOrEmpty()) {
