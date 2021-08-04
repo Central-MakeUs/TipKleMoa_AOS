@@ -32,6 +32,25 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        binding.swipeSearch.setOnRefreshListener {
+            val pagerAdapter = PagerFragmentStateAdapter(requireActivity())
+            // 2개의 Fragment Add
+            pagerAdapter.removeAllFragments()
+
+            pagerAdapter.addFragment(PopularKeywordFragment())
+            pagerAdapter.addFragment(RecentKeywordFragment())
+            // Adapter
+            binding.searchViewPager.adapter = pagerAdapter
+
+            binding.searchViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                }
+            })
+
+            binding.swipeSearch.isRefreshing = false
+        }
+
         val pagerAdapter = PagerFragmentStateAdapter(requireActivity())
         // 2개의 Fragment Add
         pagerAdapter.addFragment(PopularKeywordFragment())

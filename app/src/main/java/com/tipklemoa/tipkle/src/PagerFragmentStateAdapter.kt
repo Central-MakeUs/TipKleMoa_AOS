@@ -21,8 +21,8 @@ class PagerFragmentStateAdapter(fragmentActivity: FragmentActivity): FragmentSta
         notifyItemInserted(fragments.size-1)
     }
 
-    fun removeFragment() {
-        fragments.removeAt(fragments.size-1)
-        notifyItemRemoved(fragments.size)
+    fun removeAllFragments() {
+        fragments.removeAll(fragments)
+        notifyDataSetChanged()
     }
 }

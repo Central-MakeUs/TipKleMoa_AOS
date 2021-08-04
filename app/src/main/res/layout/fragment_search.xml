@@ -1,98 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/searchFrame"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/swipeSearch"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".src.home.HomeFragment">
+    android:layout_height="match_parent">
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/searchFrame"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        android:overScrollMode="never"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".src.home.HomeFragment">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:background="@color/white"
-                android:minHeight="?attr/actionBarSize"
-                android:theme="?attr/actionBarTheme"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent="0.1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="wrap_content">
 
-            </androidx.appcompat.widget.Toolbar>
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@color/white"
+                    android:minHeight="?attr/actionBarSize"
+                    android:theme="?attr/actionBarTheme"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/edtSearch"
-                style="@style/searchView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="24dp"
-                app:defaultQueryHint="검색어를 입력해주세요."
-                android:gravity="left"
-                android:paddingLeft="-13dp"
-                app:iconifiedByDefault="false"
-                app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-                app:layout_constraintEnd_toEndOf="@+id/toolbar"
-                app:layout_constraintHeight_percent="0.409"
-                app:layout_constraintStart_toStartOf="@id/toolbar"
-                app:layout_constraintTop_toTopOf="@+id/toolbar"
-                app:layout_constraintWidth_percent="0.87"
-                app:queryHint="검색어를 입력해주세요." />
+                </androidx.appcompat.widget.Toolbar>
 
-            <ImageView
-                android:id="@+id/imageView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                android:layout_margin="11dp"
-                android:src="@drawable/ic_search_small"
-                app:layout_constraintBottom_toBottomOf="@+id/edtSearch"
-                app:layout_constraintStart_toStartOf="@+id/edtSearch"
-                app:layout_constraintTop_toTopOf="@+id/edtSearch" />
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/edtSearch"
+                    style="@style/searchView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="24dp"
+                    app:defaultQueryHint="검색어를 입력해주세요."
+                    android:gravity="left"
+                    android:paddingLeft="-13dp"
+                    app:iconifiedByDefault="false"
+                    app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+                    app:layout_constraintEnd_toEndOf="@+id/toolbar"
+                    app:layout_constraintHeight_percent="0.409"
+                    app:layout_constraintStart_toStartOf="@id/toolbar"
+                    app:layout_constraintTop_toTopOf="@+id/toolbar"
+                    app:layout_constraintWidth_percent="0.87"
+                    app:queryHint="검색어를 입력해주세요." />
 
-            <com.google.android.material.tabs.TabLayout
-                android:layout_marginTop="20dp"
-                android:id="@+id/search_top_tab"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:clipToPadding="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edtSearch"
-                app:tabIndicator="@drawable/ic_home_tab_underline"
-                app:tabIndicatorColor="@color/mint"
-                app:tabPaddingEnd="-1dp"
-                app:tabPaddingStart="-1dp"
-                app:tabSelectedTextColor="@color/mint"
-                app:tabTextAppearance="@style/search_tabtext_style"
-                tools:ignore="SpeakableTextPresentCheck" />
+                <ImageView
+                    android:id="@+id/imageView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    android:layout_margin="11dp"
+                    android:src="@drawable/ic_search_small"
+                    app:layout_constraintBottom_toBottomOf="@+id/edtSearch"
+                    app:layout_constraintStart_toStartOf="@+id/edtSearch"
+                    app:layout_constraintTop_toTopOf="@+id/edtSearch" />
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/searchViewPager"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/search_top_tab" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+                <com.google.android.material.tabs.TabLayout
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/search_top_tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:clipToPadding="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtSearch"
+                    app:tabIndicator="@drawable/ic_home_tab_underline"
+                    app:tabIndicatorColor="@color/mint"
+                    app:tabPaddingEnd="-1dp"
+                    app:tabPaddingStart="-1dp"
+                    app:tabSelectedTextColor="@color/mint"
+                    app:tabTextAppearance="@style/search_tabtext_style"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/searchViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/search_top_tab" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
