@@ -1,35 +1,31 @@
 package com.tipklemoa.tipkle.src.search
 
 import android.os.Bundle
-import androidx.recyclerview.widget.GridLayoutManager
-import com.google.android.material.tabs.TabLayout
+import androidx.fragment.app.FragmentManager
 import com.tipklemoa.tipkle.R
-import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseFragment
-import com.tipklemoa.tipkle.config.BaseResponse
-import com.tipklemoa.tipkle.databinding.ViewpagerPickedTipTabBinding
 import com.tipklemoa.tipkle.databinding.ViewpagerPopularKeywordBinding
-import com.tipklemoa.tipkle.databinding.ViewpagerRecentKeywordBinding
-import com.tipklemoa.tipkle.src.home.model.BannerResponse
-import com.tipklemoa.tipkle.src.home.model.CategoryListResponse
-import com.tipklemoa.tipkle.src.home.model.HomePreviewFeedResponse
-import com.tipklemoa.tipkle.src.home.model.LookAroundResponse
 import com.tipklemoa.tipkle.src.search.model.KeywordResponse
 import com.tipklemoa.tipkle.src.search.model.SearchResponse
 
 class PopularViewPagerFragment : BaseFragment<ViewpagerPopularKeywordBinding>(ViewpagerPopularKeywordBinding::bind,
     R.layout.viewpager_popular_keyword), SearchFragmentView {
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onResume() {
+        super.onResume()
 
-        showLoadingDialog(requireContext())
-        SearchService(this).tryGetKeyword("popular")
+        if (!isNetworkConnected()){
+            showCustomToast("네트워크 연결을 확인해주세요!")
+        }
+        else{
+            showLoadingDialog(requireContext())
+            SearchService(this).tryGetKeyword("popular")
+        }
     }
 
     override fun onGetKeywordSuccess(response: KeywordResponse) {
         dismissLoadingDialog()
-        var rankNumList = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+        val rankNumList = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
         val pageAdapter = KeywordAdapter(requireContext(), rankNumList, response.result)
         pageAdapter.setOnItemClickListener(onClicked)
         binding.rvPopularKeyword.adapter = pageAdapter

@@ -1,287 +1,295 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<androidx.core.widget.NestedScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".src.RegisterNewTipActivity">
+    android:id="@+id/scrollNewTip"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:background="@color/white"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        tools:context=".src.RegisterNewTipActivity">
 
-
-    </androidx.appcompat.widget.Toolbar>
-
-    <ImageView
-        android:id="@+id/btnNewTipBack"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_gravity="center"
-        android:layout_marginVertical="30dp"
-        android:layout_marginLeft="24dp"
-        android:background="@drawable/ic_icon_back"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar" />
-
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/notosanscjkkr_bold"
-        android:includeFontPadding="false"
-        android:text="새 게시물"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvCompleteNewTip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="30dp"
-        android:layout_marginRight="24dp"
-        android:fontFamily="@font/notosanscjkkr_bold"
-        android:includeFontPadding="false"
-        android:text="완료"
-        android:textColor="@color/DBGray"
-        android:enabled="false"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnTakePic"
-        android:layout_width="88dp"
-        android:layout_height="88dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="22dp"
-        android:background="@drawable/ic_camera_rectangle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/ic_camera_icon"
-        app:layout_constraintEnd_toEndOf="@+id/btnTakePic"
-        app:layout_constraintStart_toStartOf="@+id/btnTakePic"
-        app:layout_constraintTop_toTopOf="@+id/btnTakePic" />
-
-    <TextView
-        android:id="@+id/tvPickedPicCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:textSize="13dp"
-        android:text="0"
-        android:textColor="@color/mint"
-        app:layout_constraintStart_toStartOf="@+id/imageView11"
-        app:layout_constraintTop_toBottomOf="@+id/imageView11" />
-
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="/5"
-        android:textColor="@color/gray97"
-        android:textSize="13dp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView11"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/tvPickedPicCount"
-        app:layout_constraintTop_toBottomOf="@+id/imageView11" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvPickedPicList"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginLeft="8dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="@+id/btnTakePic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnTakePic"
-        app:layout_constraintTop_toTopOf="@+id/btnTakePic" />
-
-    <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="40dp"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnTakePic"
-        app:srcCompat="@drawable/ic_gray_line" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_category"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView12">
-
-        <TextView
-            android:id="@+id/tvNewTipCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="20dp"
-            android:layout_marginLeft="24dp"
-            android:fontFamily="@font/notosanscjkkr_medium"
-            android:includeFontPadding="false"
-            android:text="*카테고리"
-            android:textColor="@color/mint"
-            android:textSize="18dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+
+        </androidx.appcompat.widget.Toolbar>
 
         <ImageView
+            android:id="@+id/btnNewTipBack"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_marginVertical="30dp"
+            android:layout_marginLeft="24dp"
+            android:background="@drawable/ic_icon_back"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/toolbar" />
+
+        <TextView
+            android:id="@+id/textView16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/notosanscjkkr_bold"
+            android:includeFontPadding="false"
+            android:text="새 게시물"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintEnd_toEndOf="@+id/toolbar"
+            app:layout_constraintStart_toStartOf="@+id/toolbar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCompleteNewTip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="30dp"
             android:layout_marginRight="24dp"
-            android:background="@drawable/ic_arrow_down"
+            android:fontFamily="@font/notosanscjkkr_bold"
+            android:includeFontPadding="false"
+            android:text="완료"
+            android:textColor="@color/DBGray"
+            android:enabled="false"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintEnd_toEndOf="@+id/toolbar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnTakePic"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/ic_camera_rectangle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/ic_camera_icon"
+            app:layout_constraintEnd_toEndOf="@+id/btnTakePic"
+            app:layout_constraintStart_toStartOf="@+id/btnTakePic"
+            app:layout_constraintTop_toTopOf="@+id/btnTakePic" />
+
+        <TextView
+            android:id="@+id/tvPickedPicCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textSize="13dp"
+            android:text="0"
+            android:textColor="@color/mint"
+            app:layout_constraintStart_toStartOf="@+id/imageView11"
+            app:layout_constraintTop_toBottomOf="@+id/imageView11" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/5"
+            android:textColor="@color/gray97"
+            android:textSize="13dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView11"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/tvPickedPicCount"
+            app:layout_constraintTop_toBottomOf="@+id/imageView11" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPickedPicList"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="@+id/btnTakePic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnTakePic"
+            app:layout_constraintTop_toTopOf="@+id/btnTakePic" />
+
+        <ImageView
+            android:id="@+id/imageView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="40dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnTakePic"
+            app:srcCompat="@drawable/ic_gray_line" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_category"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView12">
+
+            <TextView
+                android:id="@+id/tvNewTipCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                android:layout_marginLeft="24dp"
+                android:fontFamily="@font/notosanscjkkr_medium"
+                android:includeFontPadding="false"
+                android:text="*카테고리"
+                android:textColor="@color/mint"
+                android:textSize="18dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="24dp"
+                android:background="@drawable/ic_arrow_down"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/imageView13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_category"
+            app:srcCompat="@drawable/ic_gray_line" />
+
+        <TextView
+            android:id="@+id/tvWhenStar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:fontFamily="@font/notosanscjkkr_bold"
+            android:includeFontPadding="false"
+            android:text="*"
+            android:textSize="18dp"
+            android:textColor="@color/mint"
+            app:layout_constraintBottom_toBottomOf="@+id/edtWhen"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/edtWhen">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/edtWhen"
+            android:layout_width="0dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="12dp"
+            android:background="@color/transparent"
+            android:hint="  When? (4~25자 입력해주세요.)"
+            android:inputType="textPersonName"
+            android:maxLength="25"
+            android:minHeight="48dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/DBGray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView13" />
+
+        <ImageView
+            android:id="@+id/imageView14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="12dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtWhen"
+            app:srcCompat="@drawable/ic_gray_line" />
+
+        <TextView
+            android:id="@+id/tvHowStar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:fontFamily="@font/notosanscjkkr_bold"
+            android:includeFontPadding="false"
+            android:text="*"
+            android:textSize="18dp"
+            android:textColor="@color/mint"
+            app:layout_constraintBottom_toBottomOf="@+id/edtHow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/edtHow">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/edtHow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginHorizontal="24dp"
+            android:background="@color/transparent"
+            android:hint="  How? (4~25자 입력해주세요.)"
+            android:inputType="textPersonName"
+            android:maxLength="25"
+            android:minHeight="48dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/DBGray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView14" />
+
+        <ImageView
+            android:id="@+id/imageView15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="12dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtHow"
+            app:srcCompat="@drawable/ic_gray_line" />
+
+        <EditText
+            android:id="@+id/edtTipLine"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="@color/transparent"
+            android:gravity="start"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:lineSpacingExtra="6dp"
+            android:enabled="true"
+            android:hint="나만의 꿀팁을 입력해주세요. (관계없는 내용의 꿀팁은 게시가 제한될 수 있어요.)"
+            android:inputType="text|textMultiLine"
+            android:textColorHint="@color/DBGray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView15" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ImageView
-        android:id="@+id/imageView13"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_category"
-        app:srcCompat="@drawable/ic_gray_line" />
-
-    <TextView
-        android:id="@+id/tvWhenStar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:fontFamily="@font/notosanscjkkr_bold"
-        android:includeFontPadding="false"
-        android:text="*"
-        android:textSize="18dp"
-        android:textColor="@color/mint"
-        app:layout_constraintBottom_toBottomOf="@+id/edtWhen"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/edtWhen">
-
-    </TextView>
-
-    <EditText
-        android:id="@+id/edtWhen"
-        android:layout_width="0dp"
-        android:layout_marginHorizontal="24dp"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="12dp"
-        android:background="@color/transparent"
-        android:hint="  When? (4~25자 입력해주세요.)"
-        android:inputType="textPersonName"
-        android:maxLength="25"
-        android:minHeight="48dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/DBGray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView13" />
-
-    <ImageView
-        android:id="@+id/imageView14"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="12dp"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtWhen"
-        app:srcCompat="@drawable/ic_gray_line" />
-
-    <TextView
-        android:id="@+id/tvHowStar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:fontFamily="@font/notosanscjkkr_bold"
-        android:includeFontPadding="false"
-        android:text="*"
-        android:textSize="18dp"
-        android:textColor="@color/mint"
-        app:layout_constraintBottom_toBottomOf="@+id/edtHow"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/edtHow">
-
-    </TextView>
-
-    <EditText
-        android:id="@+id/edtHow"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginHorizontal="24dp"
-        android:background="@color/transparent"
-        android:hint="  How? (4~25자 입력해주세요.)"
-        android:inputType="textPersonName"
-        android:maxLength="25"
-        android:minHeight="48dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/DBGray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView14" />
-
-    <ImageView
-        android:id="@+id/imageView15"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="12dp"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtHow"
-        app:srcCompat="@drawable/ic_gray_line" />
-
-    <EditText
-        android:id="@+id/edtTipLine"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginBottom="24dp"
-        android:background="@color/transparent"
-        android:gravity="start"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/black"
-        android:lineSpacingExtra="6dp"
-        android:hint="나만의 꿀팁을 입력해주세요. (관계없는 내용의 꿀팁은 게시가 제한될 수 있어요.)"
-        android:inputType="textMultiLine"
-        android:textColorHint="@color/DBGray"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView15" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

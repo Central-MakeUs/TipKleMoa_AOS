@@ -158,6 +158,7 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(
             Log.d("case", "1")
 
             binding.layoutEmptysearch.visibility = View.INVISIBLE
+            binding.rvSearchFeed.visibility = View.VISIBLE
             searchResultList.addAll(response.result)
             Log.d("case", searchResultList.size.toString())
             searchAdapter = SearchFeedAdapter(requireContext(), searchResultList)

@@ -12,15 +12,19 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:layout_marginRight="8dp"
-        android:src="@drawable/keyword_mint"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_rectangle_keyword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ImageContrastCheck" />
 
     <TextView
         android:id="@+id/tvKeyword"
         android:layout_width="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="4dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/notosanscjkkr_medium"
         android:includeFontPadding="false"

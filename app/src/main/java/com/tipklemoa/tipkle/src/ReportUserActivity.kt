@@ -13,6 +13,7 @@ class ReportUserActivity : BaseActivity<ActivityReportUserBinding>(ActivityRepor
     var postId = 0
     var commentId = 0
     var what = ""
+    var reason = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +37,7 @@ class ReportUserActivity : BaseActivity<ActivityReportUserBinding>(ActivityRepor
 
         binding.layoutLie.setOnClickListener {
             val bundle = Bundle()
+            reason = "거짓 정보"
             if (postId!=0){
                 bundle.putInt("postId", postId)
             }
@@ -43,6 +45,7 @@ class ReportUserActivity : BaseActivity<ActivityReportUserBinding>(ActivityRepor
                 bundle.putInt("commentId", commentId)
             }
             bundle.putString("what", "report")
+            bundle.putString("reason", reason)
 
             val reallyReportDialog = ReallyReportDialog()
             reallyReportDialog.arguments = bundle
@@ -51,6 +54,7 @@ class ReportUserActivity : BaseActivity<ActivityReportUserBinding>(ActivityRepor
 
         binding.layoutAd.setOnClickListener {
             val bundle = Bundle()
+            reason = "광고 및 홍보성 내용"
             if (postId!=0){
                 bundle.putInt("postId", postId)
             }
@@ -58,6 +62,7 @@ class ReportUserActivity : BaseActivity<ActivityReportUserBinding>(ActivityRepor
                 bundle.putInt("commentId", commentId)
             }
             bundle.putString("what", "report")
+            bundle.putString("reason", reason)
 
             val reallyReportDialog = ReallyReportDialog()
             reallyReportDialog.arguments = bundle
@@ -66,6 +71,7 @@ class ReportUserActivity : BaseActivity<ActivityReportUserBinding>(ActivityRepor
 
         binding.layoutAbuse.setOnClickListener {
             val bundle = Bundle()
+            reason = "욕설, 비방 등 "
             if (postId!=0){
                 bundle.putInt("postId", postId)
             }
@@ -73,6 +79,7 @@ class ReportUserActivity : BaseActivity<ActivityReportUserBinding>(ActivityRepor
                 bundle.putInt("commentId", commentId)
             }
             bundle.putString("what", "report")
+            bundle.putString("reason", reason)
 
             val reallyReportDialog = ReallyReportDialog()
             reallyReportDialog.arguments = bundle
@@ -81,6 +88,7 @@ class ReportUserActivity : BaseActivity<ActivityReportUserBinding>(ActivityRepor
 
         binding.layoutCopyright.setOnClickListener {
             val bundle = Bundle()
+            reason = "저작권 침해"
             if (postId!=0){
                 bundle.putInt("postId", postId)
             }
@@ -88,6 +96,7 @@ class ReportUserActivity : BaseActivity<ActivityReportUserBinding>(ActivityRepor
                 bundle.putInt("commentId", commentId)
             }
             bundle.putString("what", "report")
+            bundle.putString("reason", reason)
 
             val reallyReportDialog = ReallyReportDialog()
             reallyReportDialog.arguments = bundle
@@ -96,6 +105,7 @@ class ReportUserActivity : BaseActivity<ActivityReportUserBinding>(ActivityRepor
 
         binding.layoutEtc.setOnClickListener {
             val bundle = Bundle()
+            reason = "기타"
             if (postId!=0){
                 bundle.putInt("postId", postId)
             }
@@ -103,6 +113,7 @@ class ReportUserActivity : BaseActivity<ActivityReportUserBinding>(ActivityRepor
                 bundle.putInt("commentId", commentId)
             }
             bundle.putString("what", "report")
+            bundle.putString("reason", reason)
 
             val reallyReportDialog = ReallyReportDialog()
             reallyReportDialog.arguments = bundle

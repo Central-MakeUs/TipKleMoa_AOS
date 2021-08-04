@@ -24,6 +24,7 @@
         android:theme="@style/Theme.TipKle">
         <activity
             android:name=".src.mypage.KeywordActivity"
+            android:theme="@style/Theme.Keyword"
             android:exported="true" />
         <activity
             android:name=".src.ReportUserActivity"
@@ -97,11 +98,13 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-<!--        <service android:name=".">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="com.google.firebase.MESSAGING_EVENT" />-->
-<!--            </intent-filter>-->
-<!--        </service>-->
+        <service
+            android:name=".service.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

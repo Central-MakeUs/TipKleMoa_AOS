@@ -1,166 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/mainRefresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
-
-    <!-- tabindicatorFullWidth : 글씨크기에 맞게 indicator -->
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/picked_cat_tab"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/white"
-        android:clipToPadding="false"
-        app:tabIndicatorFullWidth="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tabIndicatorColor="@color/mint"
-        app:tabPaddingBottom="-10dp"
-        app:tabPaddingEnd="-1dp"
-        app:tabPaddingStart="-1dp"
-        app:tabPaddingTop="-1dp"
-        app:tabSelectedTextColor="@color/mint"
-        app:tabTextAppearance="@style/home_categorytabtext_style"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/pickedBannerViewPager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/picked_cat_tab" >
-
-    </androidx.viewpager2.widget.ViewPager2>
-
-    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-        android:id="@+id/pickedIndicator"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginTop="12dp"
-        app:dotsColor="@color/DBGray"
-        app:dotsCornerRadius="8dp"
-        app:dotsSize="6dp"
-        app:dotsSpacing="4dp"
-        app:dotsWidthFactor="2.5"
-        app:progressMode="false"
-        app:selectedDotColor="@color/mint"
-        app:layout_constraintWidth_percent="0.125"
-        app:layout_constraintHeight_percent="0.023"
-        app:layout_constraintTop_toBottomOf="@id/pickedBannerViewPager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/pickedLookAround"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pickedIndicator">
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <!-- tabindicatorFullWidth : 글씨크기에 맞게 indicator -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/picked_cat_tab"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:clipToPadding="false"
+            app:tabIndicatorFullWidth="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabIndicatorColor="@color/mint"
+            app:tabPaddingBottom="-10dp"
+            app:tabPaddingEnd="-1dp"
+            app:tabPaddingStart="-1dp"
+            app:tabPaddingTop="-1dp"
+            app:tabSelectedTextColor="@color/mint"
+            app:tabTextAppearance="@style/home_categorytabtext_style"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pickedBannerViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/picked_cat_tab" >
+
+        </androidx.viewpager2.widget.ViewPager2>
+
+        <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+            android:id="@+id/pickedIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            app:dotsColor="@color/DBGray"
+            app:dotsCornerRadius="8dp"
+            app:dotsSize="6dp"
+            app:dotsSpacing="4dp"
+            app:dotsWidthFactor="2.5"
+            app:progressMode="false"
+            app:selectedDotColor="@color/mint"
+            app:layout_constraintWidth_percent="0.125"
+            app:layout_constraintHeight_percent="0.023"
+            app:layout_constraintTop_toBottomOf="@id/pickedBannerViewPager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/pickedLookAround"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pickedIndicator">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
+                android:text="팁끌 둘러보기"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_icon_next"
+                android:backgroundTint="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/pickedtiprecent"
             android:layout_marginLeft="24dp"
             android:fontFamily="@font/notosanscjkkr_bold"
+            android:textSize="16dp"
+            android:layout_marginTop="6dp"
             android:includeFontPadding="false"
-            android:text="팁끌 둘러보기"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:textSize="18dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="최신순"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/pickedLookAround" />
 
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginRight="24dp"
-            android:layout_gravity="center"
-            android:background="@drawable/ic_icon_next"
-            android:backgroundTint="@color/black"
+        <TextView
+            android:id="@+id/imageView3"
+            android:layout_width="3dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_marginBottom="1dp"
+            android:fontFamily="@font/notosanscjkkr_bold"
+            android:includeFontPadding="false"
+            android:text=" | "
+            android:textColor="@color/DBGray"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="@+id/pickedtiprecent"
+            app:layout_constraintStart_toEndOf="@+id/pickedtiprecent"
+            app:layout_constraintTop_toTopOf="@+id/pickedtiprecent" />
+
+        <TextView
+            android:id="@+id/pickedtippopular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:fontFamily="@font/notosanscjkkr_bold"
+            android:includeFontPadding="false"
+            android:text="인기순"
+            android:textColor="@color/DBGray"
+            android:textSize="16dp"
+            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="@+id/pickedtiprecent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvHomePreviewFeed"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="8dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="24dp"
+            android:overScrollMode="never"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pickedtiprecent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/pickedfloatting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="20dp"
+            app:maxImageSize="64dp"
+            app:fabSize="normal"
+            app:fabCustomSize="64dp"
+            android:clickable="true"
+            android:src="@drawable/ic_icon_write"
+            android:stateListAnimator="@null"
+            android:scaleType="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/pickedtiprecent"
-        android:layout_marginLeft="24dp"
-        android:fontFamily="@font/notosanscjkkr_bold"
-        android:textSize="16dp"
-        android:layout_marginTop="6dp"
-        android:includeFontPadding="false"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:text="최신순"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pickedLookAround" />
-
-    <TextView
-        android:id="@+id/imageView3"
-        android:layout_width="3dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="6dp"
-        android:layout_marginBottom="1dp"
-        android:fontFamily="@font/notosanscjkkr_bold"
-        android:includeFontPadding="false"
-        android:text=" | "
-        android:textColor="@color/DBGray"
-        android:textSize="15dp"
-        app:layout_constraintBottom_toBottomOf="@+id/pickedtiprecent"
-        app:layout_constraintStart_toEndOf="@+id/pickedtiprecent"
-        app:layout_constraintTop_toTopOf="@+id/pickedtiprecent" />
-
-    <TextView
-        android:id="@+id/pickedtippopular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="6dp"
-        android:fontFamily="@font/notosanscjkkr_bold"
-        android:includeFontPadding="false"
-        android:text="인기순"
-        android:textColor="@color/DBGray"
-        android:textSize="16dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/pickedtiprecent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvHomePreviewFeed"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="8dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="24dp"
-        android:overScrollMode="never"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pickedtiprecent" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/pickedfloatting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="20dp"
-        app:maxImageSize="64dp"
-        app:fabSize="normal"
-        app:fabCustomSize="64dp"
-        android:clickable="true"
-        android:src="@drawable/ic_icon_write"
-        android:stateListAnimator="@null"
-        android:scaleType="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

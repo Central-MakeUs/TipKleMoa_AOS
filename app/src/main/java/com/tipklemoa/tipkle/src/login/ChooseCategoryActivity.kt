@@ -33,24 +33,34 @@ LoginActivityView {
         binding.linearLayout5.isEnabled = true
         binding.linearLayout5.isClickable = true
 
-        binding.loComplete.setOnClickListener {
-            val nickName = intent.getStringExtra("nickName")
-            val accessToken = intent.getStringExtra("accessToken")
+        if (!isNetworkConnected()){
+            Log.d("네트워크", "연결끊김")
+            showCustomToast("네트워크 연결을 확인해주세요!")
+        }
 
-            for (i in categoryList){
-                if (i!=0){
-                    pickedCategoryList.add(i)
+        binding.loComplete.setOnClickListener {
+            if (!isNetworkConnected()){
+                Log.d("네트워크", "연결끊김")
+                showCustomToast("네트워크 연결을 확인해주세요!")
+            }
+            else{
+                val nickName = intent.getStringExtra("nickName")
+                val accessToken = intent.getStringExtra("accessToken")
+                val fcmToken = intent.getStringExtra("fcmToken")
+
+                for (i in categoryList){
+                    if (i!=0){
+                        pickedCategoryList.add(i)
+                    }
+                }
+
+                if (nickName!= null && accessToken!=null && fcmToken!=null){
+                    showLoadingDialog(this)
+                    val postKakaoRegisterRequest = PostKakaoRegisterRequest(accessToken, nickName,
+                        pickedCategoryList, fcmToken)
+                    LoginService(this).tryPostKakaoRegister(postKakaoRegisterRequest)
                 }
             }
-
-            if (nickName!= null && accessToken!=null){
-                showLoadingDialog(this)
-                val postKakaoRegisterRequest = PostKakaoRegisterRequest(accessToken, nickName,
-                    pickedCategoryList)
-                LoginService(this).tryPostKakaoRegister(postKakaoRegisterRequest)
-            }
-
-            Log.d("hello", "왜안돼")
         }
 
         binding.layoutClean.setOnClickListener {

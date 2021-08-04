@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -21,6 +22,7 @@ import com.tipklemoa.tipkle.src.model.CommentResponse
 import com.tipklemoa.tipkle.src.model.DetailFeedResponse
 import com.tipklemoa.tipkle.src.model.NewTipResponse
 import com.tipklemoa.tipkle.src.model.PostReportFeedRequest
+import com.tipklemoa.tipkle.src.search.SearchService
 import com.tipklemoa.tipkle.util.LoadingDialog
 
 class ReallyReportDialog : DialogFragment(), MainView {
@@ -31,6 +33,7 @@ class ReallyReportDialog : DialogFragment(), MainView {
     var postId = 0
     var commentId = 0
     var what = ""
+    var reason = ""
 
     lateinit var mLoadingDialog: LoadingDialog
     private lateinit var binding: LayoutDetailReallyReportDialogBinding
@@ -51,6 +54,7 @@ class ReallyReportDialog : DialogFragment(), MainView {
         postId = arguments?.getInt("postId")!!
         commentId = arguments?.getInt("commentId")!!
         what = arguments?.getString("what")!!
+        reason = arguments?.getString("reason")!!
 
         Log.d("확인", postId.toString())
 
@@ -61,14 +65,25 @@ class ReallyReportDialog : DialogFragment(), MainView {
 
 
         binding.btnReportConfirm.setOnClickListener {
-            showLoadingDialog(requireContext())
             if (postId!=0){
-                val postReportFeedRequest = PostReportFeedRequest("신고")
-                MainService(this).tryPostReportFeed(postId, postReportFeedRequest)
+                if (!isNetworkConnected()){
+                    Toast.makeText(requireContext(), "네트워크 연결을 확인해주세요!", Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    showLoadingDialog(requireContext())
+                    val postReportFeedRequest = PostReportFeedRequest(reason)
+                    MainService(this).tryPostReportFeed(postId, postReportFeedRequest)
+                }
             }
             else if (commentId!=0){
-                val postReportComment = PostReportFeedRequest("신고")
-                MainService(this).tryPostReportComment(commentId, postReportComment)
+                if (!isNetworkConnected()){
+                    Toast.makeText(requireContext(), "네트워크 연결을 확인해주세요!", Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    showLoadingDialog(requireContext())
+                    val postReportComment = PostReportFeedRequest(reason)
+                    MainService(this).tryPostReportComment(commentId, postReportComment)
+                }
             }
         }
 
@@ -214,5 +229,10 @@ class ReallyReportDialog : DialogFragment(), MainView {
     override fun onPostCommentReportFailure(message: String) {
         dismissLoadingDialog()
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    fun isNetworkConnected(): Boolean {
+        val cm = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return cm.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
     }
 }

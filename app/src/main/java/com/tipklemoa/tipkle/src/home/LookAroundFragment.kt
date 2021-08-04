@@ -1,6 +1,8 @@
 package com.tipklemoa.tipkle.src.home
 
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.Network
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -20,11 +22,36 @@ class LookAroundFragment : BaseFragment<FragmentLookAroundBinding>(
     R.layout.fragment_look_around
 ), HomeFragmentView{
     var clickedCatName = ApplicationClass.sSharedPreferences.getString("clickedCatName", null)
+    lateinit var networkCallback : ConnectivityManager.NetworkCallback
 
     private var lookaroundList = mutableListOf<ResultLookAround>()
     private var page = 1      // 현재 페이지
     var isFeedEnd = false
     var postId = 0
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        if (!isNetworkConnected()){
+            showCustomToast("네트워크 연결을 확인해주세요!")
+        }
+
+        networkCallback = object : ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: Network) {
+                showLoadingDialog(requireContext())
+                page = 1
+                lookaroundList.clear()
+                isFeedEnd = false
+
+                HomeService(this@LookAroundFragment).tryLookAroundFeed(clickedCatName!!, "recent", null, page)
+            }
+
+            override fun onLost(network: Network) {
+                // 네트워크가 끊길 때 호출됩니다.
+
+            }
+        }
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -37,23 +64,33 @@ class LookAroundFragment : BaseFragment<FragmentLookAroundBinding>(
         binding.tvLookAroundRecent.setOnClickListener {
             binding.tvLookAroundRecent.setTextColor(resources.getColor(R.color.black))
             binding.tvLookAroundPopular.setTextColor(resources.getColor(R.color.DBGray))
-            showLoadingDialog(requireContext())
             if (clickedCatName != null) {
                 page = 1
                 lookaroundList.clear()
 
-                HomeService(this).tryLookAroundFeed(clickedCatName!!, "recent", null, page)
+                if (!isNetworkConnected()){
+                    showCustomToast("네트워크 연결을 확인해주세요!")
+                }
+                else{
+                    showLoadingDialog(requireContext())
+                    HomeService(this).tryLookAroundFeed(clickedCatName!!, "recent", null, page)
+                }
             }
         }
 
         binding.tvLookAroundPopular.setOnClickListener {
             binding.tvLookAroundPopular.setTextColor(resources.getColor(R.color.black))
             binding.tvLookAroundRecent.setTextColor(resources.getColor(R.color.DBGray))
-            showLoadingDialog(requireContext())
             if (clickedCatName != null) {
                 page = 1
                 lookaroundList.clear()
-                HomeService(this).tryLookAroundFeed(clickedCatName!!, "popular", null, page)
+                if (!isNetworkConnected()){
+                    showCustomToast("네트워크 연결을 확인해주세요!")
+                }
+                else{
+                    showLoadingDialog(requireContext())
+                    HomeService(this).tryLookAroundFeed(clickedCatName!!, "popular", null, page)
+                }
             }
         }
 
@@ -69,14 +106,18 @@ class LookAroundFragment : BaseFragment<FragmentLookAroundBinding>(
 //                수평으로 더이상 스크롤이 안되면, 데이터를 더해서 불러옴
                 if (!binding.rvLookAroundFeed.canScrollVertically(1)) {
                     if (!isFeedEnd) {
-                        dismissLoadingDialog()
-                        showLoadingDialog(requireContext())
-                        if (clickedCatName != null) {
-                            HomeService(this@LookAroundFragment).tryLookAroundFeed(
-                                clickedCatName!!,
-                                "popular",
-                                null, ++page
-                            )
+                        if (!isNetworkConnected()){
+                            showCustomToast("네트워크 연결을 확인해주세요!")
+                        }
+                        else {
+                            showLoadingDialog(requireContext())
+                            if (clickedCatName != null) {
+                                HomeService(this@LookAroundFragment).tryLookAroundFeed(
+                                    clickedCatName!!,
+                                    "popular",
+                                    null, ++page
+                                )
+                            }
                         }
                     }
                 }
@@ -84,14 +125,16 @@ class LookAroundFragment : BaseFragment<FragmentLookAroundBinding>(
         })
     }
 
+    override fun onStop() {
+        super.onStop()
+
+        terminateNetworkCallback(networkCallback)
+    }
+
     override fun onResume() {
         super.onResume()
 
-        page = 1
-        lookaroundList.clear()
-        isFeedEnd = false
-        showLoadingDialog(requireContext())
-        clickedCatName?.let { HomeService(this).tryLookAroundFeed(it, "recent", null, page) }
+        registerNetworkCallback(networkCallback)
     }
 
     private val onClicked = object: LookAroundFeedAdapter.OnItemClickListener{

@@ -2,6 +2,7 @@ package com.tipklemoa.tipkle.src
 
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -43,9 +44,7 @@ class DeleteOrReportBottomSheet: BottomSheetDialogFragment(), TipkleFragmentView
         postId = arguments?.getInt("postId")!!
         folderId = arguments?.getInt("folderId")!!
         commentId = arguments?.getInt("commentId")!!
-        what = arguments?.getString("what")!!
-
-        Log.d("postId", postId.toString())
+        what = arguments?.getString("what", "").toString()
 
         binding = LayoutDetailBottomsheetBinding.inflate(inflater, container, false)
 
@@ -61,7 +60,7 @@ class DeleteOrReportBottomSheet: BottomSheetDialogFragment(), TipkleFragmentView
         }
 
         binding.constraintLayout2.setOnClickListener {
-            if (postId!=0){
+            if (postId!=0){ //게시글에서 신고/삭제하기를 누를때
                 if (what=="delete"){
                     val dialog = ReallyDeleteDialog()
                     val bundle = Bundle()
@@ -78,8 +77,13 @@ class DeleteOrReportBottomSheet: BottomSheetDialogFragment(), TipkleFragmentView
                 }
             }
             else if (folderId!=0){
-                showLoadingDialog(requireContext())
-                TipkleService(this).tryDeleteFolder(folderId)
+                if (!isNetworkConnected()){
+                    Toast.makeText(requireContext(), "네트워크 연결을 확인해주세요!", Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    showLoadingDialog(requireContext())
+                    TipkleService(this).tryDeleteFolder(folderId)
+                }
             }
             else if (commentId!=0){
                 if (what=="delete"){
@@ -254,5 +258,10 @@ class DeleteOrReportBottomSheet: BottomSheetDialogFragment(), TipkleFragmentView
 
     override fun onPostCommentReportFailure(message: String) {
         TODO("Not yet implemented")
+    }
+
+    fun isNetworkConnected(): Boolean {
+        val cm = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return cm.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
     }
 }

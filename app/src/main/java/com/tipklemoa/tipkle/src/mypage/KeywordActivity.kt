@@ -3,8 +3,8 @@ package com.tipklemoa.tipkle.src.mypage
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.ImageView
-import android.widget.TextView
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipDrawable
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.config.BaseActivity
 import com.tipklemoa.tipkle.config.BaseResponse
@@ -12,6 +12,7 @@ import com.tipklemoa.tipkle.databinding.ActivityKeywordBinding
 import com.tipklemoa.tipkle.src.mypage.model.KeywordResponse
 import com.tipklemoa.tipkle.src.mypage.model.MyPageResponse
 import com.tipklemoa.tipkle.src.mypage.model.PostKeywordRequest
+
 
 class KeywordActivity : BaseActivity<ActivityKeywordBinding>(ActivityKeywordBinding::inflate), MyPageView{
 
@@ -32,13 +33,14 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding>(ActivityKeywordBind
                     binding.tvCompleteKeyword.isEnabled = false
                     binding.tvCompleteKeyword.setTextColor(
                         resources.getColor(
-                            R.color.DBGray
+                            com.tipklemoa.tipkle.R.color.DBGray
                         )
                     )
                 } else {
                     binding.tvCompleteKeyword.isEnabled = true
                     binding.tvCompleteKeyword.setTextColor(
-                        resources.getColor(R.color.mint
+                        resources.getColor(
+                            com.tipklemoa.tipkle.R.color.mint
                         )
                     )
                 }
@@ -123,22 +125,32 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding>(ActivityKeywordBind
 
     override fun onGetKeywordSuccess(response: KeywordResponse) {
         dismissLoadingDialog()
-        binding.flowLayout.removeAllViews()
-
+        binding.chipGroup.removeAllViews()
         binding.tvKeywordNum.text = response.result.size.toString()
 
         for (i in response.result){
-            val keywordLayout = layoutInflater.inflate(
+            val chip = Chip(this)
+            chip.text = i.keyword
+            chip.setTextColor(resources.getColor(R.color.black))
+            chip.closeIcon = resources.getDrawable(R.drawable.ic_x)
+            chip.isCloseIconVisible = true
+            //chip.
+            chip.setTextAppearance(R.style.ChipTextAppearance)
+            //val chipDrawable = ChipDrawable.createFromResource(this, R.drawable.keyword_mint)
+            //chip.setChipDrawable(chipDrawable)
+
+            binding.chipGroup.addView(chip)
+/*            val keywordLayout = layoutInflater.inflate(
                 R.layout.layout_keyword_item,
-                binding.flowLayout,false)
-            val keywordText = keywordLayout.findViewById<TextView>(R.id.tvKeyword)
-            val button = keywordLayout.findViewById<ImageView>(R.id.btnKeywordX)
-            keywordText.text = i.keyword
-            button.setOnClickListener {
-                showLoadingDialog(this)
-                MyPageService(this).tryDeleteKeyword(i.keywordId)
-            }
-            binding.flowLayout.addView(keywordLayout)
+                binding.chipGroup,false)*/
+//            val keywordText = keywordLayout.findViewById<TextView>(R.id.tvKeyword)
+//            val button = keywordLayout.findViewById<ImageView>(R.id.btnKeywordX)
+//            keywordText.text = i.keyword
+//            button.setOnClickListener {
+//                showLoadingDialog(this)
+//                MyPageService(this).tryDeleteKeyword(i.keywordId)
+//            }
+//            binding.flowLayout.addView(keywordLayout)
         }
     }
 

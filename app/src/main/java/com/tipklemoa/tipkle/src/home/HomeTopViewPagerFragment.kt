@@ -20,8 +20,13 @@ class HomeTopViewPagerFragment : BaseFragment<ViewpagerHomeTabBinding>(Viewpager
         super.onActivityCreated(savedInstanceState)
 
         binding.btnSettingCategory.setOnClickListener {
-            val homeEditCategoryBottomSheet = HomeEditCategoryBottomSheet()
-            homeEditCategoryBottomSheet.show(parentFragmentManager, homeEditCategoryBottomSheet.tag)
+            if (!isNetworkConnected()){
+                showCustomToast("네트워크 연결을 확인해주세요!")
+            }
+            else{
+                val homeEditCategoryBottomSheet = HomeEditCategoryBottomSheet()
+                homeEditCategoryBottomSheet.show(parentFragmentManager, homeEditCategoryBottomSheet.tag)
+            }
         }
 
         val pagerAdapter = PagerFragmentStateAdapter(requireActivity())

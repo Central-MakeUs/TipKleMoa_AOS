@@ -67,13 +67,14 @@ class RegisterWithNickNameActivity : BaseActivity<ActivityRegisterWithNickNameBi
             val toCatIntent = Intent(this, ChooseCategoryActivity::class.java)
             toCatIntent.putExtra("nickName", binding.edtNickName.text.toString())
             toCatIntent.putExtra("accessToken", intent.getStringExtra("accessToken"))
+            toCatIntent.putExtra("fcmToken", intent.getStringExtra("fcmToken"))
             startActivity(toCatIntent)
         }
     }
 
     private fun activateButton() {
         //버튼 활성화
-        if (is_agree_flag && binding.edtNickName.text.toString().replace(" ", "").isNotEmpty()){
+        if (is_agree_flag && binding.edtNickName.text.toString().trim().isNotEmpty()){
             binding.imgRightArrow.backgroundTintList = ColorStateList.valueOf(Color.BLACK)
             binding.tvLoginNext.setTextColor(resources.getColor(R.color.black))
             binding.loNext.isClickable = true

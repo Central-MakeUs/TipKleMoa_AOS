@@ -1,6 +1,8 @@
 package com.tipklemoa.tipkle.src.home
 
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.Network
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +15,7 @@ import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseFragment
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.ViewpagerPickedTipTabBinding
+import com.tipklemoa.tipkle.src.MainService
 import com.tipklemoa.tipkle.src.RegisterNewTipActivity
 import com.tipklemoa.tipkle.src.SelectPicActivity
 import com.tipklemoa.tipkle.src.home.model.BannerResponse
@@ -22,12 +25,46 @@ import com.tipklemoa.tipkle.src.home.model.LookAroundResponse
 
 class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(ViewpagerPickedTipTabBinding::bind,
     R.layout.viewpager_picked_tip_tab), HomeFragmentView {
+    lateinit var networkCallback : ConnectivityManager.NetworkCallback
 
     var clickedCatName:String?=null
     var editor = ApplicationClass.sSharedPreferences.edit()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        networkCallback = object : ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: Network) {
+                showLoadingDialog(requireContext())
+                HomeService(this@PickedTipViewPagerFragment).tryGetPickedCategoryList()
+                HomeService(this@PickedTipViewPagerFragment).tryGetBanner()
+            }
+
+            override fun onLost(network: Network) {
+                // 네트워크가 끊길 때 호출됩니다.
+
+            }
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (!isNetworkConnected()){
+            showCustomToast("네트워크 연결을 확인해주세요!")
+        }
+
+        binding.mainRefresh.setOnRefreshListener {
+            if (!isNetworkConnected()){
+                showCustomToast("네트워크 연결을 확인해주세요!")
+            }
+            else{
+                showLoadingDialog(requireContext())
+                HomeService(this@PickedTipViewPagerFragment).tryGetPickedCategoryList()
+                HomeService(this@PickedTipViewPagerFragment).tryGetBanner()
+            }
+            binding.mainRefresh.isRefreshing = false
+        }
 
         binding.pickedfloatting.setOnClickListener {
             binding.pickedfloatting.compatElevation = 0F
@@ -39,9 +76,14 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
 
         setFragmentResultListener("editCat"){ key, bundle ->
             if (bundle.getString("editCat_ok")=="ok"){
-                showLoadingDialog(requireContext())
-                binding.pickedCatTab.removeAllTabs()
-                HomeService(this).tryGetPickedCategoryList()
+                if (!isNetworkConnected()){
+                    showCustomToast("네트워크 연결을 확인해주세요!")
+                }
+                else{
+                    showLoadingDialog(requireContext())
+                    binding.pickedCatTab.removeAllTabs()
+                    HomeService(this).tryGetPickedCategoryList()
+                }
             }
         }
     }
@@ -49,14 +91,19 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
     override fun onResume() {
         super.onResume()
 
-        binding.pickedCatTab.removeAllTabs()
-        showLoadingDialog(requireContext())
-        HomeService(this).tryGetPickedCategoryList()
-        HomeService(this).tryGetBanner()
+        registerNetworkCallback(networkCallback)
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        terminateNetworkCallback(networkCallback)
     }
 
     override fun onGetPickedCategoryListSuccess(response: CategoryListResponse) {
         dismissLoadingDialog()
+        binding.pickedCatTab.removeAllTabs()
+
         for (e in response.result) {
             binding.pickedCatTab.addTab(binding.pickedCatTab.newTab().setText(e.categoryName))
         }
@@ -80,8 +127,13 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
 
                 binding.pickedtiprecent.setTextColor(resources.getColor(R.color.black))
                 binding.pickedtippopular.setTextColor(resources.getColor(R.color.DBGray))
+                if (!isNetworkConnected()){
+                    showCustomToast("네트워크 연결을 확인해주세요!")
+                }
+                else{
+                    HomeService(this@PickedTipViewPagerFragment).tryHomePreviewFeed(clickedCatName!!, "recent")
+                }
                 //showLoadingDialog(requireContext())
-                HomeService(this@PickedTipViewPagerFragment).tryHomePreviewFeed(clickedCatName!!, "recent")
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -96,15 +148,25 @@ class PickedTipViewPagerFragment : BaseFragment<ViewpagerPickedTipTabBinding>(Vi
         binding.pickedtiprecent.setOnClickListener {
             binding.pickedtiprecent.setTextColor(resources.getColor(R.color.black))
             binding.pickedtippopular.setTextColor(resources.getColor(R.color.DBGray))
-            showLoadingDialog(requireContext())
-            HomeService(this).tryHomePreviewFeed(clickedCatName!!, "recent")
+            if (!isNetworkConnected()){
+                showCustomToast("네트워크 연결을 확인해주세요!")
+            }
+            else{
+                showLoadingDialog(requireContext())
+                HomeService(this).tryHomePreviewFeed(clickedCatName!!, "recent")
+            }
         }
 
         binding.pickedtippopular.setOnClickListener {
             binding.pickedtippopular.setTextColor(resources.getColor(R.color.black))
             binding.pickedtiprecent.setTextColor(resources.getColor(R.color.DBGray))
-            showLoadingDialog(requireContext())
-            HomeService(this).tryHomePreviewFeed(clickedCatName!!, "popular")
+            if (!isNetworkConnected()){
+                showCustomToast("네트워크 연결을 확인해주세요!")
+            }
+            else{
+                showLoadingDialog(requireContext())
+                HomeService(this).tryHomePreviewFeed(clickedCatName!!, "popular")
+            }
         }
 
         binding.pickedLookAround.setOnClickListener {

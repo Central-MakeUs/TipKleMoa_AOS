@@ -27,10 +27,16 @@ import java.util.*
 class EditProfileActivity : BaseActivity<ActivityEditProfileBinding>(ActivityEditProfileBinding::inflate), MyPageView{
     var storage: FirebaseStorage? = null //파이어베이스하
     var imageUri:String?=null
+    var originalImageUrl:String?=null
+    var originalNick:String?=null
+    var editedNick = false
+    var editedProfile = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.edtNickNameEdit.setText(intent.getStringExtra("nickName"))
+        originalNick = intent.getStringExtra("nickName")
+        originalImageUrl = intent.getStringExtra("profileImg")
         imageUri = intent.getStringExtra("profileImg")
         storage = FirebaseStorage.getInstance()
 
@@ -40,7 +46,7 @@ class EditProfileActivity : BaseActivity<ActivityEditProfileBinding>(ActivityEdi
             .circleCrop()
             .into(binding.imgEditProfile) //멤버 프로필
 
-        if (binding.edtNickNameEdit.text.isNotEmpty()){
+        if (binding.edtNickNameEdit.text.toString().trim().isNotEmpty()){
             binding.tvCompleteEditProfile.isEnabled = true
             binding.tvCompleteEditProfile.setTextColor(resources.getColor(
                 R.color.black))
@@ -57,7 +63,7 @@ class EditProfileActivity : BaseActivity<ActivityEditProfileBinding>(ActivityEdi
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (binding.edtNickNameEdit.text.isNullOrEmpty()) {
+                if (binding.edtNickNameEdit.text.toString().trim().isEmpty()) {
                     binding.tvProfileAlert.text = "닉네임을 입력해주세요!"
                     binding.tvProfileAlert.setTextColor(resources.getColor(
                         R.color.textRed))
@@ -111,23 +117,52 @@ class EditProfileActivity : BaseActivity<ActivityEditProfileBinding>(ActivityEdi
             }
 
         binding.tvCompleteEditProfile.setOnClickListener {
-            if (binding.edtNickNameEdit.text.isNotEmpty() && intent.getStringExtra("profileImg")!=imageUri){ //프사 바꿨을 때
-                Log.d("확인", "프사바꿈")
-                val patchNickNameRequest = PostEditNickNameRequest(binding.edtNickNameEdit.text.toString().trim())
-                if (imageUri!=null){
+            if (!isNetworkConnected()) {
+                showCustomToast("네트워크 연결을 확인해주세요!")
+            } else {
+                if (binding.edtNickNameEdit.text.toString()
+                        .trim() == originalNick && intent.getStringExtra("profileImg") != imageUri
+                ) { //프사만 바꿨을 때
                     Log.d("확인", "프사바꿈")
-                    imageUploadFirebase()
-                } else{ //프사없음
-                    showLoadingDialog(this)
-                    val profileRequest = PostEditProfileRequest()
-                    MyPageService(this).tryPatchProfile(profileRequest)
+                    if (imageUri != null) { //프사 있음
+                        Log.d("확인", "프사바꿈")
+                        imageUploadFirebase()
+                    } else { //프사없음
+                        editedProfile = true
+                        showLoadingDialog(this)
+                        val profileRequest = PostEditProfileRequest()
+                        MyPageService(this).tryPatchProfile(profileRequest)
+                    }
                 }
-                MyPageService(this).tryPatchNickName(patchNickNameRequest)
-            }
-            else if (binding.edtNickNameEdit.text.isNotEmpty() && intent.getStringExtra("profileImg")==imageUri) { //프사 안바꿨을때
+                else if (binding.edtNickNameEdit.text.toString()
+                        .trim() != originalNick && intent.getStringExtra("profileImg") == imageUri
+                ) { //닉네임만 바꿨을때
 
-                val patchNickNameRequest = PostEditNickNameRequest(binding.edtNickNameEdit.text.toString().trim())
-                MyPageService(this).tryPatchNickName(patchNickNameRequest)
+                    val patchNickNameRequest =
+                        PostEditNickNameRequest(binding.edtNickNameEdit.text.toString().trim())
+                    MyPageService(this).tryPatchNickName(patchNickNameRequest)
+                }
+                else if (binding.edtNickNameEdit.text.toString()
+                        .trim() != originalNick && intent.getStringExtra("profileImg") != imageUri
+                ) { //둘다 바꿈
+                    if (imageUri != null) { //프사 있음
+                        Log.d("확인", "프사바꿈")
+                        imageUploadFirebase()
+                    } else { //프사없음
+                        editedProfile = true
+                        showLoadingDialog(this)
+                        val profileRequest = PostEditProfileRequest()
+                        MyPageService(this).tryPatchProfile(profileRequest)
+                    }
+                    val patchNickNameRequest =
+                        PostEditNickNameRequest(binding.edtNickNameEdit.text.toString().trim())
+                    MyPageService(this).tryPatchNickName(patchNickNameRequest)
+                }
+                else if (binding.edtNickNameEdit.text.toString()
+                        .trim() == originalNick && intent.getStringExtra("profileImg") == imageUri
+                ) { //둘다 변경 x -> 그냥 종료
+                    finish()
+                }
             }
         }
 
@@ -143,6 +178,7 @@ class EditProfileActivity : BaseActivity<ActivityEditProfileBinding>(ActivityEdi
 
     private fun imageUploadFirebase(){
         showLoadingDialog(this)
+        editedProfile = true
 
         val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val imageFile = "Image_"+timestamp+"_.jpg"
@@ -185,6 +221,7 @@ class EditProfileActivity : BaseActivity<ActivityEditProfileBinding>(ActivityEdi
     override fun onPatchProfileImgSuccess(response: BaseResponse) {
         dismissLoadingDialog()
         showCustomToast("프로필 사진 수정 완료")
+        if (editedProfile) finish()
     }
 
     override fun onPatchProfileImgFailure(message: String) {
@@ -194,6 +231,8 @@ class EditProfileActivity : BaseActivity<ActivityEditProfileBinding>(ActivityEdi
 
     override fun onPatchNickNameSuccess(response: BaseResponse) {
         showCustomToast("닉네임 수정 완료")
+        editedNick = true
+        if (!editedProfile && editedNick) finish() //닉네임만 수정했을때 바로 종료
     }
 
     override fun onPatchNickNameFailure(message: String) {

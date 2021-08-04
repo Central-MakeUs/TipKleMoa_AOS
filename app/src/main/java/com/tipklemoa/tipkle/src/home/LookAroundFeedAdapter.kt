@@ -41,6 +41,8 @@ class LookAroundFeedAdapter(val context: Context, private val feedList: List<Res
             Glide
                 .with(context)
                 .load(feed.profileImgUrl)
+                .error(R.drawable.ic_img_profile)
+                .circleCrop()
                 .into(imgProfile) // 프로필
 
             tvLookAroundUserName.text = feed.nickName //닉네임
@@ -62,7 +64,7 @@ class LookAroundFeedAdapter(val context: Context, private val feedList: List<Res
             val layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             imgFeed.layoutManager = layoutManager
-            var adapter = LookAroundImageAdapter(context, feed.imgUrl)
+            val adapter = LookAroundImageAdapter(context, feed.imgUrl)
             imgFeed.adapter = adapter
 
             layoutWhenToImage.setOnClickListener {

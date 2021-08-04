@@ -3,6 +3,9 @@ package com.tipklemoa.tipkle.src.login
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import com.tipklemoa.tipkle.config.ApplicationClass
@@ -14,19 +17,27 @@ import com.tipklemoa.tipkle.src.login.model.KakaoLoginResponse
 import com.tipklemoa.tipkle.src.login.model.KakaoRegisterResponse
 import com.tipklemoa.tipkle.src.login.model.PostKakaoLoginRequest
 
-class  LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate),
+class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate),
     LoginActivityView {
 
     private var accessToken:String?=null
-    var email:String?=null
     val editor = ApplicationClass.sSharedPreferences.edit()
+    var fcmToken:String?=null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (!isNetworkConnected()){
+            showCustomToast("네트워크 연결을 확인해주세요!")
+        }
+
+        getToken()
 
         // 로그인 공통 callback 구성
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
                 accessToken = null
+                showCustomToast("카카오 로그인 실패! 다시 시도해주세요")
                 Log.e("kakao", "로그인 실패", error)
             }
             else if (token != null) {
@@ -34,9 +45,11 @@ class  LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::
 
                 Log.i("kakao", "로그인 성공 ${token.accessToken}")
 
-                showLoadingDialog(this)
-                val postKakaoLoginRequest = PostKakaoLoginRequest(accessToken!!)
-                LoginService(this).tryPostKakaoLogin(postKakaoLoginRequest = postKakaoLoginRequest)
+                if (fcmToken!=null){
+                    showLoadingDialog(this)
+                    val postKakaoLoginRequest = PostKakaoLoginRequest(accessToken!!, fcmToken!!)
+                    LoginService(this).tryPostKakaoLogin(postKakaoLoginRequest = postKakaoLoginRequest)
+                }
             }
         }
 
@@ -57,6 +70,7 @@ class  LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::
         if (response.result.isMember=='N'){ //회원아님
             val intent = Intent(this, RegisterWithNickNameActivity::class.java)
             intent.putExtra("accessToken", accessToken)
+            intent.putExtra("fcmToken", fcmToken)
             startActivity(intent)
         }
         else{ //회원임
@@ -65,6 +79,24 @@ class  LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::
             this.finish()
             startActivity(Intent(this, MainActivity::class.java))
         }
+    }
+
+    fun getToken() {
+        //토큰값을 받아옵니다.
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("확인", "Fetching FCM registration token failed", task.exception)
+                fcmToken = null
+
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            fcmToken = task.result
+
+            // Log and toast
+            Log.d("확인", fcmToken.toString())
+        })
     }
 
     override fun onPostKakaoLoginFailure(message: String) {

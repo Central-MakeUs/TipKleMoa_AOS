@@ -56,7 +56,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="@font/notosanscjkkr_bold"
         android:includeFontPadding="false"
-        android:text="조회 부분 레이아웃 미정입니다"
+        android:text="알림 받을 키워드"
         android:textColor="@color/black"
         android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -124,29 +124,28 @@
         app:layout_constraintEnd_toEndOf="@+id/edtKeyword"
         app:layout_constraintTop_toTopOf="@+id/edtKeyword" />
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/rvKeyword"-->
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chip_group"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtKeyword">
+
+    </com.google.android.material.chip.ChipGroup>
+    <!--    <com.nex3z.flowlayout.FlowLayout-->
+<!--        android:id="@+id/flowLayout"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="0dp"-->
 <!--        android:layout_marginHorizontal="24dp"-->
-<!--        android:layout_marginTop="12dp"-->
-<!--        android:overScrollMode="never"-->
-<!--        app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"-->
-<!--        tools:listitem="@layout/layout_keyword_item"-->
 <!--        app:layout_constraintBottom_toBottomOf="parent"-->
 <!--        app:layout_constraintEnd_toEndOf="parent"-->
 <!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/edtKeyword" />-->
-    <com.nex3z.flowlayout.FlowLayout
-        android:id="@+id/flowLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:flChildSpacing="auto"
-        android:layout_marginHorizontal="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtKeyword" />
+<!--        app:layout_constraintTop_toBottomOf="@+id/edtKeyword" >-->
+
+<!--    </com.nex3z.flowlayout.FlowLayout>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

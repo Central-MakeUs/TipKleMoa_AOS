@@ -53,7 +53,7 @@ class HomeEditCategoryBottomSheet: BottomSheetDialogFragment(), HomeFragmentView
         //bottomSheet.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
         val bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-        bottomSheetBehavior.peekHeight = 500
+        bottomSheetBehavior.peekHeight = 1000
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

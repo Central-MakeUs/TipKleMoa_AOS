@@ -6,12 +6,17 @@
         <item name="backgroundColor">@color/white</item>
         <item name="colorPrimary">@color/mint</item>
         <item name="android:screenOrientation">portrait</item>
-<!--        <item name="colorPrimaryVariant">@color/purple_700</item>-->
-<!--        <item name="colorOnPrimary">@color/white</item>-->
-        <!-- Secondary brand color. -->
-<!--        <item name="colorSecondary">@color/teal_200</item>-->
-<!--        <item name="colorSecondaryVariant">@color/teal_700</item>-->
-<!--        <item name="colorOnSecondary">@color/black</item>-->
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">#C4C4C4</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.Keyword" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="background">@color/white</item>
+        <item name="backgroundColor">@color/white</item>
+        <item name="colorPrimary">@color/mint</item>
+        <item name="android:screenOrientation">portrait</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">#C4C4C4</item>
         <!-- Customize your theme here. -->
@@ -51,5 +56,12 @@
     <style name="searchView" parent="Widget.AppCompat.SearchView">
         <item name="android:queryHint">"검색어를 입력하세요."</item>
         <item name="android:background">@drawable/ic_search_box</item>
+    </style>
+
+    <style name="ChipTextAppearance" parent="TextAppearance.MaterialComponents.Chip">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/notosanscjkkr_medium</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 </resources>

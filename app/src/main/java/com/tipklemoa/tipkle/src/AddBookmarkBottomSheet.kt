@@ -1,6 +1,7 @@
 package com.tipklemoa.tipkle.src
 
 import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -20,6 +21,7 @@ import com.tipklemoa.tipkle.src.model.CommentResponse
 import com.tipklemoa.tipkle.src.model.DetailFeedResponse
 import com.tipklemoa.tipkle.src.model.NewTipResponse
 import com.tipklemoa.tipkle.src.model.PostAddBookMarkRequest
+import com.tipklemoa.tipkle.src.search.SearchService
 import com.tipklemoa.tipkle.src.tipkle.TipkleFragmentView
 import com.tipklemoa.tipkle.src.tipkle.TipkleService
 import com.tipklemoa.tipkle.src.tipkle.model.FolderFeedResponse
@@ -44,17 +46,28 @@ class AddBookmarkBottomSheet: BottomSheetDialogFragment(), MainView, TipkleFragm
         postId = arguments?.getInt("postId")!!
 
         binding = LayoutAddbookmarkBottomsheetBinding.inflate(inflater, container, false)
-        showLoadingDialog(requireContext())
-        TipkleService(this).tryGetFolderList()
+
+        if (!isNetworkConnected()){
+            Toast.makeText(requireContext(), "네트워크 연결을 확인해주세요!", Toast.LENGTH_SHORT).show()
+        }
+        else{
+            showLoadingDialog(requireContext())
+            TipkleService(this).tryGetFolderList()
+        }
 
         return binding.root
     }
 
     private val onClicked = object: BookMarkFolderAdapter.OnItemClickListener {
         override fun onClicked(folderId: Int) {
-            showLoadingDialog(requireContext())
-            val postAddBookMarkRequest = PostAddBookMarkRequest(postId)
-            MainService(this@AddBookmarkBottomSheet).tryPostBookMark(folderId, postAddBookMarkRequest)
+            if (!isNetworkConnected()){
+                Toast.makeText(requireContext(), "네트워크 연결을 확인해주세요!", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                showLoadingDialog(requireContext())
+                val postAddBookMarkRequest = PostAddBookMarkRequest(postId)
+                MainService(this@AddBookmarkBottomSheet).tryPostBookMark(folderId, postAddBookMarkRequest)
+            }
         }
     }
 
@@ -203,5 +216,10 @@ class AddBookmarkBottomSheet: BottomSheetDialogFragment(), MainView, TipkleFragm
 
     override fun onPostCommentReportFailure(message: String) {
         TODO("Not yet implemented")
+    }
+
+    fun isNetworkConnected(): Boolean {
+        val cm = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return cm.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
     }
 }

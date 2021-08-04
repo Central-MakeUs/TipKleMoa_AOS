@@ -50,10 +50,10 @@
         <entry key="app/src/main/res/drawable/ic_x.xml" value="0.1734375" />
         <entry key="app/src/main/res/layout/activity_choose_category.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_feed_detail.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/activity_feed_detail.xml" value="0.37575757575757573" />
         <entry key="app/src/main/res/layout/activity_folder_detail.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/activity_keyword.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_keyword.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/layout/activity_make_folder.xml" value="0.25" />
@@ -75,7 +75,7 @@
         <entry key="app/src/main/res/layout/fragment_tipkle.xml" value="0.375" />
         <entry key="app/src/main/res/layout/fragment_today_tip.xml" value="0.1578125" />
         <entry key="app/src/main/res/layout/home_bottomsheet_edit_category.xml" value="0.13958333333333334" />
-        <entry key="app/src/main/res/layout/home_bottomsheet_layout.xml" value="0.37906976744186044" />
+        <entry key="app/src/main/res/layout/home_bottomsheet_layout.xml" value="0.165" />
         <entry key="app/src/main/res/layout/layout_addbookmark_bottomsheet.xml" value="0.335" />
         <entry key="app/src/main/res/layout/layout_banner.xml" value="0.25" />
         <entry key="app/src/main/res/layout/layout_bookmark_folder_list.xml" value="0.75" />
@@ -89,7 +89,7 @@
         <entry key="app/src/main/res/layout/layout_folder_feed.xml" value="0.335" />
         <entry key="app/src/main/res/layout/layout_folder_preview.xml" value="0.5" />
         <entry key="app/src/main/res/layout/layout_gallery_item.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/layout_home_lookaround.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/layout_home_lookaround.xml" value="0.335" />
         <entry key="app/src/main/res/layout/layout_home_preview_feed.xml" value="0.375" />
         <entry key="app/src/main/res/layout/layout_keyword_dialog.xml" value="0.375" />
         <entry key="app/src/main/res/layout/layout_keyword_item.xml" value="0.44150110375275936" />

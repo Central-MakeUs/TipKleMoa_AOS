@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -49,9 +50,20 @@ class StarDialog : DialogFragment(), MainView {
         postId = arguments?.getInt("postId")!!
 
         binding.btnDeleteConfirm.setOnClickListener {
-            showLoadingDialog(requireContext())
-            val postStarRequest = PostStarRequest(binding.postRatingBar.numStars)
-            MainService(this).tryPostStar(postId, postStarRequest)
+            if (!isNetworkConnected()){
+                Toast.makeText(requireContext(), "네트워크 연결을 확인해주세요", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                if (binding.postRatingBar.rating.toInt()==0){
+                    Toast.makeText(requireContext(), "별점으로 0점은 줄 수 없습니다", Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    showLoadingDialog(requireContext())
+                    Log.d("확인", binding.postRatingBar.rating.toString())
+                    val postStarRequest = PostStarRequest(binding.postRatingBar.rating.toInt())
+                    MainService(this).tryPostStar(postId, postStarRequest)
+                }
+            }
         }
 
         binding.btnDeleteCancel.setOnClickListener {
@@ -73,7 +85,7 @@ class StarDialog : DialogFragment(), MainView {
     override fun onResume() {
         super.onResume()
 
-        var params: ViewGroup.LayoutParams? = dialog?.window?.attributes
+        val params: ViewGroup.LayoutParams? = dialog?.window?.attributes
         val deviceWidth = size!!.x
        // val deviceHeight = size!!.y
 
@@ -188,5 +200,10 @@ class StarDialog : DialogFragment(), MainView {
 
     override fun onPostCommentReportFailure(message: String) {
         TODO("Not yet implemented")
+    }
+
+    fun isNetworkConnected(): Boolean {
+        val cm = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return cm.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
     }
 }

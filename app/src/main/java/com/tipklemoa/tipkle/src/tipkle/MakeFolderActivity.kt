@@ -25,17 +25,23 @@ class MakeFolderActivity : BaseActivity<ActivityMakeFolderBinding>(ActivityMakeF
         }
 
         binding.btnCompleteNewFolder.setOnClickListener {
-            if (binding.edtNewFolder.text.isNullOrEmpty()){
+            if (binding.edtNewFolder.text.toString().trim().isEmpty()){
                 binding.edtNewFolder.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.textRed))
                 binding.tvNewTipAlert.visibility = View.VISIBLE
                 binding.tvNewTipAlert.text = "폴더명을 입력해주세요."
             }else{
                 binding.edtNewFolder.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.mint))
                 binding.tvNewTipAlert.visibility = View.INVISIBLE
-                var postNewFolderRequest = PostNewFolderRequest(binding.edtNewFolder.text.toString())
 
-                showLoadingDialog(this)
-                TipkleService(this).tryMakeFolder(postNewFolderRequest)
+                if (!isNetworkConnected()){
+                    showCustomToast("네트워크 연결을 확인해주세요!")
+                }
+                else{
+                    val postNewFolderRequest = PostNewFolderRequest(binding.edtNewFolder.text.toString().trim())
+
+                    showLoadingDialog(this)
+                    TipkleService(this).tryMakeFolder(postNewFolderRequest)
+                }
             }
         }
 

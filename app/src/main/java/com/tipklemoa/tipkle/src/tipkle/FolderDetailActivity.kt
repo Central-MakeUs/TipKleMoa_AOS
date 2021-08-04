@@ -1,5 +1,7 @@
 package com.tipklemoa.tipkle.src.tipkle
 
+import android.net.ConnectivityManager
+import android.net.Network
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,14 +14,28 @@ import com.tipklemoa.tipkle.src.tipkle.model.MakeFolderResponse
 import com.tipklemoa.tipkle.src.tipkle.model.TipFolderResponse
 
 class FolderDetailActivity : BaseActivity<ActivityFolderDetailBinding>(ActivityFolderDetailBinding::inflate), TipkleFragmentView{
+    lateinit var networkCallback : ConnectivityManager.NetworkCallback
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        var folderId = intent.getIntExtra("folderId", 0)
-        if (folderId!=0) {
-            showLoadingDialog(this)
-            TipkleService(this).tryGetFolderFeed(folderId)
+        val folderId = intent.getIntExtra("folderId", 0)
+        if (!isNetworkConnected()){
+            showCustomToast("네트워크 연결을 확인해주세요!")
+        }
+
+        networkCallback = object : ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: Network) {
+                if (folderId!=0) {
+                    showLoadingDialog(this@FolderDetailActivity)
+                    TipkleService(this@FolderDetailActivity).tryGetFolderFeed(folderId)
+                }
+            }
+
+            override fun onLost(network: Network) {
+                // 네트워크가 끊길 때 호출됩니다.
+
+            }
         }
 
         binding.btnFolderDetailBack.setOnClickListener {
@@ -44,6 +60,18 @@ class FolderDetailActivity : BaseActivity<ActivityFolderDetailBinding>(ActivityF
                     this.finish()
                 }
             }
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        terminateNetworkCallback(networkCallback)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        registerNetworkCallback(networkCallback)
     }
 
     override fun onGetTipFolderListSuccess(response: TipFolderResponse) {

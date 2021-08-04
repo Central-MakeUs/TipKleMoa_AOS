@@ -13,7 +13,7 @@ class PopularKeywordFragment : BaseFragment<FragmentPopularKeywordBinding>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // ViewPagerFragment를 fragmentFrame에 띄우기ㅌ
+        // ViewPagerFragment를 fragmentFrame에 띄우기
         parentFragmentManager.beginTransaction().add(R.id.popularFrame, PopularViewPagerFragment()).commit()
     }
 }

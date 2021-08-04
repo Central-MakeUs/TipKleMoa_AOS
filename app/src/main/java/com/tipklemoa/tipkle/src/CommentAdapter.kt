@@ -34,6 +34,8 @@ class CommentAdapter(val context: Context, private val commentList: List<ResultC
              Glide
                     .with(context)
                     .load(comment.profileImgUrl)
+                    .circleCrop()
+                    .error(R.drawable.ic_img_profile)
                     .into(imgCommentProfile)
 //            if (comment.isAuthor=='Y'){
 //

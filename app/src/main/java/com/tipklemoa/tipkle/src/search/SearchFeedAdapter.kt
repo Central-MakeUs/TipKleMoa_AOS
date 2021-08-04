@@ -38,6 +38,8 @@ class SearchFeedAdapter(val context: Context, private val searchList: List<Resul
             Glide
                 .with(context)
                 .load(feed.profileImgUrl)
+                .circleCrop()
+                .error(R.drawable.ic_img_profile)
                 .into(imgProfile) // 프로필
 
             tvSearchUserName.text = feed.nickName //닉네임

@@ -2,6 +2,10 @@ package com.tipklemoa.tipkle.src
 
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkRequest
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -20,6 +24,7 @@ import com.tipklemoa.tipkle.src.model.NewTipResponse
 import com.tipklemoa.tipkle.util.LoadingDialog
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tipklemoa.tipkle.R
+import com.tipklemoa.tipkle.databinding.ActivityFeedDetailBinding
 import com.tipklemoa.tipkle.src.home.HomeService
 import com.tipklemoa.tipkle.src.home.LookAroundFeedAdapter
 import com.tipklemoa.tipkle.src.model.PostCommentRequest
@@ -32,6 +37,7 @@ class CommentBottomSheet: BottomSheetDialogFragment(), MainView{
     var commentAdapter:CommentAdapter?=null
     lateinit var mLoadingDialog: LoadingDialog
     var editor = ApplicationClass.sSharedPreferences.edit()
+    lateinit var networkCallback : ConnectivityManager.NetworkCallback
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,19 +46,34 @@ class CommentBottomSheet: BottomSheetDialogFragment(), MainView{
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
 
-        postId = arguments?.getInt("postId")!!
+        if (!isNetworkConnected()){
+            Toast.makeText(requireContext(), "네트워크 연결을 확인해주세요", Toast.LENGTH_SHORT).show()
+        }
 
+        postId = arguments?.getInt("postId")!!
         binding = LayoutCommentBottomsheetBinding.inflate(inflater, container, false)
+
+        networkCallback = object : ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: Network) {
+                showLoadingDialog(requireContext())
+                MainService(this@CommentBottomSheet).tryGetComments(postId)
+            }
+
+            override fun onLost(network: Network) {
+                // 네트워크가 끊길 때 호출됩니다.
+
+            }
+        }
 
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        showLoadingDialog(requireContext())
-        MainService(this).tryGetComments(postId)
-    }
+//    override fun onResume() {
+//        super.onResume()
+//
+//        showLoadingDialog(requireContext())
+//        MainService(this).tryGetComments(postId)
+//    }
 
     private val onClicked = object: CommentAdapter.OnItemClickListener{
         override fun onClicked(commentId: Int, isAuthor: Char) {
@@ -65,9 +86,14 @@ class CommentBottomSheet: BottomSheetDialogFragment(), MainView{
             if (isAuthor=='Y') bundle.putString("what", "delete")
             else bundle.putString("what", "report")
 
-            val editOrDeleteBottomSheet = DeleteOrReportBottomSheet()
-            editOrDeleteBottomSheet.arguments = bundle
-            editOrDeleteBottomSheet.show(parentFragmentManager, editOrDeleteBottomSheet.tag)
+            if (!isNetworkConnected()){
+                Toast.makeText(requireContext(), "네트워크 연결을 확인해주세요", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                val editOrDeleteBottomSheet = DeleteOrReportBottomSheet()
+                editOrDeleteBottomSheet.arguments = bundle
+                editOrDeleteBottomSheet.show(parentFragmentManager, editOrDeleteBottomSheet.tag)
+            }
         }
     }
 
@@ -83,8 +109,8 @@ class CommentBottomSheet: BottomSheetDialogFragment(), MainView{
         view.layoutParams = layoutParams
 
         binding.btnComment.setOnClickListener {
-            if (binding.edtComment.text.isNotEmpty()) {
-                val postCommentRequest = PostCommentRequest(binding.edtComment.text.toString().replace(" ", ""))
+            if (binding.edtComment.text.toString().trim().isNotEmpty()) {
+                val postCommentRequest = PostCommentRequest(binding.edtComment.text.toString().trim())
                 Log.d("test" ,binding.edtComment.text.toString())
                 MainService(this).tryPostComment(postId, postCommentRequest)
             }
@@ -111,12 +137,24 @@ class CommentBottomSheet: BottomSheetDialogFragment(), MainView{
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+
+        terminateNetworkCallback(networkCallback)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        registerNetworkCallback(networkCallback)
+    }
+
     override fun onGetFeedDetailSuccess(response: DetailFeedResponse) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onGetFeedDetailFailure(message: String) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onDeleteFeedSuccess(response: BaseResponse) {
@@ -166,7 +204,7 @@ class CommentBottomSheet: BottomSheetDialogFragment(), MainView{
 
         binding.tvCommentNum.text = response.result.size.toString()
         binding.rvComment.adapter = commentAdapter
-        binding.rvComment.layoutManager?.scrollToPosition(0)
+        binding.rvComment.layoutManager?.scrollToPosition(response.result.size-1)
     }
 
     override fun onGetCommentFailure(message: String) {
@@ -176,6 +214,7 @@ class CommentBottomSheet: BottomSheetDialogFragment(), MainView{
 
     override fun onPostCommentSuccess(response: BaseResponse) {
         dismissLoadingDialog()
+        binding.edtComment.text.clear()
         Toast.makeText(requireContext(), "댓글 등록이 완료되었습니다", Toast.LENGTH_SHORT).show()
         showLoadingDialog(requireContext())
         MainService(this).tryGetComments(postId)
@@ -208,5 +247,26 @@ class CommentBottomSheet: BottomSheetDialogFragment(), MainView{
 
     override fun onPostCommentReportFailure(message: String) {
         TODO("Not yet implemented")
+    }
+
+    fun isNetworkConnected(): Boolean {
+        val cm = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return cm.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
+    }
+
+    // 콜백을 등록하는 함수
+    fun registerNetworkCallback(networkCallback: ConnectivityManager.NetworkCallback) {
+        val connectivityManager = requireContext().getSystemService(ConnectivityManager::class.java)
+        val networkRequest = NetworkRequest.Builder()
+            .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+            .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
+            .build()
+        connectivityManager?.registerNetworkCallback(networkRequest, networkCallback)
+    }
+
+    // 콜백을 해제하는 함수
+    fun terminateNetworkCallback(networkCallback: ConnectivityManager.NetworkCallback) {
+        val connectivityManager = requireContext().getSystemService(ConnectivityManager::class.java)
+        connectivityManager?.unregisterNetworkCallback(networkCallback)
     }
 }

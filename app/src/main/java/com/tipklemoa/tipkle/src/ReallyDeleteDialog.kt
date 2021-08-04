@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -24,7 +25,6 @@ class ReallyDeleteDialog : DialogFragment(), MainView {
     var color = 0
     var postId = 0
     var commentId = 0
-    var what = ""
 
     lateinit var mLoadingDialog: LoadingDialog
     private lateinit var binding: LayoutDetailReallyDeleteDialogBinding
@@ -44,7 +44,6 @@ class ReallyDeleteDialog : DialogFragment(), MainView {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         postId = arguments?.getInt("postId")!!
         commentId = arguments?.getInt("commentId")!!
-        what = arguments?.getString("what")!!
 
         if (commentId!=0){
             binding.tvDialogMent.text = "댓글을 정말 삭제하시겠습니까?"
@@ -54,17 +53,21 @@ class ReallyDeleteDialog : DialogFragment(), MainView {
 
         binding.btnDeleteConfirm.setOnClickListener {
             if (postId!=0){
-                    //this.dismiss()
-                        showLoadingDialog(requireContext())
+                if (!isNetworkConnected()){
+                    Toast.makeText(requireContext(), "네트워크 연결을 확인해주세요", Toast.LENGTH_SHORT).show()
+                } else{
+                    showLoadingDialog(requireContext())
                     MainService(this).tryDeleteFeed(postId)
+                }
             }
             else if (commentId!=0) {
-                if (what=="delete"){
-                    //this.dismiss()
+                if (!isNetworkConnected()){
+                    Toast.makeText(requireContext(), "네트워크 연결을 확인해주세요", Toast.LENGTH_SHORT).show()
+                } else {
                     showLoadingDialog(requireContext())
                     MainService(this).tryDeleteComment(commentId)
                 }
-            }
+                }
         }
 
         binding.btnDeleteCancel.setOnClickListener {
@@ -201,5 +204,10 @@ class ReallyDeleteDialog : DialogFragment(), MainView {
 
     override fun onPostCommentReportFailure(message: String) {
         TODO("Not yet implemented")
+    }
+
+    fun isNetworkConnected(): Boolean {
+        val cm = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return cm.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
     }
 }

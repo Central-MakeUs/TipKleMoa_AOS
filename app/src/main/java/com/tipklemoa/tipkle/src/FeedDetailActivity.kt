@@ -1,5 +1,7 @@
 package com.tipklemoa.tipkle.src
 
+import android.net.ConnectivityManager
+import android.net.Network
 import android.os.Bundle
 import android.util.Log
 import com.bumptech.glide.Glide
@@ -11,10 +13,12 @@ import com.tipklemoa.tipkle.src.model.CommentResponse
 import com.tipklemoa.tipkle.src.model.DetailFeedResponse
 import com.tipklemoa.tipkle.src.model.NewTipResponse
 import android.util.DisplayMetrics
+import com.tipklemoa.tipkle.src.home.HomeService
 
 class FeedDetailActivity : BaseActivity<ActivityFeedDetailBinding>(ActivityFeedDetailBinding::inflate), MainView {
     var postId = 0
     var isBookMarked = false
+    lateinit var networkCallback : ConnectivityManager.NetworkCallback
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,8 +28,32 @@ class FeedDetailActivity : BaseActivity<ActivityFeedDetailBinding>(ActivityFeedD
 
         Log.d("postId", postId.toString())
 
-        showLoadingDialog(this)
-        MainService(this).tryGetFeedDetail(postId)
+        if (!isNetworkConnected()){
+            showCustomToast("네트워크 연결을 확인해주세요!")
+        }
+
+        binding.feedSwipe.setOnRefreshListener {
+            if (!isNetworkConnected()){
+                showCustomToast("네트워크 연결을 확인해주세요!")
+            }
+            else{
+                showLoadingDialog(this@FeedDetailActivity)
+                MainService(this@FeedDetailActivity).tryGetFeedDetail(postId)
+            }
+            binding.feedSwipe.isRefreshing = false
+        }
+
+        networkCallback = object : ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: Network) {
+                showLoadingDialog(this@FeedDetailActivity)
+                MainService(this@FeedDetailActivity).tryGetFeedDetail(postId)
+            }
+
+            override fun onLost(network: Network) {
+                // 네트워크가 끊길 때 호출됩니다.
+
+            }
+        }
     }
 
     override fun onGetFeedDetailSuccess(response: DetailFeedResponse) {
@@ -45,6 +73,8 @@ class FeedDetailActivity : BaseActivity<ActivityFeedDetailBinding>(ActivityFeedD
         Glide
             .with(this)
             .load(response.result.profileImgUrl)
+            .circleCrop()
+            .error(R.drawable.ic_img_profile)
             .into(binding.imgDetailFeedProfile) // 프로필
 
         binding.tvDetailNickName.text = response.result.nickName //닉네임
@@ -91,30 +121,46 @@ class FeedDetailActivity : BaseActivity<ActivityFeedDetailBinding>(ActivityFeedD
             val bundle = Bundle()
             bundle.putInt("postId", postId)
 
-            if (response.result.isAuthor=='Y') bundle.putString("what", "delete")
+            if (response.result.isAuthor=='Y')
+                bundle.putString("what", "delete")
             else bundle.putString("what", "report")
 
-            val editOrDeleteBottomSheet = DeleteOrReportBottomSheet()
-            editOrDeleteBottomSheet.arguments = bundle
-            editOrDeleteBottomSheet.show(supportFragmentManager, editOrDeleteBottomSheet.tag)
+            if (!isNetworkConnected()){
+                showCustomToast("네트워크 연결을 확인해주세요!")
+            }
+            else{
+                val editOrDeleteBottomSheet = DeleteOrReportBottomSheet()
+                editOrDeleteBottomSheet.arguments = bundle
+                editOrDeleteBottomSheet.show(supportFragmentManager, editOrDeleteBottomSheet.tag)
+            }
         }
 
         binding.tvCommentCount.text = response.result.commentCount.toString()
 
         binding.btnDetailAddBookMark.setOnClickListener {
             if (isBookMarked){ //취소
-                showLoadingDialog(this)
-                MainService(this).tryDeleteBookMark(postId)
-                isBookMarked = false
-                binding.btnDetailAddBookMark.setBackgroundResource(R.drawable.ic_bookmark_line)
+                if (!isNetworkConnected()){
+                    showCustomToast("네트워크 연결을 확인해주세요!")
+                }
+                else{
+                    showLoadingDialog(this)
+                    MainService(this).tryDeleteBookMark(postId)
+                    isBookMarked = false
+                    binding.btnDetailAddBookMark.setBackgroundResource(R.drawable.ic_bookmark_line)
+                }
             }
             else{ //저장
-                val bundle = Bundle()
-                bundle.putInt("postId", postId)
-                val addBookmarkBottomSheet = AddBookmarkBottomSheet()
-                addBookmarkBottomSheet.arguments = bundle
-                addBookmarkBottomSheet.show(supportFragmentManager, addBookmarkBottomSheet.tag)
-                isBookMarked = true
+                if (!isNetworkConnected()){
+                    showCustomToast("네트워크 연결을 확인해주세요!")
+                }
+                else{
+                    val bundle = Bundle()
+                    bundle.putInt("postId", postId)
+                    val addBookmarkBottomSheet = AddBookmarkBottomSheet()
+                    addBookmarkBottomSheet.arguments = bundle
+                    addBookmarkBottomSheet.show(supportFragmentManager, addBookmarkBottomSheet.tag)
+                    isBookMarked = true
+                }
             }
         }
 
@@ -158,6 +204,18 @@ class FeedDetailActivity : BaseActivity<ActivityFeedDetailBinding>(ActivityFeedD
     override fun onGetFeedDetailFailure(message: String) {
         dismissLoadingDialog()
         showCustomToast(message)
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        terminateNetworkCallback(networkCallback)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        registerNetworkCallback(networkCallback)
     }
 
     override fun onDeleteFeedSuccess(response: BaseResponse) {

@@ -103,12 +103,22 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
         binding.rvPickedPicList.adapter = newTipPicAdapter
 
         binding.tvCompleteNewTip.setOnClickListener {
-            checkIsEmpty()
+            if (!isNetworkConnected()){
+                showCustomToast("네트워크 연결을 확인해주세요!")
+            }
+            else{
+                checkIsEmpty()
+            }
         }
 
         binding.layoutCategory.setOnClickListener {
             val cetegoryDialog = NewTipCategoryDialogFragment()
             cetegoryDialog.show(supportFragmentManager, cetegoryDialog.tag)
+        }
+
+        binding.edtHow.setOnTouchListener{ v, event ->
+            binding.scrollNewTip.smoothScrollTo(0, binding.edtHow.top)
+            false
         }
 
         binding.edtHow.addTextChangedListener(object:TextWatcher{
@@ -150,9 +160,20 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
 
         })
 
-        binding.edtTipLine.setOnFocusChangeListener { v, hasFocus ->
-            activateButton()
-        }
+        binding.edtTipLine.addTextChangedListener(object:TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                activateButton()
+            }
+        })
+
 
         //액티비티에서 프래그먼트가 보내는 데이터를 받아올때!
         supportFragmentManager
@@ -254,10 +275,10 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
             //모두 입력
         var dialogText = ""
 
-        if (binding.edtWhen.text.length<4 ||
-            binding.edtHow.text.length<4 && binding.tvNewTipCategory.text.toString()!="*카테고리"){
-            if (binding.edtHow.text.length<4) dialogText += "How를 4자 이상 25자 이하 작성해주세요.\n"
-            if (binding.edtWhen.text.length<4) dialogText += "When을 4자 이상 25자 이 작성해주세요."
+        if (binding.edtWhen.text.toString().trim().length<4 ||
+            binding.edtHow.text.toString().trim().length<4 && binding.tvNewTipCategory.text.toString()!="*카테고리"){
+            if (binding.edtHow.text.toString().trim().length<4) dialogText += "How를 4자 이상 25자 이하 작성해주세요.\n"
+            if (binding.edtWhen.text.toString().trim().length<4) dialogText += "When을 4자 이상 25자 이 작성해주세요."
 
             bundle.putString("dialogText", dialogText)
             dialogIsEmpty.arguments = bundle
@@ -270,8 +291,8 @@ class RegisterNewTipActivity : BaseActivity<ActivityRegisterNewTipBinding>(Activ
 
     private fun activateButton() {
         //사진을 안올렸을때
-        if (selectedimageUrlList.isNotEmpty() && binding.edtWhen.text.isNotEmpty() &&
-            binding.edtHow.text.isNotEmpty() && binding.tvNewTipCategory.text.toString()!="*카테고리") {
+        if (selectedimageUrlList.isNotEmpty() && binding.edtWhen.text.toString().trim().isNotEmpty() &&
+            binding.edtHow.text.toString().trim().isNotEmpty() && binding.tvNewTipCategory.text.toString()!="*카테고리") {
             binding.tvCompleteNewTip.isEnabled = true
             binding.tvCompleteNewTip.setTextColor(resources.getColor(R.color.mint))
         }

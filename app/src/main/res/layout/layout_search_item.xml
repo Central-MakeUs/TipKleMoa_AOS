@@ -11,6 +11,7 @@
         android:layout_height="24dp"
         android:gravity="center"
         android:text="1"
+        android:includeFontPadding="false"
         android:textColor="@color/DBGray"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -30,15 +31,15 @@
         android:id="@+id/tvRankKeyword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:fontFamily="@font/notosanscjkkr_regular"
-        android:textSize="16dp"
-        android:includeFontPadding="false"
         android:layout_marginLeft="20dp"
+        android:fontFamily="@font/notosanscjkkr_regular"
+        android:includeFontPadding="false"
         android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/tvKeywordRankNum"
         app:layout_constraintStart_toEndOf="@+id/tvKeywordRankNum"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/tvKeywordRankNum" />
 
     <View
         android:id="@+id/view"
