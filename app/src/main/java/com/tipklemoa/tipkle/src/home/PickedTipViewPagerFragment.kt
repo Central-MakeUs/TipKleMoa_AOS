@@ -4,9 +4,7 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.Network
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.tabs.TabLayout
@@ -15,9 +13,7 @@ import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseFragment
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.ViewpagerPickedTipTabBinding
-import com.tipklemoa.tipkle.src.MainService
-import com.tipklemoa.tipkle.src.RegisterNewTipActivity
-import com.tipklemoa.tipkle.src.SelectPicActivity
+import com.tipklemoa.tipkle.src.main.SelectPicActivity
 import com.tipklemoa.tipkle.src.home.model.BannerResponse
 import com.tipklemoa.tipkle.src.home.model.CategoryListResponse
 import com.tipklemoa.tipkle.src.home.model.HomePreviewFeedResponse

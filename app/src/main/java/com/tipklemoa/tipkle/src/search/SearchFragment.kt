@@ -2,27 +2,15 @@ package com.tipklemoa.tipkle.src.search
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import android.view.KeyEvent
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.core.os.bundleOf
-import androidx.fragment.app.add
-import androidx.fragment.app.setFragmentResult
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.config.BaseFragment
 import com.tipklemoa.tipkle.databinding.FragmentSearchBinding
-import com.tipklemoa.tipkle.src.NewTipPicAdapter
-import com.tipklemoa.tipkle.src.PagerFragmentStateAdapter
-import com.tipklemoa.tipkle.src.home.HomeTopViewPagerFragment
-import com.tipklemoa.tipkle.src.home.LookAroundFragment
-import com.tipklemoa.tipkle.src.home.model.ResultLookAround
-import com.tipklemoa.tipkle.src.search.model.KeywordResponse
-import com.tipklemoa.tipkle.src.search.model.SearchResponse
+import com.tipklemoa.tipkle.src.main.PagerFragmentStateAdapter
 
 class SearchFragment : BaseFragment<FragmentSearchBinding>(
     FragmentSearchBinding::bind,

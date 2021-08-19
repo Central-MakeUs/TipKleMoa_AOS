@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -16,7 +14,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.src.home.model.ResultHomePreviewFeed
 import com.bumptech.glide.request.RequestOptions
-import com.tipklemoa.tipkle.src.FeedDetailActivity
+import com.tipklemoa.tipkle.src.main.FeedDetailActivity
 
 class HomeFeedAdapter(val context: Context, private val feedList: List<ResultHomePreviewFeed>):
     RecyclerView.Adapter<HomeFeedAdapter.ItemViewHolder>(){

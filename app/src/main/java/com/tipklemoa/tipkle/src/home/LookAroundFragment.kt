@@ -13,8 +13,7 @@ import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseFragment
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.FragmentLookAroundBinding
-import com.tipklemoa.tipkle.src.FeedDetailActivity
-import com.tipklemoa.tipkle.src.NewTipPicAdapter
+import com.tipklemoa.tipkle.src.main.FeedDetailActivity
 import com.tipklemoa.tipkle.src.home.model.*
 
 class LookAroundFragment : BaseFragment<FragmentLookAroundBinding>(

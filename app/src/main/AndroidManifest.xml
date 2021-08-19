@@ -27,13 +27,13 @@
             android:theme="@style/Theme.Keyword"
             android:exported="true" />
         <activity
-            android:name=".src.ReportUserActivity"
+            android:name=".src.main.ReportUserActivity"
             android:exported="true" />
         <activity
             android:name=".src.mypage.EditProfileActivity"
             android:exported="true" />
         <activity
-            android:name=".src.ViewOriginalImageActivity"
+            android:name=".src.main.ViewOriginalImageActivity"
             android:exported="true" />
         <activity
             android:name=".src.tipkle.FolderDetailActivity"
@@ -42,13 +42,13 @@
             android:name=".src.tipkle.MakeFolderActivity"
             android:exported="true" />
         <activity
-            android:name=".src.RegisterNewTipActivity"
+            android:name=".src.main.RegisterNewTipActivity"
             android:exported="true" />
         <activity
-            android:name=".src.SelectPicActivity"
+            android:name=".src.main.SelectPicActivity"
             android:exported="true" />
         <activity
-            android:name=".src.FeedDetailActivity"
+            android:name=".src.main.FeedDetailActivity"
             android:exported="true" />
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
@@ -81,7 +81,7 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".src.MainActivity"
+            android:name=".src.main.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity

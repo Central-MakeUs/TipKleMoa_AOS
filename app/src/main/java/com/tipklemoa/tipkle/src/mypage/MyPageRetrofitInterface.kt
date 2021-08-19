@@ -1,10 +1,6 @@
 package com.tipklemoa.tipkle.src.mypage
 
 import com.tipklemoa.tipkle.config.BaseResponse
-import com.tipklemoa.tipkle.src.login.model.PostKakaoRegisterRequest
-import com.tipklemoa.tipkle.src.model.DetailFeedResponse
-import com.tipklemoa.tipkle.src.model.NewTipResponse
-import com.tipklemoa.tipkle.src.model.PostNewTipRequest
 import com.tipklemoa.tipkle.src.mypage.model.*
 import retrofit2.Call
 import retrofit2.http.*

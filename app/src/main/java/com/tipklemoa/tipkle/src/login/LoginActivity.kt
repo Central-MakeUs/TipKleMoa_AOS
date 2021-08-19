@@ -3,7 +3,6 @@ package com.tipklemoa.tipkle.src.login
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.auth.model.OAuthToken
@@ -12,7 +11,7 @@ import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseActivity
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.ActivityLoginBinding
-import com.tipklemoa.tipkle.src.MainActivity
+import com.tipklemoa.tipkle.src.main.MainActivity
 import com.tipklemoa.tipkle.src.login.model.KakaoLoginResponse
 import com.tipklemoa.tipkle.src.login.model.KakaoRegisterResponse
 import com.tipklemoa.tipkle.src.login.model.PostKakaoLoginRequest
@@ -81,7 +80,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         }
     }
 
-    fun getToken() {
+    private fun getToken() {
         //토큰값을 받아옵니다.
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {

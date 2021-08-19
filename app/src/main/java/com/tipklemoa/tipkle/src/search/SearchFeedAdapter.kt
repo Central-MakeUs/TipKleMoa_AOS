@@ -12,9 +12,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tipklemoa.tipkle.R
-import com.tipklemoa.tipkle.src.home.model.ResultLookAround
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.tipklemoa.tipkle.src.FeedDetailActivity
+import com.tipklemoa.tipkle.src.main.FeedDetailActivity
 import com.tipklemoa.tipkle.src.home.LookAroundImageAdapter
 import com.tipklemoa.tipkle.src.search.model.ResultSearch
 

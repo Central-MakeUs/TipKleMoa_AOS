@@ -12,8 +12,7 @@ import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.tipklemoa.tipkle.R
-import com.tipklemoa.tipkle.src.FeedDetailActivity
-import com.tipklemoa.tipkle.src.MainActivity
+import com.tipklemoa.tipkle.src.main.FeedDetailActivity
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     private val TAG: String = this.javaClass.simpleName

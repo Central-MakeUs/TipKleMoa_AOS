@@ -14,7 +14,7 @@ import com.tipklemoa.tipkle.config.ApplicationClass
 import com.tipklemoa.tipkle.config.BaseActivity
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.ActivitySplashBinding
-import com.tipklemoa.tipkle.src.MainActivity
+import com.tipklemoa.tipkle.src.main.MainActivity
 import com.tipklemoa.tipkle.src.login.LoginActivity
 import com.tipklemoa.tipkle.src.login.LoginActivityView
 import com.tipklemoa.tipkle.src.login.LoginService

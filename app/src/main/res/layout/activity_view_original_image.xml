@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".src.ViewOriginalImageActivity">
+    tools:context=".src.main.ViewOriginalImageActivity">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnViewImageX"

@@ -6,17 +6,12 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.View
-import androidx.core.content.res.ResourcesCompat
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.config.BaseActivity
 import com.tipklemoa.tipkle.config.BaseResponse
 import com.tipklemoa.tipkle.databinding.ActivityEditProfileBinding
-import com.tipklemoa.tipkle.src.DeleteOrReportBottomSheet
-import com.tipklemoa.tipkle.src.MainService
-import com.tipklemoa.tipkle.src.model.PostNewTipRequest
 import com.tipklemoa.tipkle.src.mypage.model.KeywordResponse
 import com.tipklemoa.tipkle.src.mypage.model.MyPageResponse
 import com.tipklemoa.tipkle.src.mypage.model.PostEditNickNameRequest

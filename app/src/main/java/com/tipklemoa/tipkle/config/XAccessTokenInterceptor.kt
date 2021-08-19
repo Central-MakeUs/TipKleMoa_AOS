@@ -14,7 +14,7 @@ class XAccessTokenInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val builder: Request.Builder = chain.request().newBuilder()
         val jwtToken: String? = sSharedPreferences.getString(X_ACCESS_TOKEN, null)
-        var kakaoToken:String? = sSharedPreferences.getString(kakaoToken, null)
+        val kakaoToken:String? = sSharedPreferences.getString(kakaoToken, null)
 
         if (kakaoToken!=null){
             builder.addHeader("access_token", kakaoToken)

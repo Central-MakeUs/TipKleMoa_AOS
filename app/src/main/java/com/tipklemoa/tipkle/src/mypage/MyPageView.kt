@@ -1,14 +1,6 @@
 package com.tipklemoa.tipkle.src.mypage
 
 import com.tipklemoa.tipkle.config.BaseResponse
-import com.tipklemoa.tipkle.src.home.model.BannerResponse
-import com.tipklemoa.tipkle.src.home.model.CategoryListResponse
-import com.tipklemoa.tipkle.src.home.model.HomePreviewFeedResponse
-import com.tipklemoa.tipkle.src.home.model.LookAroundResponse
-import com.tipklemoa.tipkle.src.login.model.KakaoLoginResponse
-import com.tipklemoa.tipkle.src.login.model.KakaoRegisterResponse
-import com.tipklemoa.tipkle.src.model.DetailFeedResponse
-import com.tipklemoa.tipkle.src.model.NewTipResponse
 import com.tipklemoa.tipkle.src.mypage.model.KeywordResponse
 import com.tipklemoa.tipkle.src.mypage.model.MyPageResponse
 

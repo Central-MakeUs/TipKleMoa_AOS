@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.src.home.model.ResultLookAround
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.tipklemoa.tipkle.src.FeedDetailActivity
+import com.tipklemoa.tipkle.src.main.FeedDetailActivity
 
 class LookAroundFeedAdapter(val context: Context, private val feedList: List<ResultLookAround>):
     RecyclerView.Adapter<LookAroundFeedAdapter.ItemViewHolder>(){

@@ -2,8 +2,7 @@ package com.tipklemoa.tipkle.src.home
 
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayoutMediator
-import com.tipklemoa.tipkle.src.PagerFragmentStateAdapter
+import com.tipklemoa.tipkle.src.main.PagerFragmentStateAdapter
 import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.config.BaseFragment
 import com.tipklemoa.tipkle.config.BaseResponse
@@ -42,7 +41,7 @@ class HomeTopViewPagerFragment : BaseFragment<ViewpagerHomeTabBinding>(Viewpager
             }
         })
 
-        binding.vpInner.isUserInputEnabled = false
+        binding.vpInner.isUserInputEnabled = false //스와이프를 이용하여 페이지 넘김 가능 여부
     }
 
     override fun onGetPickedCategoryListSuccess(response: CategoryListResponse) {
