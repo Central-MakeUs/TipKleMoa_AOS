@@ -29,12 +29,12 @@ import java.util.Locale.getDefault
 class SelectPicActivity : BaseActivity<ActivitySelectPicBinding>(ActivitySelectPicBinding::inflate) {
 
     var adapter: SelectPicAdapter?=null
-    var uriArr = arrayListOf("1")
+    var uriArr = arrayListOf("1") //맨 첫번째에 카메라 아이콘을 넣기위함
     private lateinit var timeStamp:String
     private lateinit var imageFileName:String //현재 파일 이름
     var selectedviewList = arrayListOf<View>()
-    var selectedimageUrlList = arrayListOf<String>()
-    var selectCount = 0
+    var selectedimageUrlList = arrayListOf<String>() //선택된 이미지 리스트
+    var selectCount = 0 //오른쪽 상단에 선택된 이미지의 개수
 
     //아래는 카메라 관련
     private val REQUEST_TAKE_PHOTO = 1
@@ -44,7 +44,7 @@ class SelectPicActivity : BaseActivity<ActivitySelectPicBinding>(ActivitySelectP
         override fun onPermissionGranted() {
             getAllShownImagesPath()
 
-            adapter = SelectPicAdapter(this@SelectPicActivity, uriArr)
+            adapter = SelectPicAdapter(this@SelectPicActivity, uriArr) //gridview adapter
             binding.rvGallery.numColumns = 3 // 한 줄에 3개씩
             binding.rvGallery.adapter = adapter
         }
@@ -102,7 +102,7 @@ class SelectPicActivity : BaseActivity<ActivitySelectPicBinding>(ActivitySelectP
                         selectedviewList.add(view)
                         selectCount++
 
-                        imgBackground.visibility = View.VISIBLE
+                        imgBackground.visibility = View.VISIBLE //위에 프레임이랑 순서숫자 보여주는 부분
                         tvSelectImageCount.visibility = View.VISIBLE
                         imgFrame.visibility = View.VISIBLE
 
@@ -126,7 +126,6 @@ class SelectPicActivity : BaseActivity<ActivitySelectPicBinding>(ActivitySelectP
                 }
                 tvSelectImageCount.text = selectCount.toString()
                 binding.tvSelectPicCount.text = selectCount.toString()
-                //checkSelecetOneMore()
             }
             else if (position==0){ //사진찍기
                 if (selectCount>=5){ //5개 이상인 상태에서 누르면 띄워주고 막기
@@ -151,21 +150,10 @@ class SelectPicActivity : BaseActivity<ActivitySelectPicBinding>(ActivitySelectP
         }
     }
 
-//    private fun checkSelecetOneMore(){
-//        if (selectedviewList.size<1){
-//            binding.tvCompleteAddPic.isEnabled = false
-//            binding.tvCompleteAddPic.setTextColor(resources.getColor(R.color.DBGray))
-//        }
-//        else{
-//            binding.tvCompleteAddPic.isEnabled = true
-//            binding.tvCompleteAddPic.setTextColor(resources.getColor(R.color.black))
-//        }
-//    }
-
     // 사진 찍는 인텐트
     private fun takePictureIntent() {
         Log.d("test", "takePictureIntent")
-        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE) //사진 인텐트
         if (takePictureIntent.resolveActivity(packageManager) != null) {
 
             val photoFile: File?
@@ -183,6 +171,7 @@ class SelectPicActivity : BaseActivity<ActivitySelectPicBinding>(ActivitySelectP
         }
     }
 
+    //사진을 찍었을때 이미지 만드는 부분
     @Throws(IOException::class)
     fun createImageFile(): File { // Create an image file name
         timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", getDefault()).format(Date())
@@ -201,6 +190,7 @@ class SelectPicActivity : BaseActivity<ActivitySelectPicBinding>(ActivitySelectP
         return imageFile
     }
 
+    //갤러리의 모든 image path -> uri 반환하는 부분
     private fun getAllShownImagesPath() {
         val uriExternal: Uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         var columnIndexID: Int
