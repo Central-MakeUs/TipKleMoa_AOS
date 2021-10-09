@@ -64,7 +64,6 @@ class SelectPicActivity : BaseActivity<ActivitySelectPicBinding>(ActivitySelectP
         }
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

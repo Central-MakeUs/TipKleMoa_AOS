@@ -16,7 +16,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.tipklemoa.tipkle.src.main.FeedDetailActivity
 import com.tipklemoa.tipkle.src.tipkle.model.Post
 
-class TipkleFolderFeedAdapter(val context: Context, private val postList: List<Post>):
+class ㅜTipkleFolderFeedAdapter(val context: Context, private val postList: List<Post>):
     RecyclerView.Adapter<TipkleFolderFeedAdapter.ItemViewHolder>(){
 
     inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

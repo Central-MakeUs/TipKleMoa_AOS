@@ -1,12 +1,14 @@
 package com.tipklemoa.tipkle.src.splash
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.Network
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Base64
 import android.util.Log
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
@@ -20,9 +22,10 @@ import com.tipklemoa.tipkle.src.login.LoginActivityView
 import com.tipklemoa.tipkle.src.login.LoginService
 import com.tipklemoa.tipkle.src.login.model.KakaoLoginResponse
 import com.tipklemoa.tipkle.src.login.model.KakaoRegisterResponse
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding::inflate), LoginActivityView {
-    lateinit var networkCallback : ConnectivityManager.NetworkCallback
     //var postId = 0
 
     @RequiresApi(Build.VERSION_CODES.P)
@@ -41,62 +44,22 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
-        if (!isNetworkConnected()){
-            Log.d("네트워크", "연결끊김")
-            showCustomToast("네트워크 연결을 확인해주세요!")
-        }
-
-        networkCallback = object : ConnectivityManager.NetworkCallback() {
-            override fun onAvailable(network: Network) {
-                if (ApplicationClass.sSharedPreferences.getString(
-                        ApplicationClass.X_ACCESS_TOKEN,
-                        null
-                    ) == null
-                ) {
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
-                        finish()
-                    }, 2000)
-                } else { //로그인 O -> 자동로그인 검증
-                    showLoadingDialog(this@SplashActivity)
-                    LoginService(this@SplashActivity).tryGetAutoLogin()
-                }
-            }
-
-            override fun onLost(network: Network) {
-                // 네트워크가 끊길 때 호출됩니다.
-
-            }
-        }
-
 //        프로젝트 해시키 알아볼때 쓰는 코드
-//        try {
-//            val info = packageManager.getPackageInfo(
-//                packageName, PackageManager.GET_SIGNATURES
-//            )
-//            for (signature in info.signatures) {
-//                val md: MessageDigest = MessageDigest.getInstance("SHA")
-//                md.update(signature.toByteArray())
-//                Log.e(
-//                    "MY KEY HASH:",
-//                    Base64.encodeToString(md.digest(), Base64.DEFAULT)
-//                )
-//            }
-//        } catch (e: PackageManager.NameNotFoundException) {
-//        } catch (e: NoSuchAlgorithmException) {
-//        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        registerNetworkCallback(networkCallback)
-    }
-
-    override fun onStop() {
-        super.onStop()
-
-        terminateNetworkCallback(networkCallback)
+        try {
+            val info = packageManager.getPackageInfo(
+                packageName, PackageManager.GET_SIGNATURES
+            )
+            for (signature in info.signatures) {
+                val md: MessageDigest = MessageDigest.getInstance("SHA")
+                md.update(signature.toByteArray())
+                Log.e(
+                    "MY KEY HASH:",
+                    Base64.encodeToString(md.digest(), Base64.DEFAULT)
+                )
+            }
+        } catch (e: PackageManager.NameNotFoundException) {
+        } catch (e: NoSuchAlgorithmException) {
+        }
     }
 
     override fun onPostKakaoLoginSuccess(response: KakaoLoginResponse) {

@@ -2,10 +2,8 @@ package com.tipklemoa.tipkle.util
 
 import android.app.Dialog
 import android.content.Context
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Window
-import com.tipklemoa.tipkle.R
 import com.tipklemoa.tipkle.databinding.DialogLoadingBinding
 
 class LoadingDialog(context: Context) : Dialog(context) {

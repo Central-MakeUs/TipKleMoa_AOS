@@ -68,12 +68,12 @@
         <entry key="app/src/main/res/layout/activity_register_with_nick_name.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_report_user.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_select_pic.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_view_original_image.xml" value="0.25740337233838717" />
         <entry key="app/src/main/res/layout/dialog_loading.xml" value="0.153125" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_look_around.xml" value="0.625" />
-        <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.38137755102040816" />
+        <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.36893203883495146" />
         <entry key="app/src/main/res/layout/fragment_picked_tip.xml" value="0.1578125" />
         <entry key="app/src/main/res/layout/fragment_popular_keyword.xml" value="0.1609375" />
         <entry key="app/src/main/res/layout/fragment_recent_keyword.xml" value="0.1609375" />
@@ -110,7 +110,7 @@
         <entry key="app/src/main/res/layout/viewpager_home_tab.xml" value="0.25" />
         <entry key="app/src/main/res/layout/viewpager_nest_tab.xml" value="0.1578125" />
         <entry key="app/src/main/res/layout/viewpager_picked_tib_tav.xml" value="0.29791666666666666" />
-        <entry key="app/src/main/res/layout/viewpager_picked_tip_tab.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/viewpager_picked_tip_tab.xml" value="0.165" />
         <entry key="app/src/main/res/layout/viewpager_popular_keyword.xml" value="0.25" />
         <entry key="app/src/main/res/layout/viewpager_popular_keywrod.xml" value="0.1609375" />
         <entry key="app/src/main/res/layout/viewpager_recent_keyword.xml" value="0.1609375" />
